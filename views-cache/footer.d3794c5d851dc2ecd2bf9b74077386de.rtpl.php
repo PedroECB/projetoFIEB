@@ -1,0 +1,17 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- jQuery 2.2.3 -->
+<script src="../res/site/plugins/jQuery/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="../res/site/bootstrap/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="../res/site/plugins/iCheck/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+</html>
