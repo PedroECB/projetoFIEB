@@ -1,9 +1,9 @@
 {
-    "name": "hcodebr/ecommerce",
+    "name": "PedroECB/projetofieb",
     "authors": [
         {
-            "name": "Hcode Treinamentos",
-            "email": "suporte@hcode.com.br"
+            "name": "Pedro Henrique Carvalho",
+            "email": "pedrosophbc@gmail.com"
         }
     ],
     "require": {
