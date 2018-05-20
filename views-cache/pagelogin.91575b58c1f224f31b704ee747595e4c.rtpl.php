@@ -41,20 +41,20 @@
   <div class="login-box-body">
     <p class="login-box-msg">Logue para iniciar sua sessão</p>
 
-    <form action="#" method="post">
+    <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
+        <input type="email" class="form-control" placeholder="Email" name="login">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Senha">
+        <input type="password" class="form-control" placeholder="Senha" name="senha">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Me mantenha conectado
+              <input type="checkbox" value="connect"> Me mantenha conectado
             </label>
           </div>
         </div>

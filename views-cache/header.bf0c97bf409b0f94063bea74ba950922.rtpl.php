@@ -3,11 +3,11 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
-<html>
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SGA | ADMIN</title>
+  <title>SGA | Admin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -77,14 +77,18 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">0</span>
+            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
+              <i class="fa fa-user-plus"></i>
+              <!--<span class="label label-success">5</span>-->
             </a>
             <ul class="dropdown-menu">
               <li class="header">Nenhuma notificação disponível</li>
               <li>
                 <!-- inner menu: contains the messages -->
+
+
+
+
                 <ul class="menu">
                   <li><!-- start message -->
                     <a href="#">
@@ -95,14 +99,20 @@ desired effect
                       <!-- Message title and timestamp -->
                       <h4>
                         Carlos Silveira
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                        
                       </h4>
                       <!-- The message -->
-                      <p>Seja bem vindo ao sistema de gestão articulada</p>
+                      <p>Seja bem vindo ao Sistema de Gestão...</p>
                     </a>
                   </li>
                   <!-- end message -->
                 </ul>
+
+
+              
+
+
+
                 <!-- /.menu -->
               </li>
               <li class="footer"><a href="#">Ver todas as mensagens</a></li>
@@ -113,9 +123,9 @@ desired effect
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">0</span>
+            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
+              <i class="fa fa-envelope-o"></i>
+              <!--<span class="label label-warning">0</span>-->
             </a>
             <ul class="dropdown-menu">
               <li class="header">Você tem 0 notificações</li>
@@ -124,7 +134,7 @@ desired effect
                 <ul class="menu">
                   <li><!-- start notification -->
                     <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 Solicitações de cadastro pendentes
+                      <i class="fa fa-users text-aqua"></i> 0 Solicitações de cadastros pendentes
                     </a>
                   </li>
                   <!-- end notification -->
@@ -136,13 +146,19 @@ desired effect
           <!-- Tasks Menu -->
           <li class="dropdown tasks-menu">
             <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+
+            <!--
+            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
               <i class="fa fa-flag-o"></i>
               <span class="label label-danger">0</span>
             </a>
+           --> 
+          
             <ul class="dropdown-menu">
               <li class="header">Você tem 0 notificações</li>
               <li>
+
                 <!-- Inner menu: contains the tasks -->
                 <ul class="menu">
                   <li><!-- Task item -->
@@ -214,14 +230,14 @@ desired effect
                   <a href="#" class="btn btn-default btn-flat">Editar Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sair</a>
+                  <a href="/logout" class="btn btn-default btn-flat">Sair</a>
                 </div>
               </li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="#"><i class="fa fa-power-off" title="sair"></i></a>
+            <a href="/logout" data-toggle="#"><i class="fa fa-power-off" title="sair"></i></a>
           </li>
         </ul>
       </div>
@@ -261,19 +277,111 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+
+
+
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+          <a href="#"><i class="fa fa-suitcase"></i> <span>Sindicatos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+            <li><a href="#"><i class="fa fa-plus"></i>Novo</a></li>
           </ul>
         </li>
+
+
+
+        <li class="treeview">
+          <a href="#"><i class="fa fa-industry"></i> <span>Empresas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-plus"></i>Cadastrar</a></li>
+            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+            <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
+            <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
+          </ul>
+        </li>
+
+
+
+        <li class="treeview">
+          <a href="#"><i class="fa fa-circle-o-notch"></i> <span>Ciclos</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+            <li><a href="#"><i class="fa fa-plus-circle"></i>Novo ciclo</a></li>
+          </ul>
+        </li>
+
+
+
+
+
+     <li class="treeview">
+          <a href="#"><i class="fa fa-calendar-o"></i> <span>Visitas</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+             <li><a href="#"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+             <li><a href="#"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
+             <li><a href="#"><i class="fa fa-calendar-minus-o"></i>Agendadas</a></li>
+             <li><a href="#"><i class="fa fa-calendar-check-o"></i>Concluídas</a></li>
+              <li><a href="#"><i class="fa fa-check-square-o"></i>Finalizar</a></li>
+          </ul>
+        </li>
+
+
+
+
+           <li class="treeview">
+          <a href="#"><i class="fa fa-pie-chart"></i> <span>Relatórios</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-suitcase"></i>Sindicatos</a></li>
+            <li><a href="#"><i class="fa fa-bar-chart"></i>Visitas</a></li>
+            <li><a href="#"><i class="fa fa-line-chart"></i>Associações</a></li>
+            <li><a href="#"><i class="fa fa-exchange"></i>Negociações</a></li>
+            <li><a href="#"><i class="fa fa-area-chart"></i>Ciclos</a></li>
+          </ul>
+        </li>
+
+
+
+
+
+        <li class="treeview">
+          <a href="#"><i class="fa fa-users"></i> <span>Usuários</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-check-square-o"></i>Solicitações</a></li>
+            <li><a href="#"><i class="fa fa-user-plus"></i>Cadastrar</a></li>
+            <li><a href="#"><i class="fa fa-user"></i>Pontos focais</a></li>
+          </ul>
+        </li>
+
+
+
+
+
+        <li><a href="#"><i class="fa fa-bug"></i> <span>Reportar erro</span></a></li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Página Usuário Comum
+        Página Ponto Focal
         <small>ss fon</small>
       </h1>
       <ol class="breadcrumb">
