@@ -25,6 +25,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="../../res/admin/dist/css/skins/skin-azul.css">
   <link rel="stylesheet" href="../../res/admin/dist/css/estilo.css">
 
+  <link rel="shortcut icon" href="../../res/admin/dist/img/teste2.png" type="image/x-icon">
+<link rel="icon" href="../../res/admin/dist/img/teste2.png" type="image/x-icon">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

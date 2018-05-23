@@ -22,6 +22,20 @@ $app->config('debug', true);
 
 
 $app->get('/', function() {
+
+if(isset($_SESSION['nivel_acesso'])){
+       if($_SESSION['nivel_acesso'] == 1){
+     header("Location: /admin");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 2){
+    header("Location: /user");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 3){
+    header("Location: /user2");
+      exit;
+  }
+    }
+
     
           $page = new Page([
             "header"=>false,
@@ -87,6 +101,20 @@ $app->get('/user2', function() {
 
 
 $app->get('/login', function() {
+
+    if(isset($_SESSION['nivel_acesso'])){
+       if($_SESSION['nivel_acesso'] == 1){
+     header("Location: /admin");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 2){
+    header("Location: /user");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 3){
+    header("Location: /user2");
+      exit;
+  }
+    }
+
     
           $page = new Page([
             "header"=>false,

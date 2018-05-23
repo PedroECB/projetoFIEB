@@ -22,6 +22,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
+
+  <link rel="shortcut icon" href="../../res/user/dist/img/teste2.png" type="image/x-icon">
+  <link rel="icon" href="../../res/admin/user/img/teste2.png" type="image/x-icon">
   <link rel="stylesheet" href="../../res/user/dist/css/skins/skin-azul.css">
   <link rel="stylesheet" href="../../res/user/dist/css/estilo.css">
 
@@ -231,7 +234,7 @@ desired effect
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="#"><i class="fa fa-power-off" title="sair"></i></a>
+            <a href="/logout" data-toggle=""><i class="fa fa-power-off" title="sair"></i></a>
           </li>
         </ul>
       </div>

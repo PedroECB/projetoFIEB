@@ -17,6 +17,9 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="../res/site/plugins/iCheck/square/blue.css">
 
+
+    <link rel="shortcut icon" href="../../res/site/dist/img/teste2.png" type="image/x-icon">
+    <link rel="icon" href="../../res/site/dist/img/teste2.png" type="image/x-icon">
     <link rel="stylesheet" href="../res/site/dist/css/estilo.css">
 
 

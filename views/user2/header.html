@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SGA | HOME</title>
+  <title>SGA | Home</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -22,6 +22,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
+
+  <link rel="shortcut icon" href="../../res/user2/dist/img/teste2.png" type="image/x-icon">
+  <link rel="icon" href="../../res/user2/dist/img/teste2.png" type="image/x-icon">
   <link rel="stylesheet" href="../../res/user2/dist/css/skins/skin-azul.css">
   <link rel="stylesheet" href="../../res/user2/dist/css/estilo.css">
 
@@ -228,7 +231,7 @@ desired effect
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="#"><i class="fa fa-power-off" title="sair"></i></a>
+            <a href="/logout" data-toggle="#"><i class="fa fa-power-off" title="sair"></i></a>
           </li>
         </ul>
       </div>
