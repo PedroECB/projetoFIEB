@@ -3,8 +3,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Página Funcionário Comum
-        <small>ss fon</small>
+       <!-- Página Funcionário Comum -->
+        <small>Página inicial</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -12,10 +12,22 @@
       </ol>
     </section>
 
-    <!-- Main content -->
+     <!-- Main content -->
     <section class="content">
 
-      <!-- Your Page Content Here -->
+
+<center>
+     <img src="../../res/admin/dist/img/nomeCompletoAzul01.png" class="img-responsive logoMain" alt="Logo menu principal">
+</center>
+
+
+<center>
+     <img src="../../res/admin/dist/img/fiebtransp02.png" class="img-responsive logoMain2" alt="">
+   </center>
+
+
+
+
 
     </section>
     <!-- /.content -->

@@ -12,10 +12,22 @@
       </ol>
     </section>
 
-    <!-- Main content -->
+     <!-- Main content -->
     <section class="content">
 
-      <!-- Your Page Content Here -->
+
+<center>
+     <img src="../../res/admin/dist/img/nomeCompletoAzul01.png" class="img-responsive logoMain" alt="Logo menu principal">
+</center>
+
+
+<center>
+     <img src="../../res/admin/dist/img/fiebtransp02.png" class="img-responsive logoMain2" alt="">
+   </center>
+
+
+
+
 
     </section>
     <!-- /.content -->

@@ -1,7 +1,19 @@
+.logoMain img{margin-left: 10px;
+              top: 80px;!important;}
+
+
+
+
+
+
+
 /*
  * Skin: Blue
  * ----------
  */
+
+
+
 .skin-azul .main-header .navbar {
   background-color: #005091;
 }
