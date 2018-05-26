@@ -7,8 +7,8 @@
         <small>Página inicial do administrador</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i>Ok</a></li>
-        <li class="active">Aqui</li>
+        <li><a href="#"><i class="fa fa-bug"></i>Reportar erro</a></li>
+        <!--<li class="active">Aqui</li>-->
       </ol>
     </section>
 

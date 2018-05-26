@@ -36,13 +36,12 @@ if(isset($_SESSION['nivel_acesso'])){
   }
     }
 
+    $page = new Page([
+      "header"=>false,
+      "footer"=>false,
+    ]);
     
-          $page = new Page([
-            "header"=>false,
-            "footer"=>false,
-          ]);
-          
-          $page->setTpl("index");
+    $page->setTpl("index");
 });
 
 
@@ -56,8 +55,8 @@ $app->get('/admin', function() {
               exit;
             }
 
-          $page = new PageAdmin();   
-          $page->setTpl("index");
+      $page = new PageAdmin();   
+      $page->setTpl("index");
 });
 
 
@@ -69,8 +68,8 @@ $app->get('/user', function() {
       exit;
      }
 
-      $page = new PageUser();
-      $page->setTpl("index");
+    $page = new PageUser();
+    $page->setTpl("index");
 
 });
 
@@ -86,15 +85,10 @@ $app->get('/user2', function() {
       exit;
      }
 
-      $page = new PageUser2(); 
-      $page->setTpl("index");
+    $page = new PageUser2(); 
+    $page->setTpl("index");
 
 });
-
-
-
-
-
 
 
 
@@ -116,12 +110,12 @@ $app->get('/login', function() {
     }
 
     
-          $page = new Page([
-            "header"=>false,
-            "footer"=>false,
-          ]);
-          
-          $page->setTpl("pagelogin");
+    $page = new Page([
+      "header"=>false,
+      "footer"=>false,
+    ]);
+    
+    $page->setTpl("pagelogin");
 
 });
 
@@ -151,6 +145,30 @@ $app->get('/logout', function() {
     
   User::logout();
   
+});
+
+
+$app->get('/admin/users', function() {
+           //User::verifyAdmin(); 
+         if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+              header("Location: /login");
+              exit;
+            }
+
+      $page = new PageAdmin();   
+      $page->setTpl("users");
+});
+
+
+$app->get('/admin/users/create', function() {
+           //User::verifyAdmin(); 
+         if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+              header("Location: /login");
+              exit;
+            }
+
+      $page = new PageAdmin();   
+      $page->setTpl("users-create");
 });
 
 

@@ -66,7 +66,7 @@ class User{
 
 
 
-  public function login2($login, $senha){
+  public static function login2($login, $senha){
 
       $sql = new Sql();
       $results = $sql->select("SELECT * FROM Funcionario WHERE email =:LOGIN AND senha=:SENHA", array(
