@@ -5,7 +5,7 @@
 
 
   <div class="img-logo">
-    <img src="../res/site/dist/img/Logo.png" height=""></img>
+    <img src="../res/site/dist/img/fiebtransp.png" height=""></img>
   </div>
 
 

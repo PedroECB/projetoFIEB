@@ -24,6 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   -->
   <link rel="stylesheet" href="../../res/admin/dist/css/skins/skin-azul.css">
   <link rel="stylesheet" href="../../res/admin/dist/css/estilo.css">
+  <link rel="stylesheet" href="../../res/site/dist/css/estilo.css">
 
   <link rel="shortcut icon" href="../../res/admin/dist/img/teste2.png" type="image/x-icon">
   <link rel="icon" href="../../res/admin/dist/img/teste2.png" type="image/x-icon">

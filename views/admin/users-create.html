@@ -26,38 +26,38 @@
         <form role="form" action="/admin/users/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="nome">Nome completo:</label>
-              <input type="text" class="form-control" id="desperson" name="nome" placeholder="Nome completo do novo usuário" required="">
+              <label for="campoNome">Nome completo:</label>
+              <input type="text" class="form-control" id="campoNome" name="nome" placeholder="Nome completo do novo usuário" autofocus="" required="">
             </div>
 
             <div class="form-group">
-              <label for="nrphone" >RG (Somente administradores poderão visualizar):</label>
-              <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Apenas números" required="">
+              <label for="campoRG" >RG (Somente administradores poderão visualizar):</label>
+              <input type="tel" class="form-control" id="campoRG" name="rg" placeholder="Apenas números" required="">
             </div>
 
             <div class="form-group">
-              <label for="nrphone">Cargo (Breve descrição do cargo):</label>
-              <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Ex: Agente/Diretor/Executivo" required="">
+              <label for="cargo">Cargo:</label>
+              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="">
             </div>
 
             <div class="form-group">
-              <label for="nrphone">Tipo de usuário (Nível de acesso):</label>
-              <select id="" class="form-control">
-                  <option value="">Administrador</option>
-                  <option value="">Ponto focal</option>
-                  <option value="">Fúncionário comum CASA/SINDICATO</option>
+              <label for="campoTipo">Tipo de usuário (Nível de acesso):</label>
+              <select id="campoTipo" class="form-control">
+                  <option value="1">Administrador</option>
+                  <option value="2">Ponto focal</option>
+                  <option value="3">Fúncionário comum CASA/SINDICATO</option>
               </select>
             </div>
 
             <div class="form-group">
-              <label for="nrphone">Origem (Entidade a qual usuário pertence):</label>
-              <select id="" class="form-control">
-                <option value="">FIEB</option>
+              <label for="campoOrigem">Origem (Entidade a qual pertence o usuário):</label>
+              <select id="campoOrigem" class="form-control">
+                <option value="FIEB">FIEB</option>
                 <optgroup  label="CASAS">
-                  <option value="">IEL</option>
-                  <option value="">SENAI</option>
-                  <option value="">CIEB</option>
-                  <option value="">SESI</option>
+                  <option value="IEL">IEL</option>
+                  <option value="SENAI">SENAI</option>
+                  <option value="CIEB">CIEB</option>
+                  <option value="SESI">SESI</option>
                 </optgroup>
                   <optgroup  label="SINDICATOS">
                   <option value="">SINDVEST</option>
@@ -73,13 +73,13 @@
            
 
                <div class="form-group">
-                <label>Telefone (Opcional)</label>
+                <label>Telefone (Opcional):</label>
 
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="text" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888">
+                  <input type="tel" id="campoTel" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888" name="telefone">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -88,23 +88,23 @@
             
 
          <div class="form-group">
-              <label for="desemail">E-mail (E-mail que será utilizado para efetuar login)</label>
+              <label for="campoEmail">E-mail (E-mail que será utilizado para efetuar login)</label>
             <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
                 </div> 
-                  <input type="email" class="form-control" id="desemail" name="desemail" placeholder="email@exemplo.com" required="">
+                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="email@exemplo.com" required="">
             </div>  
         </div>
 
             <div class="form-group">
-              <label for="despassword">Senha (No máximo 15 caracteres):</label>
-              <input type="password" class="form-control" id="despassword" name="despassword" placeholder="Digite a senha" required="">
+              <label for="campoSenha1">Senha (No máximo 15 caracteres):</label>
+              <input type="password" class="form-control" id="campoSenha1" name="senha1" placeholder="Digite a senha" required="">
             </div>
 
              <div class="form-group">
-              <label for="despassword">Confirmar senha</label>
-              <input type="password" class="form-control" id="despassword" name="despassword" placeholder="Confirme a senha">
+              <label for="campoSenha2">Confirmar senha</label>
+              <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha">
             </div>
 
 

@@ -13,3 +13,19 @@
  width:;
 
 }
+
+.logoMain{margin-left: 5px;
+          margin-top: 150px;
+          width: 700px;}
+
+.logoMain2{margin-left: 0px;
+           width: 250px;
+           margin-top: 80px;}
+
+
+              /*#logoMain2{margin-left:80px;}*/
+
+
+ .login-box-body, .register-box-body{border-radius: 3px;!important;}
+ .form-control{border-radius: 3px;}
+ .btn.btn-flat{border-radius: 3px;}
