@@ -39,7 +39,7 @@
 
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Logue para iniciar sua sessão</p>
+    <p class="login-box-msg">Inicie sua sessão</p>
 
     <form action="" method="post">
       <div class="form-group has-feedback">

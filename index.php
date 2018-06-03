@@ -126,7 +126,7 @@ $app->post('/login', function() {
     
   User::login2($_POST['login'], $_POST['senha']);
 
-  if($_SESSION['nivel_acesso'] == 1){
+  if($_SESSION['nivel_acesso'] == 1){                         #Página de Login
      header("Location: /admin");
       exit;
   }elseif($_SESSION['nivel_acesso'] == 2){
@@ -143,33 +143,88 @@ $app->post('/login', function() {
 
 $app->get('/logout', function() {
     
-  User::logout();
+  User::logout();                                         #Função de logout
   
 });
 
 
-$app->get('/admin/users', function() {
-           //User::verifyAdmin(); 
-         if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-              header("Location: /login");
-              exit;
-            }
+
+                
+
+
+                               // ADMIN
+
+                                                  //Cadastro e Exclusão de usuários
+
+
+
+$app->get('/admin/users', function() {  
+                          
+if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+    header("Location: /login");
+    exit;                                        # Admin Listando usuários        
+   }
+      $users = User::listUsers();      
 
       $page = new PageAdmin();   
-      $page->setTpl("users");
+      $page->setTpl("users", array("users"=>$users));
 });
 
 
+
+
+
 $app->get('/admin/users/create', function() {
-           //User::verifyAdmin(); 
-         if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-              header("Location: /login");
-              exit;
-            }
+       
+if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+    header("Location: /login");
+    exit;                                        #Admin Cadastrando usuários
+  }
 
       $page = new PageAdmin();   
       $page->setTpl("users-create");
 });
+
+
+
+$app->get('/admin/users/:iduser/delete', function($iduser) {
+      
+if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+    header("Location: /login");
+    exit;                                     #Admin Deletando usuários
+   }
+
+      $page = new PageAdmin();   
+      $page->setTpl("users-update");
+});
+
+
+
+$app->get('/admin/users/:iduser', function($iduser) {
+      
+if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+    header("Location: /login");
+    exit;                                     #Admin Editando usuários
+   }
+      $user = User::loadById($iduser);
+
+      $page = new PageAdmin();   
+      $page->setTpl("users-update3", array("user"=>$user));
+});
+
+                                                  //Cadastro e Exclusão de empresas
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

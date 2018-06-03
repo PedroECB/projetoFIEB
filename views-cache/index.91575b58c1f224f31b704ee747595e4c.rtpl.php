@@ -5,13 +5,13 @@
 
 
   <div class="img-logo">
-    <img src="../res/site/dist/img/fiebtransp.png" height=""></img>
+    <img src="../res/site/dist/img/fiebtransp.png" class="img-responsive" height=""></img>
   </div>
 
 
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Logue para iniciar sua sessão</p>
+    <p class="login-box-msg">Inicie sua sessão</p>
 
     <form action="/login" method="post">
       <div class="form-group has-feedback">

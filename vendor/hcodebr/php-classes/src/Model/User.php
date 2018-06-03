@@ -2,8 +2,9 @@
 
 namespace Hcode\Model;
 use \Hcode\DB\Sql;
+use \Hcode\Model;
 
-class User{
+class User extends Model{
 
   private $idFuncionario;
   private $nomeFuncionario;
@@ -117,7 +118,11 @@ public static function logout(){
   exit;
 }
 
+public static function listUsers(){
 
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM Funcionario");
+}
 
 
 

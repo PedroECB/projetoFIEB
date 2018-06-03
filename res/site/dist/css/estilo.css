@@ -7,8 +7,9 @@
 
 .img-logo img
 {position:relative;
- left:10%;
- margin-bottom:20px;
+ /*left:10%;*/
+ /*margin-bottom:20px;*/
+ margin: auto auto 20px auto;
  height:100px;
  width:;
 

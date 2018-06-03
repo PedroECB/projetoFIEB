@@ -27,7 +27,7 @@
                 <thead>
                   <tr>
                     <th style="width: 120px">RG</th>
-                    <th>Nome</th>   
+                    <th style="width: 100px">Nome</th>   
                     <th style="width: 85px">Cargo</th>
                     <th style="width: 85px">Origem</th>
                    <!-- <th>E-mail</th>-->
@@ -38,14 +38,20 @@
                 <tbody>
                   {loop="$users"}
                   <tr>
-                    <td>{$value.iduser}</td>
-                    <td>{$value.desperson}</td>
-                    <td>{$value.desemail}</td>
-                    <td>{$value.deslogin}</td/>
-                    <td>{if="$value.inadmin == 1"}Sim{else}Não{/if}</td>
+                    <td>{$value.rg_func}</td>
+                    <td>{$value.nome_func}</td>
+                    <td>{$value.cargo}</td>
+                    <td>{$value.origem}</td/>
+                  
+                    <td>{if="$value.nivel_acesso == 1"}Administrador{/if}
+                        {if="$value.nivel_acesso == 2"}Ponto Focal{/if}
+                        {if="$value.nivel_acesso == 3"}Comum{/if}
+
+                      </td>
+
                     <td>
-                      <a href="/admin/users/{$value.iduser}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
-                      <a href="/admin/users/{$value.iduser}/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
+                      <a href="/admin/users/{$value.idFuncionario}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i> Editar</a>
+                      <a href="/admin/users/{$value.idFuncionario}/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Excluir</a>
                     </td>
                   </tr>
                  
