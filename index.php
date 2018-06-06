@@ -186,6 +186,22 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
 });
 
 
+$app->post('/admin/users/create', function() {
+       
+if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+    header("Location: /login");
+    exit;                                        #Admin Cadastrando usuários
+  }
+
+  var_dump($_POST);
+
+     /* $page = new PageAdmin();   
+      $page->setTpl("users-create");   */
+});
+
+
+
+
 
 $app->get('/admin/users/:iduser/delete', function($iduser) {
       

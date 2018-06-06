@@ -51,7 +51,7 @@
 
             <div class="form-group">
               <label for="campoOrigem">Origem (Entidade a qual pertence o usuário):</label>
-              <select id="campoOrigem" class="form-control">
+              <select id="campoOrigem" class="form-control" name="origem">
                 <option value="FIEB">FIEB</option>
                 <optgroup  label="CASAS">
                   <option value="IEL">IEL</option>
@@ -60,12 +60,12 @@
                   <option value="SESI">SESI</option>
                 </optgroup>
                   <optgroup  label="SINDICATOS">
-                  <option value="">SINDVEST</option>
-                  <option value="">SINDSABÕES</option>
-                  <option value="">SINDIPROCIM</option>
-                  <option value="">SINDBA</option>
-                  <option value="">SINDRATAR</option>
-                  <option value="">SINDFIT</option>
+                  <option value="SINDVEST">SINDVEST</option>
+                  <option value="SINDSABÕES">SINDSABÕES</option>
+                  <option value="SINDPROCIM">SINDIPROCIM</option>
+                  <option value="SINDBA">SINDBA</option>
+                  <option value="SINDRATAR">SINDRATAR</option>
+                  <option value="SINDFIT">SINDFIT</option>
                 </optgroup>
               </select>
             </div>
