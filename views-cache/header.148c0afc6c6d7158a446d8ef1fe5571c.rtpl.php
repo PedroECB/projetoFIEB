@@ -98,7 +98,7 @@ desired effect
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
-                        Paulo de Tarso 
+                        <?php echo htmlspecialchars( $nome, ENT_COMPAT, 'UTF-8', FALSE ); ?> 
                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                       </h4>
                       <!-- The message -->
@@ -186,7 +186,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="../../res/user2/dist/img/user02.png" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Paulo de Tarso</span>
+              <span class="hidden-xs"><?php echo htmlspecialchars( $nome, ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -194,8 +194,8 @@ desired effect
                 <img src="../../res/user2/dist/img/user02.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Paulo Tarso - Executivo 
-                  <small>Executivo SINDVEST</small>
+                  <?php echo htmlspecialchars( $nome, ENT_COMPAT, 'UTF-8', FALSE ); ?> 
+                  <small><?php echo htmlspecialchars( $cargo, ENT_COMPAT, 'UTF-8', FALSE ); ?> - <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -249,7 +249,7 @@ desired effect
           <img src="../../res/user2/dist/img/user02.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Paulo Tarso</p>
+          <p><?php echo htmlspecialchars( $nome, ENT_COMPAT, 'UTF-8', FALSE ); ?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
@@ -328,7 +328,7 @@ desired effect
              <li><a href="#"><i class="fa fa-area-chart"></i>Ciclos</a></li>
           </ul>
         </li>
-        <li><a href="#"><i class="fa fa-bug"></i> <span>Reportar erro</span></a></li>
+        
 
 
      

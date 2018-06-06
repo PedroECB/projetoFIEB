@@ -7,8 +7,7 @@
         <small>Página inicial</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
+        <li><a href="#"><i class="fa fa-bug"></i> <span>Reportar erro</span></a></li>
       </ol>
     </section>
 

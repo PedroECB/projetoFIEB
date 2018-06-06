@@ -29,6 +29,23 @@ class Page{
 
   $this->setData($this->options["data"]);
 
+        // INICIO GAMBIARRA
+
+  if(isset($_SESSION['nivel_acesso'])){
+
+    //$nome = isset($_SESSION['nome'])?$_SESSION['nome']:"Indefinido";
+    //$cargo = isset($_SESSION['cargo'])?$_SESSION['cargo']:"Indefinido 2";
+
+
+    $this->tpl->assign("nome", $_SESSION['nome']);
+    $this->tpl->assign("cargo", $_SESSION['cargo']);
+    $this->tpl->assign("origem", $_SESSION['origem']);
+
+
+  }      // FIM GAMBIARRA
+
+     
+
     $this->tpl->draw("header");
 
   }

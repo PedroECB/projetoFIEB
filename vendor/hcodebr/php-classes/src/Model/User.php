@@ -70,9 +70,8 @@ class User extends Model{
   public static function login2($login, $senha){
 
       $sql = new Sql();
-      $results = $sql->select("SELECT * FROM Funcionario WHERE email =:LOGIN AND senha=:SENHA", array(
-      ":LOGIN"=>$login,
-      ":SENHA"=>$senha
+      $results = $sql->select("SELECT * FROM funcionario WHERE email =:LOGIN", array(
+      ":LOGIN"=>$login
     ));
 
       if(count($results) === 0){
@@ -83,8 +82,9 @@ class User extends Model{
 
     $data = $results[0];
 
-    if($senha = $data['senha']){
-      $user = new User();
+    if(password_verify($senha, $data['senha'])){
+       
+       $user = new User();
        $user->setIdFuncionario($data['idFuncionario']);
        $user->setNomeFuncionario($data["nome_func"]);
        $user->setEmail($data["email"]);
@@ -94,12 +94,16 @@ class User extends Model{
        $user->setCargo($data["cargo"]);
 
        $_SESSION['nivel_acesso'] = $data['nivel_acesso'];
+       $_SESSION['nome'] = $data['nome_func'];
+       $_SESSION['cargo'] = $data['cargo'];
+       $_SESSION['origem'] = $data['origem'];
+
 
 
        return $user;
 
     }else{
-      throw new Exception('Usuário inexistente ou senha incorreta 2', 1);
+      throw new \Exception('Usuário inexistente ou senha incorreta 2');
     }
 
 
@@ -121,7 +125,7 @@ public static function logout(){
 public static function listUsers(){
 
   $sql = new Sql();
-  return $sql->select("SELECT * FROM Funcionario");
+  return $sql->select("SELECT * FROM funcionario");
 }
 
 

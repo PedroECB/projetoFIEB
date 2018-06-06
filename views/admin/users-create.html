@@ -26,8 +26,8 @@
         <form role="form" action="/admin/users/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="campoNome">Nome completo:</label>
-              <input type="text" class="form-control" id="campoNome" name="nome" placeholder="Nome completo do novo usuário" autofocus="" required="">
+              <label for="campoNome">Nome:</label>
+              <input type="text" class="form-control" id="campoNome" name="nome" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25">
             </div>
 
             <div class="form-group">
