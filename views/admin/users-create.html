@@ -19,7 +19,10 @@
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Novo Usuário</h3>
+         <div class="col-md-12"> 
+          <h3 class="box-title" style="vertical-align: middle;">Novo Usuário</h3>
+          <a href="javascript:history.back()" style="margin-left: 60px;"><button type="button" class="btn btn-default navbar-right"><b>Voltar</b></button></a>
+         </div> 
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -27,22 +30,22 @@
           <div class="box-body">
             <div class="form-group">
               <label for="campoNome">Nome:</label>
-              <input type="text" class="form-control" id="campoNome" name="nome" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25">
+              <input type="text" class="form-control" id="campoNome" name="nome_func" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25">
             </div>
 
             <div class="form-group">
               <label for="campoRG" >RG (Somente administradores poderão visualizar):</label>
-              <input type="tel" class="form-control" id="campoRG" name="rg" placeholder="Apenas números" required="">
+              <input type="tel" class="form-control" id="campoRG" name="rg_func" placeholder="Apenas números" required="" maxlength="11">
             </div>
 
             <div class="form-group">
               <label for="cargo">Cargo:</label>
-              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="">
+              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="25">
             </div>
 
             <div class="form-group">
               <label for="campoTipo">Tipo de usuário (Nível de acesso):</label>
-              <select id="campoTipo" class="form-control">
+              <select id="campoTipo" class="form-control" name="nivel_acesso">
                   <option value="1">Administrador</option>
                   <option value="2">Ponto focal</option>
                   <option value="3">Fúncionário comum CASA/SINDICATO</option>
@@ -66,6 +69,9 @@
                   <option value="SINDBA">SINDBA</option>
                   <option value="SINDRATAR">SINDRATAR</option>
                   <option value="SINDFIT">SINDFIT</option>
+                  {loop="$sindicatos"}
+                    <option value="{$value.nome_sindicato}">{$value.nome_sindicato}</option>
+                  {/loop}
                 </optgroup>
               </select>
             </div>
@@ -104,7 +110,7 @@
 
              <div class="form-group">
               <label for="campoSenha2">Confirmar senha</label>
-              <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha">
+              <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha" required="">
             </div>
 
 

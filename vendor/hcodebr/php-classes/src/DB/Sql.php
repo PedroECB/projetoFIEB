@@ -50,6 +50,8 @@ class Sql {
 
 		$stmt->execute();
 
+		return $stmt;
+
 	}
 
 	public function select($rawQuery, $params = array()):array

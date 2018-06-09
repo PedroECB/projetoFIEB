@@ -11,7 +11,7 @@ use \Hcode\PageUser;
 use \Hcode\PageUser2;
 use Hcode\Model\User;
 
-
+ 
 $app = new Slim();
 
 $app->config('debug', true);
@@ -180,9 +180,9 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
     header("Location: /login");
     exit;                                        #Admin Cadastrando usuários
   }
-
+      $sindicatos = User::listSindicatos();
       $page = new PageAdmin();   
-      $page->setTpl("users-create");
+      $page->setTpl("users-create", array("sindicatos"=>$sindicatos));
 });
 
 
@@ -193,10 +193,14 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
     exit;                                        #Admin Cadastrando usuários
   }
 
-  var_dump($_POST);
+  $user = new User();
+  $user->setData($_POST);
+  $user->saveUser($_POST);
 
-     /* $page = new PageAdmin();   
-      $page->setTpl("users-create");   */
+  header("Location: /admin/users");
+  exit;
+
+
 });
 
 
@@ -223,9 +227,8 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
     exit;                                     #Admin Editando usuários
    }
       $user = User::loadById($iduser);
-
       $page = new PageAdmin();   
-      $page->setTpl("users-update3", array("user"=>$user));
+      $page->setTpl("users-update3", array("user"=>$user[0]));
 });
 
                                                   //Cadastro e Exclusão de empresas

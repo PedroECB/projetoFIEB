@@ -7,7 +7,7 @@ use \Hcode\Model;
 class User extends Model{
 
   private $idFuncionario;
-  private $nomeFuncionario;
+  private $nome_func;
   private $email;
   private $senha;
   private $nivel_acesso;
@@ -109,10 +109,16 @@ class User extends Model{
 
   }
 
-  /*public static function verifyAdmin(){
-      if(){}
-  }
-*/
+
+
+public static function loadById($iduser){
+    $newId = (int)$iduser;
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT * FROM funcionario WHERE idFuncionario=:ID", array(":ID"=>$newId));
+
+    return $result;
+}
 
 
 
@@ -125,8 +131,94 @@ public static function logout(){
 public static function listUsers(){
 
   $sql = new Sql();
-  return $sql->select("SELECT * FROM funcionario");
+  return $sql->select("SELECT * FROM funcionario ORDER BY idFuncionario DESC");
 }
+
+public static function listSindicatos(){
+  
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM sindicato");
+}
+
+
+
+public function saveUser($dados){
+/*
+  $nome = "Joao do Teste";
+  $rg = "156778056";
+  $cargo = "Agentao";
+  $nivel_acesso = 1;
+  $origem = "FIEB";
+  $telefone = "34757884";
+  $email = "pedromix56@gmail.com";
+  $senha = "123456";
+  $id = 3;*/
+
+
+  $nome = $dados['nome_func'];
+  $rg = $dados['rg_func'];
+  $cargo = $dados['cargo'];
+  $nivel_acesso = (int)$dados['nivel_acesso'];
+  $origem = $dados['origem'];
+  $telefone = $dados['telefone'];
+  $email = $dados['email'];
+  $senha = password_hash($dados['senha1'], PASSWORD_DEFAULT);
+  //$senha = $_POST['senha1'];
+
+ $sql = new Sql();
+
+ $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, cargo) 
+  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :cargo)", 
+  array(
+    ":nome"=>$nome,
+    ":rg"=>$rg,
+    ":email"=>$email,
+    ":telefone"=>$telefone,
+    ":senha"=>$senha,
+    ":nivel_acesso"=>$nivel_acesso,
+    ":origem"=>$origem,
+    ":cargo"=>$cargo
+));
+
+  if($result->rowCount() == 0){
+    throw new \Exception('Erro ao cadastrar usuário', 1);
+  };
+
+  //header("Location: /admin/users");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+$id = 3;
+$sql = new Sql();
+$result = $sql->select("SELECT * FROM funcionario where idFuncionario=:ID;", array(":ID"=>$id));
+
+var_dump($result);
+*/
 
 
 
