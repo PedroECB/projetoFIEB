@@ -24,18 +24,7 @@ $app->config('debug', true);
 
 $app->get('/', function() {
 
-if(isset($_SESSION['nivel_acesso'])){
-       if($_SESSION['nivel_acesso'] == 1){
-     header("Location: /admin");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 2){
-    header("Location: /user");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 3){
-    header("Location: /user2");
-      exit;
-  }
-    }
+    User::verifyLoginAll();
 
     $page = new Page([
       "header"=>false,
@@ -90,19 +79,7 @@ $app->get('/user2', function() {
 
 $app->get('/login', function() {
 
-    if(isset($_SESSION['nivel_acesso'])){
-       if($_SESSION['nivel_acesso'] == 1){
-     header("Location: /admin");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 2){
-    header("Location: /user");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 3){
-    header("Location: /user2");
-      exit;
-  }
-    }
-
+    User::verifyLoginAll();
     
     $page = new Page([
       "header"=>false,
@@ -119,17 +96,7 @@ $app->get('/login', function() {
 $app->post('/login', function() {
     
   User::login2($_POST['login'], $_POST['senha']);
-
-  if($_SESSION['nivel_acesso'] == 1){                         #Página de Login
-     header("Location: /admin");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 2){
-    header("Location: /user");
-      exit;
-  }elseif($_SESSION['nivel_acesso'] == 3){
-    header("Location: /user2");
-      exit;
-  }
+  User::verifyLoginAll();
 
 });
 
@@ -146,7 +113,7 @@ $app->get('/logout', function() {
                 
 
 
-                               // ADMIN
+                                     // ADMIN
 
                                                   //Cadastro e Exclusão de usuários
 
@@ -154,10 +121,7 @@ $app->get('/logout', function() {
 
 $app->get('/admin/users', function() {  
                           
-if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-    header("Location: /login");
-    exit;                                               
-   }                        
+      User::verifyLoginAdmin();                     
                                           # Admin Listando usuários 
       $users = User::listUsers();      
 
@@ -171,10 +135,9 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
 
 $app->get('/admin/users/create', function() {
        
-if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-    header("Location: /login");
-    exit;                                        #Admin Cadastrando usuários
-  }
+      User::verifyLoginAdmin();          
+                       
+                                                    #Admin Cadastrando usuários GET
       $sindicatos = User::listSindicatos();
       $page = new PageAdmin();   
       $page->setTpl("users-create", array("sindicatos"=>$sindicatos));
@@ -183,11 +146,8 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
 
 $app->post('/admin/users/create', function() {
        
-if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-    header("Location: /login");
-    exit;                                        #Admin Cadastrando usuários
-  }
-
+  User::verifyLoginAdmin();
+                                                   #Admin Cadastrando usuários POST
   $user = new User();
   $user->setData($_POST);
   $user->saveUser($_POST);
@@ -204,11 +164,8 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
 
 $app->get('/admin/users/:iduser/delete', function($iduser) {
       
-if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-    header("Location: /login");
-    exit;                                     #Admin Deletando usuários
-   }
-
+      User::verifyLoginAdmin();
+                                  #Admin Deletando usuários
       $page = new PageAdmin();   
       $page->setTpl("users-update");
 });
@@ -217,10 +174,8 @@ if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
 
 $app->get('/admin/users/:iduser', function($iduser) {
       
-if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-    header("Location: /login");
-    exit;                                     #Admin Editando usuários
-   }
+      User::verifyLoginAdmin();
+                                                     #Admin Editando usuários
       $user = User::loadById($iduser);
       $page = new PageAdmin();   
       $page->setTpl("users-update3", array("user"=>$user[0]));

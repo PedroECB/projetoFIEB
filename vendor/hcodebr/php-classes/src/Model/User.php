@@ -164,6 +164,22 @@ public static function verifyLoginUser2(){
      }
 }
 
+public static function verifyLoginAll(){
+  
+   if(isset($_SESSION['nivel_acesso'])){
+       if($_SESSION['nivel_acesso'] == 1){
+     header("Location: /admin");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 2){
+    header("Location: /user");
+      exit;
+  }elseif($_SESSION['nivel_acesso'] == 3){
+    header("Location: /user2");
+      exit;
+  }
+    }
+}
+
 
 
 
