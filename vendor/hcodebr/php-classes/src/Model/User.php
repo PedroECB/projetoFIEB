@@ -15,52 +15,6 @@ class User extends Model{
   private $cargo;
 
 
-                      # Login 1
-/*
-  public static function login($login, $senha){
-    $sql = new Sql();
-    $results = $sql->select("SELECT * FROM Funcionario WHERE email =:LOGIN ", array(
-      ":LOGIN"=>$login
-    ));
-
-    if(count($results) === 0){
-
-      throw new \Exception('Usuário inexistente ou senha inválida');
-
-    }
-
-    $data = $results[0];
-
-    if(password_verify($senha, $data['senha'])){
-
-       $user = new User();
-       $this->setIdFuncionario($data["idFuncionario"]);
-       $this->setNomeFuncionario($data["nome_func"]);
-       $this->setEmail($data["email"]);
-       $this->setSenha($data["senha"]);
-       $this->setNivelAcesso($data["nivel_acesso"]);
-       $this->setOrigem($data["origem"]);
-       $this->setCargo($data["cargo"]);
-
-       header("Location: index.php");
-
-       return $user;
-
-       
-
-       
-    }else{
-      throw new Exception('Usuário inexistente ou senha incorreta 2', 1);
-    }
-
-
-  }
-
-  */
-
-
-
-
 
                                                      #Login 2
 
@@ -84,6 +38,8 @@ class User extends Model{
 
     if(password_verify($senha, $data['senha'])){
        
+      $_SESSION['timeSession'] = time()+120;
+
        $user = new User();
        $user->setIdFuncionario($data['idFuncionario']);
        $user->setNomeFuncionario($data["nome_func"]);
@@ -143,16 +99,6 @@ public static function listSindicatos(){
 
 
 public function saveUser($dados){
-/*
-  $nome = "Joao do Teste";
-  $rg = "156778056";
-  $cargo = "Agentao";
-  $nivel_acesso = 1;
-  $origem = "FIEB";
-  $telefone = "34757884";
-  $email = "pedromix56@gmail.com";
-  $senha = "123456";
-  $id = 3;*/
 
 
   $nome = $dados['nome_func'];
@@ -190,42 +136,33 @@ public function saveUser($dados){
 
 
 
+                                    //VERIFICAÇÕES DE SESSÕES
 
 
 
 
+public static function verifyLoginAdmin(){
+  if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
+              header("Location: /login");
+              exit;
+            }
+} 
 
 
+public static function verifyLoginUser(){
+  if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!=="2"){
+      header("Location: /login");
+      exit;
+     }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-$id = 3;
-$sql = new Sql();
-$result = $sql->select("SELECT * FROM funcionario where idFuncionario=:ID;", array(":ID"=>$id));
-
-var_dump($result);
-*/
-
-
-
-
-
-
-
+public static function verifyLoginUser2(){
+  if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!=="3"){
+      header("Location: /login");
+      exit;
+     }
+}
 
 
 

@@ -1,10 +1,14 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
-<section class="content-header">
+<section class="content-header" style="margin-bottom:25px;">
   <h1>
-    
+   
   </h1>
+  <ol class="breadcrumb">
+    <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
+    <li class="active"><a href="/admin/users">Usuários</a></li>
+  </ol>
 </section>
 
 <!-- Main content -->
@@ -13,8 +17,11 @@
   <div class="row">
   	<div class="col-md-12">
   		<div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">Informações de usuário</h3>
+        <div class="box-header with-border ">
+         <div class="col-md-12"> 
+          <h3 class="box-title" style="vertical-align: middle; margin-right:-25px;" >INFORMAÇÕES DE USUÁRIO</h3>
+          <a href="javascript:history.back()" style="margin-left: 62px;"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a>
+         </div> 
         </div>
         <!-- /.box-header -->
       
@@ -59,9 +66,9 @@
             <div class="form-group">
               <label for="campoTipo">Tipo de usuário (Nível de acesso):</label>
               <select id="campoTipo" class="form-control" name="nivel_acesso">
-                  <option value="1">Administrador</option>
-                  <option value="2">Ponto focal</option>
-                  <option value="3">Fúncionário comum CASA/SINDICATO</option>
+                  <option value="1" <?php if( $user["nivel_acesso"] == 1 ){ ?>selected<?php } ?>>Administrador</option>
+                  <option value="2"<?php if( $user["nivel_acesso"] == 2 ){ ?> selected <?php } ?>>Ponto focal</option>
+                  <option value="3" <?php if( $user["nivel_acesso"] == 3 ){ ?>selected<?php } ?>>Fúncionário comum CASA/SINDICATO</option>
               </select>
             </div>
 

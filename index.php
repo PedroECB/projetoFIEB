@@ -1,5 +1,6 @@
 <?php 
 
+session_cache_expire(1);
 session_start();
 
 require_once("vendor/autoload.php");
@@ -49,11 +50,8 @@ if(isset($_SESSION['nivel_acesso'])){
 
 
 $app->get('/admin', function() {
-           //User::verifyAdmin(); 
-         if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
-              header("Location: /login");
-              exit;
-            }
+      
+      User::verifyLoginAdmin(); 
 
       $page = new PageAdmin();   
       $page->setTpl("index");
@@ -63,10 +61,8 @@ $app->get('/admin', function() {
 
 
 $app->get('/user', function() {  
-     if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!=="2"){
-      header("Location: /login");
-      exit;
-     }
+     
+    User::verifyLoginUser();
 
     $page = new PageUser();
     $page->setTpl("index");
@@ -80,10 +76,8 @@ $app->get('/user', function() {
 
 
 $app->get('/user2', function() {  
-     if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!=="3"){
-      header("Location: /login");
-      exit;
-     }
+     
+     User::verifyLoginUser2();
 
     $page = new PageUser2(); 
     $page->setTpl("index");
@@ -162,8 +156,9 @@ $app->get('/admin/users', function() {
                           
 if(!isset($_SESSION['nivel_acesso']) || $_SESSION['nivel_acesso']!== "1"){
     header("Location: /login");
-    exit;                                        # Admin Listando usuários        
-   }
+    exit;                                               
+   }                        
+                                          # Admin Listando usuários 
       $users = User::listUsers();      
 
       $page = new PageAdmin();   

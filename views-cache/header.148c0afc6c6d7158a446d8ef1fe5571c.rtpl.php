@@ -82,7 +82,7 @@ desired effect
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
-              <i class="fa fa-envelope-o"></i>
+              <i class="fa fa-bell-o"></i>
               <!--<span class="label label-success">0</span>-->
             </a>
             <ul class="dropdown-menu">
@@ -304,7 +304,7 @@ desired effect
 
 
 
-       <li class="treeview">
+      <!-- <li class="treeview">
           <a href="#"><i class="fa fa-circle-o-notch"></i> <span>Ciclos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -314,7 +314,7 @@ desired effect
             <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
           </ul>
         </li>
-
+      -->
   <li class="treeview">
           <a href="#"><i class="fa fa-pie-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">

@@ -3,7 +3,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>Cadastro de novo usuário</small>
+    <small>Cadastro de usuário</small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
@@ -20,8 +20,8 @@
       <div class="box box-primary">
         <div class="box-header with-border">
          <div class="col-md-12"> 
-          <h3 class="box-title" style="vertical-align: middle;">Novo Usuário</h3>
-          <a href="javascript:history.back()" style="margin-left: 60px;"><button type="button" class="btn btn-default navbar-right"><b>Voltar</b></button></a>
+          <h3 class="box-title" style="vertical-align: middle;">NOVO USUÁRIO</h3>
+          <a href="javascript:history.back()" style="margin-left: 60px;"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a>
          </div> 
         </div>
         <!-- /.box-header -->
@@ -107,13 +107,24 @@
 
             <div class="form-group">
               <label for="campoSenha1">Senha (No máximo 15 caracteres):</label>
+
+               <div class="input-group">
+               <div class="input-group-addon">
+                  <i class="fa fa-lock"></i>
+                </div> 
               <input type="password" class="form-control" id="campoSenha1" name="senha1" placeholder="Digite a senha" required="">
             </div>
+          </div>
 
              <div class="form-group">
               <label for="campoSenha2">Confirmar senha</label>
+             <div class="input-group">
+               <div class="input-group-addon">
+                  <i class="fa fa-lock"></i>
+                </div>  
               <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha" required="">
             </div>
+           </div> 
 
 
 <!--
