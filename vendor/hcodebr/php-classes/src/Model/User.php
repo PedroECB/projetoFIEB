@@ -1,5 +1,7 @@
 <?php 
 
+
+
 namespace Hcode\Model;
 use \Hcode\DB\Sql;
 use \Hcode\Model;
@@ -14,8 +16,7 @@ class User extends Model{
   private $origem;
   private $cargo;
 
-
-
+ 
                                                      #Login 2
 
 
@@ -38,7 +39,6 @@ class User extends Model{
 
     if(password_verify($senha, $data['senha'])){
        
-      $_SESSION['timeSession'] = time()+120;
 
        $user = new User();
        $user->setIdFuncionario($data['idFuncionario']);
@@ -50,6 +50,7 @@ class User extends Model{
        $user->setCargo($data["cargo"]);
 
        $_SESSION['nivel_acesso'] = $data['nivel_acesso'];
+       $_SESSION['idFuncionario'] = $data['idFuncionario'];
        $_SESSION['nome'] = $data['nome_func'];
        $_SESSION['cargo'] = $data['cargo'];
        $_SESSION['origem'] = $data['origem'];
@@ -76,6 +77,34 @@ public static function loadById($iduser){
     return $result;
 }
 
+public static function updateFocal($iduser, $post){
+
+  $nivel_acesso = $_POST['nivel_acesso'];
+
+
+    $sql = new Sql();
+    $result = $sql->query("UPDATE funcionario SET nivel_acesso=:nv WHERE idFuncionario=:iduser", 
+      array(":nv"=>$nivel_acesso,
+            ":iduser"=>$iduser));
+
+    if($result->rowCount()==0){
+      throw new \Exception('Erro ao atualizar nivel de acesso de usuário');
+    }
+}
+
+public static function deleteUser($iduser2){
+
+$iduser = (int) $iduser2;
+
+if($iduser !== 1){
+
+      $sql = new Sql();
+      $sql->query("DELETE FROM funcionario WHERE idFuncionario=:iduser", array(":iduser"=>$iduser));
+  }else{
+    throw new \Exception('Tentando deletar o desenvolvedor desgraça?');
+  }
+
+}
 
 
 public static function logout(){
@@ -87,13 +116,25 @@ public static function logout(){
 public static function listUsers(){
 
   $sql = new Sql();
-  return $sql->select("SELECT * FROM funcionario ORDER BY idFuncionario DESC");
+  return $sql->select("SELECT * FROM funcionario ORDER BY nome_func");
 }
 
 public static function listSindicatos(){
   
   $sql = new Sql();
   return $sql->select("SELECT * FROM sindicato");
+}
+
+public static function listFocais(){
+  $nv = 2;
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM funcionario WHERE nivel_acesso=:NV ORDER BY nome_func", array(":NV"=>$nv));
+}
+
+public static function listAllSolicitations(){
+
+  $sql = new Sql();
+  return  $sql->select("SELECT * FROM cadastros ORDER BY nome_func");
 }
 
 
@@ -165,7 +206,7 @@ public static function verifyLoginUser2(){
 }
 
 public static function verifyLoginAll(){
-  
+
    if(isset($_SESSION['nivel_acesso'])){
        if($_SESSION['nivel_acesso'] == 1){
      header("Location: /admin");

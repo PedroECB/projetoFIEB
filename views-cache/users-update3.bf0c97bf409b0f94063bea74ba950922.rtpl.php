@@ -31,36 +31,36 @@
 
             <div class="form-group">
               <label for="desperson">Nome</label>
-              <input type="text" class="form-control" id="desperson" name="desperson" placeholder="Digite o nome" value="<?php echo htmlspecialchars( $user["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="text" class="form-control" id="desperson" name="desperson" placeholder="Digite o nome" value="<?php echo htmlspecialchars( $user["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled="">
             </div>
 
              <div class="form-group">
               <label for="cRg">RG</label>
-              <input type="text" class="form-control" id="cRg" name="rg" placeholder="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="text" class="form-control" id="cRg" name="rg" placeholder="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
             
 
             <div class="form-group">
               <label for="cCargo">Cargo:</label>
-              <input type="text" class="form-control" id="cCargo" name="cargo" placeholder="Ex: Agente/Executivo" value="<?php echo htmlspecialchars( $user["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="text" class="form-control" id="cCargo" name="cargo" placeholder="Ex: Agente/Executivo" value="<?php echo htmlspecialchars( $user["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
 
             <div class="form-group">
               <label for="cOrigem">Origem</label>
-              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
 
 
 
             <div class="form-group">
               <label for="desemail">E-mail</label>
-              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="email" class="form-control" id="desemail" name="desemail" placeholder="Digite o e-mail" value="<?php echo htmlspecialchars( $user["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
 
 
             <div class="form-group">
               <label for="nrphone">Telefone</label>
-              <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Sem telefone"  value="<?php echo htmlspecialchars( $user["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" readonly="">
+              <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Sem telefone"  value="<?php echo htmlspecialchars( $user["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
            
             <div class="form-group">

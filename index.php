@@ -1,6 +1,5 @@
 <?php 
 
-session_cache_expire(1);
 session_start();
 
 require_once("vendor/autoload.php");
@@ -105,17 +104,21 @@ $app->post('/login', function() {
 $app->get('/logout', function() {
     
   User::logout();                                         #Função de logout
-  
+  exit;
 });
 
 
-
-                
 
 
                                      // ADMIN
 
                                                   //Cadastro e Exclusão de usuários
+
+
+
+
+
+
 
 
 
@@ -128,10 +131,6 @@ $app->get('/admin/users', function() {
       $page = new PageAdmin();   
       $page->setTpl("users", array("users"=>$users));
 });
-
-
-
-
 
 $app->get('/admin/users/create', function() {
        
@@ -162,12 +161,50 @@ $app->post('/admin/users/create', function() {
 
 
 
+
+
+
+
+
+$app->get('/admin/users-focais', function() {  
+                          
+      User::verifyLoginAdmin();                     
+                                          # Admin Listando Pontos focais
+      $users = User::listFocais();      
+
+      $page = new PageAdmin();   
+      $page->setTpl("users-focais", array("users"=>$users));
+});
+
+
+
+$app->get('/admin/users-focais/create', function() {  
+              
+      User::verifyLoginAdmin();          
+                       
+                                                    #Admin Cadastrando usuários Pontos focais
+      $sindicatos = User::listSindicatos();
+      $page = new PageAdmin();   
+      $page->setTpl("focais-create", array("sindicatos"=>$sindicatos));
+
+
+});
+
+
+
+
+
+
+
+
+
 $app->get('/admin/users/:iduser/delete', function($iduser) {
       
       User::verifyLoginAdmin();
                                   #Admin Deletando usuários
-      $page = new PageAdmin();   
-      $page->setTpl("users-update");
+      User::deleteUser($iduser);
+      header("Location: /admin/users");
+      exit;
 });
 
 
@@ -180,6 +217,43 @@ $app->get('/admin/users/:iduser', function($iduser) {
       $page = new PageAdmin();   
       $page->setTpl("users-update3", array("user"=>$user[0]));
 });
+
+
+$app->post('/admin/users/:iduser', function($iduser) {
+      
+      User::verifyLoginAdmin();
+
+                                                     #Admin Editando usuários
+      //      $user = User::loadById($iduser);
+              User::updateFocal($iduser, $_POST);
+              header("Location: /admin/users");
+              exit;
+ 
+});
+
+
+
+$app->get('/admin/solicitations', function() {  
+                          
+      User::verifyLoginAdmin();
+     $solicitations = User::listAllSolicitations();
+
+                                          # Admin Listando usuários 
+      //$users = User::listUsers();      
+
+      $page = new PageAdmin();   
+      $page->setTpl("solicitations", array("solicitations"=>$solicitations));
+});
+
+
+
+
+
+
+
+
+
+
 
                                                   //Cadastro e Exclusão de empresas
 
