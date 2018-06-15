@@ -6,7 +6,7 @@
     <small>Cadastro de usuário</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
+    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li><a href="/admin/users">Usuários</a></li>
     <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
   </ol>
@@ -29,22 +29,22 @@
         <form role="form" action="/admin/users/create" method="post">
           <div class="box-body">
             <div class="form-group">
-              <label for="campoNome">Nome:</label>
+              <label for="campoNome">Nome: <span class="text-danger">*</span></label>
               <input type="text" class="form-control" id="campoNome" name="nome_func" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25">
             </div>
 
             <div class="form-group">
-              <label for="campoRG" >RG (Somente administradores poderão visualizar):</label>
+              <label for="campoRG" >RG (Somente administradores poderão visualizar): <span class="text-danger">*</span></label></label>
               <input type="tel" class="form-control" id="campoRG" name="rg_func" placeholder="Apenas números" required="" maxlength="11">
             </div>
 
             <div class="form-group">
-              <label for="cargo">Cargo:</label>
+              <label for="cargo">Cargo: <span class="text-danger">*</span></label></label>
               <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="25">
             </div>
 
             <div class="form-group">
-              <label for="campoTipo">Tipo de usuário (Nível de acesso):</label>
+              <label for="campoTipo">Tipo de usuário (Nível de acesso): <span class="text-danger">*</span></label></label>
               <select id="campoTipo" class="form-control" name="nivel_acesso">
                   <option value="1">Administrador</option>
                   <option value="2">Ponto focal</option>
@@ -53,7 +53,7 @@
             </div>
 
             <div class="form-group">
-              <label for="campoOrigem">Origem (Entidade a qual pertence o usuário):</label>
+              <label for="campoOrigem">Origem (Entidade a qual pertence o usuário): <span class="text-danger">*</span></label></label>
               <select id="campoOrigem" class="form-control" name="origem">
                 <option value="FIEB">FIEB</option>
                 <optgroup  label="CASAS">
@@ -94,7 +94,7 @@
             
 
          <div class="form-group">
-              <label for="campoEmail">E-mail (E-mail que será utilizado para efetuar login)</label>
+              <label for="campoEmail">E-mail (E-mail que será utilizado para efetuar login): <span class="text-danger">*</span></label></label>
             <div class="input-group">
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
@@ -104,23 +104,23 @@
         </div>
 
             <div class="form-group">
-              <label for="campoSenha1">Senha (No máximo 15 caracteres):</label>
+              <label for="campoSenha1">Senha (No máximo 15 caracteres): <span class="text-danger">*</span></label></label>
 
                <div class="input-group">
                <div class="input-group-addon">
                   <i class="fa fa-lock"></i>
                 </div> 
-              <input type="password" class="form-control" id="campoSenha1" name="senha1" placeholder="Digite a senha" required="">
+              <input type="password" class="form-control" id="campoSenha1" name="senha1" placeholder="Digite a senha" required="" maxlength="15">
             </div>
           </div>
 
              <div class="form-group">
-              <label for="campoSenha2">Confirmar senha</label>
+              <label for="campoSenha2">Confirmar senha: <span class="text-danger">*</span></label></label>
              <div class="input-group">
                <div class="input-group-addon">
                   <i class="fa fa-lock"></i>
                 </div>  
-              <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha" required="">
+              <input type="password" class="form-control" id="campoSenha2" name="senha2" placeholder="Confirme a senha" required="" maxlength="15">
             </div>
            </div> 
 

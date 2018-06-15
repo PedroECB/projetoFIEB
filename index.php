@@ -211,6 +211,7 @@ $app->get('/admin/users/:iduser/delete', function($iduser) {
 
 $app->get('/admin/users/:iduser', function($iduser) {
       
+
       User::verifyLoginAdmin();
                                                      #Admin Editando usuários
       $user = User::loadById($iduser);
@@ -238,8 +239,7 @@ $app->get('/admin/solicitations', function() {
       User::verifyLoginAdmin();
      $solicitations = User::listAllSolicitations();
 
-                                          # Admin Listando usuários 
-      //$users = User::listUsers();      
+     # Admin Listando solicitações 
 
       $page = new PageAdmin();   
       $page->setTpl("solicitations", array("solicitations"=>$solicitations));
@@ -248,6 +248,26 @@ $app->get('/admin/solicitations', function() {
 
 
 
+
+$app->get('/admin/edit-profile', function() {  
+                          
+      User::verifyLoginAdmin();
+      $user = User::loadById($_SESSION['idFuncionario']);                         
+      $page = new PageAdmin();   
+      $page->setTpl("edit-profile", array("user"=>$user[0]));
+});
+
+
+
+
+
+$app->post('/admin/edit-profile', function() {  
+                          
+      User::verifyLoginAdmin();
+      var_dump($_POST);
+      User::editProfile($_POST, $_SESSION['idFuncionario']);
+    
+});
 
 
 

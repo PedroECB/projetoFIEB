@@ -11,6 +11,7 @@
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li class="active"><a href="/admin/users">Usuários</a></li>
+    <li class="active"><a href="/admin/solicitations">Solicitações</a></li>
   </ol>
 </section>
 

@@ -6,8 +6,9 @@
     Pontos Focais
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
+    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li class="active"><a href="/admin/users">Usuários</a></li>
+    <li class="active"><a href="/admin/users-focais">Pontos Focais</a></li>
   </ol>
 </section>
 
@@ -42,7 +43,7 @@
                    <!-- <td><?php echo htmlspecialchars( $value1["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>-->
                     <td><?php echo htmlspecialchars( $value1["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
+                    <td><b><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td/>
                   
                     <td><!--<?php if( $value1["nivel_acesso"] == 1 ){ ?>Administrador<?php } ?>
                         <?php if( $value1["nivel_acesso"] == 2 ){ ?>Ponto Focal<?php } ?>

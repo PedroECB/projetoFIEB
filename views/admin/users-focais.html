@@ -6,8 +6,9 @@
     Pontos Focais
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
+    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li class="active"><a href="/admin/users">Usuários</a></li>
+    <li class="active"><a href="/admin/users-focais">Pontos Focais</a></li>
   </ol>
 </section>
 
@@ -42,7 +43,7 @@
                    <!-- <td>{$value.rg_func}</td>-->
                     <td>{$value.nome_func}</td>
                     <td>{$value.cargo}</td>
-                    <td>{$value.origem}</td/>
+                    <td><b>{$value.origem}</b></td/>
                   
                     <td><!--{if="$value.nivel_acesso == 1"}Administrador{/if}
                         {if="$value.nivel_acesso == 2"}Ponto Focal{/if}

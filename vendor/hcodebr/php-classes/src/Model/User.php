@@ -74,6 +74,11 @@ public static function loadById($iduser){
     $sql = new Sql();
     $result = $sql->select("SELECT * FROM funcionario WHERE idFuncionario=:ID", array(":ID"=>$newId));
 
+    if(!$result){
+      throw new \Exception('Pare de bugar essa desgraça aí fdp', 9);
+    }
+
+
     return $result;
 }
 
@@ -174,7 +179,37 @@ public function saveUser($dados){
   //header("Location: /admin/users");
 }
 
+public static function editProfile($dados, $iduser){
 
+  $id = (int)$iduser;
+  $nome = $_POST['cNome'];
+  $cargo = $_POST['cCargo'];
+  $email = $_POST['cEmail'];
+  $telefone = $_POST['cTelefone'];
+
+
+try{
+
+  $sql = new Sql();
+ $result = $sql->query("UPDATE funcionario SET nome_func=:nome, email=:email, telefone=:tel, cargo=:cargo WHERE idFuncionario=:id", 
+  array(":nome"=>$nome,
+        ":email"=>$email,
+        ":tel"=>$telefone,
+        ":cargo"=>$cargo,
+        ":id"=>$id));
+
+}catch(\PDOException $e){
+
+     echo $e->getMessage();
+    echo "<br> Erro caraio"; 
+}
+    
+    $_SESSION['nome'] = $nome;
+    $_SESSION['cargo'] = $cargo;
+
+     User::verifyLoginAll();
+
+}
 
 
                                     //VERIFICAÇÕES DE SESSÕES
