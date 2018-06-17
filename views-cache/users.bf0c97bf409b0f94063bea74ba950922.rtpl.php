@@ -23,7 +23,7 @@
             </div>
 
             <div class="box-body no-padding">
-              <table class="table table-striped table-bordered text-center table-responsive">
+              <table class="table table-striped table-bordered text-center table-responsive table-hover">
                 <thead>
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
@@ -37,6 +37,7 @@
                 </thead>
                 <tbody>
                   <?php $counter1=-1;  if( isset($users) && ( is_array($users) || $users instanceof Traversable ) && sizeof($users) ) foreach( $users as $key1 => $value1 ){ $counter1++; ?>
+                  
                   <tr>
                    <!-- <td><?php echo htmlspecialchars( $value1["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>-->
                     <td><?php echo htmlspecialchars( $value1["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
@@ -54,6 +55,7 @@
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> <b>Excluir</b></a>
                     </td>
                   </tr>
+                
                  
                   <?php } ?>
                  <!--  <tr>

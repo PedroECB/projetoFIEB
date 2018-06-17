@@ -23,7 +23,7 @@
             </div>
 
             <div class="box-body no-padding">
-              <table class="table table-striped table-bordered text-center table-responsive">
+              <table class="table table-striped table-bordered text-center table-responsive table-hover">
                 <thead>
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
@@ -37,6 +37,7 @@
                 </thead>
                 <tbody>
                   {loop="$users"}
+                  
                   <tr>
                    <!-- <td>{$value.rg_func}</td>-->
                     <td>{$value.nome_func}</td>
@@ -54,6 +55,7 @@
                       <a href="/admin/users/{$value.idFuncionario}/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> <b>Excluir</b></a>
                     </td>
                   </tr>
+                
                  
                   {/loop}
                  <!--  <tr>

@@ -82,7 +82,7 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
+            <a href="/user/solicitations" class="sdropdown-toggle" data-toggle="sdropdown">
               <i class="fa fa-user-plus"></i>
               <!--<span class="label label-warning">1</span>-->
             </a>
@@ -336,7 +336,7 @@ desired effect
         </li>
 
         <li><a href="#"><i class="fa fa-flag"></i> <span>Demandas</span></a></li>
-        <li><a href="#"><i class="fa fa-user-plus"></i> <span>Solicitações</span></a></li>
+        <li><a href="/user/solicitations"><i class="fa fa-user-plus"></i> <span>Solicitações</span></a></li>
         <li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li>
 
 

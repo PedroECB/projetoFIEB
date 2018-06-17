@@ -164,7 +164,13 @@ public static function listAllSolicitations(){
   return  $sql->select("SELECT * FROM cadastros ORDER BY nome_func");
 }
 
+public static function listAllSolicitationsUser($origem){
 
+ $orig = $origem;
+
+  $sql = new Sql();
+  return  $sql->select("SELECT * FROM cadastros WHERE origem=:orig ORDER BY nome_func", array(":orig"=>$orig));
+}
 
 
 public static function aproveSolicitation($dados){
@@ -197,7 +203,7 @@ public static function aproveSolicitation($dados){
 ));
 
   if($result->rowCount() == 0){
-    throw new \Exception('Erro ao aprovar solicitação de usuário', 1);
+    throw new \Exception('Erro ao aprovar solicitação de usuário verifique os dados e tente novamente', 1);
   };
 
 

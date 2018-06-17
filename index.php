@@ -234,6 +234,9 @@ $app->post('/admin/users/:iduser', function($iduser) {
 
 
 
+
+
+
 $app->get('/admin/solicitations', function() {  
                           
       User::verifyLoginAdmin();
@@ -259,6 +262,34 @@ $app->get('/admin/solicitations/:iduser/aprove', function($iduser) {
       
 });
 
+$app->get('/user/solicitations', function() {  
+                          
+      User::verifyLoginUser();
+      $solicitations = User::listAllSolicitationsUser($_SESSION['origem']);
+
+      $page = new PageUser();   
+      $page->setTpl("solicitations", array("solicitations"=>$solicitations));
+});
+
+
+
+$app->get('/user/solicitations/:iduser/aprove', function($iduser) {  
+                          
+      User::verifyLoginUser();
+      $dadosUser = User::getCadastro($iduser);
+
+    if($dadosUser[0]['origem'] == $_SESSION['origem']){
+
+      User::aproveSolicitation($dadosUser[0]);
+      header("Location: /user/solicitations");
+      exit;
+
+    }else{
+        throw new \Exception('Pare de tentar burlar a desgraça',89);
+    }
+
+      
+});
 
 
 
