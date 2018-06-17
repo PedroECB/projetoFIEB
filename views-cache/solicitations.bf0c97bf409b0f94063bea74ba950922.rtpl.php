@@ -54,7 +54,7 @@
 
 
                     <td>
-                      <a href="/admin/users/<?php echo htmlspecialchars( $value1["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/aprove" class="btn btn-success btn-xs"><i class="fa fa-check"></i> <b>Aprovar</b></a>
+                      <a href="/admin/solicitations/<?php echo htmlspecialchars( $value1["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/aprove" class="btn btn-success btn-xs"><i class="fa fa-check"></i> <b>Aprovar</b></a>
                       <a href="#" onclick="return confirm('Deseja realmente recusar a solicitação desse usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Recusar</b></a>
                     </td>
                   </tr>
@@ -62,7 +62,7 @@
                   <?php } ?>
 
                 
-
+              <!--
                    <tr>
                     <td>Vinicius dos Santos Lima</td>
                     <td>Executivo</td>
@@ -87,12 +87,15 @@
 
 
 
+    -->
 
+           
 
 
                 </tbody>
               </table>
             </div>
+             <?php if( !$solicitations ){ ?><center><h3 class="text-primary">Nenhuma Solicitação Disponível</h3> </center><br><?php } ?>
             <!-- /.box-body -->
           </div>
     </div>

@@ -54,7 +54,7 @@
 
 
                     <td>
-                      <a href="/admin/users/{$value.idCadastro}/aprove" class="btn btn-success btn-xs"><i class="fa fa-check"></i> <b>Aprovar</b></a>
+                      <a href="/admin/solicitations/{$value.idCadastro}/aprove" class="btn btn-success btn-xs"><i class="fa fa-check"></i> <b>Aprovar</b></a>
                       <a href="#" onclick="return confirm('Deseja realmente recusar a solicitação desse usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Recusar</b></a>
                     </td>
                   </tr>
@@ -62,7 +62,7 @@
                   {/loop}
 
                 
-
+              <!--
                    <tr>
                     <td>Vinicius dos Santos Lima</td>
                     <td>Executivo</td>
@@ -87,12 +87,15 @@
 
 
 
+    -->
 
+           
 
 
                 </tbody>
               </table>
             </div>
+             {if="!$solicitations"}<center><h3 class="text-primary">Nenhuma Solicitação Disponível</h3> </center><br>{/if}
             <!-- /.box-body -->
           </div>
     </div>

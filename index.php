@@ -246,6 +246,30 @@ $app->get('/admin/solicitations', function() {
 });
 
 
+$app->get('/admin/solicitations/:iduser/aprove', function($iduser) {  
+                          
+      User::verifyLoginAdmin();
+     $dadosUser = User::getCadastro($iduser);
+     
+      User::aproveSolicitation($dadosUser[0]);
+
+      header("Location: /admin/solicitations");
+      exit;
+
+      
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -270,8 +294,45 @@ $app->post('/admin/edit-profile', function() {
 });
 
 
+$app->get('/user/edit-profile', function() {  
+                          
+      User::verifyLoginUser();
+      $user = User::loadById($_SESSION['idFuncionario']);                         
+      $page = new PageUser();   
+      $page->setTpl("edit-profile", array("user"=>$user[0]));
+});
 
 
+
+
+
+$app->post('/user/edit-profile', function() {  
+                          
+      User::verifyLoginUser();
+      var_dump($_POST);
+      User::editProfile($_POST, $_SESSION['idFuncionario']);
+    
+});
+
+$app->get('/user2/edit-profile', function() {  
+                          
+      User::verifyLoginUser2();
+      $user = User::loadById($_SESSION['idFuncionario']);                         
+      $page = new PageUser2();   
+      $page->setTpl("edit-profile", array("user"=>$user[0]));
+});
+
+
+
+
+
+$app->post('/user2/edit-profile', function() {  
+                          
+      User::verifyLoginUser2();
+      var_dump($_POST);
+      User::editProfile($_POST, $_SESSION['idFuncionario']);
+    
+});
 
 
 

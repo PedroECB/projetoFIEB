@@ -22,7 +22,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect.
   -->
-
+ <link rel="stylesheet" href="../../res/site/dist/css/estilo.css">
+ 
   <link rel="shortcut icon" href="../../res/user2/dist/img/teste2.png" type="image/x-icon">
   <link rel="icon" href="../../res/user2/dist/img/teste2.png" type="image/x-icon">
   <link rel="stylesheet" href="../../res/user2/dist/css/skins/skin-azul.css">
@@ -221,7 +222,7 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Editar Perfil</a>
+                  <a href="/user2/edit-profile" class="btn btn-default btn-flat">Editar Perfil</a>
                 </div>
                 <div class="pull-right">
                   <a href="/logout" class="btn btn-default btn-flat">Sair</a>

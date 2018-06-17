@@ -82,6 +82,28 @@ public static function loadById($iduser){
     return $result;
 }
 
+public static function getCadastro($iduser){
+    $newId = (int)$iduser;
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT * FROM cadastros WHERE idCadastro=:ID", array(":ID"=>$newId));
+
+    if(!$result){
+      throw new \Exception('Pare de bugar essa desgraça aí fdp', 10);
+    }
+
+
+    return $result;
+}
+
+
+
+
+
+
+
+
+
 public static function updateFocal($iduser, $post){
 
   $nivel_acesso = $_POST['nivel_acesso'];
@@ -141,6 +163,58 @@ public static function listAllSolicitations(){
   $sql = new Sql();
   return  $sql->select("SELECT * FROM cadastros ORDER BY nome_func");
 }
+
+
+
+
+public static function aproveSolicitation($dados){
+
+  $idcadastro = $dados['idCadastro'];
+
+  $nome = $dados['nome_func'];
+  $rg = $dados['rg_func'];
+  $cargo = $dados['cargo'];
+  $nivel_acesso = (int)$dados['nivel_acesso'];
+  $origem = $dados['origem'];
+  $telefone = $dados['telefone'];
+  $email = $dados['email_func'];
+  $senha = $dados['senha'];
+
+ 
+  $sql = new Sql();
+
+  $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, cargo) 
+  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :cargo)", 
+  array(
+    ":nome"=>$nome,
+    ":rg"=>$rg,
+    ":email"=>$email,
+    ":telefone"=>$telefone,
+    ":senha"=>$senha,
+    ":nivel_acesso"=>$nivel_acesso,
+    ":origem"=>$origem,
+    ":cargo"=>$cargo
+));
+
+  if($result->rowCount() == 0){
+    throw new \Exception('Erro ao aprovar solicitação de usuário', 1);
+  };
+
+
+    $sql2 = new Sql();
+   $result2 = $sql->query("DELETE FROM cadastros WHERE idCadastro=:idcadastro", array(":idcadastro"=>$idcadastro));
+
+   if($result2->rowCount() == 0){
+    throw new \Exception('Erro ao deletar o usuário depois de aprovar', 1);
+   }
+
+
+
+
+
+}
+
+
 
 
 
