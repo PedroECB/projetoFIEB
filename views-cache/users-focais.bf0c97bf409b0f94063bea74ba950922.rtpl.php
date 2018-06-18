@@ -28,13 +28,13 @@
                 <thead>
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
-                    <th style="width: 100px">Nome</th>   
-                    <th style="width: 85px">Cargo</th>
-                    <th style="width: 85px">Origem</th>
+                    <th style="width: 100px" class="text-primary">Nome</th>   
+                    <th style="width: 85px" class="text-primary">Cargo</th>
+                    <th style="width: 85px" class="text-primary">Origem</th>
                    <!-- <th>E-mail</th>-->
-                    <th style="width: 120px">E-mail</th>
-                    <th style="width: 85px">Telefone</th>
-                    <th style="width: 100px">&nbsp;</th>
+                    <th style="width: 120px" class="text-primary">E-mail</th>
+                    <th style="width: 85px" class="text-primary">Telefone</th>
+                    <th style="width: 100px" class="text-primary">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>

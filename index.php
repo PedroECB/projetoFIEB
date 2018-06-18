@@ -122,6 +122,10 @@ $app->get('/logout', function() {
 
 
 
+
+
+
+
 $app->get('/admin/users', function() {  
                           
       User::verifyLoginAdmin();                     
@@ -131,6 +135,8 @@ $app->get('/admin/users', function() {
       $page = new PageAdmin();   
       $page->setTpl("users", array("users"=>$users));
 });
+
+
 
 $app->get('/admin/users/create', function() {
        
@@ -366,6 +372,35 @@ $app->post('/user2/edit-profile', function() {
 });
 
 
+
+$app->get('/admin/sindicatos', function() {  
+                          
+      User::verifyLoginAdmin();                         
+      $sindicatos = User::listSindicatos();
+
+      $page = new PageAdmin();   
+      $page->setTpl("sindicatos2", array("sindicatos"=>$sindicatos));
+});
+
+
+$app->get('/admin/sindicatos-create', function() {  
+                          
+      User::verifyLoginAdmin();                         
+      //$sindicatos = User::listSindicatos();
+
+      $page = new PageAdmin();   
+      $page->setTpl("sindicatos-create");
+});
+
+$app->post('/admin/sindicatos-create', function() {  
+                          
+      User::verifyLoginAdmin();                         
+      User::saveSindicato($_POST);
+
+      header("Location: /admin/sindicatos");
+      exit;
+
+});
 
                                                   //Cadastro e Exclusão de empresas
 

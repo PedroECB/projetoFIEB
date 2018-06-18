@@ -149,7 +149,7 @@ public static function listUsers(){
 public static function listSindicatos(){
   
   $sql = new Sql();
-  return $sql->select("SELECT * FROM sindicato");
+  return $sql->select("SELECT * FROM sindicato ORDER BY nome_sindicato");
 }
 
 public static function listFocais(){
@@ -288,6 +288,24 @@ try{
     $_SESSION['cargo'] = $cargo;
 
      User::verifyLoginAll();
+
+}
+
+
+
+public static function saveSindicato($dados){
+   
+   $nome_sindicato = trim($dados['nomeSindicato']);
+   $descricao = $dados['descricaoSindicato'];
+
+  $sql = new Sql();
+  $result = $sql->query("INSERT INTO sindicato (nome_sindicato, descricao_sindicato) VALUES (:nomeSindicato, :descricao)",
+  array(":nomeSindicato"=>$nome_sindicato,
+        ":descricao"=>$descricao));
+
+  if($result->rowCount() == 0){
+    throw new \Exception('Erro ao cadastrar sindicato, verifique os dados e tente novamente', 55);
+  }
 
 }
 

@@ -2,10 +2,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Sobre nós
+      Versão 1.0.1
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2018 <a href="#">Desenvolvido por SIXTECH</a>.</strong> Todos os direitos reservados.
+    <strong>Copyright &copy; 2018 <a href="#">Desenvolvido por ...</a></strong> Todos os direitos reservados.
   </footer>
 
   <!-- Control Sidebar -->
@@ -95,6 +95,7 @@
 <script src="../../res/admin/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../../res/admin/dist/js/app.min.js"></script>
+<script src="../../res/site/dist/js/validacoes.js"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
