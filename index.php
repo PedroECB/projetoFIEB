@@ -255,6 +255,9 @@ $app->get('/admin/solicitations', function() {
 });
 
 
+
+
+
 $app->get('/admin/solicitations/:iduser/aprove', function($iduser) {  
                           
       User::verifyLoginAdmin();
@@ -267,6 +270,25 @@ $app->get('/admin/solicitations/:iduser/aprove', function($iduser) {
 
       
 });
+
+
+$app->get('/admin/solicitations-info/:iduser', function($iduser) {  
+                          
+      User::verifyLoginAdmin();
+      $user = User::getCadastro($iduser);
+      
+
+      $page = new PageAdmin();   
+      $page->setTpl("solicitations-info1", array("user"=>$user[0])); 
+
+      
+});
+
+
+
+
+
+
 
 $app->get('/user/solicitations', function() {  
                           
@@ -297,7 +319,22 @@ $app->get('/user/solicitations/:iduser/aprove', function($iduser) {
       
 });
 
+$app->get('/user/solicitations-info/:iduser', function($iduser) {  
+                          
+      User::verifyLoginUser();
+      $user = User::getCadastro($iduser);
+      
+      if($user[0]['origem'] == $_SESSION['origem']){
 
+        $page = new PageUser();   
+        $page->setTpl("solicitationsinfo", array("user"=>$user[0])); 
+
+      }else{
+         throw new Exception('Tentativa de acesso recusada', 8);
+      }
+
+      
+});
 
 
 

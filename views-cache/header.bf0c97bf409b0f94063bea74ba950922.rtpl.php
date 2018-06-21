@@ -271,9 +271,9 @@ desired effect
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Buscar..." readonly="">
               <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat" disabled><i class="fa fa-search"></i>
                 </button>
               </span>
         </div>
@@ -309,7 +309,7 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-plus"></i>Cadastrar</a></li>
-            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
             <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
             <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
           </ul>
@@ -325,7 +325,7 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar Todos</a></li>
-            <li><a href="#"><i class="fa fa-plus-circle"></i>Novo ciclo</a></li>
+            <li><a href="#"><i class="fa fa-plus-circle"></i>Iniciar Ciclo</a></li>
           </ul>
         </li>
 

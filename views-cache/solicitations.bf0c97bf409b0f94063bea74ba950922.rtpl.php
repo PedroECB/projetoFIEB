@@ -54,7 +54,7 @@
 
 
                     <td>
-                      <a href="#" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
+                      <a href="/admin/solicitations-info/<?php echo htmlspecialchars( $value1["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
                       <a href="/admin/solicitations/<?php echo htmlspecialchars( $value1["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/aprove" class="btn btn-success btn-xs"><i class="fa fa-check"></i> <b>Aprovar</b></a>
                       <a href="#" onclick="return confirm('Deseja realmente recusar a solicitação desse usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Recusar</b></a>
                     </td>

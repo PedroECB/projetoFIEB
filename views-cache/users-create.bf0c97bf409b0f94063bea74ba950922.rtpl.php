@@ -64,12 +64,6 @@
                 </optgroup>
                   <optgroup  label="SINDICATOS">
                  
-                 <!-- <option value="SINDVEST">SINDVEST</option>
-                  <option value="SINDSABÕES">SINDSABÕES</option>
-                  <option value="SINDPROCIM">SINDIPROCIM</option>
-                  <option value="SINDBA">SINDBA</option>
-                  <option value="SINDRATAR">SINDRATAR</option>
-                  <option value="SINDFIT">SINDFIT</option> -->
                   <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?>
 
                     <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>

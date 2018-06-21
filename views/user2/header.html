@@ -256,7 +256,7 @@ desired effect
         </div>
       </div>
 
-      <!-- search form (Optional) -->
+      <!-- search form (Optional) 
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -265,11 +265,13 @@ desired effect
                 </button>
               </span>
         </div>
-      </form>
+      </form> 
+
+      -->
       <!-- /.search form -->
 
   <ul class="sidebar-menu">
-        <li class="header">Menu</li>
+        <li class="header"><b style="color:white;"><center>Menu</center></b></li>
         <!-- Optionally, you can add icons to the links -->
 
 
