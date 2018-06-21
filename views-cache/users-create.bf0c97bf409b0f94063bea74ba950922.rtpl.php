@@ -40,7 +40,7 @@
 
             <div class="form-group">
               <label for="cargo">Cargo: <span class="text-danger">*</span></label></label>
-              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="25">
+              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="40">
             </div>
 
             <div class="form-group">
@@ -76,13 +76,25 @@
            
 
                <div class="form-group">
-                <label>Telefone (Opcional):</label>
+                <label for="campoTel">Telefone (Opcional):</label>
 
                 <div class="input-group">
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
                   <input type="tel" id="campoTel" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888" name="telefone">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+                <div class="form-group">
+                <label for="campoTel2">Telefone Alternativo (Opcional):</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <input type="tel" id="campoTel2" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888" name="telefone2">
                 </div>
                 <!-- /.input group -->
               </div>

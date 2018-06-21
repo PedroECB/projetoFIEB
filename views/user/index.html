@@ -3,8 +3,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Página inicial
-        <small></small>
+        
+        <small>Página inicial do ponto focal</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/user"><i class="fa fa-bug"></i> Reportar Erro</a></li>

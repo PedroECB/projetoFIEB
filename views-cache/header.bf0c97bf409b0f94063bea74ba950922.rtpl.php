@@ -85,6 +85,8 @@ desired effect
             <a href="/admin/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="Solicitações">
               <i class="fa fa-user-plus"></i>
               <!--<span class="label label-success">5</span>-->
+              <?php if( $qnt > 0 ){ ?>  <span class="label label-success"> <?php echo htmlspecialchars( $qnt, ENT_COMPAT, 'UTF-8', FALSE ); ?> </span> <?php } ?>
+
             </a>
             <ul class="dropdown-menu">
               <li class="header">Nenhuma notificação disponível</li>

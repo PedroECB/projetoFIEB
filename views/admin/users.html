@@ -32,7 +32,7 @@
                     <th style="width: 85px">Origem</th>
                    <!-- <th>E-mail</th>-->
                     <th style="width: 120px">Nível de acesso</th>
-                    <th style="width: 140px">&nbsp;</th>
+                    <th style="width: 40px">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,8 +44,8 @@
                     <td>{$value.cargo}</td>
                     <td>{$value.origem}</td/>
                   
-                    <td>{if="$value.nivel_acesso == 1"}Administrador{/if}
-                        {if="$value.nivel_acesso == 2"}Ponto Focal{/if}
+                    <td>{if="$value.nivel_acesso == 1"}<span class="text-success">Administrador</span>{/if}
+                        {if="$value.nivel_acesso == 2"}<span class="text-primary">Ponto Focal</span>{/if}
                         {if="$value.nivel_acesso == 3"}Comum{/if}
 
                       </td>

@@ -82,9 +82,11 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="/user/solicitations" class="sdropdown-toggle" data-toggle="sdropdown">
+            <a href="/user/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="Você tem <?php echo htmlspecialchars( $qnt, ENT_COMPAT, 'UTF-8', FALSE ); ?> solicitações pendentes">
               <i class="fa fa-user-plus"></i>
               <!--<span class="label label-warning">1</span>-->
+              <?php if( $qnt > 0 ){ ?>  <span class="label label-success"> <?php echo htmlspecialchars( $qnt, ENT_COMPAT, 'UTF-8', FALSE ); ?> </span> <?php } ?>
+
             </a>
             <ul class="dropdown-menu">
               <li class="header">Nenhuma notificação disponível</li>

@@ -227,25 +227,27 @@ public static function aproveSolicitation($dados){
 public function saveUser($dados){
 
 
-  $nome = $dados['nome_func'];
+  $nome = trim(ucwords(mb_strtolower($dados['nome_func'])));
   $rg = $dados['rg_func'];
   $cargo = $dados['cargo'];
   $nivel_acesso = (int)$dados['nivel_acesso'];
   $origem = $dados['origem'];
   $telefone = $dados['telefone'];
+  $telefone2 = $dados['telefone2'];
   $email = $dados['email'];
   $senha = password_hash($dados['senha1'], PASSWORD_DEFAULT);
   //$senha = $_POST['senha1'];
 
  $sql = new Sql();
 
- $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, cargo) 
-  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :cargo)", 
+ $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, telefone2, senha, nivel_acesso, origem, cargo) 
+  VALUES(:nome, :rg, :email, :telefone, :telefone2, :senha, :nivel_acesso, :origem, :cargo)", 
   array(
     ":nome"=>$nome,
     ":rg"=>$rg,
     ":email"=>$email,
     ":telefone"=>$telefone,
+    ":telefone2"=>$telefone2,
     ":senha"=>$senha,
     ":nivel_acesso"=>$nivel_acesso,
     ":origem"=>$origem,
@@ -262,19 +264,21 @@ public function saveUser($dados){
 public static function editProfile($dados, $iduser){
 
   $id = (int)$iduser;
-  $nome = $_POST['cNome'];
-  $cargo = $_POST['cCargo'];
+  $nome = trim(ucwords($_POST['cNome']));
+  $cargo = trim(ucwords($_POST['cCargo']));
   $email = $_POST['cEmail'];
   $telefone = $_POST['cTelefone'];
+  $telefone2 = $_POST['cTelefone2'];
 
 
 try{
 
   $sql = new Sql();
- $result = $sql->query("UPDATE funcionario SET nome_func=:nome, email=:email, telefone=:tel, cargo=:cargo WHERE idFuncionario=:id", 
+ $result = $sql->query("UPDATE funcionario SET nome_func=:nome, email=:email, telefone=:tel, telefone2=:tel2, cargo=:cargo WHERE idFuncionario=:id", 
   array(":nome"=>$nome,
         ":email"=>$email,
         ":tel"=>$telefone,
+        ":tel2"=>$telefone2,
         ":cargo"=>$cargo,
         ":id"=>$id));
 

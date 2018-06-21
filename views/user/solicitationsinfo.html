@@ -6,8 +6,8 @@
     <small>Informações Sobre Solicitação de Acesso ao Sistema</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="#">Solicitações</a></li>
+    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
+    <li><a href="/user/solicitations">Solicitações</a></li>
     
   </ol>
 </section>

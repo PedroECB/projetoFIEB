@@ -3,6 +3,7 @@
 namespace Hcode;
 
 use Rain\Tpl;
+use \Hcode\DB\Sql;
 
 class Page{
  
@@ -40,6 +41,30 @@ class Page{
     $this->tpl->assign("nome", $_SESSION['nome']);
     $this->tpl->assign("cargo", $_SESSION['cargo']);
     $this->tpl->assign("origem", $_SESSION['origem']);
+
+    if($_SESSION['nivel_acesso'] == 1){
+
+
+        $sql = new Sql();
+        $result = $sql->query("SELECT COUNT(nome_func) FROM cadastros");
+        $not = $result->fetchAll();
+        $qnt = $not[0][0];
+
+         $this->tpl->assign("qnt", $qnt);
+
+    }elseif($_SESSION['nivel_acesso'] == 2){
+
+      $origem = $_SESSION['origem'];
+
+      $sql = new Sql();
+      $result = $sql->query("SELECT COUNT(nome_func) FROM cadastros WHERE origem=:orig", array(":orig"=>$origem));
+      $not = $result->fetchAll();
+      $qnt = $not[0][0];
+
+      $this->tpl->assign("qnt", $qnt);
+
+
+    }
 
 
   }      // FIM GAMBIARRA

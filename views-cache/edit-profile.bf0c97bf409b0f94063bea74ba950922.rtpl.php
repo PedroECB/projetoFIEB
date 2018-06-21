@@ -53,7 +53,7 @@
 
 
             <div class="form-group">
-              <label for="desemail">E-mail: *</label>
+              <label for="desemail">E-mail (E-mail que será utilizado para efetuar login): *</label>
               <input type="email" class="form-control" id="desemail" name="cEmail" placeholder="Digite o e-mail" maxlength="43" value="<?php echo htmlspecialchars( $user["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
             </div>
 
@@ -61,6 +61,11 @@
             <div class="form-group">
               <label for="nrphone">Telefone:</label>
               <input type="tel" class="form-control" id="nrphone" name="cTelefone" placeholder="(DDD) 7777-8888"  value="<?php echo htmlspecialchars( $user["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" maxlength="16">
+            </div>
+
+             <div class="form-group">
+              <label for="nrphone2">Telefone alternativo:</label>
+              <input type="tel" class="form-control" id="nrphone2" name="cTelefone2" placeholder="(DDD) 7777-8888"  value="<?php echo htmlspecialchars( $user["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" maxlength="16">
             </div>
            
     

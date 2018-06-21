@@ -62,6 +62,11 @@
               <label for="nrphone">Telefone:</label>
               <input type="tel" class="form-control" id="nrphone" name="cTelefone" placeholder="(DDD) 7777-8888"  value="<?php echo htmlspecialchars( $user["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" maxlength="16">
             </div>
+
+            <div class="form-group">
+              <label for="nrphone2">Telefone Alternativo:</label>
+              <input type="tel" class="form-control" id="nrphone2" name="cTelefone2" placeholder="(DDD) 7777-8888"  value="<?php echo htmlspecialchars( $user["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" maxlength="16">
+            </div>
            
     
             <div class="form-group">

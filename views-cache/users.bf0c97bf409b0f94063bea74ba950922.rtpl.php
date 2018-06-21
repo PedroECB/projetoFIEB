@@ -32,7 +32,7 @@
                     <th style="width: 85px">Origem</th>
                    <!-- <th>E-mail</th>-->
                     <th style="width: 120px">Nível de acesso</th>
-                    <th style="width: 140px">&nbsp;</th>
+                    <th style="width: 40px">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,8 +44,8 @@
                     <td><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
                   
-                    <td><?php if( $value1["nivel_acesso"] == 1 ){ ?>Administrador<?php } ?>
-                        <?php if( $value1["nivel_acesso"] == 2 ){ ?>Ponto Focal<?php } ?>
+                    <td><?php if( $value1["nivel_acesso"] == 1 ){ ?><span class="text-success">Administrador</span><?php } ?>
+                        <?php if( $value1["nivel_acesso"] == 2 ){ ?><span class="text-primary">Ponto Focal</span><?php } ?>
                         <?php if( $value1["nivel_acesso"] == 3 ){ ?>Comum<?php } ?>
 
                       </td>

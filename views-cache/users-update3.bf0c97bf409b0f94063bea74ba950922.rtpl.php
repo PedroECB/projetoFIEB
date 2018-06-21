@@ -62,6 +62,11 @@
               <label for="nrphone">Telefone:</label>
               <input type="tel" class="form-control" id="nrphone" name="nrphone" placeholder="Sem telefone"  value="<?php echo htmlspecialchars( $user["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
+
+             <div class="form-group">
+              <label for="nrphone">Telefone Alternativo:</label>
+              <input type="tel" class="form-control" id="nrphone2" name="nrphone2" placeholder="Sem telefone alternativo"  value="<?php echo htmlspecialchars( $user["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
+            </div>
            
             <div class="form-group">
               <label for="campoTipo">Tipo de usuário (Nível de acesso):</label>

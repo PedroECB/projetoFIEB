@@ -1,5 +1,6 @@
 <?php 
 
+
 session_start();
 
 require_once("vendor/autoload.php");
@@ -383,7 +384,6 @@ $app->get('/user/edit-profile', function() {
 $app->post('/user/edit-profile', function() {  
                           
       User::verifyLoginUser();
-      var_dump($_POST);
       User::editProfile($_POST, $_SESSION['idFuncionario']);
     
 });
