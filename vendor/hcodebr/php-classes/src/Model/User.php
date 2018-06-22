@@ -96,6 +96,44 @@ public static function getCadastro($iduser){
     return $result;
 }
 
+public static function getSindicato($idsindicato){
+    $newId = (int)$idsindicato;
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT * FROM sindicato WHERE idSindicato=:ID", array(":ID"=>$newId));
+
+    if(!$result){
+      throw new \Exception('Pare de bugar essa desgraça aí fdp do sindicato', 10);
+    }
+
+
+    return $result;
+}
+
+
+public static function updateSindicato($idsindicato, $post){
+
+  $idSindicato = (int) $idsindicato;
+  $nome_sindicato = $_POST['nomeSindicato'];
+  $descricao_sindicato = $_POST['descricaoSindicato'];
+
+  //echo $idSindicato. " nome: ".$nome_sindicato." descricao: ".$descricao_sindicato;
+
+
+    $sql = new Sql();
+    $result = $sql->query("UPDATE sindicato SET nome_sindicato=:ns, descricao_sindicato=:descs WHERE idSindicato=:ids", 
+      array(":ns"=>$nome_sindicato,
+            ":descs"=>$descricao_sindicato,
+            ":ids"=>$idSindicato));
+
+    if($result->rowCount()==0){
+      throw new \Exception('Erro ao atualizar informação de Sindicato',77);
+    }
+    
+
+
+}
+
 
 
 
@@ -312,6 +350,30 @@ public static function saveSindicato($dados){
   }
 
 }
+
+
+public static function removeSindicato($id){
+   
+   $newId = (int)$id;
+
+
+  $sql = new Sql();
+  $result = $sql->query("DELETE FROM sindicato where idSindicato=:ids",
+  array(":ids"=>$newId));
+
+  if($result->rowCount() == 0){
+    throw new \Exception('Erro ao remover sindicato, verifique os dados e tente novamente', 55);
+  }
+
+
+  
+}
+
+
+
+
+
+
 
 
                                     //VERIFICAÇÕES DE SESSÕES

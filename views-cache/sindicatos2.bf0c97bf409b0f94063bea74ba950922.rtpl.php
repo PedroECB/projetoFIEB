@@ -35,7 +35,7 @@
               Relatórios &nbsp<i class="fa fa-pie-chart"></i>
             </a>
 
-            <a href="#<?php echo htmlspecialchars( $value1["idSindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="small-box-footer">
+            <a href="/admin/sindicato-edit/<?php echo htmlspecialchars( $value1["idSindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="small-box-footer">
               Editar &nbsp<i class="fa fa-pencil-square"></i>
             </a>
           </div>

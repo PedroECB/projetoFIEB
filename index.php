@@ -410,6 +410,10 @@ $app->post('/user2/edit-profile', function() {
 
 
 
+
+
+
+
 $app->get('/admin/sindicatos', function() {  
                           
       User::verifyLoginAdmin();                         
@@ -418,6 +422,39 @@ $app->get('/admin/sindicatos', function() {
       $page = new PageAdmin();   
       $page->setTpl("sindicatos2", array("sindicatos"=>$sindicatos));
 });
+
+
+$app->get('/admin/sindicato/:idsindicato/remove', function($idsindicato) {  
+                          
+      User::verifyLoginAdmin();                         
+      User::removeSindicato($idsindicato);
+      header("Location: /admin/sindicatos");
+      exit;
+});
+
+
+
+$app->get('/admin/sindicato-edit/:idsindicato', function($idsindicato) {  
+                          
+      User::verifyLoginAdmin();                         
+      $sindicato = User::getSindicato($idsindicato);
+
+      $page = new PageAdmin();   
+      $page->setTpl("sindicato-edit", array("sindicato"=>$sindicato[0]));
+});
+
+$app->post('/admin/sindicato-edit/:idsindicato', function($idsindicato) {  
+                          
+      User::verifyLoginAdmin();                         
+     // $sindicato = User::getSindicato($idsindicato);
+      User::UpdateSindicato($idsindicato, $_POST);
+      header("Location: /admin/sindicatos");
+      exit;
+});
+
+
+
+
 
 
 $app->get('/admin/sindicatos-create', function() {  
