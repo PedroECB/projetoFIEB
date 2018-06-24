@@ -20,7 +20,7 @@
       <div class="box box-primary">
         <div class="box-header with-border">
          <div class="col-md-12"> 
-          <center><h3 class="box-title" style="vertical-align: middle;"><b>NOVO SINDICATO</b></h3></center>
+          <center><h3 class="box-title" style="vertical-align: middle;"><b>NOVO SINDICATO</b></h3> <a href="javascript:history.back();"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a></center>
           <!--<a href="javascript:history.back()" style="margin-left: 60px;"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a>-->
          </div> 
         </div>

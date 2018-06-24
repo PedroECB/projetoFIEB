@@ -82,7 +82,7 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="/admin/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="Solicitações">
+            <a href="/admin/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="<?php echo htmlspecialchars( $qnt, ENT_COMPAT, 'UTF-8', FALSE ); ?> Solicitações pendentes">
               <i class="fa fa-user-plus"></i>
               <!--<span class="label label-success">5</span>-->
               <?php if( $qnt > 0 ){ ?>  <span class="label label-success"> <?php echo htmlspecialchars( $qnt, ENT_COMPAT, 'UTF-8', FALSE ); ?> </span> <?php } ?>

@@ -33,7 +33,7 @@
 
           <div class="form-group">
               <label for="campoDtCadastro">Data de Cadastro:</label>
-              <input type="text" class="form-control" id="campoDtCadastro" name="dataCadastro" placeholder="" readonly="" value="">
+              <input type="text" class="form-control" id="campoDtCadastro" name="dataCadastro" placeholder="" readonly="" value="<?php echo date('d/m/Y     H:i:s', strtotime($user["dtcadastro"])); ?>">
             </div>
 
 

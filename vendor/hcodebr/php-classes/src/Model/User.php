@@ -5,8 +5,12 @@
 namespace Hcode\Model;
 use \Hcode\DB\Sql;
 use \Hcode\Model;
+use \Hcode\Mailer;
 
 class User extends Model{
+
+  const SECRET = "Hcodephp7_Secret";
+  const URLPROJETO = "http://www.projetofieb.com";
 
   private $idFuncionario;
   private $nome_func;
@@ -199,7 +203,7 @@ public static function listFocais(){
 public static function listAllSolicitations(){
 
   $sql = new Sql();
-  return  $sql->select("SELECT * FROM cadastros ORDER BY nome_func");
+  return  $sql->select("SELECT * FROM cadastros ORDER BY idCadastro DESC");
 }
 
 public static function listAllSolicitationsUser($origem){
@@ -267,7 +271,7 @@ public function saveUser($dados){
 
   $nome = trim(ucwords(mb_strtolower($dados['nome_func'])));
   $rg = $dados['rg_func'];
-  $cargo = $dados['cargo'];
+  $cargo = ucfirst($dados['cargo']);
   $nivel_acesso = (int)$dados['nivel_acesso'];
   $origem = $dados['origem'];
   $telefone = $dados['telefone'];
@@ -303,7 +307,7 @@ public static function editProfile($dados, $iduser){
 
   $id = (int)$iduser;
   $nome = trim(ucwords($_POST['cNome']));
-  $cargo = trim(ucwords($_POST['cCargo']));
+  $cargo = trim(ucfirst($_POST['cCargo']));
   $email = $_POST['cEmail'];
   $telefone = $_POST['cTelefone'];
   $telefone2 = $_POST['cTelefone2'];
@@ -368,6 +372,127 @@ public static function removeSindicato($id){
 
   
 }
+
+
+
+public static function getForgot($email){
+
+ $sql = new Sql();
+ $results = $sql->select("SELECT * FROM funcionario WHERE email=:email", array(":email"=>$email));
+
+ if(count($results) === 0){
+  throw new \Exception('Não foi possível recuperar a senha', 500);
+
+ }else{
+
+      $data = $results[0];
+      $desip = $_SERVER['REMOTE_ADDR'];
+
+      $sql3 = new Sql();
+      $sql2 = new Sql();
+      $sql1 = new Sql();
+      $resultSql2 = $sql2->query("INSERT INTO funcionario_recoveries (Funcionario_idFuncionario, desip)
+       VALUES (:iduser, :desip)", 
+      array(":iduser"=>$data['idFuncionario'],
+            ":desip"=>$_SERVER['REMOTE_ADDR']));
+
+      if($resultSql2->rowCount() === 0){ throw new \Exception('Falha no insert', 501);  }
+
+      $resultSql1 = $sql1->select("SELECT max(idrecoverie) FROM funcionario_recoveries");
+      $lastid = $resultSql1[0]["max(idrecoverie)"];
+
+
+      $results2 = $sql3->select("SELECT * FROM funcionario_recoveries WHERE idrecoverie=:lastid", array(":lastid"=>$lastid));
+
+      if(count($results2) === 0){ 
+        throw new \Exception('Falha na recuperação da senha', 502);
+
+      }else{
+
+          $dataRecovery = $results2[0];
+
+          $iv = random_bytes(openssl_cipher_iv_length('aes-256-cbc'));
+          $code = openssl_encrypt($dataRecovery['idrecoverie'], 'aes-256-cbc', User::SECRET, 0, $iv);
+          $result = base64_encode($iv.$code);
+
+          $link = User::URLPROJETO."/forgot/reset?code=$result";
+          
+           echo $data['email']." - ".$data['nome_func'];
+
+          $mailer = new Mailer($data['email'], $data['nome_func'], "Redefinir senha SGA", "forgot", 
+           array("name"=>$data['nome_func'],
+                 "link"=>$link));
+
+          $mailer->send();
+
+          return $data;
+
+
+      }
+
+
+
+ }
+
+
+}
+
+
+public static function validForgotDecrypt($result){
+
+    $result = base64_decode($result);
+    $code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
+    $iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');;
+    $idrecovery = openssl_decrypt($code, 'aes-256-cbc', User::SECRET, 0, $iv);
+
+    $sql = new Sql();
+    $results = $sql->select("SELECT* FROM funcionario_recoveries a JOIN funcionario b ON a.Funcionario_idFuncionario=b.idFuncionario
+WHERE idrecoverie=:idrecovery AND a.dtrecovery IS NULL AND DATE_ADD(a.dtregister, INTERVAL 1 HOUR)>= NOW();", 
+array(":idrecovery"=>$idrecovery));
+
+
+if(count($results) === 0){
+
+    throw new \Exception('Não foi possível recuperar a senha', 507);
+
+}else{
+
+  return $results[0];
+
+}
+
+
+
+
+
+}
+
+
+public static function setForgotUsed($idrecoverie){
+
+$sql = new Sql();
+$sql->query("UPDATE funcionario_recoveries SET dtrecovery= NOW() WHERE idrecoverie=:idreco", array(":idreco"=>$idrecoverie));
+
+
+}
+
+
+public static function setPassword($password, $iduser){
+
+   $newPassword = password_hash($password, PASSWORD_DEFAULT);
+ 
+   $sql = new Sql();
+   $sql->query("UPDATE funcionario SET senha=:newSenha WHERE idFuncionario=:iduser", array(
+    ":newSenha"=>$newPassword,
+    ":iduser"=>$iduser
+   ));
+
+
+}
+
+
+
+
 
 
 

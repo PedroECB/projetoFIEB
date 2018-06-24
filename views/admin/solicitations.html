@@ -5,7 +5,7 @@
 <section class="content-header">
 
   <h1>
-     <small>CLIQUE SOBRE O USUÁRIO PARA OBTER INFORMAÇÕES MAIS DETALHADAS</small>
+     <small>CLIQUE NO BOTÃO DE INFORMAÇÕES PARA OBTER MAIS DETALHES SOBRE O USUÁRIO</small>
   </h1>
   
   <ol class="breadcrumb">

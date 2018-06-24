@@ -70,7 +70,7 @@
            
     
             <div class="form-group">
-              <a href="#"><button type="button" class="btn btn-link">Alterar Senha</button></a>
+              <a href="#"><button type="button" class="btn btn-link"><b>Alterar Senha</b></button></a>
             </div>
 
 
@@ -78,9 +78,10 @@
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
-           <div class="col-md-12"> 
-            <a href="javascript:history.back()"><button type="button" class="btn btn-primary"><b>VOLTAR</b></button></a>
-            <button type="submit" class="btn btn-link navbar-right" onclick="return confirm('Deseja realmente salvar as alterações no perfil?')"><b>SALVAR</b></button>
+           <div class="col-md-12">
+           <button type="submit" class="btn btn-primary" onclick="return confirm('Deseja realmente salvar as alterações no perfil?')"><b>SALVAR</b></button> 
+            <a href="javascript:history.back()"><button type="button" class="btn btn-default navbar-right"><b>VOLTAR</b></button></a>
+            
            </div> 
           </div>
         </form>

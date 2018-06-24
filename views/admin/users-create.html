@@ -20,8 +20,11 @@
       <div class="box box-primary">
         <div class="box-header with-border">
          <div class="col-md-12"> 
-          <h3 class="box-title" style="vertical-align: middle;">NOVO USUÁRIO</h3>
-          <a href="javascript:history.back()" style="margin-left: 60px;"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a>
+         
+         <center> 
+          <h3 class="box-title" style="vertical-align: middle;"><b>NOVO USUÁRIO</b></h3>
+          <a href="javascript:history.back()"><button type="button" class="btn btn-link navbar-right" style="margin-left: 15px;"><b>Voltar</b></button></a>
+         </center>
          </div> 
         </div>
         <!-- /.box-header -->

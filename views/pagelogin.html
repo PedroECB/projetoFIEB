@@ -79,7 +79,7 @@
     -->
     <!-- /.social-auth-links -->
 
-    <a href="#">Esqueci minha senha</a><br>
+    <a href="/forgot">Esqueci minha senha</a><br>
     <a href="register.html" class="text-center">Cadastrar-se</a>
 
   </div>

@@ -8,6 +8,8 @@
     <b>SINDICATOS</b>
   </h1>
 
+  <br><a href="/admin/sindicatos-create"><button type="button" class="btn btn-primary"><b>NOVO SINDICATO</b></button></a>
+
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li><a href="/admin/sindicatos">Sindicatos</a></li>
