@@ -214,6 +214,12 @@ public static function listAllSolicitationsUser($origem){
   return  $sql->select("SELECT * FROM cadastros WHERE origem=:orig ORDER BY nome_func", array(":orig"=>$orig));
 }
 
+public static function listCiclos(){
+
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM ciclo");
+}
+
 
 public static function aproveSolicitation($dados){
 

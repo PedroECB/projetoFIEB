@@ -553,6 +553,16 @@ $app->post('/admin/sindicatos-create', function() {
 
 });
 
+$app->get('/admin/ciclos', function() {  
+                          
+      User::verifyLoginAdmin();
+
+      $ciclos = User::listCiclos();                         
+
+      $page = new PageAdmin();   
+      $page->setTpl("ciclos", array("ciclos"=>$ciclos));
+});
+
 
 
 
