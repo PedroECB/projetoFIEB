@@ -220,6 +220,57 @@ public static function listCiclos(){
   return $sql->select("SELECT * FROM ciclo order by data_inicio");
 }
 
+public static function getCiclo($idciclo){
+ 
+$id = (int) $idciclo; 
+
+  $sql = new Sql();
+
+   $result = $sql->select("SELECT * FROM ciclo WHERE idCiclo=:id", array(":id"=>$id));
+   if(count($result) == 0 ){
+     throw new \Exception('Falha na busca do ciclo', 599);
+   }
+
+   return $result;
+
+}
+
+public static function updateCiclo($idciclo, $dados){
+
+ $id = (int)$idciclo;
+ $nomeciclo = $dados['nomeCiclo'];
+ $dataInicio = $dados['dataInicio'];
+ $dataTermino = $dados['dataTermino'];
+
+ $sql = new Sql();
+ $query = $sql->query("UPDATE ciclo SET nome_ciclo=:nomeciclo, data_inicio=:datainicio, data_termino=:datatermino WHERE idCiclo=:id",
+ array(":nomeciclo"=>$nomeciclo,
+       ":datainicio"=>$dataInicio,
+       ":datatermino"=>$dataTermino,
+       ":id"=>$id));
+
+ if($query->rowCount() == 0){
+
+    var_dump($query->errorInfo());
+    throw new \Exception('Falha na edição do ciclo', 598);
+ }
+
+
+}
+
+public function deleteCiclo($idciclo){
+
+  $sql = new Sql();
+  $query = $sql->query("DELETE FROM ciclo where idCiclo=:id limit 1", array(":id"=>$idciclo));
+
+  if($query->rowCount() == 0 ){
+    throw new \Exception('Falha na exclusão do ciclo', 597);
+  }
+
+}
+
+
+
 public static function createCiclo($datas){
 
  $nomeCiclo = ucfirst($datas['nomeCiclo']);

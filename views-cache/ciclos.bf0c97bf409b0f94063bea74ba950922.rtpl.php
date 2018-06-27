@@ -58,7 +58,7 @@
                     <!--<span class="info-box-number">01/01/2018</span>
                     <span class="info-box-number">01/01/2018</span>-->
                   <div class="col-md-12">
-                    <a href="/admin/ciclo-edit/<?php echo htmlspecialchars( $value1["idCiclo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="color:white;"><i class="fa fa-pencil-square navbar-right" title="Editar ciclo"></i></a>
+                    <a href="/admin/ciclos/<?php echo htmlspecialchars( $value1["idCiclo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="color:white;"><i class="fa fa-pencil-square navbar-right" title="Editar ciclo"></i></a>
                   </div>
             </div>
             <!-- /.info-box-content -->

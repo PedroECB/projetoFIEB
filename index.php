@@ -553,6 +553,8 @@ $app->post('/admin/sindicatos-create', function() {
 
 });
 
+
+
 $app->get('/admin/ciclos', function() {  
                           
       User::verifyLoginAdmin();
@@ -562,6 +564,33 @@ $app->get('/admin/ciclos', function() {
       $page = new PageAdmin();   
       $page->setTpl("ciclos", array("ciclos"=>$ciclos));
 });
+
+$app->get('/admin/ciclos/:idciclo', function($idciclo) {  
+                          
+      User::verifyLoginAdmin();
+
+      $ciclo = User::getCiclo($idciclo);                         
+
+      $page = new PageAdmin();   
+      $page->setTpl("ciclos-edit", array("ciclo"=>$ciclo[0]));
+});
+
+$app->post('/admin/ciclos/:idciclo', function($idciclo) {  
+                          
+      User::verifyLoginAdmin();
+      User::updateCiclo($idciclo, $_POST);
+      header("Location: /admin/ciclos");
+      exit;
+});
+
+$app->get('/admin/ciclos/:idciclo/remove', function($idciclo) {  
+                          
+      User::verifyLoginAdmin();                        
+      User::deleteCiclo($idciclo);
+      header("Location: /admin/ciclos");
+      exit;
+});
+
 
 $app->get('/admin/ciclo-create', function() {  
                           
