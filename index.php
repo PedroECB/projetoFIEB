@@ -563,9 +563,21 @@ $app->get('/admin/ciclos', function() {
       $page->setTpl("ciclos", array("ciclos"=>$ciclos));
 });
 
+$app->get('/admin/ciclo-create', function() {  
+                          
+      User::verifyLoginAdmin();                       
 
+      $page = new PageAdmin();   
+      $page->setTpl("ciclo-create");
+});
 
-
+$app->post('/admin/ciclo-create', function() {  
+                          
+      User::verifyLoginAdmin();
+      User::createCiclo($_POST);
+      header("Location: /admin/ciclos");
+      exit;
+});
 
 
                                                   //Cadastro e Exclusão de empresas

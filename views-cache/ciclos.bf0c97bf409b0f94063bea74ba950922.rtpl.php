@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -41,22 +41,24 @@
   
 <div class="box-body">
 
-{loop="$ciclos"}
+<?php $counter1=-1;  if( isset($ciclos) && ( is_array($ciclos) || $ciclos instanceof Traversable ) && sizeof($ciclos) ) foreach( $ciclos as $key1 => $value1 ){ $counter1++; ?>
+
 
       <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box bg-blue">
               <a href="#Relatorios" style="color:white;"><span class="info-box-icon"><i class="fa fa-calendar"></i></span></a>
 
             <div class="info-box-content">
-                    <b><span class="info-box-text text-center">{$value.nome_ciclo} CICLO</span></b>
+                    <b><span class="info-box-text text-center"><?php echo htmlspecialchars( $value1["nome_ciclo"], ENT_COMPAT, 'UTF-8', FALSE ); ?> CICLO</span></b>
                        <div class=""> 
-                          <b>Início</b> - {function="date('d/m/Y', strtotime($value.data_inicio))"}<br>
-                          <b>Fim</b> - {function="date('d/m/Y', strtotime($value.data_termino))"}
+                          <b>Início</b> - <?php echo date('d/m/Y', strtotime($value1["data_inicio"])); ?><br>
+                          <b>Fim</b> - <?php echo date('d/m/Y', strtotime($value1["data_termino"])); ?>
+
                       </div> 
                     <!--<span class="info-box-number">01/01/2018</span>
                     <span class="info-box-number">01/01/2018</span>-->
                   <div class="col-md-12">
-                    <a href="/admin/ciclo-edit/{$value.idCiclo}" style="color:white;"><i class="fa fa-pencil-square navbar-right" title="Editar ciclo"></i></a>
+                    <a href="/admin/ciclo-edit/<?php echo htmlspecialchars( $value1["idCiclo"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" style="color:white;"><i class="fa fa-pencil-square navbar-right" title="Editar ciclo"></i></a>
                   </div>
             </div>
             <!-- /.info-box-content -->
@@ -65,7 +67,8 @@
           <!-- /.info-box -->
         </div>
 
-{/loop}
+<?php } ?>
+
 
            
 

@@ -12,3 +12,8 @@ function toUpperSind(){
 function confirmUpper(){
  formSindicato.nomeSindicato.value = formSindicato.nomeSindicato.value.toUpperCase();
 }
+
+
+function formatDate(){
+  
+}

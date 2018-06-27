@@ -217,9 +217,41 @@ public static function listAllSolicitationsUser($origem){
 public static function listCiclos(){
 
   $sql = new Sql();
-  return $sql->select("SELECT * FROM ciclo");
+  return $sql->select("SELECT * FROM ciclo order by data_inicio");
 }
 
+public static function createCiclo($datas){
+
+ $nomeCiclo = ucfirst($datas['nomeCiclo']);
+ $dataInicio = $datas['dataInicio'];
+ $dataTermino = $datas['dataTermino'];
+
+
+ $sql = new Sql();
+ $result = $sql->select("SELECT * FROM ciclo WHERE data_termino>:datainicio", array(":datainicio"=>$dataInicio));
+
+ if(count($result)==0 and $dataInicio<$dataTermino){ 
+
+    
+      $sql2 = new Sql();
+      $query = $sql2->query("INSERT INTO ciclo (nome_ciclo, data_inicio, data_termino) VALUES (:nomeCiclo, :dataInicio, :dataTermino)",
+      array(":nomeCiclo"=>$nomeCiclo,
+            ":dataInicio"=>$dataInicio,
+            ":dataTermino"=>$dataTermino));
+
+      if($query->rowCount() == 0){
+            throw new \Exception('Ciclo não pode ser criado. Nome de ciclo já existente', 602);
+    }
+
+    }else{ 
+              throw new \Exception('Ciclo não pode ser criado. Ciclo já existente na data digitada ou datas inválidas.', 601);
+
+              //echo "<script> alert('Ciclo não pode ser criado, ciclo já existente na data digitada ou datas inválidas'); history.back();</script>";
+              exit;
+          }
+
+  
+}
 
 public static function aproveSolicitation($dados){
 

@@ -327,7 +327,7 @@ desired effect
           </a>
           <ul class="treeview-menu">
             <li><a href="/admin/ciclos"><i class="fa fa-sort-alpha-asc"></i>Listar Todos</a></li>
-            <li><a href="#"><i class="fa fa-plus-circle"></i>Iniciar Ciclo</a></li>
+            <li><a href="/admin/ciclo-create"><i class="fa fa-plus-circle"></i>Iniciar Ciclo</a></li>
           </ul>
         </li>
 
