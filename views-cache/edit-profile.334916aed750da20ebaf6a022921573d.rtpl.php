@@ -70,7 +70,7 @@
            
     
             <div class="form-group">
-              <a href="#"><button type="button" class="btn btn-link">Alterar Senha</button></a>
+              <a href="/user/alter-password"><button type="button" class="btn btn-link"><b>Alterar Senha</b></button></a>
             </div>
 
 

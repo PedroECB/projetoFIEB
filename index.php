@@ -11,6 +11,7 @@ use \Hcode\PageAdmin;
 use \Hcode\PageUser;
 use \Hcode\PageUser2;
 use Hcode\Model\User;
+use \Hcode\Mailer;
 
 
  
@@ -21,7 +22,7 @@ $app->config('debug', true);
 
 
 
-
+ 
 
 $app->get('/', function() {
 
@@ -350,6 +351,19 @@ $app->get('/admin/solicitations/:iduser/aprove', function($iduser) {
 });
 
 
+$app->get('/admin/solicitations/:iduser/recuse', function($iduser) {  
+                          
+      User::verifyLoginAdmin();
+     $dadosUser = User::getCadastro($iduser);
+     
+      User::recuseSolicitation($dadosUser[0]);
+      header("Location: /admin/solicitations");
+      exit;
+
+      
+});
+
+
 $app->get('/admin/solicitations-info/:iduser', function($iduser) {  
                           
       User::verifyLoginAdmin();
@@ -396,6 +410,28 @@ $app->get('/user/solicitations/:iduser/aprove', function($iduser) {
 
       
 });
+
+
+$app->get('/user/solicitations/:iduser/recuse', function($iduser) {  
+                          
+      User::verifyLoginUser();
+      $dadosUser = User::getCadastro($iduser);
+
+    if($dadosUser[0]['origem'] == $_SESSION['origem']){
+
+      User::recuseSolicitation($dadosUser[0]);
+      header("Location: /user/solicitations");
+      exit;
+
+    }else{
+        throw new \Exception('Pare de tentar burlar a desgraça',89);
+    }
+
+      
+});
+
+
+
 
 $app->get('/user/solicitations-info/:iduser', function($iduser) {  
                           
@@ -606,6 +642,53 @@ $app->post('/admin/ciclo-create', function() {
       User::createCiclo($_POST);
       header("Location: /admin/ciclos");
       exit;
+});
+
+$app->get('/admin/alter-password', function() {  
+                          
+      User::verifyLoginAdmin();                       
+      $page = new PageAdmin();   
+      $page->setTpl("alter-password");
+});
+
+$app->post('/admin/alter-password', function() {  
+                          
+      User::verifyLoginAdmin();
+      User::alterPassword($_SESSION['idFuncionario'], $_POST);
+      header("Location:/admin");
+      exit;                       
+});
+
+
+
+$app->get('/user/alter-password', function() {  
+                          
+      User::verifyLoginUser();                       
+      $page = new PageUser();   
+      $page->setTpl("alter-password");
+});
+
+$app->post('/user/alter-password', function() {  
+                          
+      User::verifyLoginUser();
+      User::alterPassword($_SESSION['idFuncionario'], $_POST);
+      header("Location:/user");
+      exit;                       
+});
+
+$app->get('/user2/alter-password', function() {  
+                          
+      User::verifyLoginUser2();                       
+      $page = new PageUser2();   
+      $page->setTpl("alter-password");
+});
+
+$app->post('/user2/alter-password', function() {  
+                          
+      User::verifyLoginUser2();
+      User::alterPassword($_SESSION['idFuncionario'], $_POST);
+      header("Location:/user2");
+      exit;                       
 });
 
 

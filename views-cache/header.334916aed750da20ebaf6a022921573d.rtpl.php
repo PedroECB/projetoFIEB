@@ -261,6 +261,7 @@ desired effect
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
+     
 
       <!-- search form (Optional) 
       <form action="#" method="get" class="sidebar-form">

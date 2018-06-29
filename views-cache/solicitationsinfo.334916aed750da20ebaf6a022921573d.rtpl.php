@@ -110,7 +110,7 @@
 
            
             <a href="/user/solicitations/<?php echo htmlspecialchars( $user["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/aprove"><button type="button" class="btn btn-success"><b><i class="fa fa-check"></i>&nbsp Aprovar</b></button></a>  
-            <a><button type="button" class="btn btn-danger navbar-right"><b><i class="fa fa-close"></i>&nbsp Recusar</b></button></a>
+            <a href="/user/solicitations/<?php echo htmlspecialchars( $user["idCadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/recuse"><button onclick="return confirm('Deseja realmente recusar a solicitação desse usuário?')" type="button" class="btn btn-danger navbar-right"><b><i class="fa fa-close"></i>&nbsp Recusar</b></button></a>
     
 
 

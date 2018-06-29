@@ -36,7 +36,8 @@ class User extends Model{
       if(count($results) === 0){
 
       throw new \Exception('Usuário inexistente ou senha inválida');
-
+        //echo "<script> alert('Usuário inexistente ou senha inválida'); javascript:history.back();</script>";
+        //exit;
     }
 
     $data = $results[0];
@@ -65,6 +66,7 @@ class User extends Model{
 
     }else{
       throw new \Exception('Usuário inexistente ou senha incorreta 2');
+
     }
 
 
@@ -211,7 +213,7 @@ public static function listAllSolicitationsUser($origem){
  $orig = $origem;
 
   $sql = new Sql();
-  return  $sql->select("SELECT * FROM cadastros WHERE origem=:orig ORDER BY nome_func", array(":orig"=>$orig));
+  return  $sql->select("SELECT * FROM cadastros WHERE origem=:orig ORDER BY idCadastro desc", array(":orig"=>$orig));
 }
 
 public static function listCiclos(){
@@ -317,7 +319,8 @@ public static function aproveSolicitation($dados){
   $email = $dados['email_func'];
   $senha = $dados['senha'];
 
- 
+
+
   $sql = new Sql();
 
   $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, cargo) 
@@ -334,7 +337,7 @@ public static function aproveSolicitation($dados){
 ));
 
   if($result->rowCount() == 0){
-    throw new \Exception('Erro ao aprovar solicitação de usuário verifique os dados e tente novamente', 1);
+    throw new \Exception('Erro ao aprovar solicitação. Dados já cadastrados ou inválidos', 1);
   };
 
 
@@ -346,6 +349,35 @@ public static function aproveSolicitation($dados){
    }
 
 
+   $mailer = new Mailer($email, $nome, "SGA - Solicitacao de Acesso Aprovada", "aprove", 
+           array("name"=>$nome,
+                 "link"=>User::URLPROJETO));
+
+          $mailer->send();
+
+
+}
+
+public static function recuseSolicitation($dados){
+
+$idcadastro = $dados['idCadastro'];
+$email = $dados['email_func'];
+$nome = $dados['nome_func'];
+
+$mailer = new Mailer($email, $nome, "SGA - Solicitacao de Acesso Recusada", "recuse", 
+           array("name"=>$nome));
+
+          $mailer->send(); 
+
+
+
+  $sql = new Sql();
+  $query = $sql->query("DELETE FROM cadastros WHERE idCadastro=:idcadastro", array(":idcadastro"=>$idcadastro));
+
+  if($query->rowCount() == 0){
+
+    throw new Exception('Falha ao recusar solicitação de usuário', 700);
+  }
 
 
 
@@ -425,6 +457,48 @@ try{
      User::verifyLoginAll();
 
 }
+
+public static function alterPassword($iduser, $dados){
+
+ $id = (int)$iduser;
+ $senhaAtual = $dados['senhaAtual'];
+ $senha1 = $dados['senha1'];
+ $senha2 = $dados['senha2'];
+
+  $sql = new Sql();
+  $result = $sql->select("SELECT * FROM funcionario WHERE idFuncionario=:id", array(":id"=>$id));
+  $data = $result[0];
+
+  if(password_verify($senhaAtual, $data['senha']) && $senha1 === $senha2){
+
+     
+    $newSenha = password_hash($senha2, PASSWORD_DEFAULT);
+
+      // Senha válida
+    $sql2 = new Sql();
+    $query = $sql2->query("UPDATE funcionario SET senha=:newsenha WHERE idFuncionario=:id LIMIT 1", 
+      array(":newsenha"=>$newSenha,
+            ":id"=>$id));
+
+
+
+
+    if($query->rowCount() == 0){
+
+        throw new \Exception('Falha ao atualizar senha', 5069);
+    }
+    
+
+
+  }else{
+    throw new \Exception('Não foi possível alterar a senha, verifique os dados e tente novamente', 5068);
+  }
+
+
+
+}
+
+
 
 
 
