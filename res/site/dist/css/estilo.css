@@ -33,3 +33,8 @@
 
 
 .one-link{color:#99acc6; text-decoration: underline;}
+
+
+@media(max-width:450px){
+  .info-some{display: none;}
+}

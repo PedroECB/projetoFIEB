@@ -304,14 +304,14 @@ desired effect
 
 
         <li class="treeview">
-          <a href="#"><i class="fa fa-industry"></i> <span>Empresas</span>
+          <a href=""><i class="fa fa-industry"></i> <span>Empresas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-plus"></i>Cadastrar</a></li>
-            <li><a href="#"><i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
+            <li><a href="/admin/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
+            <li><a href="/admin/empresas"><i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
             <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
             <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
           </ul>

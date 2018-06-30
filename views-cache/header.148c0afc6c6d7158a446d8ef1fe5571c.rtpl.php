@@ -82,8 +82,8 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
-              <i class="fa fa-bell-o"></i>
+            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown" title="Notificações">
+              <i class="fa fa-flag-o"></i>
               <!--<span class="label label-success">0</span>-->
             </a>
             <ul class="dropdown-menu">
@@ -283,8 +283,8 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="#"><i class="fa fa-plus"></i>Cadastrar</a></li>
-            <li><a href="#"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+             <li><a href="/user2/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
+            <li><a href="/user2/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
             <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
             <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
           </ul>
