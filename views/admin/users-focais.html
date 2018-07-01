@@ -32,8 +32,8 @@
                     <th style="width: 85px" class="text-primary">Cargo</th>
                     <th style="width: 85px" class="text-primary">Origem</th>
                    <!-- <th>E-mail</th>-->
-                    <th style="width: 120px" class="text-primary">E-mail</th>
-                    <th style="width: 85px" class="text-primary">Telefone</th>
+                    <th style="width: 120px" class="text-primary md2-some">E-mail</th>
+                    <th style="width: 85px" class="text-primary md2-some">Telefone</th>
                     <th style="width: 100px" class="text-primary">&nbsp;</th>
                   </tr>
                 </thead>
@@ -45,13 +45,13 @@
                     <td>{$value.cargo}</td>
                     <td><b>{$value.origem}</b></td/>
                   
-                    <td><!--{if="$value.nivel_acesso == 1"}Administrador{/if}
+                    <td class="md2-some"><!--{if="$value.nivel_acesso == 1"}Administrador{/if}
                         {if="$value.nivel_acesso == 2"}Ponto Focal{/if}
                         {if="$value.nivel_acesso == 3"}Comum{/if}-->
 
                         {$value.email}
                       </td>
-                      <td>{$value.telefone}</td>
+                      <td class="md2-some">{$value.telefone}</td>
                     <td>
                       <a href="/admin/users/{$value.idFuncionario}" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
                       <a href="/admin/users/{$value.idFuncionario}/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Remover</b></a>

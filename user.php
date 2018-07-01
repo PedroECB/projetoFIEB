@@ -7,6 +7,7 @@ use \Hcode\PageUser;
 use \Hcode\PageUser2;
 use Hcode\Model\User;
 use Hcode\Model\Empresa;
+use Hcode\Model\Visita;
 
 
 
@@ -135,8 +136,8 @@ $app->post('/user/alter-password', function() {
 $app->get('/user/empresa-create', function() {  
                           
       User::verifyLoginUser(); 
-    $cidades = Empresa::listCidades();
-    $sindicatos = User::listSindicatos(); 
+      $cidades = Empresa::listCidades();
+      $sindicatos = User::listSindicatos(); 
 
       $page = new PageUser();   
       $page->setTpl("empresa-create-new", array("cidades"=>$cidades, "sindicatos"=>$sindicatos));
@@ -146,7 +147,7 @@ $app->post('/user/empresa-create', function() {
                           
       User::verifyLoginUser();                       
       Empresa::saveEmpresa($_POST);
-      header("Location: /user/empresas");
+      header("Location:/user/empresas/origem");
       exit;
 
 });
@@ -160,20 +161,96 @@ $app->get("/user/empresas", function(){
 
 });
 
+$app->get("/user/empresas/origem", function(){
+
+    $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser();
+    $empresas = Empresa::listAllOrigem($origem);
+    $page = new PageUser();   
+    $page->setTpl("list-empresas", array("empresas"=>$empresas));
+    
+
+});
+
+
 $app->get("/user/empresas/:idempresa", function($idempresa){
 
     User::verifyLoginUser();
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
     $page = new PageUser();   
-    $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0]));
+    $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION));
 
 });
 
-$app->get("/user2/empresas/:idempresa", function($idempresa){
 
-    User::verifyLoginUser2();
+
+
+$app->get("/user/agendarvisita/:idempresa", function($idempresa){
+
+    User::verifyLoginUser();
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
-    $page = new PageUser2();   
-    $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0]));
+    $sindicatos = User::listSindicatos();
+    $cidades = Empresa::listCidades();
+    $page = new PageUser();   
+    $page->setTpl("agendavisita-create", array("empresa"=>$empresa[0], "sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION));
+
+});
+
+
+$app->post("/user/agendarvisita/:idempresa", function($idempresa){
+
+    User::verifyLoginUser();
+    Visita::SaveVisitaEmp($_POST);
+    header("Location: /user/visitas");
+    exit;
+
+});
+
+$app->get("/user/visitas", function(){
+
+User::verifyLoginUser();
+$visitas = Visita::listAll();
+
+$page = new PageUser();
+$page->setTpl("list-visitas", array("visitas"=>$visitas));
+
+});
+
+$app->get("/user/empresa/:idempresa/delete", function($idempresa){
+
+      User::verifyLoginUser();
+      
+     if(Empresa::removeEmpresa($idempresa)){
+      header("Location: /user/empresas");
+      exit;
+     };
+
+
+});
+
+
+$app->get("/user/visita/create", function(){
+
+      User::verifyLoginUser();
+      $sindicatos = User::listSindicatos();
+      $cidades = Empresa::listCidades();
+
+      $page = new PageUser();
+      $page->setTpl("visita-create", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION));
+
+
+
+});
+
+$app->post("/user/visita/create", function(){
+
+      User::verifyLoginUser();
+      Visita::SaveVisitaEmp2($_POST);
+      header("Location: /user/visitas");
+      exit;
+
+
+
 
 });

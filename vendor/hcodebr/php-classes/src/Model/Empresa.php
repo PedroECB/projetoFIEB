@@ -35,6 +35,42 @@ class Empresa extends Model{
     return $sql->select("SELECT * FROM empresas ORDER BY idEmpresas desc;");
   }
 
+  public static function listAllOrigem($origem){
+
+    $orig = $origem;
+
+    $sql = new Sql();
+    return $sql->select("SELECT * FROM empresas WHERE origem_cadastro=:orig ORDER BY idEmpresas desc;", array(":orig"=>$orig));
+
+  }
+
+  public static function getEmpresa($id){
+
+    $newId = (int) $id;
+
+    $sql = new Sql();
+    return $sql->select("SELECT * FROM empresas WHERE idEmpresas=:idempresa", array(":idempresa"=>$newId));
+
+  }
+
+  public static function removeEmpresa($id){
+    
+    $newId = $id;
+
+    $sql = new Sql();
+
+    $result = $sql->query("DELETE FROM empresas where idEmpresas=:id", array(":id"=>$newId));
+
+    if($result->rowCount() == 0){
+      echo "<script> alert('Não foi possível remover a empresa, empresa com visitas ativas.'); javascript:history.back();</script>";
+      return false;
+      exit;
+    };
+
+    return true;
+
+  }
+
 
   public static function getFuncEmpresaSind($idempresa){
  
@@ -77,11 +113,12 @@ class Empresa extends Model{
   public static function saveEmpresa($dados){
 
       $idFuncionario = $_SESSION['idFuncionario'];
+      $origem_func = $_SESSION['origem'];
       $cnpj = $dados['cnpj'];
       $razaoSocial = $dados['razaoSocial'];
       $nomeFantasia = $dados['nomeFantasia'];
       $situacaoAssociacao = $dados['sitAssoc'];
-      $associadaA = isset($dados['Assoc'])?$dados['Assoc']:NULL;
+      $associadaA = isset($dados['Assoc'])?(int)$dados['Assoc']:NULL;
       $cidade = $dados['campoCidade'];
       $regiao = $dados['CampoRegiao'];
       $bairro = $dados['campoBairro'];
@@ -92,8 +129,8 @@ class Empresa extends Model{
 
     $sql = new Sql();
     $query = $sql->query("INSERT INTO empresas 
-      (idFuncionario, Sindicato_idSindicato, cnpj, razao_social, nome_fantasia, situacao_associacao, municipio, regiao_estado, bairro, endereco, email, telefone, telefone2)
-      VALUES(:idFuncionario, :associadaA, :cnpj, :razaoSocial, :nome_fantasia, :situacaoAssociacao, :municipio, :regiao, :bairro, :endereco, :email, :telefone, :telefone2)",
+      (idFuncionario, Sindicato_idSindicato, cnpj, razao_social, nome_fantasia, situacao_associacao, municipio, regiao_estado, bairro, endereco, email, telefone, telefone2, origem_cadastro)
+      VALUES(:idFuncionario, :associadaA, :cnpj, :razaoSocial, :nome_fantasia, :situacaoAssociacao, :municipio, :regiao, :bairro, :endereco, :email, :telefone, :telefone2, :origem_cadastro)",
       array(":idFuncionario"=>$idFuncionario,
             ":associadaA"=>$associadaA,
             ":cnpj"=>$cnpj,
@@ -106,7 +143,8 @@ class Empresa extends Model{
             ":endereco"=>$endereco,
             ":email"=>$email,
             ":telefone"=>$telefone,
-            ":telefone2"=>$telefone2));
+            ":telefone2"=>$telefone2,
+            ":origem_cadastro"=>$origem_func));
 
     if($query->rowCount() == 0){
       

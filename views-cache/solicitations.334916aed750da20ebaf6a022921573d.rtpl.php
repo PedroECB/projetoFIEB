@@ -34,7 +34,7 @@
                     <th style="width: 85px">Cargo</th>
                     <th style="width: 85px">Origem</th>
                    <!-- <th>E-mail</th>-->
-                    <th style="width: 120px">Email</th>
+                    <th style="width: 120px" class="md2-some">Email</th>
                     <th style="width: 140px">&nbsp;</th>
                   </tr>
                 </thead>
@@ -49,7 +49,7 @@
                     <td><?php echo htmlspecialchars( $value1["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["email_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md2-some"><?php echo htmlspecialchars( $value1["email_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                   
 
 

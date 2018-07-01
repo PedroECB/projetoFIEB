@@ -7,6 +7,7 @@ use \Hcode\PageUser;
 use \Hcode\PageUser2;
 use Hcode\Model\User;
 use Hcode\Model\Empresa;
+use Hcode\Model\Visita;
 
 
 
@@ -367,7 +368,79 @@ $app->get("/admin/empresas/:idempresa", function($idempresa){
     User::verifyLoginAdmin();
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
     $page = new PageAdmin();   
-    $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0]));
+    $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION));
 
 });
 
+
+$app->get("/admin/agendarvisita/:idempresa", function($idempresa){
+
+    User::verifyLoginAdmin();
+    $empresa = Empresa::getFuncEmpresaSind($idempresa);
+    $sindicatos = User::listSindicatos();
+    $cidades = Empresa::listCidades();
+    $page = new PageAdmin();   
+    $page->setTpl("agendavisita-create", array("empresa"=>$empresa[0], "sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION));
+
+});
+
+
+$app->post("/admin/agendarvisita/:idempresa", function($idempresa){
+
+    User::verifyLoginAdmin();
+    Visita::SaveVisitaEmp($_POST);
+    header("Location: /admin/visitas");
+    exit;
+
+});
+
+
+$app->get("/admin/visitas", function(){
+
+User::verifyLoginAdmin();
+$visitas = Visita::listAll();
+
+$page = new PageAdmin();
+$page->setTpl("list-visitas", array("visitas"=>$visitas));
+
+});
+
+
+$app->get("/admin/empresa/:idempresa/delete", function($idempresa){
+
+      User::verifyLoginAdmin();
+      
+     if(Empresa::removeEmpresa($idempresa)){
+      header("Location: /admin/empresas");
+      exit;
+     };
+
+
+});
+
+
+$app->get("/admin/visita/create", function(){
+
+      User::verifyLoginAdmin();
+      $sindicatos = User::listSindicatos();
+      $cidades = Empresa::listCidades();
+
+      $page = new PageAdmin();
+      $page->setTpl("visita-create", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION));
+
+
+
+});
+
+
+$app->post("/admin/visita/create", function(){
+
+      User::verifyLoginAdmin();
+      Visita::SaveVisitaEmp2($_POST);
+      header("Location: /admin/visitas");
+      exit;
+
+
+
+
+});

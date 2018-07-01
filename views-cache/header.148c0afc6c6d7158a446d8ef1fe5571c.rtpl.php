@@ -83,7 +83,7 @@ desired effect
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="sdropdown-toggle" data-toggle="sdropdown" title="Notificações">
-              <i class="fa fa-flag-o"></i>
+              <i class="fa  fa-bell-o"></i>
               <!--<span class="label label-success">0</span>-->
             </a>
             <ul class="dropdown-menu">
@@ -284,7 +284,8 @@ desired effect
           </a>
           <ul class="treeview-menu">
              <li><a href="/user2/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
-            <li><a href="/user2/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
+             <li><a href="/user2/empresas/origem"><i class="fa fa-dot-circle-o"></i>Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+            <li><a href="/user2/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
             <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
             <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
           </ul>
@@ -297,8 +298,8 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="#"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
-             <li><a href="#"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
+             <li><a href="/user2/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
+             <li><a href="/user2/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
              <li><a href="#"><i class="fa fa-calendar-minus-o"></i>Agendadas</a></li>
              <li><a href="#"><i class="fa fa-calendar-check-o"></i>Concluídas</a></li>
               <li><a href="#"><i class="fa fa-check-square-o"></i>Finalizar</a></li>

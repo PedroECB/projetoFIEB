@@ -32,8 +32,8 @@
                     <th style="width: 85px" class="text-primary">Cargo</th>
                     <th style="width: 85px" class="text-primary">Origem</th>
                    <!-- <th>E-mail</th>-->
-                    <th style="width: 120px" class="text-primary">E-mail</th>
-                    <th style="width: 85px" class="text-primary">Telefone</th>
+                    <th style="width: 120px" class="text-primary md2-some">E-mail</th>
+                    <th style="width: 85px" class="text-primary md2-some">Telefone</th>
                     <th style="width: 100px" class="text-primary">&nbsp;</th>
                   </tr>
                 </thead>
@@ -45,13 +45,13 @@
                     <td><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><b><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td/>
                   
-                    <td><!--<?php if( $value1["nivel_acesso"] == 1 ){ ?>Administrador<?php } ?>
+                    <td class="md2-some"><!--<?php if( $value1["nivel_acesso"] == 1 ){ ?>Administrador<?php } ?>
                         <?php if( $value1["nivel_acesso"] == 2 ){ ?>Ponto Focal<?php } ?>
                         <?php if( $value1["nivel_acesso"] == 3 ){ ?>Comum<?php } ?>-->
 
                         <?php echo htmlspecialchars( $value1["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?>
                       </td>
-                      <td><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                      <td class="md2-some"><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Remover</b></a>

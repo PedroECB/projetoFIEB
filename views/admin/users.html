@@ -29,7 +29,7 @@
                    <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 100px">Nome</th>   
                     <th style="width: 85px">Cargo</th>
-                    <th style="width: 85px">Origem</th>
+                    <th style="width: 85px" class="md2-some">Origem</th>
                    <!-- <th>E-mail</th>-->
                     <th style="width: 120px">Nível de acesso</th>
                     <th style="width: 40px">&nbsp;</th>
@@ -41,7 +41,7 @@
                   <a href="#" class=""><tr>
                    <!-- <td>{$value.rg_func}</td>-->
                     <td>{$value.nome_func}</td>
-                    <td>{$value.cargo}</td>
+                    <td class="md2-some">{$value.cargo}</td>
                     <td>{$value.origem}</td/>
                   
                     <td>{if="$value.nivel_acesso == 1"}<span class="text-success">Administrador</span>{/if}
@@ -52,7 +52,7 @@
 
                     <td>
                       <a href="/admin/users/{$value.idFuncionario}" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
-                      <a href="/admin/users/{$value.idFuncionario}/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> <b>Excluir</b></a>
+                      <a href="/admin/users/{$value.idFuncionario}/delete" onclick="return confirm('Todas as visitas cadastradas por esse usuário serão deletadas. Deseja realmente remover este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> <b>Excluir</b></a>
                     </td>
                   
                   </tr>

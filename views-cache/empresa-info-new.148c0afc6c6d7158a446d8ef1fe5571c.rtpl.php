@@ -45,7 +45,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td><b>CADASTRADA POR</b></td>          <td> <?php if( isset($empresa["nome_func"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td><td class="text-primary info-some"><b><?php if( isset($empresa["origem"]) ){ ?><?php echo htmlspecialchars( $empresa["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></b></td></tr>
+              <tr><td><b>CADASTRADA POR</b></td>          <td> <?php if( isset($empresa["nome_func"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td><td class="text-primary info-some"><b><?php echo htmlspecialchars( $empresa["origem_cadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td></tr>
               <tr><td><b>CNPJ</b></td>                     <td> <?php echo htmlspecialchars( $empresa["cnpj"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>RAZÃO SOCIAL</b></td>             <td> <?php echo htmlspecialchars( $empresa["razao_social"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>NOME FANTASIA</b></td>            <td> <?php echo htmlspecialchars( $empresa["nome_fantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
@@ -74,9 +74,13 @@
           <div class="box-footer">
            <div class="col-md-12"> 
  
-            <a href="/user2/empresa/agenda-visita/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-success btn-sm" style="margin-top: 5px;"><b><i class="fa fa-calendar"></i>&nbsp AGENDAR VISITA</b></button></a>  
+            <a href="/user2/agendarvisita/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-success btn-sm" style="margin-top: 5px;"><b><i class="fa fa-calendar"></i>&nbsp AGENDAR VISITA</b></button></a>  
 
-            <a href="/user2/empresa/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"><button type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            <?php if( $empresa["origem_cadastro"] == $origem["origem"] ){ ?>
+
+            <a href="/user2/empresa/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"><button onclick="return confirm('Deseja realmente remover essa empresa do sistema?');" type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            <?php } ?>
+
 
             <a href="javascript:history.back();"><button type="button" class="btn btn-default btn-sm navbar-right" style="margin-top: 5px;"><b>&nbsp VOLTAR</b></button></a>
     

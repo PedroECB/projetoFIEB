@@ -33,11 +33,11 @@
                 <thead >
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
-                    <th style="width: 30px; vertical-align: middle;">CNPJ</th>   
+                    <th style="width: 30px; vertical-align: middle;" class="md2-some">CNPJ</th>   
                     <th style="width: 80px; vertical-align: middle;">Nome Fantasia</th>
                     <th style="width: 100px; vertical-align: middle;">Situação da Associação</th>
-                    <th  style="width:30px; vertical-align: middle;">Município</th>
-                    <th style="width: 50px; vertical-align: middle;">Região</th>
+                    <th  style="width:30px; vertical-align: middle;" class="md2-some">Município</th>
+                    <th style="width: 50px; vertical-align: middle;" class="md2-some">Região</th>
                     <th style="width: 140px; vertical-align: middle;">&nbsp;</th>
                   </tr>
                 </thead>
@@ -48,21 +48,21 @@
                 {loop="$empresas"}
 
                  <tr>
-                    <td>{$value.cnpj}</td>
+                    <td class="md2-some">{$value.cnpj}</td>
                     <td>{$value.nome_fantasia}</td>
 
                     <!--<td>{$value.situacao_associacao}</td>-->
                     <td>
                     {if="$value.situacao_associacao == 'Não Associada'"}<span class="text-danger">Não Associada</span>{/if}
                     {if="$value.situacao_associacao == 'Associada'"}<span class="text-success">Associada</span>{/if}
-                    {if="$value.situacao_associacao == 'Associacão em Negociação'"}<span class="text-primary">Associação em Negociação</span>{/if}
+                    {if="$value.situacao_associacao == 'Associação em Negociação'"}<span class="text-primary">Associação em Negociação</span>{/if}
                     {if="$value.situacao_associacao == 'Associação Efetivada'"}<span class="text-warning">Associação Efetivada</span>{/if}
                   </td>
 
-                    <td>{$value.municipio}</td>
-                    <td>{$value.regiao_estado}</td>
+                    <td class="md2-some">{$value.municipio}</td>
+                    <td class="md2-some">{$value.regiao_estado}</td>
                     <td>
-                      <a href="#" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>
+                      <a href="/user/agendarvisita/{$value.idEmpresas}" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>
                       <a href="/user/empresas/{$value.idEmpresas}"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
                     </td>
                   </tr>

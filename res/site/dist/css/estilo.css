@@ -38,3 +38,25 @@
 @media(max-width:450px){
   .info-some{display: none;}
 }
+
+
+ @media(max-width: 535px){
+  .md-some{display: none;}
+
+ }
+
+ @media(max-width: 330px){
+    .xs-some{display: none;} 
+  }
+
+@media(max-width: 500px){
+ 
+
+  .btn{margin-top: 5px;}
+
+}
+
+@media(max-width: 600px){
+  .md2-some{display: none;}
+
+ }

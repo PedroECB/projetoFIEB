@@ -291,9 +291,8 @@ desired effect
           </a>
           <ul class="treeview-menu">
              <li><a href="/user/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
-            <li><a href="/user/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
-            <li><a href="#"><i class="fa fa-check"></i>Associadas</a></li>
-            <li><a href="#"><i class="fa fa-times"></i>Não associadas</a></li>
+             <li><a href="/user/empresas/origem"><i class="fa fa-dot-circle-o"></i>Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+            <li><a href="/user/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
           </ul>
         </li>
 
@@ -304,8 +303,8 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="#"> <i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
-             <li><a href="#"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
+             <li><a href="/user/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
+             <li><a href="/user/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
              <li><a href="#"><i class="fa fa-calendar-minus-o"></i>Agendadas</a></li>
              <li><a href="#"><i class="fa fa-calendar-check-o"></i>Concluídas</a></li>
               <li><a href="#"><i class="fa fa-check-square-o"></i>Finalizar</a></li>

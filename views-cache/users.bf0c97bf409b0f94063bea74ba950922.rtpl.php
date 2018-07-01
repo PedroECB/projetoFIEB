@@ -29,7 +29,7 @@
                    <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 100px">Nome</th>   
                     <th style="width: 85px">Cargo</th>
-                    <th style="width: 85px">Origem</th>
+                    <th style="width: 85px" class="md2-some">Origem</th>
                    <!-- <th>E-mail</th>-->
                     <th style="width: 120px">Nível de acesso</th>
                     <th style="width: 40px">&nbsp;</th>
@@ -41,7 +41,7 @@
                   <a href="#" class=""><tr>
                    <!-- <td><?php echo htmlspecialchars( $value1["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>-->
                     <td><?php echo htmlspecialchars( $value1["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md2-some"><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>
                   
                     <td><?php if( $value1["nivel_acesso"] == 1 ){ ?><span class="text-success">Administrador</span><?php } ?>

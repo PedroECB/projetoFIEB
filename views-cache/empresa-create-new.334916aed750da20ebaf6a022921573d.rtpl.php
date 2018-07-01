@@ -59,7 +59,7 @@
 
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
-                <option value="Associação em Negociação">Associacão em Negociação</option>
+                <option value="Associação em Negociação">Associação em Negociação</option>
                 <option value="Associação Efetivada">Associação Efetivada</option>
 
               </select>

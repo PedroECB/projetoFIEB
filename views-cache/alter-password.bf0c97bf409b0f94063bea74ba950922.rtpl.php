@@ -9,7 +9,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="#">Alterar senha</a></li>
+    <li class="active"><a href="/admin/alter-password">Alterar senha</a></li>
   </ol>
 </section>
 
