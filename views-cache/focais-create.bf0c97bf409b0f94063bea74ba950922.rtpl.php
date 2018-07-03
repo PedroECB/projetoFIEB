@@ -6,7 +6,7 @@
     <small>Cadastro de Ponto Focal</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-dashboard"></i> Início</a></li>
+    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
     <li><a href="/admin/users">Usuários</a></li>
     <li class="active"><a href="/admin/users-focais/create">Cadastrar Ponto Focal</a></li>
   </ol>

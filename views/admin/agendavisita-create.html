@@ -53,7 +53,7 @@
        <optgroup label="CASAS"> 
           <option value="IEL">IEL</option>
           <option value="SESI">SESI</option>
-          <option value="SENAI">SESI</option>
+          <option value="SENAI">SENAI</option>
           <option value="CIEB">CIEB</option>
        </optgroup> 
 

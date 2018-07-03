@@ -42,6 +42,7 @@
       <option value="Visita Agendada">Visita Agendada</option>
       <option value="Visita Realizada">Visita Realizada</option>
       <option value="Sem Sucesso no Agendamento">Sem Sucesso no Agendamento</option>
+      <option value="Empresa Desativada">Sem Sucesso no Agendamento</option>
     </select>
   </div>
 </div>

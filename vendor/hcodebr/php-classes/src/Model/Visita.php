@@ -166,8 +166,130 @@ class Visita extends Model{
 public static function listAll(){
 
     $sql = new Sql();
-    return $sql->select("SELECT * FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario AND c.idEmpresas=b.Empresas_idEmpresas");
+    return $sql->select("SELECT * FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario AND c.idEmpresas=b.Empresas_idEmpresas order by idVisita desc");
 }
+
+public static function listAllOrigem($origem){
+
+    $orig = $origem;
+
+    $sql = new Sql();
+    return $sql->select("SELECT * FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario AND c.idEmpresas=b.Empresas_idEmpresas WHERE a.origem=:orig order by idVisita desc", array(":orig"=>$orig));
+}
+
+
+public static function getVisita($idvisita){
+
+    $idVisita = (int)$idvisita;
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT * from funcionario join visita join empresas join visita_has_funcionario
+ on funcionario.idFuncionario=visita.idFuncionario and visita.Empresas_idEmpresas=empresas.idEmpresas and visita.idVisita=visita_has_funcionario.Visita_idVisita where visita.idVisita =:idVisita", array(":idVisita"=>$idVisita));
+
+    if(count($result)>0){
+        return$result;
+    }else{
+
+        $sql2 = new Sql();
+        $result2 = $sql2->select("select * from funcionario join visita join empresas on funcionario.idFuncionario=visita.idFuncionario and visita.Empresas_idEmpresas=empresas.idEmpresas where visita.idVisita =:idVisita", array(":idVisita"=>$idVisita));
+
+        
+
+        if(count($result2)==0){
+            throw new \Exception('Erro ao obter dados da visita', 6007);
+        }
+
+        return $result2;
+    }
+}
+
+
+
+public static function atualizaVisita($dados){
+
+     $idVisita = (int)$dados['idVisita'];
+     $dataPrevista = $dados['dataVisita'];
+     $status_visita = $dados['campoStatus'];
+     $demandaInicial = $dados['campoDemanda'];
+     $familia_prod = $dados['campoFamilia'];
+     $observacao = $dados['campoObservacao'];
+
+
+     $sql = new Sql();
+     $result = $sql->query("UPDATE visita set familia_prod=:familia_prod, demanda_inicial=:demandaInicial, status_visita=:status_visita, data_prevista=:dataPrevista, observacao=:observacao where idVisita=:idVisita", 
+        array(":observacao"=>$observacao,
+              ":idVisita"=>$idVisita,
+              ":dataPrevista"=>$dataPrevista,
+              ":status_visita"=>$status_visita,
+              ":demandaInicial"=>$demandaInicial,
+              ":familia_prod"=>$familia_prod));
+
+   /*  $sql2 = new Sql();
+     $query2 = $sql2->query("UPDATE visita SET observacao=:observ WHERE idVisita=:idVisita", 
+      array(":observ"=>$observacao,
+            ":idVisita"=>$idVisita));*/
+
+    return true;
+
+}
+
+
+
+public static function finalizeVisita($dados){
+
+
+    $idFuncionario = $_SESSION['idFuncionario'];
+    $idVisita = $dados['idVisita'];
+    $agente_atend = $dados['campoAgenteAtend'];
+    $data_realizacao = $dados['dataRealização'];
+    $status_negociacao = $dados['campoNegociacao'];
+    $familia_prod = $dados['campoFamilia'];
+    $valor_prod = $dados['campoValorProduto'];
+    $situacaoAssociacao = $dados['sitAssoc'];
+    $preco_prod = $dados['campoValorProduto']!==""?$dados['campoValorProduto']:NULL;
+    $demandas  = $dados['campoDemandas']!==""?$dados['campoDemandas']:NULL;
+    $observacao = $dados['campoObservacao'];
+
+
+    $sql = new Sql();
+    $query = $sql->query("INSERT INTO visita_has_funcionario (visita_idVisita, Funcionario_idFuncionario, agente_atend, data_realizacao, 
+                         demanda_ident, status_negociacao, preco_prod, status_associacao) VALUES (
+                        :idVisita, :idFuncionario, :agente_atend, :data_realizacao, :demanda_ident, :status_negociacao,
+                        :preco_prod, :status_associacao)", 
+                        array(":idVisita"=>$idVisita,
+                              ":idFuncionario"=>$idFuncionario,
+                              ":agente_atend"=>$agente_atend,
+                              ":data_realizacao"=>$data_realizacao,
+                              ":demanda_ident"=>$demandas,
+                              ":status_negociacao"=>$status_negociacao,
+                              ":preco_prod"=>$preco_prod,
+                              ":status_associacao"=>$situacaoAssociacao));
+
+    var_dump($dados);
+    if($dados['campoDemandas'] !== ""){
+        $sql2 = new Sql();
+        $query2 = $sql2->query("INSERT INTO demandas (idVisita_demandas, demanda) VALUES (:idVisita, :demanda)", 
+                            array(":idVisita"=>$idVisita,
+                                  ":demanda"=>$demandas));
+    }
+
+    $newStatus = "Visita Realizada";
+
+    $sql3 = new Sql();
+    $query = $sql3->query("UPDATE visita SET status_visita=:newStatus, observacao=:observacao WHERE idVisita=:idVisita", 
+                    array(":newStatus"=>$newStatus,
+                          ":observacao"=>$observacao,
+                          ":idVisita"=>$idVisita));
+
+}
+
+
+
+
+
+
+
+
 
 
 

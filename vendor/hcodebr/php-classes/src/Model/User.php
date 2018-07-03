@@ -59,6 +59,7 @@ class User extends Model{
        $_SESSION['nome'] = $data['nome_func'];
        $_SESSION['cargo'] = $data['cargo'];
        $_SESSION['origem'] = $data['origem'];
+       $_SESSION['tp'] = $data['tp'];
 
 
 
@@ -196,6 +197,12 @@ public static function listSindicatos(){
   return $sql->select("SELECT * FROM sindicato ORDER BY nome_sindicato");
 }
 
+public static function listCasas(){
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM casas order by nome_casa desc");
+
+}
+
 public static function listFocais(){
   $nv = 2;
   $sql = new Sql();
@@ -215,6 +222,27 @@ public static function listAllSolicitationsUser($origem){
   $sql = new Sql();
   return  $sql->select("SELECT * FROM cadastros WHERE origem=:orig ORDER BY idCadastro desc", array(":orig"=>$orig));
 }
+
+
+public static function listAllDemandas($origem){
+
+  $orig = $origem;
+  $iel = 'IEL'; 
+   $sql = new Sql();
+  return $sql->select("SELECT* FROM visita JOIN visita_has_funcionario JOIN demandas ON visita.idVisita=visita_has_funcionario.Visita_idVisita AND visita_has_funcionario.Visita_idVisita=demandas.idVisita_demandas WHERE demandas.demanda=:orig",
+   array(":orig"=>$orig));
+
+}
+
+public static function deleteDemanda($idDemanda){
+
+$id = (int)$idDemanda;
+
+  $sql = new Sql();
+  $query = $sql->query("DELETE FROM demandas WHERE idDemanda=:id", array(":id"=>$id));
+
+}
+
 
 public static function listCiclos(){
 
@@ -401,10 +429,19 @@ public function saveUser($dados){
   $senha = password_hash($dados['senha1'], PASSWORD_DEFAULT);
   //$senha = $_POST['senha1'];
 
+  if($origem == "IEL" || $origem == "SESI" || $origem == "SENAI" || $origem == "CIEB"){
+
+    $tp = "CASA";
+  }else{
+
+    $tp = "SINDICATO";
+
+  }
+
  $sql = new Sql();
 
- $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, telefone2, senha, nivel_acesso, origem, cargo) 
-  VALUES(:nome, :rg, :email, :telefone, :telefone2, :senha, :nivel_acesso, :origem, :cargo)", 
+ $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, telefone2, senha, nivel_acesso, origem, tp, cargo) 
+  VALUES(:nome, :rg, :email, :telefone, :telefone2, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
   array(
     ":nome"=>$nome,
     ":rg"=>$rg,
@@ -414,7 +451,8 @@ public function saveUser($dados){
     ":senha"=>$senha,
     ":nivel_acesso"=>$nivel_acesso,
     ":origem"=>$origem,
-    ":cargo"=>$cargo
+    ":cargo"=>$cargo,
+    ":tp"=>$tp
 ));
 
   if($result->rowCount() == 0){
@@ -522,6 +560,16 @@ public static function saveSindicato($dados){
 public static function removeSindicato($id){
    
    $newId = (int)$id;
+
+   $sql2 = new Sql();
+   $result2 = $sql2->select("SELECT * FROM sindicato WHERE idSindicato=:id", array(":id"=>$newId));
+
+
+
+   $orig = $result2[0]['nome_sindicato'];
+
+  $sql3 = new Sql();
+  $sql3->query("DELETE FROM funcionario WHERE origem=:orig", array(":orig"=>$orig));
 
 
   $sql = new Sql();

@@ -81,11 +81,11 @@ desired effect
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown" title="Notificações">
+            <!-- Menu toggle button  SINO-->
+           <!-- <a href="#" class="sdropdown-toggle" data-toggle="sdropdown" title="Notificações">
               <i class="fa  fa-bell-o"></i>
-              <!--<span class="label label-success">0</span>-->
-            </a>
+              <span class="label label-success">0</span>
+            </a>-->
             <ul class="dropdown-menu">
               <li class="header">Nenhuma notificação disponível</li>
               <li>
@@ -296,11 +296,9 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="/user2/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
-             <li><a href="/user2/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
-             <li><a href="#"><i class="fa fa-calendar-minus-o"></i>Agendadas</a></li>
-             <li><a href="#"><i class="fa fa-calendar-check-o"></i>Concluídas</a></li>
-              <li><a href="#"><i class="fa fa-check-square-o"></i>Finalizar</a></li>
+            <li><a href="/user2/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
+            <li><a href="/user2/origem/visitas"><i class="fa fa-dot-circle-o"></i>Visitas {$origem}</a></li>
+             <li><a href="/user2/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li> 
           </ul>
         </li>
 
@@ -324,10 +322,13 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-bar-chart"></i>Visitas</a></li>
-            <li><a href="#"><i class="fa fa-line-chart"></i>Associações</a></li>
-            <li><a href="#"><i class="fa fa-exchange"></i>Negociações</a></li>
-             <li><a href="#"><i class="fa fa-area-chart"></i>Ciclos</a></li>
+
+             {if="$tp == 'SINDICATO'"} 
+            <li><a href="/user2/relatorio-sindicato/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
+           {/if}
+           {if="$tp == 'CASA'"} 
+            <li><a href="/user2/relatorio-casa/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
+           {/if}
           </ul>
         </li>
         

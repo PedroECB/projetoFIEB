@@ -8,6 +8,8 @@ use \Hcode\PageUser2;
 use Hcode\Model\User;
 use Hcode\Model\Empresa;
 use Hcode\Model\Visita;
+use Hcode\Model\Sindicato;
+use Hcode\Model\Casa;
 
 
 
@@ -35,6 +37,23 @@ $app->get('/user/solicitations', function() {
 
       $page = new PageUser();   
       $page->setTpl("solicitations", array("solicitations"=>$solicitations));
+});
+
+$app->get('/user/demandas', function() {  
+                          
+      User::verifyLoginUser();
+      $demandas = User::listAllDemandas($_SESSION['origem']);
+
+      $page = new PageUser();   
+      $page->setTpl("list-demandas", array("demandas"=>$demandas));
+});
+
+$app->get('/user/demanda/:idDemanda/delete', function($idDemanda) {  
+                          
+      User::verifyLoginUser();
+      User::deleteDemanda($idDemanda);
+      header("Location: /user/demandas");
+      exit;
 });
 
 
@@ -247,10 +266,131 @@ $app->post("/user/visita/create", function(){
 
       User::verifyLoginUser();
       Visita::SaveVisitaEmp2($_POST);
-      header("Location: /user/visitas");
+      header("Location: /user/origem/visitas");
       exit;
 
 
+});
 
+
+$app->get("/user/visitas-info/:idvisita", function($idvisita){
+
+      User::verifyLoginUser();
+
+      $visita = Visita::getVisita($idvisita);
+
+
+      $page = new PageUser();
+      $page->setTpl("visita-info", array("visita"=>$visita[0],"origem"=>$_SESSION));
 
 });
+
+$app->get("/user/edit-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+
+      $page = new PageUser();
+      $page->setTpl("visita-edit", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+
+});
+
+$app->post("/user/edit-visita/:idvisita", function($idvisita){
+
+     User::verifyLoginUser();
+     if(Visita::atualizaVisita($_POST)){
+       $idvisita = $_POST['idVisita'];
+      
+      echo "<script> alert('Visita Alterada com Sucesso'); javascript:history.back(); </script>";
+      
+      exit;
+
+     };
+  });
+
+
+ $app->get("/user/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+      $page = new PageUser();
+      $page->setTpl("finalize-visita01", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+    
+
+});
+
+
+ $app->post("/user/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+      Visita::finalizeVisita($_POST);
+      header("Location: /user/visitas-info/$idvisita");
+      exit;
+      
+    
+
+});
+
+
+
+$app->get("/user/origem/visitas", function(){
+
+  $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser();
+    $visitas = Visita::listAllOrigem($origem);
+
+    $page = new PageUser();
+    $page->setTpl("list-visitas", array("visitas"=>$visitas));
+
+});
+
+ $app->get("/user/relatorio-sindicato/", function(){
+
+      User::verifyLoginUser();
+     $nome = $_SESSION['origem']; //Sindicato::getNomeSindicato($idSindicato);
+
+     $dadosSindicato = ['nome_sindicato'=>$nome];
+
+     $dadosEmpresas = Sindicato::contEmpresas($nome);
+     $dadosVisitas = Sindicato::contVisitas($nome);
+
+
+
+      
+      $page = new PageUser();
+      $page->setTpl("sind-relat1", array("dadosSindicato"=>$dadosSindicato,
+                                         "dadosEmpresas"=>$dadosEmpresas[0],
+                                         "dadosVisitas"=>$dadosVisitas[0]));
+
+      
+
+});
+
+ 
+
+  $app->get("/user/relatorio-casa/", function(){
+
+      User::verifyLoginUser();
+      $nome =  $_SESSION['origem'];
+      
+      $dadosCasa = ['nome_casa'=>$nome];
+      
+
+      $dadosEmpresas = Casa::contEmpresas($nome);
+      $dadosVisitas = Casa::contVisitas($nome);
+
+   
+      $page = new PageUser();
+      $page->setTpl("casa-relat", array("dadosCasa"=>$dadosCasa, 
+                                        "dadosEmpresas"=>$dadosEmpresas[0],
+                                        "dadosVisitas"=>$dadosVisitas[0]));
+    
+
+}); 

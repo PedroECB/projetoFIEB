@@ -9,6 +9,8 @@ use \Hcode\PageUser2;
 use Hcode\Model\User;
 use Hcode\Model\Empresa;
 use Hcode\Model\Visita;
+use Hcode\Model\Sindicato;
+use Hcode\Model\Casa;
 
 
 
@@ -182,10 +184,150 @@ $app->post("/user2/visita/create", function(){
 
       User::verifyLoginUser2();
       Visita::SaveVisitaEmp2($_POST);
-      header("Location: /user2/visitas");
+      header("Location: /user2/origem/visitas");
       exit;
 
 
 
+
+});
+
+
+$app->get("/user2/visitas-info/:idvisita", function($idvisita){
+
+      User::verifyLoginUser2();
+
+      $visita = Visita::getVisita($idvisita);
+
+
+      $page = new PageUser2();
+      $page->setTpl("visita-info", array("visita"=>$visita[0],"origem"=>$_SESSION));
+
+});
+
+
+$app->get("/user2/edit-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser2();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+
+      $page = new PageUser2();
+      $page->setTpl("visita-edit", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+
+});
+
+
+$app->post("/user2/edit-visita/:idvisita", function($idvisita){
+
+     User::verifyLoginUser2();
+     if(Visita::atualizaVisita($_POST)){
+       $idvisita = $_POST['idVisita'];
+      
+      echo "<script> alert('Visita Alterada com Sucesso'); javascript:history.back(); </script>";
+      
+      exit;
+
+     };
+  });
+
+
+ $app->get("/user2/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser2();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+      $page = new PageUser2();
+      $page->setTpl("finalize-visita01", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+    
+
+});
+
+
+ $app->post("/user2/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginUser2();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+      Visita::finalizeVisita($_POST);
+      header("Location: /user2/visitas-info/$idvisita");
+      exit;
+      
+    
+
+});
+
+ $app->get("/user2/relatorio-sindicato/", function(){
+
+      User::verifyLoginUser2();
+     $nome = $_SESSION['origem']; //Sindicato::getNomeSindicato($idSindicato);
+
+     $dadosSindicato = ['nome_sindicato'=>$nome];
+
+     $dadosEmpresas = Sindicato::contEmpresas($nome);
+     $dadosVisitas = Sindicato::contVisitas($nome);
+
+
+
+      
+      $page = new PageUser2();
+      $page->setTpl("sind-relat1", array("dadosSindicato"=>$dadosSindicato,
+                                         "dadosEmpresas"=>$dadosEmpresas[0],
+                                         "dadosVisitas"=>$dadosVisitas[0]));
+
+      
+
+});
+
+
+   $app->get("/user2/relatorio-casa/", function(){
+
+      User::verifyLoginUser();
+      $nome =  $_SESSION['origem'];
+      
+      $dadosCasa = ['nome_casa'=>$nome];
+      
+
+      $dadosEmpresas = Casa::contEmpresas($nome);
+      $dadosVisitas = Casa::contVisitas($nome);
+
+   
+      $page = new PageUser();
+      $page->setTpl("casa-relat", array("dadosCasa"=>$dadosCasa, 
+                                        "dadosEmpresas"=>$dadosEmpresas[0],
+                                        "dadosVisitas"=>$dadosVisitas[0]));
+    
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$app->get("/user2/origem/visitas", function(){
+
+  $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser2();
+    $visitas = Visita::listAllOrigem($origem);
+
+    $page = new PageUser2();
+    $page->setTpl("list-visitas", array("visitas"=>$visitas));
 
 });

@@ -34,6 +34,7 @@ class Page{
 
   if(isset($_SESSION['nivel_acesso'])){
 
+    $this->tpl->assign("tp", $_SESSION['tp']);
     //$nome = isset($_SESSION['nome'])?$_SESSION['nome']:"Indefinido";
     //$cargo = isset($_SESSION['cargo'])?$_SESSION['cargo']:"Indefinido 2";
 
@@ -61,7 +62,15 @@ class Page{
       $not = $result->fetchAll();
       $qnt = $not[0][0];
 
+
+      $sql2 = new Sql();
+      $result2 = $sql2->query("SELECT count(demanda) FROM demandas WHERE demanda =:orig", array(":orig"=>$origem));
+      $not2 = $result2->fetchAll();
+
+      $qntD = $not2[0][0];
+
       $this->tpl->assign("qnt", $qnt);
+      $this->tpl->assign("qntD", $qntD);
 
 
     }

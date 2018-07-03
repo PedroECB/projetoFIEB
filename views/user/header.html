@@ -82,7 +82,7 @@ desired effect
           <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
-            <a href="/user/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="Você tem {$qnt} solicitações pendentes">
+            <a href="/user/solicitations" class="sdropdown-toggle" data-toggle="sdropdown" title="{$qnt} Solicitações pendentes">
               <i class="fa fa-user-plus"></i>
               <!--<span class="label label-warning">1</span>-->
               {if="$qnt > 0"}  <span class="label label-success"> {$qnt} </span> {/if}
@@ -123,9 +123,9 @@ desired effect
           <li class="dropdown notifications-menu">
             <!-- Menu toggle button -->
 
-            <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
-              <i class="fa  fa-envelope-o"></i>
-              <!--<span class="label label-success">1</span>-->
+            <a href="/user/demandas" class="sdropdown-toggle" data-toggle="sdropdown" title="Demandas">
+              <i class="fa  fa-flag"></i>
+             {if="$qntD>0"} <span class="label label-danger">{$qntD}</span>{/if}
             </a>
 
             <ul class="dropdown-menu">
@@ -301,11 +301,9 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="/user/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
-             <li><a href="/user/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
-             <li><a href="#"><i class="fa fa-calendar-minus-o"></i>Agendadas</a></li>
-             <li><a href="#"><i class="fa fa-calendar-check-o"></i>Concluídas</a></li>
-              <li><a href="#"><i class="fa fa-check-square-o"></i>Finalizar</a></li>
+            <li><a href="/user/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
+            <li><a href="/user/origem/visitas"><i class="fa fa fa-dot-circle-o"></i>Visitas {$origem}</a></li>
+             <li><a href="/user/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>    
           </ul>
         </li>
 
@@ -330,14 +328,16 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-bar-chart"></i>Visitas</a></li>
-            <li><a href="#"><i class="fa fa-line-chart"></i>Associações</a></li>
-            <li><a href="#"><i class="fa fa-exchange"></i>Negociações</a></li>
-             <li><a href="#"><i class="fa fa-area-chart"></i>Ciclos</a></li>
+           {if="$tp == 'SINDICATO'"} 
+            <li><a href="/user/relatorio-sindicato/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
+           {/if}
+           {if="$tp == 'CASA'"} 
+            <li><a href="/user/relatorio-casa/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
+           {/if}
           </ul>
         </li>
 
-        <li><a href="#"><i class="fa fa-flag"></i> <span>Demandas</span></a></li>
+        <li><a href="/user/demandas"><i class="fa fa-flag"></i> <span>Demandas</span></a></li>
         <li><a href="/user/solicitations"><i class="fa fa-user-plus"></i> <span>Solicitações</span></a></li>
         <li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li>
 

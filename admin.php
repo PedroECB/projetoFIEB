@@ -8,6 +8,8 @@ use \Hcode\PageUser2;
 use Hcode\Model\User;
 use Hcode\Model\Empresa;
 use Hcode\Model\Visita;
+use Hcode\Model\Sindicato;
+use Hcode\Model\Casa;
 
 
 
@@ -409,7 +411,7 @@ $page->setTpl("list-visitas", array("visitas"=>$visitas));
 $app->get("/admin/empresa/:idempresa/delete", function($idempresa){
 
       User::verifyLoginAdmin();
-      
+
      if(Empresa::removeEmpresa($idempresa)){
       header("Location: /admin/empresas");
       exit;
@@ -440,7 +442,151 @@ $app->post("/admin/visita/create", function(){
       header("Location: /admin/visitas");
       exit;
 
+});
 
 
+
+$app->get("/admin/visitas-info/:idvisita", function($idvisita){
+
+      User::verifyLoginAdmin();
+
+      $visita = Visita::getVisita($idvisita);
+
+
+      $page = new PageAdmin();
+      $page->setTpl("visita-info", array("visita"=>$visita[0],"origem"=>$_SESSION));
 
 });
+
+$app->get("/admin/edit-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginAdmin();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+
+      $page = new PageAdmin();
+      $page->setTpl("visita-edit", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+
+});
+
+
+$app->post("/admin/edit-visita/:idvisita", function($idvisita){
+
+     User::verifyLoginAdmin();
+     if(Visita::atualizaVisita($_POST)){
+       $idvisita = $_POST['idVisita'];
+      
+      echo "<script> alert('Visita Alterada com Sucesso'); javascript:history.back(); </script>";
+      
+      exit;
+
+     };
+  });
+
+
+
+
+ $app->get("/admin/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginAdmin();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+
+      $page = new PageAdmin();
+      $page->setTpl("finalize-visita01", array("visita"=>$visita[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+    
+
+});
+
+
+
+$app->post("/admin/finalize-visita/:idvisita", function($idvisita){
+
+      User::verifyLoginAdmin();
+      $visita = Visita::getVisita($idvisita);
+      $sindicatos = User::listSindicatos();
+      Visita::finalizeVisita($_POST);
+      header("Location: /admin/visitas-info/$idvisita");
+      exit;
+      
+    
+
+}); 
+
+
+
+ $app->get("/admin/relatorios/sindicatos", function(){
+
+      User::verifyLoginAdmin();
+      $sindicatos = User::listSindicatos();
+
+      $page = new PageAdmin();
+      $page->setTpl("list-sindicatos-relat", array("origem"=>$_SESSION, "sindicatos"=>$sindicatos));
+    
+
+});   
+     
+
+ $app->get("/admin/relatorio-sindicato/:idSindicato", function($idSindicato){
+
+      User::verifyLoginAdmin();
+     $nome = Sindicato::getNomeSindicato($idSindicato);
+
+     $dadosSindicato = ['nome_sindicato'=>$nome];
+
+     $dadosEmpresas = Sindicato::contEmpresas($nome);
+     $dadosVisitas = Sindicato::contVisitas($nome);
+
+
+
+      
+      $page = new PageAdmin();
+      $page->setTpl("sind-relat1", array("dadosSindicato"=>$dadosSindicato,
+                                         "dadosEmpresas"=>$dadosEmpresas[0],
+                                         "dadosVisitas"=>$dadosVisitas[0]));
+
+    
+    
+
+});
+
+
+
+  $app->get("/admin/relatorio-casa/", function(){
+
+      User::verifyLoginAdmin();
+      $casas = User::listCasas();
+
+      $page = new PageAdmin();
+      $page->setTpl("list-casas-relat", array("casas"=>$casas));
+    
+
+});
+
+
+  $app->get("/admin/relatorio-casa/:idcasa", function($idcasa){
+
+      User::verifyLoginAdmin();
+      $nome = Casa::getNomeCasa($idcasa);
+      
+      $dadosCasa = ['nome_casa'=>$nome];
+      
+
+      $dadosEmpresas = Casa::contEmpresas($nome);
+      $dadosVisitas = Casa::contVisitas($nome);
+
+   
+      $page = new PageAdmin();
+      $page->setTpl("casa-relat", array("dadosCasa"=>$dadosCasa, 
+                                        "dadosEmpresas"=>$dadosEmpresas[0],
+                                        "dadosVisitas"=>$dadosVisitas[0]));
+    
+
+});
+  
+
+
+
+
+
