@@ -35,7 +35,7 @@ class User extends Model{
 
       if(count($results) === 0){
 
-      throw new \Exception('Usuário inexistente ou senha inválida');
+      throw new \Exception('Usuário inexistente ou senha inválida!');
         //echo "<script> alert('Usuário inexistente ou senha inválida'); javascript:history.back();</script>";
         //exit;
     }
@@ -66,7 +66,7 @@ class User extends Model{
        return $user;
 
     }else{
-      throw new \Exception('Usuário inexistente ou senha incorreta 2');
+      throw new \Exception('Usuário inexistente ou senha inválida!');
 
     }
 
@@ -347,12 +347,19 @@ public static function aproveSolicitation($dados){
   $email = $dados['email_func'];
   $senha = $dados['senha'];
 
+  if($origem == "IEL" || $origem == "SESI" || $origem == "SENAI" || $origem == "CIEB"){
+
+    $tp = "CASA";
+  }else{
+    $tp = "SINDICATO";
+  }
+
 
 
   $sql = new Sql();
 
-  $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, cargo) 
-  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :cargo)", 
+  $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, tp, cargo) 
+  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
   array(
     ":nome"=>$nome,
     ":rg"=>$rg,
@@ -361,6 +368,7 @@ public static function aproveSolicitation($dados){
     ":senha"=>$senha,
     ":nivel_acesso"=>$nivel_acesso,
     ":origem"=>$origem,
+    ":tp"=>$tp,
     ":cargo"=>$cargo
 ));
 
@@ -529,7 +537,7 @@ public static function alterPassword($iduser, $dados){
 
 
   }else{
-    throw new \Exception('Não foi possível alterar a senha, verifique os dados e tente novamente', 5068);
+    throw new \Exception('Não foi possível alterar a senha, verifique os dados digitados e tente novamente.', 5068);
   }
 
 
@@ -702,9 +710,85 @@ public static function setPassword($password, $iduser){
 }
 
 
+public static function registerUser($dados){
+
+  $nome_func = trim($dados['campoNome']);
+  
+  if(is_numeric($dados['campoRG'])){
+    $rg_func = $dados['campoRG'];
+  }else{
+    throw new \Exception('RG inválido',5068);
+  }
+  $email_func = $dados['campoEmail'];
+
+  if($dados['senha1'] === $dados['senha2']){
+    $senha = password_hash($dados['senha2'], PASSWORD_DEFAULT);
+  }else{
+    throw new \Exception('As senhas não coincidem', 8990);
+  }
+
+ 
+
+  if($dados['campoOrigem'] !== ""){
+
+    $origem = $dados['campoOrigem'];
+  }else{
+    throw new \Exception('Selecione a sua origem', 9645);
+  }
+
+  $cargo = $dados['campoCargo'];
+  $nivel_acesso = 3;
+
+  User::verificaRG($rg_func);
+  User::verificaEmail($email_func);
+
+  $sql = new Sql();
+  $query = $sql->query("INSERT INTO cadastros (nome_func, rg_func, email_func, senha, nivel_acesso, origem, cargo) VALUES
+      (:nome, :rg_func, :email_func, :senha, :nivel_acesso, :origem, :cargo)", array(
+        ":nome"=>$nome_func,
+        ":rg_func"=>$rg_func,
+        ":email_func"=>$email_func,
+        ":senha"=>$senha,
+        ":nivel_acesso"=>$nivel_acesso,
+        ":origem"=>$origem,
+        ":cargo"=>$cargo));
+
+  if($query->rowCount()==0){ throw new \Exception('Falha ao cadastrar as informações no banco de dados', 850222);}
+
+
+}
 
 
 
+public static function verificaRG($rg){
+  $sql = new Sql();
+  $result = $sql->select("SELECT * FROM funcionario WHERE rg_func=:rg", array(":rg"=>$rg));
+
+  if(count($result)>0){
+    throw new \Exception('RG já cadastrado', 00365);
+  }
+
+  $sql2 = new Sql();
+  $result2 = $sql2->select("SELECT * FROM cadastros WHERE rg_func=:rg", array(":rg"=>$rg));
+
+  if(count($result2)>0){ throw new \Exception('RG já cadastrado', 9856);}
+}
+
+
+
+
+public static function verificaEmail($email){
+  $sql = new Sql();
+  $result = $sql->select("SELECT * FROM funcionario WHERE email=:email", array(":email"=>$email));
+
+  if(count($result)>0){ throw new \Exception('Email já cadastrado', 6933);}
+
+  $sql2 = new Sql();
+  $result2 = $sql2->select("SELECT * FROM cadastros WHERE email_func=:email", array(":email"=>$email));
+
+  if(count($result2)>0){ throw new \Exception('Email já cadastrado', 6933);}
+
+}
 
 
 
@@ -756,6 +840,23 @@ public static function verifyLoginAll(){
     }
 }
 
+
+public static function reportError($dados){
+
+  $descricao = $dados['campoDescricao'];
+  $nome = $_SESSION['nome'];
+
+  $mailer = new Mailer("pedrosophbc@gmail.com", $_SESSION['nome'], "SGA - ERROR REPORT", "error", 
+           array("name"=>$nome,
+                 "link"=>User::URLPROJETO,
+                 "descricao"=>$descricao));
+
+          $mailer->send();
+
+
+
+
+}
 
 
 

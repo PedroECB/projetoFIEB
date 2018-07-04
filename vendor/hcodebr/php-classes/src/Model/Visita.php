@@ -38,7 +38,7 @@ class Visita extends Model{
     $result = $sql->select("SELECT * FROM ciclo WHERE data_inicio<=:dataPrevista and data_termino>=:dataPrevista", array(":dataPrevista"=>$dataPrevista));
 
     if(count($result)==0){
-      throw new \Exception('Nenhum ciclo iniciado para data prevista da visita', 600);
+      throw new \Exception('Nenhum ciclo iniciado na data prevista para visita', 600);
     }
 
         $idCiclo = (int)$result[0]['idCiclo'];

@@ -4,8 +4,10 @@
 <div class="login-box">
 
 
-  <div class="img-logo">
-    <img src="../res/site/dist/img/fiebtransp.png" class="img-responsive" height=""></img>
+  <div class="register-logo">
+    <div class="lockscreen-logo">
+    <img src="../res/site/dist/img/LOGO01BRANCO.png" height="" class="img-responsive"></img>
+  </div>
   </div>
 
 
@@ -32,7 +34,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><B>ENTRAR</B></button>
         </div>
         <!-- /.col -->
       </div>
@@ -52,7 +54,7 @@
     <!-- /.social-auth-links -->
 
     <a href="/forgot">Esqueci minha senha</a><br>
-    <a href="register.html" class="text-center">Cadastrar-se</a>
+    <a href="/register" class="text-center">Cadastre-se</a>
 
   </div>
   <!-- /.login-box-body -->

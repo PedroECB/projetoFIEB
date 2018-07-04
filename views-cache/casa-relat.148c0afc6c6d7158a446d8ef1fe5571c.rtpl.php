@@ -4,12 +4,12 @@
 <section class="content-header">
 
   <h1>
-     <small>DEMANDAS GERADAS DE OUTRAS VISITAS</small>
+     <small>RELATÓRIO DE VISITAS DA CASA</small>
   </h1>
   
   <ol class="breadcrumb">
     <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="#">Relatórios Sindicatos</a></li>
+    <li class="active"><a href="#">Relatórios</a></li>
   </ol>
 </section>
 
@@ -22,7 +22,7 @@
             
             <div class="box-header">
               <div class="col-md-12">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h3 class="text-primary"><center><b><?php echo htmlspecialchars( $dadosSindicato["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h3> <!--</a>-->
+              <!--<a href="#" class="btn btn-success btn-block"> --><h3 class="text-primary"><center><b><?php echo htmlspecialchars( $dadosCasa["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h3> <!--</a>-->
               </div>
             </div>
 
@@ -31,7 +31,7 @@
             <div class="box-body no-padding">
             
             
-                    <div class="box-footer">
+                    
                     
                     <div class="col-md-6">
                       <div class="col-sm-12"><br>
@@ -56,11 +56,11 @@
                             </tr>
 
                              <tr>
-                              <td><b>Empresas Associadas</b></td><td><?php echo htmlspecialchars( $dadosEmpresas["empresas_associadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
+                              <td><b><!--Empresas Associadas--></b></td><td>&nbsp</td>  
                             </tr> 
 
                              <tr>
-                              <td><b>Não Associadas</b></td><td><?php echo htmlspecialchars( $dadosEmpresas["nao_associadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
+                              <td><b><!----></b></td><td>&nbsp</td>  
                             </tr>  
                           
 
@@ -139,9 +139,9 @@
 
                         <div class="col-md-6">
                          <div class="col-sm-12"><br>
-                        <center><h4><b>ASSOCIAÇÕES</b></h4></center>  
+                        <center><h4><b>NEGOCIAÇÕES COMERCIAIS</b></h4></center>  
                       </div>
-                        <table class="table table-striped table-bordered   table-hover">
+                        <table class="table table-striped table-bordered   table-hover table-responsive">
                           <thead>
                             <tr>
                              <!-- <th style="width: 120px">RG</th>-->
@@ -156,11 +156,11 @@
 
 
                              <tr>
-                              <td><b>Associações Efetivadas</b></td><td><?php echo htmlspecialchars( $dadosEmpresas["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
+                              <td><b>Negociadas</b></td><td><?php echo htmlspecialchars( $dadosVisitas["negociadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
                             </tr>
 
                              <tr>
-                              <td><b>Associações em Negociação</b></td><td><?php echo htmlspecialchars( $dadosEmpresas["associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
+                              <td><b>Não Negociadas</b></td><td><?php echo htmlspecialchars( $dadosVisitas["nao_negociadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
                             </tr> 
 
                           
@@ -183,48 +183,7 @@
                        </div>
 
 
-                        <div class="col-md-6">
-                         <div class="col-sm-12"><br>
-                        <center><h4><b>NÃO ASSOCIADO PARA ASSOCIADO</b></h4></center>  
-                      </div>
-                        <table class="table table-striped table-bordered   table-hover">
-                          <thead>
-                            <tr>
-                             <!-- <th style="width: 120px">RG</th>-->
-                              <th style="">&nbsp</th>   
-                             
-                             <!-- <th>E-mail</th>
-                              <th style="width: 190px">Observação</th>
-                              <th style="width: 50px">&nbsp;</th>-->
-                            </tr>
-                          </thead>
-                          <tbody>
-
-
-                             <tr>
-                              <td><b>Total</b></td><td><?php echo htmlspecialchars( $dadosEmpresas["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>  
-                            </tr>
-
-                           
-
-                          
-                          
-
-
-
-                          <!-- <td>Visita realizada e demanda gerada para várias casas e que ainda necessitam ser visualizadas</td>
-                              <td>
-                                
-                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b> Detalhes da Visita</b></a>
-                                <a href="#"  class="btn btn-danger btn-xs" title="Remover notificação de demanda"><i class="fa fa-close"></i> <b></b></a>
-                              </td>-->
-
-
-
-                          </tbody>
-                        </table>
-
-                       </div>
+                       
 
 
 
@@ -233,7 +192,7 @@
 
 
 
-</div>
+
 
 
 
@@ -248,3 +207,10 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+
+
+
+
+
+

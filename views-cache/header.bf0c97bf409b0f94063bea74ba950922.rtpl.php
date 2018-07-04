@@ -130,11 +130,11 @@ desired effect
 
           <!-- Notifications Menu -->
           <li class="dropdown notifications-menu">
-            <!-- Menu toggle button -->
+            <!-- Menu toggle button 
             <a href="#" class="sdropdown-toggle" data-toggle="sdropdown">
               <i class="fa fa-envelope-o"></i>
-              <!--<span class="label label-warning">0</span>-->
-            </a>
+              <span class="label label-warning">0</span>
+            </a>-->
             <ul class="dropdown-menu">
               <li class="header">Você tem 0 notificações</li>
               <li>
@@ -270,17 +270,7 @@ desired effect
         </div>
       </div>
 
-      <!-- search form (Optional) -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Buscar..." readonly="">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat" disabled><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+    
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">

@@ -153,7 +153,7 @@ class Empresa extends Model{
      if($error[1] === 1062){
         throw new \Exception('CNPJ já cadastrado', 7800);
      }else{
-      throw new \Exception('Erro ao cadastrar empresa', 7801);
+      throw new \Exception('Erro ao cadastrar empresa, verifique os dados digitados e tente novamente', 7801);
      }
 
     }

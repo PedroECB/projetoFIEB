@@ -7,7 +7,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/empresas">Agendar Visita</a></li>
+    <li><a href="#">Agendar Visita</a></li>
     
   </ol>
 </section>
@@ -23,6 +23,11 @@
 
 <div class="box-header">
     <center><h4 class=""><b>VISITA</b><a href="javascript:history.back();"><button class="btn btn-link navbar-right" style="margin-left: 50px;"><b>Voltar</b></button></a></h4></center>
+    <?php if( isset($error["error"]) ){ ?><br>
+    <div class="alert alert-danger" role="alert">
+      <center><b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center>
+    </div>
+    <?php } ?>
 
 <br>
 <div class="row">
@@ -31,7 +36,7 @@
       <input hidden name="idEmpresa" value="<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"> 
     <div class="form-group">
         <label for="dataPrevista">Data prevista para visita: *</label>
-        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required>
+        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required value="<?php if( isset($dados["dataPrevista"]) ){ ?><?php echo htmlspecialchars( $dados["dataPrevista"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
       </div>
   </div>
 
@@ -49,11 +54,12 @@
     <div class="col-md-6">
       <label for="campoDemanda">Demanda inicial: *</label>
       <select name="campoDemanda" id="campoDemanda" class="form-control">
-        
+        <?php if( isset($dados["campoDemanda"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["campoDemanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $dados["campoDemanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
+
        <optgroup label="CASAS"> 
           <option value="IEL">IEL</option>
           <option value="SESI">SESI</option>
-          <option value="SENAI">SESI</option>
+          <option value="SENAI">SENAI</option>
           <option value="CIEB">CIEB</option>
        </optgroup> 
 
@@ -78,7 +84,7 @@
       
 
       <div class="col-sm-12"><br>
-        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4"></textarea>
+        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4"><?php if( isset($dados["campoObservacao"]) ){ ?><?php echo htmlspecialchars( $dados["campoObservacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></textarea>
       </div>
     
   </div>

@@ -40,7 +40,21 @@ User::verifyLoginAll();
 
 $app->post("/forgot", function(){
 
-$user = User::getForgot($_POST['email']);
+try{
+    $user = User::getForgot($_POST['email']);
+}catch(Exception $e){
+
+    $error ['error'] = $e->getMessage();
+
+       $page = new Page([
+      "header"=>false,
+      "footer"=>false,
+    ]);
+    
+    $page->setTpl("forgot", array("error"=>$error, "post"=>$_POST));
+    exit;
+
+}
 
         header("Location: /forgot/sent");
         exit;
@@ -120,8 +134,23 @@ $app->get('/login', function() {
 
 
 $app->post('/login', function() {
-    
-  User::login2($_POST['login'], $_POST['senha']);
+  
+  try{
+       User::login2($_POST['login'], $_POST['senha']);
+      
+      }catch(Exception $e){
+
+        /*$dados [0]['email'] = $_POST['email'];*/
+        $erro ['error'] = $e->getMessage();
+        $page = new Page([
+          "header"=>false,
+          "footer"=>false,
+        ]);
+        $page->setTpl("pagelogin", array("error"=>$erro,"dados"=>$_POST));
+        exit;
+
+      }
+
   User::verifyLoginAll();
 
 });
@@ -134,4 +163,57 @@ $app->get('/logout', function() {
   exit;
 });
 
+
+
+$app->get('/register', function() {
+
+    User::verifyLoginAll();
+    $sindicatos = User::listSindicatos();
+    
+    $page = new Page([
+      "header"=>false,
+      "footer"=>false,
+    ]);
+    
+    $page->setTpl("register", array("sindicatos"=>$sindicatos));
+
+});
+
+
+$app->post('/register', function() {
+
+  try{
+      User::verifyLoginAll();
+      User::registerUser($_POST);
+    }catch(Exception $e){
+
+        $erro ['error'] = $e->getMessage();
+        $sindicatos = User::listSindicatos();
+        $page = new Page([
+          "header"=>false,
+          "footer"=>false,
+        ]);
+        $page->setTpl("register", array("error"=>$erro,"dados"=>$_POST, "sindicatos"=>$sindicatos));
+        exit;
+
+      }
+
+    header("Location: /register/completed");
+    exit;
+
+});
+
+
+$app->get('/register/completed', function() {
+
+    User::verifyLoginAll();
+    
+    $page = new Page([
+      "header"=>false,
+      "footer"=>false,
+    ]);
+    
+    $page->setTpl("completed");
+
+});
 

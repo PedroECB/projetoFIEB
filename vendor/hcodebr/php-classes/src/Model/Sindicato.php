@@ -54,9 +54,9 @@ class Sindicato extends Model{
     $dados[0]['associacao_em_negociacao'] = $result4[0]['count(cnpj)'];
     
     $sql5 = new Sql();
-    $result5 = $sql5->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associação Efetivada';",array(":origem"=>$origem));
+    $result5 = $sql5->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_associacao='Associação Efetivada';",array(":origem"=>$origem));
 
-    $dados[0]['associacaoEfetivada'] = $result5[0]['count(cnpj)'];
+    $dados[0]['associacaoEfetivada'] = $result5[0]['count(idVisita)'];
 
     return $dados;
  }

@@ -27,6 +27,14 @@
             <h3 class="box-title" style="vertical-align: middle;"><b>CADASTRO DE EMPRESA</b></h3>
             <a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a>
           </center>
+          <?php if( isset($error["error"]) ){ ?><br>
+          <div class="alert alert-danger" role="alert">
+            <center><b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center>
+          </div>
+
+          <?php } ?>
+
+
         </div>
 
         </div>
@@ -37,7 +45,7 @@
 
           <div class="form-group">
               <label for="campoCNPJ">CNPJ: *</label>
-              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" value="" onkeyup="formatCNPJ();"  maxlength="15" required>
+              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" value="<?php if( isset($dados["cnpj"]) ){ ?><?php echo htmlspecialchars( $dados["cnpj"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>" onkeyup="formatCNPJ();"  maxlength="15" required>
             </div>
 
 
@@ -45,22 +53,22 @@
 
             <div class="form-group">
               <label for="campoRazaoSocial">Razão Social: *</label> 
-              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  value="" onkeypress="formatRazaoSocial();" maxlength="50" required>
+              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  value="<?php if( isset($dados["razaoSocial"]) ){ ?><?php echo htmlspecialchars( $dados["razaoSocial"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>" onkeypress="formatRazaoSocial();" maxlength="50" required>
             </div>
 
             <div class="form-group">
               <label for="campoNomeFantasia" >Nome Fantasia: *</label>
-              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required>
+              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="<?php if( isset($dados["nomeFantasia"]) ){ ?><?php echo htmlspecialchars( $dados["nomeFantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>
 
             <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
+                <?php if( isset($dados["sitAssoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["sitAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["sitAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
                 <option value="Associação em Negociação">Associação em Negociação</option>
-                <option value="Associação Efetivada">Associação Efetivada</option>
 
               </select>
             </div>
@@ -68,6 +76,7 @@
             <div class="form-group">
               <label for="campoAssoc" >Empresa Associada à: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
+                <?php if( isset($dados["Assoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
                 <option value="Não Associada">Não Associada</option>
                 
@@ -97,6 +106,8 @@
             <div class="form-group">
                  <label for="campoCidade" >Cidade/Município: *</label>
                      <select name="campoCidade" id="campoCidade" onchange="validaCidade();" class="form-control">
+                            <?php if( isset($dados["campoCidade"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["campoCidade"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $dados["campoCidade"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
+
                             <option value="">Selecione a cidade</option>
                             <option value="Abaíra">Abaíra</option>
                             <option value="Abaré">Abaré</option>
@@ -115,7 +126,7 @@
 
           <div class="form-group">
               <label for="campoRegiao">Região:</label>
-              <input type="text" class="form-control" id="campoRegiao" name="CampoRegiao" placeholder="" readonly="">
+              <input type="text" class="form-control" id="campoRegiao" name="CampoRegiao" placeholder="" readonly="" required value="<?php if( isset($dados["CampoRegiao"]) ){ ?><?php echo htmlspecialchars( $dados["CampoRegiao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>
       </div>
 
@@ -130,13 +141,14 @@
         
           <div class="form-group">
               <label for="campoBairro">Bairro:</label>
-              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();">
+              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();" value="<?php if( isset($dados["campoBairro"]) ){ ?><?php echo htmlspecialchars( $dados["campoBairro"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>
 
 
             <div class="form-group">
               <label for="campoEndereco">Endereço: </label>
-              <input type="text" class="form-control" id="campoEndereco" name="campoEndereco" placeholder="Ex: Rua Américo de Oliveira, N47" maxlength="80" onkeypress="formatEndereco();">
+              <input type="text" class="form-control" id="campoEndereco" name="campoEndereco" placeholder="Ex: Rua Américo de Oliveira, N47"
+               value="<?php if( isset($dados["campoEndereco"]) ){ ?><?php echo htmlspecialchars( $dados["campoEndereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>" maxlength="80" onkeypress="formatEndereco();">
             </div>
 
 
@@ -147,7 +159,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
                 </div> 
-                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50">
+                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="<?php if( isset($dados["email"]) ){ ?><?php echo htmlspecialchars( $dados["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>  
         </div>
 
@@ -162,7 +174,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14">
+                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14" value="<?php if( isset($dados["campoTelefone"]) ){ ?><?php echo htmlspecialchars( $dados["campoTelefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -176,7 +188,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-mobile"></i>
                   </div>
-                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15">
+                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15" value="<?php if( isset($dados["campoTelefone2"]) ){ ?><?php echo htmlspecialchars( $dados["campoTelefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>" >
                 </div>
                 <!-- /.input group -->
               </div>

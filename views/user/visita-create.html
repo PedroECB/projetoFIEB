@@ -25,13 +25,18 @@
     <center><h4 class=""><b>VISITA</b><a href="javascript:history.back();"><button class="btn btn-link navbar-right" style="margin-left: 50px;"><b>Voltar</b></button></a></h4></center>
 
 <br>
+{if="isset($error.error)"}
+<div class="alert alert-danger" role="alert">
+  <center><b>{$error.error}</b></center>
+</div>
+{/if}
 <div class="row">
   <div class="col-md-6">
      <form role="form" action="/user/visita/create" method="post" id="formEmpresa">
       
     <div class="form-group">
         <label for="dataPrevista">Data prevista para visita: *</label>
-        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required>
+        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required value="{if="isset($dados.dataPrevista)"}{$dados.dataPrevista}{/if}">
       </div>
   </div>
 
@@ -42,7 +47,6 @@
       <option value="Visita Agendada">Visita Agendada</option>
       <option value="Visita Realizada">Visita Realizada</option>
       <option value="Sem Sucesso no Agendamento">Sem Sucesso no Agendamento</option>
-      <option value="Empresa Desativada">Sem Sucesso no Agendamento</option>
     </select>
   </div>
 </div>
@@ -50,11 +54,11 @@
     <div class="col-md-6">
       <label for="campoDemanda">Demanda inicial: *</label>
       <select name="campoDemanda" id="campoDemanda" class="form-control">
-        
+        {if="isset($dados.campoDemanda)"}<option value="{$dados.campoDemanda}" selected>{$dados.campoDemanda}</option>{/if}
        <optgroup label="CASAS"> 
           <option value="IEL">IEL</option>
           <option value="SESI">SESI</option>
-          <option value="SENAI">SESI</option>
+          <option value="SENAI">SENAI</option>
           <option value="CIEB">CIEB</option>
        </optgroup> 
 
@@ -68,6 +72,7 @@
       <div class="col-md-6">
         <label for="campoFamilia">Família do Produto Ofertado:</label>
         <select name="campoFamilia" id="campoFamilia" class="form-control">
+          {if="isset($dados.campoFamilia)"}<option value="{$dados.campoFamilia}" selected>{$dados.campoFamilia}</option>{/if}
           <option value="Qualidade de Vida">Qualidade de Vida</option>
           <option value="Desenvolvimento de Carreiras">Desenvolvimento de Carreiras</option>
           <option value="Desenvolvimento Empresarial">Desenvolvimento Empresarial</option>
@@ -78,7 +83,7 @@
       
 
       <div class="col-sm-12"><br>
-        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4"></textarea>
+        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4">{if="isset($dados.campoObservacao)"}{$dados.campoObservacao}{/if}</textarea>
       </div>
     
   </div>
@@ -103,7 +108,7 @@
 
           <div class="form-group">
               <label for="campoCNPJ">CNPJ: *</label>
-              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" value="" onkeyup="formatCNPJ();"  maxlength="15" required>
+              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" onkeyup="formatCNPJ();"  maxlength="15" required value="{if="isset($dados.cnpj)"}{$dados.cnpj}{/if}">
             </div>
 
 
@@ -111,22 +116,21 @@
 
             <div class="form-group">
               <label for="campoRazaoSocial">Razão Social: *</label> 
-              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  value="" onkeypress="formatRazaoSocial();" maxlength="50" required>
+              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  onkeypress="formatRazaoSocial();" maxlength="50" required value="{if="isset($dados.razaoSocial)"}{$dados.razaoSocial}{/if}">
             </div>
 
             <div class="form-group">
               <label for="campoNomeFantasia" >Nome Fantasia: *</label>
-              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" value="" onkeypress="formatNomeFantasia();" required>
+              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" value="{if="isset($dados.nomeFantasia)"}{$dados.nomeFantasia}{/if}" onkeypress="formatNomeFantasia();" required>
             </div>
 
             <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
-
+                {if="isset($dados.sitAssoc)"}<option value="{$dados.sitAssoc}" selected>{$dados.sitAssoc}</option>{/if}
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
                 <option value="Associação em Negociação">Associacão em Negociação</option>
-                <option value="Associação Efetivada">Associação Efetivada</option>
 
               </select>
             </div>
@@ -137,7 +141,7 @@
 
                 <option value="Não Associada">Não Associada</option>
                 
-
+                {if="isset($dados.Assoc)"}<option value="{$dados.Assoc}" selected>{$dados.Assoc}</option>{/if}
                 <optgroup label="SINDICATO">
                  {loop="$sindicatos"} 
                   <option value="{$value.idSindicato}">{$value.nome_sindicato}</option>
@@ -161,6 +165,7 @@
                  <label for="campoCidade" >Cidade/Município: *</label>
                      <select name="campoCidade" id="campoCidade" onchange="validaCidade();" class="form-control" required>
                             <option value="">Selecione a cidade</option>
+                            {if="isset($dados.campoCidade)"}<option value="{$dados.campoCidade}" selected>{$dados.campoCidade}</option>{/if}
                             <option value="Abaíra">Abaíra</option>
                             <option value="Abaré">Abaré</option>
                             <option value="Feira de Santana">Feira de Santana</option>
@@ -177,7 +182,7 @@
 
           <div class="form-group">
               <label for="campoRegiao">Região:</label>
-              <input type="text" class="form-control" id="campoRegiao" name="campoRegiao" placeholder="" value="" readonly>
+              <input type="text" class="form-control" id="campoRegiao" name="campoRegiao" placeholder="" value="{if="isset($dados.campoRegiao)"}{$dados.campoRegiao}{/if}" readonly>
             </div>
       </div>
 
@@ -192,13 +197,13 @@
         
           <div class="form-group">
               <label for="campoBairro">Bairro:</label>
-              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();" value="">
+              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();" value="{if="isset($dados.campoBairro)"}{$dados.campoBairro}{/if}">
             </div>
 
 
             <div class="form-group">
               <label for="campoEndereco">Endereço: </label>
-              <input type="text" class="form-control" id="campoEndereco" name="campoEndereco" placeholder="Ex: Rua Américo de Oliveira, N47" maxlength="80" onkeypress="formatEndereco();" value="">
+              <input type="text" class="form-control" id="campoEndereco" name="campoEndereco" placeholder="Ex: Rua Américo de Oliveira, N47" maxlength="80" onkeypress="formatEndereco();" value="{if="isset($dados.campoEndereco)"}{$dados.campoEndereco}{/if}">
             </div>
 
 
@@ -209,7 +214,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
                 </div> 
-                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50">
+                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="{if="isset($dados.email)"}{$dados.email}{/if}">
             </div>  
         </div>
 
@@ -224,7 +229,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14" value="">
+                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14" value="{if="isset($dados.campoTelefone)"}{$dados.campoTelefone}{/if}">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -238,7 +243,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-mobile"></i>
                   </div>
-                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15" value="">
+                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15" value="{if="isset($dados.campoTelefone2)"}{$dados.campoTelefone2}{/if}">
                 </div>
                 <!-- /.input group -->
               </div>

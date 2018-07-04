@@ -107,6 +107,15 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function() {
+
+    $("#campoRG").bind('paste', function(e) {
+        e.preventDefault();
+    });
+
+});
+
+
 function verificaAssoc(){
 
  if(formEmpresa.sitAssoc.value !== "Não Associada"){
@@ -186,4 +195,36 @@ if(formEmpresa.campoTelefone2.value.length == 10){
 }
 
 }
+
+function toUpperName(){
+  if(register.campoNome.value.length == 1){
+
+    register.campoNome.value = register.campoNome.value.toUpperCase();
+  }
+}
+
+
+function validaRG(){
+  var rg = register.campoRG.value;
+
+  if(isNaN(rg)){
+
+    alert('O campo de RG deve conter apenas números');
+    register.campoRG.value = "";
+    focc();
+  }
+}
+
+function focc(){
+  campoRG.focus();
+}
+
+function toUpperCargo(){
+  if(register.campoCargo.value.length == 1){
+
+    register.campoCargo.value = register.campoCargo.value.toUpperCase();
+  }
+}
+
+
 

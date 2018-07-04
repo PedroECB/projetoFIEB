@@ -32,22 +32,25 @@
 <div class="login-box">
 
 
-  <div class="img-logo">
-    <img src="../res/site/dist/img/fiebtransp.png" height="" class="img-responsive"></img>
+  <div class="register-logo">
+    <div class="lockscreen-logo">
+    <img src="../res/site/dist/img/LOGO01BRANCO.png" height="" class="img-responsive"></img>
+  </div>
   </div>
 
 
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Inicie sua sessão</p>
+    <?php if( isset($error["error"]) ){ ?><center><span class="error-login" style="display:inline-block;padding-bottom: 7px; padding-top: -20px;"><b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></span></center><?php } ?>
 
     <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="login" required>
+        <input type="email" class="form-control" placeholder="Email" name="login" required value="<?php if( isset($dados["login"]) ){ ?><?php echo htmlspecialchars( $dados["login"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Senha" name="senha" required>
+        <input type="password" class="form-control" placeholder="Senha" name="senha" required <?php if( isset($error["error"]) ){ ?>autofocus<?php } ?>>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -60,7 +63,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat"><b>ENTRAR</b></button>
         </div>
         <!-- /.col -->
       </div>
@@ -80,7 +83,7 @@
     <!-- /.social-auth-links -->
 
     <a href="/forgot">Esqueci minha senha</a><br>
-    <a href="register.html" class="text-center">Cadastrar-se</a>
+    <a href="/register" class="text-center">Cadastre-se</a>
 
   </div>
   <!-- /.login-box-body -->

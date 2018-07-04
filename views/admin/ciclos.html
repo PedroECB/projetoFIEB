@@ -6,7 +6,7 @@
 
 
   <h1>  <!--<b>CICLOS</b>-->
-    <small>CLIQUE SOBRE O ÍCONE DE CALENDÁRIO PARA OBTER INFORMAÇÕES MAIS DETALHADAS</small>
+    <small><b>CICLOS INICIADOS</b></small>
   </h1>
 
  

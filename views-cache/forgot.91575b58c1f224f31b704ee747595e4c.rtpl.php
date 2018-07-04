@@ -49,6 +49,11 @@
 
   </div>
   <!-- /.lockscreen-item -->
+  <?php if( isset($error["error"]) ){ ?>
+  <div class="alert alert-danger" role="alert">
+    <center><b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center>
+  </div>
+  <?php } ?>
   <div class="help-block text-center" style="color:white;">
     Digite seu e-mail e receba as instruções para redefinir a sua senha.
   </div>

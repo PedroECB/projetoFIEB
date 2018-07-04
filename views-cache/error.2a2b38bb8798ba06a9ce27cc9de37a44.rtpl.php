@@ -410,11 +410,11 @@
                     <tr>
                       <td class="body-padding"></td>
                       <td class="body-padded">
-                        <div class="body-title">Ola <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>,</div>
+                        <div class="body-title">Reportado por <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>,</div>
                         <table class="body-text">
                           <tr>
                             <td class="body-text-cell">
-                              Sua solicitacao de acesso ao Sistema de Gestao Articulada foi aprovada por um dos administradores.  
+                              <?php echo htmlspecialchars( $descricao, ENT_COMPAT, 'UTF-8', FALSE ); ?>.  
                             </td>
                             
                           </tr>

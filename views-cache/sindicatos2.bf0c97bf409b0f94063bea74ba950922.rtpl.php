@@ -33,7 +33,7 @@
             <div class="icon">
               <!--<i class="ion ion-stats-bars"></i>-->
             </div>
-            <a href="#<?php echo htmlspecialchars( $value1["idSindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="small-box-footer">
+            <a href="/admin/relatorio-sindicato/<?php echo htmlspecialchars( $value1["idSindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="small-box-footer">
               Relatórios &nbsp<i class="fa fa-pie-chart"></i>
             </a>
 

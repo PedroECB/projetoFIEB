@@ -1,4 +1,4 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -383,7 +383,7 @@
         <td class="header container" align="center">
           <div class="content">
             <span class="brand">
-              <center><a href="<?php echo htmlspecialchars( $link, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <center><a href="{$link}">
                 SISTEMA DE GESTAO ARTICULADA
               </a>
             </center>
@@ -403,22 +403,22 @@
                 <td>
                   <table class="soapbox">
                     <tr>
-                      <td class="soapbox-title">Solicitacao de Acesso Aprovada</td>
+                      
                     </tr>
                   </table>
                   <table class="body">
                     <tr>
                       <td class="body-padding"></td>
                       <td class="body-padded">
-                        <div class="body-title">Ola <?php echo htmlspecialchars( $name, ENT_COMPAT, 'UTF-8', FALSE ); ?>,</div>
+                        <div class="body-title">Reportado por {$name},</div>
                         <table class="body-text">
                           <tr>
                             <td class="body-text-cell">
-                              Sua solicitacao de acesso ao Sistema de Gestao Articulada foi aprovada por um dos administradores.  
+                              {$descricao}.  
                             </td>
                             
                           </tr>
-                          <td class="body-text-cell">Obrigado! <a href="<?php echo htmlspecialchars( $link, ENT_COMPAT, 'UTF-8', FALSE ); ?>"> Acesse o sistema clicando aqui</a></td>
+                          <td class="body-text-cell"> <a href="{$link}"> Acesse o sistema clicando aqui</a></td>
                         </table>
                         <center>
                         <br><!--[if mso]>

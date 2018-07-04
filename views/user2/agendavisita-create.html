@@ -7,7 +7,7 @@
   </h1>
   <ol class="breadcrumb">
     <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/empresas">Agendar Visita</a></li>
+    <li><a href="#">Agendar Visita</a></li>
     
   </ol>
 </section>
@@ -23,7 +23,11 @@
 
 <div class="box-header">
     <center><h4 class=""><b>VISITA</b><a href="javascript:history.back();"><button class="btn btn-link navbar-right" style="margin-left: 50px;"><b>Voltar</b></button></a></h4></center>
-
+    {if="isset($error.error)"}<br>
+    <div class="alert alert-danger" role="alert">
+      <center><b>{$error.error}</b></center>
+    </div>
+    {/if}
 <br>
 <div class="row">
   <div class="col-md-6">
@@ -31,7 +35,7 @@
       <input hidden name="idEmpresa" value="{$empresa.idEmpresas}"> 
     <div class="form-group">
         <label for="dataPrevista">Data prevista para visita: *</label>
-        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required>
+        <input type="date" class="form-control" id="dataPrevista" name="dataPrevista" placeholder="dd/mm/aaaa"  maxlength="10" required value="{if="isset($dados.dataPrevista)"}{$dados.dataPrevista}{/if}">
       </div>
   </div>
 
@@ -49,11 +53,11 @@
     <div class="col-md-6">
       <label for="campoDemanda">Demanda inicial: *</label>
       <select name="campoDemanda" id="campoDemanda" class="form-control">
-        
+        {if="isset($dados.campoDemanda)"}<option value="{$dados.campoDemanda}">{$dados.campoDemanda}</option>{/if}
        <optgroup label="CASAS"> 
           <option value="IEL">IEL</option>
           <option value="SESI">SESI</option>
-          <option value="SENAI">SESI</option>
+          <option value="SENAI">SENAI</option>
           <option value="CIEB">CIEB</option>
        </optgroup> 
 
@@ -77,7 +81,7 @@
       
 
       <div class="col-sm-12"><br>
-        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4"></textarea>
+        <label for="campoObservacao">Observação:</label><textarea name="campoObservacao" id="campoObservacao" class="form-control" maxlength="300" rows="4">{if="isset($dados.campoObservacao)"}{$dados.campoObservacao}{/if}</textarea>
       </div>
     
   </div>

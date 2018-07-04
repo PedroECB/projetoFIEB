@@ -7,7 +7,7 @@
         <small>Página inicial do administrador</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-bug"></i>Reportar erro</a></li>
+        <li><a href="/admin/report-error"><i class="fa fa-bug"></i>Reportar erro</a></li>
         <!--<li class="active">Aqui</li>-->
       </ol>
     </section>

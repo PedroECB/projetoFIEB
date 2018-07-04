@@ -35,7 +35,7 @@
 
             <div class="form-group">
               <label for="campoRG" >RG (Somente administradores poderão visualizar):</label>
-              <input type="tel" class="form-control" id="campoRG" name="rg_func" placeholder="Apenas números" required="" maxlength="11">
+              <input type="tel" class="form-control" id="campoRG" name="rg_func" placeholder="Apenas números" required="" maxlength="15">
             </div>
 
             <div class="form-group">

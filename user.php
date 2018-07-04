@@ -144,13 +144,37 @@ $app->get('/user/alter-password', function() {
       $page->setTpl("alter-password");
 });
 
+
+
+
 $app->post('/user/alter-password', function() {  
                           
       User::verifyLoginUser();
-      User::alterPassword($_SESSION['idFuncionario'], $_POST);
-      header("Location:/user");
-      exit;                       
+     try{ 
+          User::alterPassword($_SESSION['idFuncionario'], $_POST);
+         }catch(Exception $e){
+
+          $error ['error'] = $e->getMessage();
+
+          $page = new PageUser();   
+          $page->setTpl("alter-password", array("error"=>$error, "dados"=>$_POST));
+
+          exit;
+
+
+         }
+         echo "<script> alert('Senha alterada com sucesso'); javascript:history.back(); </script>";
+              exit; 
+     // header("Location:/user");
+                            
 });
+
+
+
+
+
+
+
 
 $app->get('/user/empresa-create', function() {  
                           
@@ -162,14 +186,37 @@ $app->get('/user/empresa-create', function() {
       $page->setTpl("empresa-create-new", array("cidades"=>$cidades, "sindicatos"=>$sindicatos));
 });
 
+
+
+
+
 $app->post('/user/empresa-create', function() {  
                           
-      User::verifyLoginUser();                       
-      Empresa::saveEmpresa($_POST);
-      header("Location:/user/empresas/origem");
+      User::verifyLoginUser();
+
+      try{                       
+            Empresa::saveEmpresa($_POST);
+        }catch(Exception $e){
+
+          $error ['error'] = $e->getMessage();
+
+          $cidades = Empresa::listCidades();
+          $sindicatos = User::listSindicatos();                        
+          $page = new PageUser();   
+          $page->setTpl("empresa-create-new", array("cidades"=>$cidades, "sindicatos"=>$sindicatos, "error"=>$error, "dados"=>$_POST));
+          exit;
+        }
+
+      header("Location: /user/empresas/origem");
       exit;
 
 });
+
+
+
+
+
+
 
 $app->get("/user/empresas", function(){
 
@@ -220,8 +267,25 @@ $app->get("/user/agendarvisita/:idempresa", function($idempresa){
 $app->post("/user/agendarvisita/:idempresa", function($idempresa){
 
     User::verifyLoginUser();
-    Visita::SaveVisitaEmp($_POST);
-    header("Location: /user/visitas");
+
+  try{
+      Visita::SaveVisitaEmp($_POST);
+  }catch(Exception $e){
+  
+    $error ['error'] = $e->getMessage();
+
+    $empresa = Empresa::getFuncEmpresaSind($idempresa);
+    $sindicatos = User::listSindicatos();
+    $cidades = Empresa::listCidades();
+    $page = new PageAdmin();   
+    $page->setTpl("agendavisita-create", array("empresa"=>$empresa[0], "sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+    exit;
+
+  }
+
+
+
+    header("Location: /user/origem/visitas");
     exit;
 
 });
@@ -241,7 +305,7 @@ $app->get("/user/empresa/:idempresa/delete", function($idempresa){
       User::verifyLoginUser();
       
      if(Empresa::removeEmpresa($idempresa)){
-      header("Location: /user/empresas");
+      header("Location: /user/empresas/origem");
       exit;
      };
 
@@ -265,10 +329,23 @@ $app->get("/user/visita/create", function(){
 $app->post("/user/visita/create", function(){
 
       User::verifyLoginUser();
-      Visita::SaveVisitaEmp2($_POST);
+    try{
+        Visita::SaveVisitaEmp2($_POST);
+    }catch(Exception $e){
+
+         $error ['error'] = $e->getMessage();
+
+         $sindicatos = User::listSindicatos();
+         $cidades = Empresa::listCidades();
+
+         $page = new PageUser();
+         $page->setTpl("visita-create", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+         exit;
+    }
+
+
       header("Location: /user/origem/visitas");
       exit;
-
 
 });
 

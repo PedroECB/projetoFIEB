@@ -64,13 +64,36 @@ $app->get('/user2/alter-password', function() {
       $page->setTpl("alter-password");
 });
 
+
+
+
+
+
 $app->post('/user2/alter-password', function() {  
                           
       User::verifyLoginUser2();
-      User::alterPassword($_SESSION['idFuncionario'], $_POST);
-      header("Location:/user2");
-      exit;                       
+     try{ 
+          User::alterPassword($_SESSION['idFuncionario'], $_POST);
+         }catch(Exception $e){
+
+          $error ['error'] = $e->getMessage();
+
+          $page = new PageUser2();   
+          $page->setTpl("alter-password", array("error"=>$error, "dados"=>$_POST));
+
+          exit;
+
+
+         }
+         echo "<script> alert('Senha alterada com sucesso'); javascript:history.back(); </script>";
+              exit; 
+     // header("Location:/user");
+                            
 });
+
+
+
+
 
 
 $app->get('/user2/empresa-create', function() {  
@@ -82,14 +105,40 @@ $app->get('/user2/empresa-create', function() {
       $page->setTpl("empresa-create-new", array("cidades"=>$cidades, "sindicatos"=>$sindicatos));
 });
 
+
+
+
+
 $app->post('/user2/empresa-create', function() {  
                           
-      User::verifyLoginUser2();                       
-      Empresa::saveEmpresa($_POST);
+      User::verifyLoginUser2();
+
+      try{                       
+            Empresa::saveEmpresa($_POST);
+        }catch(Exception $e){
+
+          $error ['error'] = $e->getMessage();
+
+          $cidades = Empresa::listCidades();
+          $sindicatos = User::listSindicatos();                        
+          $page = new PageUser2();   
+          $page->setTpl("empresa-create-new", array("cidades"=>$cidades, "sindicatos"=>$sindicatos, "error"=>$error, "dados"=>$_POST));
+          exit;
+        }
+
       header("Location: /user2/empresas/origem");
       exit;
 
 });
+
+
+
+
+
+
+
+
+
 
 $app->get("/user2/empresas", function(){
 
@@ -133,14 +182,44 @@ $app->get("/user2/agendarvisita/:idempresa", function($idempresa){
 
 });
 
+
+
+
+
+
+
+
 $app->post("/user2/agendarvisita/:idempresa", function($idempresa){
 
     User::verifyLoginUser2();
-    Visita::SaveVisitaEmp($_POST);
-    header("Location: /user2/visitas");
+
+  try{
+      Visita::SaveVisitaEmp($_POST);
+  }catch(Exception $e){
+  
+    $error ['error'] = $e->getMessage();
+
+    $empresa = Empresa::getFuncEmpresaSind($idempresa);
+    $sindicatos = User::listSindicatos();
+    $cidades = Empresa::listCidades();
+    $page = new PageUser2();   
+    $page->setTpl("agendavisita-create", array("empresa"=>$empresa[0], "sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+    exit;
+
+  }
+
+
+
+    header("Location: /user2/origem/visitas");
     exit;
 
 });
+
+
+
+
+
+
 
 $app->get("/user2/visitas", function(){
 
@@ -180,17 +259,38 @@ $app->get("/user2/visita/create", function(){
 });
 
 
+
+
+
+
 $app->post("/user2/visita/create", function(){
 
       User::verifyLoginUser2();
-      Visita::SaveVisitaEmp2($_POST);
-      header("Location: /user2/origem/visitas");
+    try{
+        Visita::SaveVisitaEmp2($_POST);
+    }catch(Exception $e){
+
+         $error ['error'] = $e->getMessage();
+
+         $sindicatos = User::listSindicatos();
+         $cidades = Empresa::listCidades();
+
+         $page = new PageUser2();
+         $page->setTpl("visita-create", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+         exit;
+    }
+
+
+      header("Location: /user/origem/visitas");
       exit;
 
-
-
-
 });
+
+
+
+
+
+
 
 
 $app->get("/user2/visitas-info/:idvisita", function($idvisita){
@@ -284,7 +384,7 @@ $app->post("/user2/edit-visita/:idvisita", function($idvisita){
 
    $app->get("/user2/relatorio-casa/", function(){
 
-      User::verifyLoginUser();
+      User::verifyLoginUser2();
       $nome =  $_SESSION['origem'];
       
       $dadosCasa = ['nome_casa'=>$nome];
@@ -294,7 +394,7 @@ $app->post("/user2/edit-visita/:idvisita", function($idvisita){
       $dadosVisitas = Casa::contVisitas($nome);
 
    
-      $page = new PageUser();
+      $page = new PageUser2();
       $page->setTpl("casa-relat", array("dadosCasa"=>$dadosCasa, 
                                         "dadosEmpresas"=>$dadosEmpresas[0],
                                         "dadosVisitas"=>$dadosVisitas[0]));
