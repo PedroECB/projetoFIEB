@@ -4,7 +4,7 @@
 <section class="content-header">
 
   <h1>
-     <small>DEMANDAS GERADAS DE OUTRAS VISITAS</small>
+     <small>RELATÓRIOS DO SINDICATO</small>
   </h1>
   
   <ol class="breadcrumb">

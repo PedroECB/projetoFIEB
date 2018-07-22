@@ -78,6 +78,7 @@
         <select name="campoFamilia" id="campoFamilia" class="form-control">
           <?php if( isset($dados["campoFamilia"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["campoFamilia"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["campoFamilia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
+          <option value=""></option>
           <option value="Qualidade de Vida">Qualidade de Vida</option>
           <option value="Desenvolvimento de Carreiras">Desenvolvimento de Carreiras</option>
           <option value="Desenvolvimento Empresarial">Desenvolvimento Empresarial</option>

@@ -51,7 +51,7 @@
               <select id="campoTipo" class="form-control" name="nivel_acesso">
                   <option value="1">Administrador</option>
                   <option value="2">Ponto focal</option>
-                  <option value="3">Fúncionário comum CASA/SINDICATO</option>
+                  <option value="3">Agente de mercado/Executivo</option>
               </select>
             </div>
 
