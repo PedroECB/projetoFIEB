@@ -883,6 +883,32 @@ public static function getPage($page = 1, $itemsPerPage = 10){
 
 }
 
+public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM funcionario 
+                WHERE nome_func LIKE :search OR cargo LIKE :search OR origem LIKE :search OR email LIKE :search
+                ORDER BY nome_func
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>'%'.$search.'%'));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
 
 
 public function getIdFuncionario(){
