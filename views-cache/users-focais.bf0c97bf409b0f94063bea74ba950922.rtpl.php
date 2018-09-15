@@ -21,6 +21,17 @@
             
             <div class="box-header">
               <a href="/admin/users-focais/create" class="btn btn-primary"><b>NOVO PONTO FOCAL</b></a>
+               <div class="box-tools" style="">
+                  <form action="/admin/users-focais">
+                  <div class="input-group input-group-sm" style="width: 300px;top:6px;">
+                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="">
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                
+                </form>
+              </div>
             </div>
 
             <div class="box-body no-padding">
@@ -53,7 +64,7 @@
                       </td>
                       <td class="md2-some"><?php echo htmlspecialchars( $value1["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
-                      <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-xs"><i class="fa fa-info"></i> <b>Info</b></a>
+                      <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-info btn-xs">&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp Info &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>
                       <a href="/admin/users/<?php echo htmlspecialchars( $value1["idFuncionario"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete" onclick="return confirm('Deseja realmente excluir este usuário?')" class="btn btn-danger btn-xs"><i class="fa fa-close"></i> <b>Remover</b></a>
                     </td>
                   </tr>
@@ -74,6 +85,13 @@
               </table>
             </div>
             <!-- /.box-body -->
+             <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+                <li><a href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+              </ul>
+            </div>
           </div>
   	</div>
   </div>

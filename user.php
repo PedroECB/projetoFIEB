@@ -218,7 +218,7 @@ $app->post('/user/empresa-create', function() {
 
 
 
-$app->get("/user/empresas", function(){
+/*$app->get("/user/empresas", function(){
 
     User::verifyLoginUser();
     $empresas = Empresa::listAll();
@@ -226,6 +226,52 @@ $app->get("/user/empresas", function(){
     $page->setTpl("list-empresas", array("empresas"=>$empresas));
 
 });
+*/
+
+
+
+$app->get("/user/empresas", function(){
+
+    User::verifyLoginUser();
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearch($search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPage($page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user/empresas?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser();   
+    $page->setTpl("list-empresas", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages));
+
+});
+
+
+/*
 
 $app->get("/user/empresas/origem", function(){
 
@@ -234,15 +280,69 @@ $app->get("/user/empresas/origem", function(){
     User::verifyLoginUser();
     $empresas = Empresa::listAllOrigem($origem);
     $page = new PageUser();   
-    $page->setTpl("list-empresas", array("empresas"=>$empresas));
+    $page->setTpl("list-empresas-search", array("empresas"=>$empresas, "search"=>'',
+                      "pages"=>[]));
     
 
+});*/
+
+$app->get("/user/empresas/origem", function(){
+
+    User::verifyLoginUser();
+
+    $origem = $_SESSION['origem'];
+
+    
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearchOrigem($origem ,$search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPageOrigem($origem, $page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user/empresas/origem?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser();   
+    $page->setTpl("list-empresas-search", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages,
+                      "origemS"=>$_SESSION['origem']));
+
 });
+
+
+
+
+
+
+
 
 
 $app->get("/user/empresas/:idempresa", function($idempresa){
 
     User::verifyLoginUser();
+
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
     $page = new PageUser();   
     $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION));
@@ -277,7 +377,7 @@ $app->post("/user/agendarvisita/:idempresa", function($idempresa){
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
     $sindicatos = User::listSindicatos();
     $cidades = Empresa::listCidades();
-    $page = new PageAdmin();   
+    $page = new PageUser();   
     $page->setTpl("agendavisita-create", array("empresa"=>$empresa[0], "sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
     exit;
 

@@ -910,6 +910,58 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 10){
 }
 
 
+public static function getPageFocais($page = 1, $itemsPerPage = 10){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM funcionario 
+                WHERE nivel_acesso= 2 ORDER BY nome_func
+                limit $start, $itemsPerPage;
+
+                ");
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearchFocais($search, $page = 1, $itemsPerPage = 10){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM funcionario 
+                WHERE nivel_acesso = 2  AND nome_func LIKE :search OR origem LIKE :search
+                ORDER BY nome_func
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>'%'.$search.'%'));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+
 
 public function getIdFuncionario(){
   return $this->idFuncionario;

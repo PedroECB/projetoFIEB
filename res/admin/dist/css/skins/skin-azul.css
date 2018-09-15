@@ -55,7 +55,7 @@
   }
 }
 .skin-azul .main-header .logo {
-  background-color: #206aa9;
+  background-color: #015091;
   color: #ffffff;
   border-bottom: 0 solid transparent;
 }
@@ -71,7 +71,7 @@
 .skin-azul .wrapper,
 .skin-azul .main-sidebar,
 .skin-azul .left-side {
-  background-color: #222d32;
+  background-color: #07406f;
 }
 .skin-azul .user-panel > .info,
 .skin-azul .user-panel > .info > a {
@@ -79,7 +79,7 @@
 }
 .skin-azul .sidebar-menu > li.header {
   color: #4b646f;
-  background: #1a2226;
+  background: #08375d;
 }
 .skin-azul .sidebar-menu > li > a {
   border-left: 3px solid transparent;
@@ -87,15 +87,15 @@
 .skin-azul .sidebar-menu > li:hover > a,
 .skin-azul .sidebar-menu > li.active > a {
   color: #ffffff;
-  background: #1e282c;
-  border-left-color: #3c8dbc;
+  background: #09375d;
+  border-left-color: #ffffff;
 }
 .skin-azul .sidebar-menu > li > .treeview-menu {
   margin: 0 1px;
-  background: #2c3b41;
+  background: #13334e;
 }
 .skin-azul .sidebar a {
-  color: #b8c7ce;
+  color: #ffffff;
 }
 .skin-azul .sidebar a:hover {
   text-decoration: none;

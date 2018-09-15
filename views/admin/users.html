@@ -42,7 +42,7 @@
                    <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 100px">Nome</th>   
                     <th style="width: 85px" class="md2-some">Cargo</th>
-                    <th style="width: 85px">Origem</th>
+                    <th style="width: 85px" class="orig">Origem</th>
                    <!-- <th>E-mail</th>-->
                     <th style="width: 120px" class="nv">Nível de acesso</th>
                     <th style="width: 40px">&nbsp;</th>
@@ -55,7 +55,7 @@
                    <!-- <td>{$value.rg_func}</td>-->
                     <td>{$value.nome_func}</td>
                     <td class="md2-some">{$value.cargo}</td>
-                    <td>{$value.origem}</td/>
+                    <td class="orig">{$value.origem}</td/>
                   
                     <td>{if="$value.nivel_acesso == 1"}<span class="text-success">Administrador</span>{/if}
                         {if="$value.nivel_acesso == 2"}<span class="text-primary">Ponto Focal</span>{/if}

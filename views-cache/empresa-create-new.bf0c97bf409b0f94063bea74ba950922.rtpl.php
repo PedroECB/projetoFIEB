@@ -58,7 +58,7 @@
 
             <div class="form-group">
               <label for="campoNomeFantasia" >Nome Fantasia: *</label>
-              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="<?php if( isset($dados["nomeFantasia"]) ){ ?><?php echo htmlspecialchars( $dados["nomeFantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
+              <input type="text" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="<?php if( isset($dados["nomeFantasia"]) ){ ?><?php echo htmlspecialchars( $dados["nomeFantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>
 
             <div class="form-group">

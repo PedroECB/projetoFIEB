@@ -9,12 +9,12 @@
 <section class="content-header">
 
   <h1>
-     <small>EMPRESAS CADASTRADAS</small>
+     <small><b>EMPRESAS CADASTRADAS</b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/user2/empresas">Empresas</a></li>
+    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
+    <li class="active"><a href="/user/empresas">Empresas</a></li>
   </ol>
 </section>
 
@@ -26,10 +26,10 @@
       <div class="box box-primary">
             
             <div class="box-header">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS</b></center></h4> <!--</a>-->
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS <?php echo htmlspecialchars( $origemS, ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center></h4> <!--</a>-->
   
               <div class="box-tools">
-                <form action="/user2/empresas">
+                <form action="/user/empresas/origem">
                   <div class="input-group input-group-md" style="width: 205px; margin-top: 10px;">
                     <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                     <div class="input-group-btn">
@@ -79,8 +79,8 @@
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
-                      <a href="/user2/agendarvisita/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> Agendar Visita</b></a>
-                      <a href="/user2/empresas/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs">&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp&nbsp&nbsp Detalhes &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>
+                      <a href="/user/agendarvisita/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> Agendar Visita</b></a>
+                      <a href="/user/empresas/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs">&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp&nbsp&nbsp Detalhes &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>
                     </td>
                   </tr>
 

@@ -140,26 +140,120 @@ $app->post('/user2/empresa-create', function() {
 
 
 
-$app->get("/user2/empresas", function(){
+/*$app->get("/user2/empresas", function(){
 
     User::verifyLoginUser2();
     $empresas = Empresa::listAll();
     $page = new PageUser2();   
     $page->setTpl("list-empresas", array("empresas"=>$empresas));
 
+});*/
+
+$app->get("/user2/empresas", function(){
+
+    User::verifyLoginUser2();
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearch($search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPage($page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user2/empresas?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser2();   
+    $page->setTpl("list-empresas", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages));
+
 });
 
-$app->get("/user2/empresas/origem", function(){
+
+
+/*$app->get("/user2/empresas/origem", function(){
 
     $origem = $_SESSION['origem'];
 
     User::verifyLoginUser2();
     $empresas = Empresa::listAllOrigem($origem);
+
     $page = new PageUser2();   
-    $page->setTpl("list-empresas", array("empresas"=>$empresas));
+    $page->setTpl("list-empresas-search", array("empresas"=>$empresas, "search"=>'',
+                      "pages"=>[]));
     
 
+});*/
+
+
+$app->get("/user2/empresas/origem", function(){
+
+    User::verifyLoginUser2();
+
+    $origem = $_SESSION['origem'];
+
+    
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearchOrigem($origem ,$search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPageOrigem($origem, $page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user2/empresas/origem?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser2();   
+    $page->setTpl("list-empresas-search", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages,
+                      "origemS"=>$_SESSION['origem']));
+
 });
+
+
+
+
 
 
 $app->get("/user2/empresas/:idempresa", function($idempresa){

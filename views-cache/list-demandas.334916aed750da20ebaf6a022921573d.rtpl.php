@@ -79,8 +79,8 @@
                     <td><?php echo htmlspecialchars( $value1["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
                       
-                      <a href="/user/visitas-info/<?php echo htmlspecialchars( $value1["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b> Detalhes da Visita</b></a>
-                      <a href="/user/demanda/<?php echo htmlspecialchars( $value1["idDemanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"  class="btn btn-danger btn-xs" title="Remover notificação de demanda"><i class="fa fa-close"></i> <b></b></a>
+                      <a href="/user/visitas-info/<?php echo htmlspecialchars( $value1["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-primary btn-xs">&nbsp&nbsp<i class="fa fa-info"></i> <b> &nbsp</b></a>
+                      <a href="/user/demanda/<?php echo htmlspecialchars( $value1["idDemanda"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"  class="btn btn-danger btn-xs" title="Remover notificação de demanda">&nbsp<i class="fa fa-close"></i>&nbsp <b></b></a>
                     </td>
                   </tr> 
                 <?php } ?>

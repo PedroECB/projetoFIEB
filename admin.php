@@ -100,10 +100,44 @@ $app->get('/admin/users-focais', function() {
                           
       User::verifyLoginAdmin();                     
                                           # Admin Listando Pontos focais
-      $users = User::listFocais();      
+       $search = (isset($_GET['search'])) ? $_GET['search']: "";
+      $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+      if($search != ''){
+
+          $pagination = User::getPageSearchFocais($search, $page);
+
+      }else{
+
+          $pagination = User::getPageFocais($page);
+      }
+
+    
+
+      $pages = [];
+
+      for($x = 0; $x < $pagination['pages']; $x++){
+
+        array_push($pages, [
+          'href'=>'/admin/users-focais?'.http_build_query([
+            'page'=>$x+1,
+            'search'=>$search
+          ]),
+          'text'=>$x+1
+        ]);
+
+      }
+
+
+
+      //$users = User::listFocais();      
 
       $page = new PageAdmin();   
-      $page->setTpl("users-focais", array("users"=>$users));
+      $page->setTpl("users-focais", array(
+        "users"=>$pagination['data'],
+        "search"=>$search,
+        "pages"=>$pages
+      ));
 });
 
 
@@ -450,9 +484,40 @@ $app->post('/admin/report-error', function() {
 $app->get("/admin/empresas", function(){
 
     User::verifyLoginAdmin();
-    $empresas = Empresa::listAll();
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearch($search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPage($page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/admin/empresas?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
     $page = new PageAdmin();   
-    $page->setTpl("list-empresas", array("empresas"=>$empresas));
+    $page->setTpl("list-empresas", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages));
 
 });
 

@@ -40,7 +40,9 @@
     </div>
   </div>
   <div class="lockscreen-footer text-center">
+    <b><a href="/login" class="" style="text-decoration: underline; color:white;">Eu já tenho uma conta</a></b><br><br>
     <b><a href="/login" class="text-black">SISTEMA DE GESTÃO ARTICULADA  2018 &copy</a></b><br>
+
   </div>
 </div>
 <!-- /.center -->

@@ -165,6 +165,111 @@ class Empresa extends Model{
 
 
 
+  public static function getPage($page = 1, $itemsPerPage = 10){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM empresas ORDER BY idEmpresas desc
+                      limit $start, $itemsPerPage;
+
+                ");
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+
+public static function getPageSearch($search, $page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM empresas  WHERE razao_social LIKE :search OR nome_fantasia LIKE :search OR municipio LIKE :search OR cnpj LIKE :search OR situacao_associacao LIKE :search
+                ORDER BY idEmpresas desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>$search.'%'));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM empresas WHERE origem_cadastro=:orig  AND razao_social LIKE :search 
+                OR origem_cadastro=:orig AND nome_fantasia LIKE :search
+                OR origem_cadastro=:orig AND cnpj LIKE :search
+                OR origem_cadastro=:orig AND municipio LIKE :search
+                OR origem_cadastro=:orig AND regiao_estado LIKE :search
+                OR origem_cadastro=:orig AND situacao_associacao LIKE :search
+                ORDER BY idEmpresas desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>$search.'%', ":orig"=>$origem));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+
+  public static function getPageOrigem($origem, $page = 1, $itemsPerPage = 10){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM empresas WHERE origem_cadastro=:orig ORDER BY idEmpresas desc
+                      limit $start, $itemsPerPage;
+
+                ", array(":orig"=>$origem));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
 
 
 

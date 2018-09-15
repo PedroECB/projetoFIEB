@@ -26,10 +26,10 @@
       <div class="box box-primary">
             
             <div class="box-header">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS</b></center></h4> <!--</a>-->
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS <?php echo htmlspecialchars( $origemS, ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center></h4> <!--</a>-->
   
               <div class="box-tools">
-                <form action="/user2/empresas">
+                <form action="/user2/empresas/origem">
                   <div class="input-group input-group-md" style="width: 205px; margin-top: 10px;">
                     <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                     <div class="input-group-btn">

@@ -42,7 +42,15 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Inicie sua sessão</p>
-    <?php if( isset($error["error"]) ){ ?><center><span class="error-login" style="display:inline-block;padding-bottom: 7px; padding-top: -20px;"><b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></span></center><?php } ?>
+    <?php if( isset($error["error"]) ){ ?>
+
+    <center>
+      <div class="alert-danger" style="border-radius:3px;">
+        <b><?php echo htmlspecialchars( $error["error"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b>
+      </div><br>
+    </center>
+
+    <?php } ?>
 
     <form action="" method="post">
       <div class="form-group has-feedback">

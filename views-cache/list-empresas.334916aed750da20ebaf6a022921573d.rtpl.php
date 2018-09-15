@@ -27,6 +27,17 @@
             
             <div class="box-header">
               <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS</b></center></h4> <!--</a>-->
+  
+              <div class="box-tools">
+                <form action="/user/empresas">
+                  <div class="input-group input-group-md" style="width: 205px; margin-top: 10px;">
+                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
 
             <div class="box-body no-padding">
@@ -68,8 +79,8 @@
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
-                      <a href="/user/agendarvisita/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>
-                      <a href="/user/empresas/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
+                      <a href="/user/agendarvisita/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> Agendar Visita</b></a>
+                      <a href="/user/empresas/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs">&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp&nbsp&nbsp Detalhes &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>
                     </td>
                   </tr>
 
@@ -86,6 +97,15 @@
               </table>
             </div>
             <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+
+                <li><a href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+
+              </ul>
+            </div>
           </div>
     </div>
   </div>

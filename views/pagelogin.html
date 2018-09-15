@@ -42,7 +42,14 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Inicie sua sessão</p>
-    {if="isset($error.error)"}<center><span class="error-login" style="display:inline-block;padding-bottom: 7px; padding-top: -20px;"><b>{$error.error}</b></span></center>{/if}
+    {if="isset($error.error)"}
+    <center>
+      <div class="alert-danger" style="border-radius:3px;">
+        <b>{$error.error}</b>
+      </div><br>
+    </center>
+
+    {/if}
     <form action="" method="post">
       <div class="form-group has-feedback">
         <input type="email" class="form-control" placeholder="Email" name="login" required value="{if="isset($dados.login)"}{$dados.login}{/if}">
