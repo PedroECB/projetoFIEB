@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>Alterar informações/Excluir Sindicato</small>
+    <small><b>ALTERAR INFORMAÇÕES/EXCLUIR SINDICATO</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/admin/sindicatos">Sindicatos</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/sindicatos">Sindicatos</a></li></button>
   </ol>
 </section>
 
@@ -35,12 +35,46 @@
               <input type="text" class="form-control" id="campoNomeSindicato" name="nomeSindicato" placeholder="Ex: SINDTESTE" autofocus="" value="{$sindicato.nome_sindicato}" required="" maxlength="25" onkeyup="toUpperSind();" onblur="confirmUpper();">
             </div>
 
-          
+
             <label for="campoDescSind">Descrição (Opcional):</label>
             <textarea class="form-control" id="campoDescSind" name="descricaoSindicato" cols="20" rows="5" maxlength="400">{$sindicato.descricao_sindicato}</textarea>
 
-   
-           
+ 
+            <hr>
+            <h4 class="text-center text-muted"><b>INFORMAÇÕES DE CONTATO</b></h4>
+            <hr>
+
+
+            <div class="form-group">
+              <label for="nomeExecutivo">Nome do executivo:</label>
+              <input type="text" class="form-control" id="campoNomeExecutivo" name="nomeExecutivo" placeholder="Nome completo"  maxlength="30" value="{$sindicato.nome_executivo}">
+            </div>
+
+              
+          <div class="form-group">
+              <label for="campoEmailExecutivo">E-mail do executivo:</label></label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                      <i class="fa fa-at"></i>
+                    </div> 
+                  <input type="email" class="form-control" id="campoEmailExecutivo" name="emailExecutivo" placeholder="email@exemplo.com" value="{$sindicato.email_executivo}">
+               </div>  
+        </div>
+
+
+
+
+                <div class="form-group">
+                <label for="campoTel">Telefone do executivo:</label>
+
+                <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-phone"></i>
+                  </div>
+                  <input type="tel" id="campoTel" class="form-control" placeholder="(DDD) 7777-8888" onkeyup="validaCelular2(this);" name="telefone" maxlength="15" value="{$sindicato.telefone_executivo}">
+                </div>
+                <!-- /.input group -->
+              </div>
 
         
 
@@ -51,14 +85,7 @@
 
 
 
-<!--
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
-              </label>
-            </div>
-          </div>
--->
+
 
           <!-- /.box-body -->
           <div class="box-footer">

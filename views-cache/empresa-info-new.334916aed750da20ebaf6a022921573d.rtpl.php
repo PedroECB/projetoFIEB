@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>INFORMAÇÕES DE EMPRESA CADASTRADA</small>
+    <small><b>INFORMAÇÕES DE EMPRESA CADASTRADA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user/empresas">Empresas</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user/empresas">Empresas</a></li></button>
     
   </ol>
 </section>

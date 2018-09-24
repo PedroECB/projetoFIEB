@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>Informações Sobre Solicitação de Acesso ao Sistema</small>
+    <small><b>INFORMAÇÕES DE USUÁRIO</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="#">Solicitações</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="#">Solicitações</a></li></button>
     
   </ol>
 </section>
@@ -45,8 +45,8 @@
             </div>
 
             <div class="form-group">
-              <label for="campoRG" >RG:</label>
-              <input type="tel" class="form-control" id="campoRG" name="rg" placeholder="" readonly="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+              <label for="campoRG" >CPF:</label>
+              <input type="tel" class="form-control" id="campoRG" name="rg" placeholder="" readonly="" value="<?php echo htmlspecialchars( $user["cpf_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
             </div>
 
             <div class="form-group">

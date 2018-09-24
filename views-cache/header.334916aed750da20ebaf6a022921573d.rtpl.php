@@ -279,7 +279,7 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header" style="color:white;"><center><b>Menu</b></center></li>
+        <li class="header" style="color:white;"><center><b>MENU</b></center></li>
         <!-- Optionally, you can add icons to the links -->
 
 
@@ -287,17 +287,27 @@ desired effect
         <li class="treeview">
           <a href="#"><i class="fa fa-industry"></i> <span>Empresas</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
              <li><a href="/user/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
              <li><a href="/user/empresas/origem"><i class="fa fa-dot-circle-o"></i>Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
             <li><a href="/user/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
-          </ul>
+          </ul> -->
         </li>
+      
+        <li><a href="/user/empresa-create" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-plus"></i><span>Cadastrar</span></span></a></li>
+        <li><a href="/user/empresas/origem" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-dot-circle-o"></i><span>Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></span></span></a></li>
+        <li><a href="/user/empresas" style="color:#9ba8b2; background-color:#043156;"> <i class="fa fa-sort-alpha-asc"></i><span>Listar Todas</span></span></a></li>
 
-         <li class="treeview">
+
+
+
+
+        <li><a href="/user/origem/visitas"><i class="fa fa-calendar-o"></i> <span>Visitas</span></a></li>
+
+       <!--  <li class="treeview">
           <a href="#"><i class="fa fa-calendar-o"></i> <span>Visitas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -309,6 +319,8 @@ desired effect
              <li><a href="/user/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>    
           </ul>
         </li>
+
+      -->
 
 
 
@@ -327,24 +339,24 @@ desired effect
   <li class="treeview">
           <a href="#"><i class="fa fa-pie-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          
            <?php if( $tp == 'SINDICATO' ){ ?> 
-            <li><a href="/user/relatorio-sindicato/"><i class="fa fa-bar-chart"></i>Relatórios <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+            <li><a href="/user/relatorio-sindicato/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-bar-chart"></i><span>Relatórios <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></span></a></li>
            <?php } ?>
 
            <?php if( $tp == 'CASA' ){ ?> 
-            <li><a href="/user/relatorio-casa/"><i class="fa fa-bar-chart"></i>Relatórios <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+            <li><a href="/user/relatorio-casa/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-bar-chart"></i><span>Relatórios <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></span></a></li>
            <?php } ?>
 
-          </ul>
+          
         </li>
 
         <li><a href="/user/demandas"><i class="fa fa-flag"></i> <span>Demandas</span></a></li>
         <li><a href="/user/solicitations"><i class="fa fa-user-plus"></i> <span>Solicitações</span></a></li>
-        <li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li>
+        <!--<li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li>-->
 
 
      

@@ -3,12 +3,12 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>Cadastro de usuário</small>
+    <small><b>CADASTRO DE USUÁRIO</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/admin/users">Usuários</a></li>
-    <li class="active"><a href="/admin/users/create">Cadastrar</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/users">Usuários</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/users/create">Cadastrar</a></li></button>
   </ol>
 </section>
 
@@ -22,10 +22,20 @@
          <div class="col-md-12"> 
          
          <center> 
-          <h3 class="box-title" style="vertical-align: middle;"><b>NOVO USUÁRIO</b></h3>
+          <h3 class="box-title" style="vertical-align: middle;"><b>CADASTRAR USUÁRIO</b></h3>
           <a href="javascript:history.back()"><button type="button" class="btn btn-link navbar-right" style="margin-left: 15px;"><b>Voltar</b></button></a>
          </center>
-         </div> 
+         
+
+          {if="isset($error.error)"}
+          <br>
+          <div class="alert alert-danger" role="alert">
+              <center><b>{$error.error}</b></center>
+          </div>
+
+         {/if}
+
+         </div>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
@@ -33,22 +43,29 @@
           <div class="box-body">
             <div class="form-group">
               <label for="campoNome">Nome: <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" id="campoNome" name="nome_func" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25">
+              <input type="text" class="form-control" id="campoNome" name="nome_func" placeholder="Ex: João Silva" autofocus="" required="" maxlength="25" value="{if="isset($dados.nome_func)"}{$dados.nome_func}{/if}">
             </div>
 
             <div class="form-group">
-              <label for="campoRG" >RG (Somente administradores poderão visualizar): <span class="text-danger">*</span></label></label>
-              <input type="tel" class="form-control" id="campoRG" name="rg_func" placeholder="Apenas números" required="" maxlength="15">
+              <label for="campoRG" >CPF: (Somente administradores poderão visualizar): <span class="text-danger">*</span></label></label>
+              <input type="tel" class="form-control" id="campoCPF" name="cpf_func" placeholder="Digite apenas números" required="" maxlength="14" onkeydown="validaCPF(this)" value="{if="isset($dados.cpf_func)"}{$dados.cpf_func}{/if}">
             </div>
 
             <div class="form-group">
               <label for="cargo">Cargo: <span class="text-danger">*</span></label></label>
-              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="40">
+              <input type="text" class="form-control" id="campoCargo" name="cargo" placeholder="Ex: Agente/Diretor/Executivo" required="" maxlength="40" value="{if="isset($dados.cargo)"}{$dados.cargo}{/if}">
             </div>
 
             <div class="form-group">
               <label for="campoTipo">Tipo de usuário (Nível de acesso): <span class="text-danger">*</span></label></label>
               <select id="campoTipo" class="form-control" name="nivel_acesso">
+                {if="isset($dados.origem)"}
+                   <option value="$dados.nivel_acesso" selected>
+                    {if="$dados.nivel_acesso == 1"}Administrador{/if}
+                    {if="$dados.nivel_acesso == 2"}Ponto focal{/if}
+                    {if="$dados.nivel_acesso == 3"}Agente de mercado/Executivo{/if}
+                 </option>
+                  {/if}
                   <option value="1">Administrador</option>
                   <option value="2">Ponto focal</option>
                   <option value="3">Agente de mercado/Executivo</option>
@@ -58,6 +75,9 @@
             <div class="form-group">
               <label for="campoOrigem">Origem (Entidade a qual pertence o usuário): <span class="text-danger">*</span></label></label>
               <select id="campoOrigem" class="form-control" name="origem">
+                {if="isset($dados.origem)"}
+                   <option value="$dados.origem" selected>{$dados.origem}</option>
+                  {/if}
                 <option value="FIEB">FIEB</option>
                 <optgroup  label="CASAS">
                   <option value="IEL">IEL</option>
@@ -83,7 +103,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="tel" id="campoTel" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888" name="telefone">
+                  <input type="tel" id="campoTel" class="form-control" placeholder="(DDD) 7777-8888" name="telefone" value="{if="isset($dados.telefone)"}{$dados.telefone}{/if}">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -95,7 +115,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="tel" id="campoTel2" class="form-control" data-inputmask="'mask': ['999-999-9999 [x99999]', '+099 99 99 9999[9]-9999']" data-mask placeholder="(DDD) 7777-8888" name="telefone2">
+                  <input type="tel" id="campoTel2" class="form-control"  placeholder="(DDD) 7777-8888" name="telefone2" value="{if="isset($dados.telefone2)"}{$dados.telefone2}{/if}">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -109,7 +129,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
                 </div> 
-                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="email@exemplo.com" required="">
+                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="email@exemplo.com" required="" value="{if="isset($dados.email)"}{$dados.email}{/if}">
             </div>  
         </div>
 

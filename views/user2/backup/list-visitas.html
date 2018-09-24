@@ -7,13 +7,12 @@
 <section class="content-header">
 
   <h1>
-     <small><b>TODAS AS VISITAS</b></small>
+     <small>TODAS AS VISITAS</small>
   </h1>
   
   <ol class="breadcrumb">
-    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn  btn-xs"><li class="active"><a href="/user2/visitas">Todas as visitas</a></li></button>
-    <button class="btn btn-xs"><li class="active"><a href="/user2/origem/visitas">Visitas {$origem}</a></li></button>
+    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
+    <li class="active"><a href="/user2/visitas">Visitas</a></li>
   </ol>
 </section>
 
@@ -25,18 +24,7 @@
       <div class="box box-primary">
             
             <div class="box-header">
-              <h4 class="text-primary"><center><b>VISITAS</b></center></h4>
-              <div class="box-tools">
-                <form action="/user2/visitas">
-                  <div class="input-group input-group" style="width: 200px;top:9px;">
-                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="{$search}">
-                    <div class="input-group-btn">
-                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <hr>
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>VISITAS</b></center></h4> <!--</a>-->
             </div>
 
             <div class="box-body no-padding">
@@ -48,11 +36,13 @@
                     <th style="width: 100px; vertical-align: middle;">Situação da Visita</th>
                     <th style="width: 50px; vertical-align: middle;" class="xs-some">Sindicato/Casa</th>
                     <th  style="width:30px; vertical-align: middle;" class="md-some">Município</th>
-                    <th style="width: 50px; vertical-align: middle;" class="md-some">Data Prevista</th>
+                    <th style="width: 50px; vertical-align: middle;" class="md-some">Região</th>
                     <th style="width: 140px; vertical-align: middle;">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
+
+      
 
                 {loop="$visitas"}
                    <tr>
@@ -60,7 +50,7 @@
                     <td>{$value.status_visita}</td>
                     <td class="xs-some">{$value.origem}</td>
                     <td class="md-some">{$value.municipio}</td>
-                    <td class="md-some">{function="date('d/m/Y',strtotime($value.data_prevista))"}</td>
+                    <td class="md-some">{$value.regiao_estado}</td>
                     <td>
                      <!-- <a href="#" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>-->
                       <a href="/user2/visitas-info/{$value.idVisita}"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
@@ -78,13 +68,6 @@
               </table>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                {loop="$pages"}
-                <li><a href="{$value.href}">{$value.text}</a></li>
-                {/loop}
-              </ul>
-            </div>
           </div>
     </div>
   </div>

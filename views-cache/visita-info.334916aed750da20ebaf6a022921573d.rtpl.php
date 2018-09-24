@@ -5,11 +5,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>CADASTRO DE EMPRESA PARA VISITAS</small>
+    <small><b>INFORMAÇÕES DA VISITA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user/visitas">Visitas</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user/visitas">Visitas</a></li></button>
     
   </ol>
 </section>
@@ -56,7 +56,7 @@
                       <tr><td><b>FAMÍLIA DO PRODUTO OFERTADO</b></td>            <td><?php echo htmlspecialchars( $visita["familia_prod"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td><b>DEMANDA INICIAL</b></td>   <td> <?php echo htmlspecialchars( $visita["demanda_inicial"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                        <tr><td></td><td><td></tr>
-                      <tr><td><b>AGENTE DE MERCADO QUE ATENDEU</b></td>         <td><?php if( isset($visita["agente_atend"]) ){ ?><?php echo htmlspecialchars( $visita["agente_atend"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
+                      <tr><td><b>RESPONSÁVEL PELO ATENDIMENTO</b></td>         <td><?php if( isset($visita["agente_atend"]) ){ ?><?php echo htmlspecialchars( $visita["agente_atend"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
                       <tr><td><b>DATA DE REALIZAÇÃO</b></td>                    <td><?php if( isset($visita["data_realizacao"]) ){ ?><?php echo date('d/m/Y',strtotime($visita["data_realizacao"])); ?><?php } ?></td></tr>
                       <tr><td><b>DEMANDA IDENTIFICADA NA VISITA</b></td>        <td><?php if( isset($visita["demanda_ident"]) ){ ?><?php echo htmlspecialchars( $visita["demanda_ident"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
                       <tr><td><b>SITUACÃO DA NEGOCIAÇÃO </b></td>         <td><?php if( isset($visita["status_negociacao"]) ){ ?><?php echo htmlspecialchars( $visita["status_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>

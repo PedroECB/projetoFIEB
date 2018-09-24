@@ -5,12 +5,12 @@
 <section class="content-header">
 
   <h1>
-     <small>CLIQUE SOBRE O USUÁRIO PARA OBTER INFORMAÇÕES MAIS DETALHADAS</small>
+     <small><b>CLIQUE SOBRE O USUÁRIO PARA OBTER INFORMAÇÕES MAIS DETALHADAS</b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/user/solicitations">Solicitações</a></li>
+     <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+     <button class="btn btn-xs"><li class="active"><a href="/user/solicitations">Solicitações</a></li></button>
   </ol>
 </section>
 
@@ -23,13 +23,12 @@
             
             <div class="box-header">
               <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>SOLICITAÇÕES PENDENTES</b></center></h4> <!--</a>-->
-            </div>
+            <hr></div>
 
             <div class="box-body no-padding">
               <table class="table table-striped table-bordered text-center table-responsive table-hover">
                 <thead>
                   <tr>
-                   <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 100px">Nome</th>   
                     <th style="width: 85px">Cargo</th>
                     <th style="width: 85px">Origem</th>
@@ -96,7 +95,7 @@
                 </tbody>
               </table>
             </div>
-             <?php if( !$solicitations ){ ?><center><h3 class="text-primary">Nenhuma Solicitação Disponível</h3> </center><br><?php } ?>
+             <?php if( !$solicitations ){ ?><center><h3 class="text-success">Nenhuma Solicitação Disponível</h3> </center><br><?php } ?>
             <!-- /.box-body -->
           </div>
     </div>

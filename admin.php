@@ -85,7 +85,20 @@ $app->post('/admin/users/create', function() {
                                                    #Admin Cadastrando usuários POST
   $user = new User();
   $user->setData($_POST);
-  $user->saveUser($_POST);
+
+  try{
+      $user->saveUser($_POST);
+  }catch(Exception $e){
+
+      $error['error'] = $e->getMessage();
+
+      $sindicatos = User::listSindicatos();
+      $page = new PageAdmin();   
+      $page->setTpl("users-create", array("sindicatos"=>$sindicatos, "error"=>$error, "dados"=>$_POST));
+      exit;
+
+  }
+
 
   header("Location: /admin/users");
   exit;
@@ -209,13 +222,19 @@ $app->get('/admin/solicitations', function() {
 $app->get('/admin/solicitations/:iduser/aprove', function($iduser) {  
                           
       User::verifyLoginAdmin();
-     $dadosUser = User::getCadastro($iduser);
-     
-      User::aproveSolicitation($dadosUser[0]);
+      $dadosUser = User::getCadastro($iduser);
+      $solicitations = User::listAllSolicitations();
+   
+   try{
+        User::aproveSolicitation($dadosUser[0]);    
+    }catch(Exception $e){
 
+      echo $e->getMessage();
+      exit;      
+
+    }
       header("Location: /admin/solicitations");
       exit;
-
       
 });
 
@@ -570,15 +589,49 @@ $app->post("/admin/agendarvisita/:idempresa", function($idempresa){
 });
 
 
+
+
 $app->get("/admin/visitas", function(){
 
-User::verifyLoginAdmin();
-$visitas = Visita::listAll();
+  User::verifyLoginAdmin();
+
+$search = (isset($_GET['search']))? $_GET['search']:'';
+$page = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
+
+if($search != ''){
+
+  $pagination = Visita::getPageSearch($search, $page);
+
+}else{
+
+  $pagination = Visita::getPage($page);  
+}
+
+
+
+
+$pages = [];
+
+for($x=0;$x < $pagination['pages']; $x++){
+
+  array_push($pages, [
+    'href'=>'/admin/visitas?'.http_build_query([
+      'page'=>$x+1,
+      'search'=>$search
+    ]),
+    'text'=>$x+1
+  ]);
+}
 
 $page = new PageAdmin();
-$page->setTpl("list-visitas", array("visitas"=>$visitas));
+$page->setTpl("list-visitas", array("visitas"=>$pagination['data'], "search"=>$search, "pages"=>$pages));
 
 });
+
+
+
+
+
 
 
 $app->get("/admin/empresa/:idempresa/delete", function($idempresa){

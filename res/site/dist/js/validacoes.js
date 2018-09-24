@@ -204,15 +204,17 @@ function toUpperName(){
 }
 
 
-function validaRG(){
-  var rg = register.campoRG.value;
+function validaCPF(element){
 
-  if(isNaN(rg)){
+  let campo = element;
+  let cpf = element.value;
 
-    alert('O campo de RG deve conter apenas números');
-    register.campoRG.value = "";
-    focc();
-  }
+
+  if(cpf.length == 3) {campo.value +=".";}
+  if(cpf.length == 7) {campo.value +=".";}
+  if(cpf.length == 11) {campo.value +="-";}   
+
+
 }
 
 function focc(){
@@ -228,3 +230,17 @@ function toUpperCargo(){
 
 
 
+function validaCelular2(elemento){
+
+  let telefone = elemento.value;
+
+  if(telefone.length == 2){
+
+    elemento.value = "("+elemento.value+") 9"; 
+  }
+
+  if(telefone.length == 10){
+
+    elemento.value += "-"; 
+  }
+}

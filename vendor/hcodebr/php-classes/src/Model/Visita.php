@@ -23,6 +23,7 @@ class Visita extends Model{
     $demandaInicial = $dados['campoDemanda'];
     $familia_prod = $dados['campoFamilia'];
     $observacao = $dados['campoObservacao'];
+    $status_visita = $dados['campoStatus'];
 
     $cnpj = $dados['cnpj'];
     $razaoSocial = $dados['razaoSocial'];
@@ -45,12 +46,13 @@ class Visita extends Model{
         
 
      $sql2 = new Sql();
-     $query2 = $sql2->query("INSERT INTO visita (idCiclo, Empresas_idEmpresas, idFuncionario, data_prevista, familia_prod, demanda_inicial, observacao)
-       VALUES (:idCiclo, :idEmpresa, :idFuncionario, :dataPrevista, :familia_prod, :demanda_inicial, :observacao)", array(
+     $query2 = $sql2->query("INSERT INTO visita (idCiclo, Empresas_idEmpresas, idFuncionario, data_prevista, status_visita, familia_prod, demanda_inicial, observacao)
+       VALUES (:idCiclo, :idEmpresa, :idFuncionario, :dataPrevista, :status_visita, :familia_prod, :demanda_inicial, :observacao)", array(
         ":idCiclo"=>$idCiclo,
         ":idEmpresa"=>$idEmpresa,
         ":idFuncionario"=>$idFuncionario,
         ":dataPrevista"=>$dataPrevista,
+        ":status_visita"=>$status_visita,
         ":familia_prod"=>$familia_prod,
         ":demanda_inicial"=>$demandaInicial,
         ":observacao"=>$observacao));
@@ -283,11 +285,121 @@ public static function finalizeVisita($dados){
 
 }
 
+  public static function getPage($page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario 
+                      AND c.idEmpresas=b.Empresas_idEmpresas order by idVisita desc
+                      limit $start, $itemsPerPage;
+
+                ");
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearch($search, $page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario 
+                AND c.idEmpresas=b.Empresas_idEmpresas
+                WHERE a.nome_func LIKE :search 
+                OR b.status_visita LIKE :search 
+                OR c.razao_social LIKE :search
+                OR c.nome_fantasia LIKE :search
+                OR a.origem LIKE :search
+                OR c.municipio LIKE :search 
+                ORDER BY idVisita desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>'%'.$search.'%'));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
 
 
 
+  public static function getPageOrigem($origem, $page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
 
 
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario 
+                      AND c.idEmpresas=b.Empresas_idEmpresas AND a.origem =:origem order by idVisita desc
+                      limit $start, $itemsPerPage;
+
+                ", array(":origem"=>$origem));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPerPage = 15){
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM funcionario a JOIN visita b JOIN empresas c ON a.idFuncionario=b.idFuncionario 
+                AND c.idEmpresas=b.Empresas_idEmpresas
+                WHERE a.nome_func LIKE :search AND a.origem =:origem
+                OR b.status_visita LIKE :search AND a.origem =:origem
+                OR c.razao_social LIKE :search AND a.origem =:origem
+                OR c.nome_fantasia LIKE :search AND a.origem =:origem
+                OR a.origem LIKE :search AND a.origem =:origem
+                OR c.municipio LIKE :search AND a.origem =:origem
+                ORDER BY idVisita desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>'%'.$search.'%', ":origem"=>$origem));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
 
 
 

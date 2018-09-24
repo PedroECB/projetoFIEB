@@ -315,7 +315,7 @@ $app->post("/user2/agendarvisita/:idempresa", function($idempresa){
 
 
 
-$app->get("/user2/visitas", function(){
+/*$app->get("/user2/visitas", function(){
 
 User::verifyLoginUser2();
 $visitas = Visita::listAll();
@@ -335,7 +335,46 @@ $app->get("/user2/empresa/:idempresa/delete", function($idempresa){
      };
 
 
+});*/
+
+$app->get("/user2/visitas", function(){
+
+  User::verifyLoginUser2();
+
+$search = (isset($_GET['search']))? $_GET['search']:'';
+$page = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
+
+if($search != ''){
+
+  $pagination = Visita::getPageSearch($search, $page);
+
+}else{
+
+  $pagination = Visita::getPage($page);  
+}
+
+
+
+
+$pages = [];
+
+for($x=0;$x < $pagination['pages']; $x++){
+
+  array_push($pages, [
+    'href'=>'/user2/visitas?'.http_build_query([
+      'page'=>$x+1,
+      'search'=>$search
+    ]),
+    'text'=>$x+1
+  ]);
+}
+
+$page = new PageUser2();
+$page->setTpl("list-visitas", array("visitas"=>$pagination['data'], "search"=>$search, "pages"=>$pages, "origem"=>$_SESSION['origem']));
+
 });
+
+
 
 
 
@@ -514,7 +553,7 @@ $app->post("/user2/edit-visita/:idvisita", function($idvisita){
 
 
 
-$app->get("/user2/origem/visitas", function(){
+/*$app->get("/user2/origem/visitas", function(){
 
   $origem = $_SESSION['origem'];
 
@@ -523,5 +562,46 @@ $app->get("/user2/origem/visitas", function(){
 
     $page = new PageUser2();
     $page->setTpl("list-visitas", array("visitas"=>$visitas));
+
+});
+
+*/
+
+$app->get("/user2/origem/visitas", function(){
+
+  User::verifyLoginUser2();
+
+  $origem = $_SESSION['origem'];
+
+$search = (isset($_GET['search']))? $_GET['search']:'';
+$page = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
+
+if($search != ''){
+
+  $pagination = Visita::getPageSearchOrigem($origem, $search, $page);
+
+}else{
+
+  $pagination = Visita::getPageOrigem($origem, $page);  
+}
+
+
+
+
+$pages = [];
+
+for($x=0;$x < $pagination['pages']; $x++){
+
+  array_push($pages, [
+    'href'=>'/user2/origem/visitas?'.http_build_query([
+      'page'=>$x+1,
+      'search'=>$search
+    ]),
+    'text'=>$x+1
+  ]);
+}
+
+$page = new PageUser2();
+$page->setTpl("list-visitas-origem", array("visitas"=>$pagination['data'], "search"=>$search, "pages"=>$pages, "origem"=>$_SESSION['origem']));
 
 });

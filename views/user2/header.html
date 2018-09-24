@@ -276,20 +276,36 @@ desired effect
 
 
 
-        <li class="treeview">
+       <li class="treeview">
           <a href="#"><i class="fa fa-industry"></i> <span>Empresas</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right-container"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!--<ul class="treeview-menu menu-open">
              <li><a href="/user2/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
              <li><a href="/user2/empresas/origem"><i class="fa fa-dot-circle-o"></i>Empresas {$origem}</a></li>
             <li><a href="/user2/empresas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
-          </ul>
-        </li>
+          </ul>-->
+        </li> 
 
-         <li class="treeview">
+        <!--<li>
+          <a href="#"><i class="fa fa-industry"></i> <span>Empresas</span></a>
+        </li>
+        <ul class="treeview-menu menu-open"><a>Cadastrar</a></ul>
+
+      -->
+
+        
+        
+            <li><a href="/user2/empresa-create" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-plus"></i><span>Cadastrar</span></a></li>
+            <li><a href="/user2/empresas/origem" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-dot-circle-o"></i><span>Empresas {$origem}</span></a></li>
+            <li><a href="/user2/empresas" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-sort-alpha-asc"></i><span>Listar Todas</span></a></li>
+
+
+
+
+        <!-- <li class="treeview">
           <a href="#"><i class="fa fa-calendar-o"></i> <span>Visitas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -300,9 +316,9 @@ desired effect
             <li><a href="/user2/origem/visitas"><i class="fa fa-dot-circle-o"></i>Visitas {$origem}</a></li>
              <li><a href="/user2/visitas"> <i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li> 
           </ul>
-        </li>
+        </li>-->
 
-
+        <!--<li><a href="/user2/origem/visitas"><i class="fa fa-calendar-o"></i> <span>Visitas</span></a></li>-->
 
       <!-- <li class="treeview">
           <a href="#"><i class="fa fa-circle-o-notch"></i> <span>Ciclos</span>
@@ -315,13 +331,15 @@ desired effect
           </ul>
         </li>
       -->
+      <li><a href="/user2/origem/visitas"><i class="fa fa-calendar-o"></i> <span>Visitas</span></a></li>
+      
   <li class="treeview">
           <a href="#"><i class="fa fa-pie-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!--<ul class="treeview-menu">
 
              {if="$tp == 'SINDICATO'"} 
             <li><a href="/user2/relatorio-sindicato/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
@@ -329,9 +347,15 @@ desired effect
            {if="$tp == 'CASA'"} 
             <li><a href="/user2/relatorio-casa/"><i class="fa fa-bar-chart"></i>Relatórios {$origem}</a></li>
            {/if}
-          </ul>
+          </ul> -->
         </li>
         
+          {if="$tp == 'SINDICATO'"} 
+            <li><a href="/user2/relatorio-sindicato/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-bar-chart"></i><span>Relatórios {$origem}</span></a></li>
+           {/if}
+           {if="$tp == 'CASA'"} 
+            <li><a href="/user2/relatorio-casa/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-bar-chart"></i><span>Relatórios {$origem}</span></a></li>
+           {/if}
 
 
      

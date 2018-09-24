@@ -35,8 +35,8 @@
             </div>
 
              <div class="form-group">
-              <label for="cRg">RG</label>
-              <input type="text" class="form-control" id="cRg" name="cRg" placeholder="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
+              <label for="cRg">CPF: *</label>
+              <input type="text" class="form-control" id="cRg" name="cRg" placeholder="" value="<?php echo htmlspecialchars( $user["cpf_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
             
 

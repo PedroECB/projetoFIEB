@@ -4,11 +4,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>CADASTRO DE EMPRESA PARA VISITAS</small>
+    <small><b>CADASTRO DE EMPRESA PARA VISITAS</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/visitas">Visitas</a></li>
+    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user2/visitas">Visitas</a></li></button>
     
   </ol>
 </section>
@@ -55,7 +55,7 @@
                       <tr><td><b>FAMÍLIA DO PRODUTO OFERTADO</b></td>            <td>{$visita.familia_prod}</td></tr>
                       <tr><td><b>DEMANDA INICIAL</b></td>   <td> {$visita.demanda_inicial}</td></tr>
                        <tr><td></td><td><td></tr>
-                      <tr><td><b>AGENTE DE MERCADO QUE ATENDEU</b></td>         <td>{if="isset($visita.agente_atend)"}{$visita.agente_atend}{/if}</td></tr>
+                      <tr><td><b>RESPONSÁVEL PELO ATENDIMENTO</b></td>         <td>{if="isset($visita.agente_atend)"}{$visita.agente_atend}{/if}</td></tr>
                       <tr><td><b>DATA DE REALIZAÇÃO</b></td>                    <td>{if="isset($visita.data_realizacao)"}{function="date('d/m/Y',strtotime($visita.data_realizacao))"}{/if}</td></tr>
                       <tr><td><b>DEMANDA IDENTIFICADA NA VISITA</b></td>        <td>{if="isset($visita.demanda_ident)"}{$visita.demanda_ident}{/if}</td></tr>
                       <tr><td><b>SITUACÃO DA NEGOCIAÇÃO </b></td>         <td>{if="isset($visita.status_negociacao)"}{$visita.status_negociacao}{/if}</td></tr>

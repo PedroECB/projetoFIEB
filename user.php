@@ -390,7 +390,7 @@ $app->post("/user/agendarvisita/:idempresa", function($idempresa){
 
 });
 
-$app->get("/user/visitas", function(){
+/*$app->get("/user/visitas", function(){
 
 User::verifyLoginUser();
 $visitas = Visita::listAll();
@@ -410,7 +410,46 @@ $app->get("/user/empresa/:idempresa/delete", function($idempresa){
      };
 
 
+});*/
+
+$app->get("/user/visitas", function(){
+
+  User::verifyLoginUser();
+
+$search = (isset($_GET['search']))? $_GET['search']:'';
+$page = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
+
+if($search != ''){
+
+  $pagination = Visita::getPageSearch($search, $page);
+
+}else{
+
+  $pagination = Visita::getPage($page);  
+}
+
+
+
+
+$pages = [];
+
+for($x=0;$x < $pagination['pages']; $x++){
+
+  array_push($pages, [
+    'href'=>'/user/visitas?'.http_build_query([
+      'page'=>$x+1,
+      'search'=>$search
+    ]),
+    'text'=>$x+1
+  ]);
+}
+
+$page = new PageUser();
+$page->setTpl("list-visitas", array("visitas"=>$pagination['data'], "search"=>$search, "pages"=>$pages, "origem"=>$_SESSION['origem']));
+
 });
+
+
 
 
 $app->get("/user/visita/create", function(){
@@ -516,7 +555,7 @@ $app->post("/user/edit-visita/:idvisita", function($idvisita){
 
 
 
-$app->get("/user/origem/visitas", function(){
+/*$app->get("/user/origem/visitas", function(){
 
   $origem = $_SESSION['origem'];
 
@@ -526,7 +565,52 @@ $app->get("/user/origem/visitas", function(){
     $page = new PageUser();
     $page->setTpl("list-visitas", array("visitas"=>$visitas));
 
+});*/
+
+$app->get("/user/origem/visitas", function(){
+
+  User::verifyLoginUser();
+
+  $origem = $_SESSION['origem'];
+
+$search = (isset($_GET['search']))? $_GET['search']:'';
+$page = (isset($_GET['page'])) ? (int)$_GET['page']: 1;
+
+if($search != ''){
+
+  $pagination = Visita::getPageSearchOrigem($origem, $search, $page);
+
+}else{
+
+  $pagination = Visita::getPageOrigem($origem, $page);  
+}
+
+
+
+
+$pages = [];
+
+for($x=0;$x < $pagination['pages']; $x++){
+
+  array_push($pages, [
+    'href'=>'/user/origem/visitas?'.http_build_query([
+      'page'=>$x+1,
+      'search'=>$search
+    ]),
+    'text'=>$x+1
+  ]);
+}
+
+$page = new PageUser();
+$page->setTpl("list-visitas-origem", array("visitas"=>$pagination['data'], "search"=>$search, "pages"=>$pages, "origem"=>$_SESSION['origem']));
+
 });
+
+
+
+
+
+
 
  $app->get("/user/relatorio-sindicato/", function(){
 

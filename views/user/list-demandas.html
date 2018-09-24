@@ -4,12 +4,12 @@
 <section class="content-header">
 
   <h1>
-     <small>DEMANDAS GERADAS DE OUTRAS VISITAS</small>
+     <small><b>DEMANDAS GERADAS DE OUTRAS VISITAS</b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="">Demandas</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="">Demandas</a></li></button>
   </ol>
 </section>
 

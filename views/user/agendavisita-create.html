@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>CADASTRO DE EMPRESA PARA VISITA</small>
+    <small><b>CADASTRO DE EMPRESA PARA VISITA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user/empresas">Agendar Visita</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user/empresas">Agendar Visita</a></li></button>
     
   </ol>
 </section>
@@ -37,10 +37,10 @@
 
   <div class="col-md-6">
     <label for="campoStatus" >Status Inicial de Visita: </label>
-    <select name="campoStatus" class="form-control" id="campoStatus" disabled="">
+    <select name="campoStatus" class="form-control" id="campoStatus" name="campoStatus">
       <option value="Sem Ação">Sem Ação</option>
       <option value="Visita Agendada">Visita Agendada</option>
-      <option value="Visita Realizada">Visita Realizada</option>
+      <!-- <option value="Visita Realizada">Visita Realizada</option> -->
       <option value="Sem Sucesso no Agendamento">Sem Sucesso no Agendamento</option>
     </select>
   </div>

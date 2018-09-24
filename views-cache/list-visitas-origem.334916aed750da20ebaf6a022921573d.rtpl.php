@@ -8,12 +8,13 @@
 <section class="content-header">
 
   <h1>
-     <small>TODAS AS VISITAS</small>
+     <small><b>VISITAS <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/user/visitas">Visitas</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/visitas">Todas as visitas</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/origem/visitas">Visitas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li></button>
   </ol>
 </section>
 
@@ -25,7 +26,18 @@
       <div class="box box-primary">
             
             <div class="box-header">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>VISITAS</b></center></h4> <!--</a>-->
+              <h4 class="text-primary"><center><b>VISITAS <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></b></center></h4>
+              <div class="box-tools">
+                <form action="/user/origem/visitas">
+                  <div class="input-group input-group" style="width: 200px;top:9px;">
+                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <hr>
             </div>
 
             <div class="box-body no-padding">
@@ -37,13 +49,11 @@
                     <th style="width: 100px; vertical-align: middle;">Situação da Visita</th>
                     <th style="width: 50px; vertical-align: middle;" class="xs-some">Sindicato/Casa</th>
                     <th  style="width:30px; vertical-align: middle;" class="md-some">Município</th>
-                    <th style="width: 50px; vertical-align: middle;" class="md-some">Região</th>
+                    <th style="width: 50px; vertical-align: middle;" class="md-some">Data Prevista</th>
                     <th style="width: 140px; vertical-align: middle;">&nbsp;</th>
                   </tr>
                 </thead>
                 <tbody>
-
-      
 
                 <?php $counter1=-1;  if( isset($visitas) && ( is_array($visitas) || $visitas instanceof Traversable ) && sizeof($visitas) ) foreach( $visitas as $key1 => $value1 ){ $counter1++; ?>
 
@@ -52,7 +62,7 @@
                     <td><?php echo htmlspecialchars( $value1["status_visita"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="xs-some"><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="md-some"><?php echo htmlspecialchars( $value1["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td class="md-some"><?php echo htmlspecialchars( $value1["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md-some"><?php echo date('d/m/Y',strtotime($value1["data_prevista"])); ?></td>
                     <td>
                      <!-- <a href="#" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>-->
                       <a href="/user/visitas-info/<?php echo htmlspecialchars( $value1["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
@@ -71,6 +81,15 @@
               </table>
             </div>
             <!-- /.box-body -->
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+
+                <li><a href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+
+              </ul>
+            </div>
           </div>
     </div>
   </div>

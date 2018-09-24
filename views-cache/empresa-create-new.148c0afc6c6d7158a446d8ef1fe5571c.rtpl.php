@@ -5,11 +5,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>CADASTRO DE EMPRESA PARA VISITAS</small>
+    <small><b>CADASTRO DE EMPRESA PARA VISITAS</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/empresa-create">Cadastrar Empresa</a></li>
+    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user2/empresa-create">Cadastrar Empresa</a></li></button>
     
   </ol>
 </section>
@@ -24,7 +24,7 @@
 
         <div class="col-md-12">  
           <center>
-            <h3 class="box-title" style="vertical-align: middle;"><b>CADASTRO DE EMPRESA</b></h3>
+            <h3 class="box-title text-primary" style="vertical-align: middle;"><b>CADASTRO DE EMPRESA</b></h3>
             <a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a>
           </center>
           <?php if( isset($error["error"]) ){ ?><br>
@@ -58,7 +58,7 @@
 
             <div class="form-group">
               <label for="campoNomeFantasia" >Nome Fantasia: *</label>
-              <input type="tel" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="<?php if( isset($dados["nomeFantasia"]) ){ ?><?php echo htmlspecialchars( $dados["nomeFantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
+              <input type="text" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="<?php if( isset($dados["nomeFantasia"]) ){ ?><?php echo htmlspecialchars( $dados["nomeFantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
             </div>
 
             <div class="form-group">

@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>ALTERAR INFORMAÇÕES DA VISITA</small>
+    <small><b>ALTERAR INFORMAÇÕES DA VISITA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user/visitas">Visitas</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user/visitas">Visitas</a></li></button>
     
   </ol>
 </section>

@@ -271,12 +271,14 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header" style="color:white;"><center><b>Menu</b></center></li>
+        <li class="header" style="color:white;"><center><b>MENU</b></center></li>
         <!-- Optionally, you can add icons to the links -->
 
 
+        <li><a href="/admin/sindicatos"><i class="fa fa-suitcase"></i> <span>Sindicatos</span></a></li>
 
-        <li class="treeview">
+
+       <!-- <li class="treeview">
           <a href="#"><i class="fa fa-suitcase"></i> <span>Sindicatos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -286,25 +288,28 @@ desired effect
             <li><a href="/admin/sindicatos"><i class="fa fa-sort-alpha-asc"></i>Listar</a></li>
             <li><a href="/admin/sindicatos-create"><i class="fa fa-plus"></i>Novo</a></li>
           </ul>
-        </li>
+        </li>-->
 
 
 
         <li class="treeview">
           <a href=""><i class="fa fa-industry"></i> <span>Empresas</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+          <!-- <ul class="treeview-menu">
             <li><a href="/admin/empresa-create"><i class="fa fa-plus"></i>Cadastrar</a></li>
             <li><a href="/admin/empresas"><i class="fa fa-sort-alpha-asc"></i>Listar Todas</a></li>
-          </ul>
+          </ul> -->
         </li>
 
+        <li><a href="/admin/empresa-create" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-plus"></i><span>Cadastrar empresa</span></a></li>
+            <li><a href="/admin/empresas" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-sort-alpha-asc"></i><span>Listar empresas</span></a></li>
 
+        <li><a href="/admin/ciclos"><i class="fa fa-circle-o-notch"></i> <span>Ciclos</span></a></li>
 
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#"><i class="fa fa-circle-o-notch"></i> <span>Ciclos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -314,13 +319,13 @@ desired effect
             <li><a href="/admin/ciclos"><i class="fa fa-sort-alpha-asc"></i>Listar Todos</a></li>
             <li><a href="/admin/ciclo-create"><i class="fa fa-plus-circle"></i>Iniciar Ciclo</a></li>
           </ul>
-        </li>
+        </li> -->
 
 
 
+        <li><a href="/admin/visitas"><i class="fa fa-calendar-o"></i> <span>Visitas</span></a></li>
 
-
-     <li class="treeview">
+     <!-- <li class="treeview">
           <a href="#"><i class="fa fa-calendar-o"></i> <span>Visitas</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -331,7 +336,7 @@ desired effect
              <li><a href="/admin/visita/create"><i class="fa fa-calendar-plus-o"></i>Agendar</a></li>
 
           </ul>
-        </li>
+        </li> -->
 
 
 
@@ -339,17 +344,18 @@ desired effect
            <li class="treeview">
           <a href="#"><i class="fa fa-pie-chart"></i> <span>Relatórios</span>
             <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
+              <i class="fa fa-angle-down pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
+         <!--  <ul class="treeview-menu">
             <li><a href="/admin/relatorios/sindicatos"><i class="fa fa-suitcase"></i>Sindicatos</a></li>
             <li><a href="/admin/relatorio-casa/"><i class="fa fa-home"></i>Casas</a></li>
-          </ul>
+          </ul> -->
         </li>
 
 
-
+        <li><a href="/admin/relatorios/sindicatos" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-suitcase"></i><span>Relatórios dos Sindicatos</span></a></li>
+            <li><a href="/admin/relatorio-casa/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-home"></i><span>Relatórios das Casas</span></a></li>
 
 
         <li class="treeview">

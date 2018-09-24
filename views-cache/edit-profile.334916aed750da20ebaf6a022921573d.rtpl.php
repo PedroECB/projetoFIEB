@@ -6,8 +6,8 @@
    
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/user/edit-profile">Editar perfil</a></li>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/edit-profile">Editar perfil</a></li></button>
   </ol>
 </section>
 
@@ -35,8 +35,8 @@
             </div>
 
              <div class="form-group">
-              <label for="cRg">RG</label>
-              <input type="text" class="form-control" id="cRg" name="cRg" placeholder="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
+              <label for="cRg">CPF:</label>
+              <input type="text" class="form-control" id="cRg" name="cRg" placeholder="" value="<?php echo htmlspecialchars( $user["cpf_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
             
 

@@ -6,8 +6,8 @@
    
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/admin/users">Usuários</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/users">Usuários</a></li></button>
   </ol>
 </section>
 
@@ -19,7 +19,7 @@
   		<div class="box box-primary">
         <div class="box-header with-border ">
          <div class="col-md-12"> 
-          <h3 class="box-title" style="vertical-align: middle; margin-right:-25px;" >INFORMAÇÕES DE USUÁRIO</h3>
+          <h3 class="box-title" style="vertical-align: middle; margin-right:-25px;" ><b>INFORMAÇÕES DE USUÁRIO</b></h3>
           <a href="javascript:history.back()" style="margin-left: 62px;"><button type="button" class="btn btn-link navbar-right"><b>Voltar</b></button></a>
          </div> 
         </div>
@@ -35,8 +35,8 @@
             </div>
 
              <div class="form-group">
-              <label for="cRg">RG:</label>
-              <input type="text" class="form-control" id="cRg" name="rg" placeholder="" value="<?php echo htmlspecialchars( $user["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
+              <label for="cRg">CPF:</label>
+              <input type="text" class="form-control" id="cRg" name="rg" placeholder="" value="<?php echo htmlspecialchars( $user["cpf_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" disabled>
             </div>
             
 

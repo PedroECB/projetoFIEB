@@ -124,14 +124,21 @@ public static function updateSindicato($idsindicato, $post){
   $nome_sindicato = $_POST['nomeSindicato'];
   $descricao_sindicato = $_POST['descricaoSindicato'];
 
+  $nome_executivo = $_POST['nomeExecutivo'];
+  $email_executivo = $_POST['emailExecutivo'];
+  $telefone_executivo = $_POST['telefone'];
+
   //echo $idSindicato. " nome: ".$nome_sindicato." descricao: ".$descricao_sindicato;
 
 
     $sql = new Sql();
-    $result = $sql->query("UPDATE sindicato SET nome_sindicato=:ns, descricao_sindicato=:descs WHERE idSindicato=:ids", 
+    $result = $sql->query("UPDATE sindicato SET nome_sindicato=:ns, descricao_sindicato=:descs, nome_executivo=:nome_executivo, email_executivo=:email_executivo, telefone_executivo=:telefone_executivo WHERE idSindicato=:ids", 
       array(":ns"=>$nome_sindicato,
             ":descs"=>$descricao_sindicato,
-            ":ids"=>$idSindicato));
+            ":ids"=>$idSindicato,
+            ":nome_executivo"=>$nome_executivo,
+            ":email_executivo"=>$email_executivo,
+            ":telefone_executivo"=>$telefone_executivo));
 
     if($result->rowCount()==0){
       throw new \Exception('Erro ao atualizar informação de Sindicato',77);
@@ -339,7 +346,7 @@ public static function aproveSolicitation($dados){
   $idcadastro = $dados['idCadastro'];
 
   $nome = $dados['nome_func'];
-  $rg = $dados['rg_func'];
+  $cpf = $dados['cpf_func'];
   $cargo = $dados['cargo'];
   $nivel_acesso = (int)$dados['nivel_acesso'];
   $origem = $dados['origem'];
@@ -358,11 +365,11 @@ public static function aproveSolicitation($dados){
 
   $sql = new Sql();
 
-  $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, senha, nivel_acesso, origem, tp, cargo) 
-  VALUES(:nome, :rg, :email, :telefone, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
+  $result = $sql->query("INSERT INTO funcionario (nome_func, cpf_func, email, telefone, senha, nivel_acesso, origem, tp, cargo) 
+  VALUES(:nome, :cpf, :email, :telefone, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
   array(
     ":nome"=>$nome,
-    ":rg"=>$rg,
+    ":cpf"=>$cpf,
     ":email"=>$email,
     ":telefone"=>$telefone,
     ":senha"=>$senha,
@@ -373,7 +380,7 @@ public static function aproveSolicitation($dados){
 ));
 
   if($result->rowCount() == 0){
-    throw new \Exception('Erro ao aprovar solicitação. Dados já cadastrados ou inválidos', 1);
+    throw new \Exception('<h2>Erro ao aprovar solicitação. CPF já cadastrado ou dados inválidos</h2>', 1);
   };
 
 
@@ -427,7 +434,7 @@ public function saveUser($dados){
 
 
   $nome = trim(ucwords(mb_strtolower($dados['nome_func'])));
-  $rg = $dados['rg_func'];
+  $cpf = $dados['cpf_func'];
   $cargo = ucfirst($dados['cargo']);
   $nivel_acesso = (int)$dados['nivel_acesso'];
   $origem = $dados['origem'];
@@ -448,11 +455,11 @@ public function saveUser($dados){
 
  $sql = new Sql();
 
- $result = $sql->query("INSERT INTO funcionario (nome_func, rg_func, email, telefone, telefone2, senha, nivel_acesso, origem, tp, cargo) 
-  VALUES(:nome, :rg, :email, :telefone, :telefone2, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
+ $result = $sql->query("INSERT INTO funcionario (nome_func, cpf_func, email, telefone, telefone2, senha, nivel_acesso, origem, tp, cargo) 
+  VALUES(:nome, :cpf, :email, :telefone, :telefone2, :senha, :nivel_acesso, :origem, :tp, :cargo)", 
   array(
     ":nome"=>$nome,
-    ":rg"=>$rg,
+    ":cpf"=>$cpf,
     ":email"=>$email,
     ":telefone"=>$telefone,
     ":telefone2"=>$telefone2,
@@ -464,7 +471,7 @@ public function saveUser($dados){
 ));
 
   if($result->rowCount() == 0){
-    throw new \Exception('Erro ao cadastrar usuário', 1);
+    throw new \Exception('Erro ao cadastrar usuário. Usuário com CPF já cadastrado ou dados inválidos', 1);
   };
 
   //header("Location: /admin/users");
@@ -553,10 +560,18 @@ public static function saveSindicato($dados){
    $nome_sindicato = trim($dados['nomeSindicato']);
    $descricao = $dados['descricaoSindicato'];
 
+   $nome_executivo = $dados['nomeExecutivo'];
+   $email_executivo = $dados['emailExecutivo'];
+   $telefone_executivo = $dados['telefone'];
+
   $sql = new Sql();
-  $result = $sql->query("INSERT INTO sindicato (nome_sindicato, descricao_sindicato) VALUES (:nomeSindicato, :descricao)",
+  $result = $sql->query("INSERT INTO sindicato (nome_sindicato, descricao_sindicato, nome_executivo, email_executivo, telefone_executivo) 
+        VALUES (:nomeSindicato, :descricao, :nome_executivo, :email_executivo, :telefone_executivo)",
   array(":nomeSindicato"=>$nome_sindicato,
-        ":descricao"=>$descricao));
+        ":descricao"=>$descricao,
+        ":nome_executivo"=>$nome_executivo,
+        ":email_executivo"=>$email_executivo,
+        ":telefone_executivo"=>$telefone_executivo));
 
   if($result->rowCount() == 0){
     throw new \Exception('Erro ao cadastrar sindicato, verifique os dados e tente novamente', 55);
@@ -713,12 +728,13 @@ public static function setPassword($password, $iduser){
 public static function registerUser($dados){
 
   $nome_func = trim($dados['campoNome']);
-  
-  if(is_numeric($dados['campoRG'])){
+  $cpf_func = $dados['campoCPF'];
+  /*if(is_numeric($dados['campoRG'])){
     $rg_func = $dados['campoRG'];
   }else{
     throw new \Exception('RG inválido',5068);
-  }
+  }*/
+
   $email_func = $dados['campoEmail'];
 
   if($dados['senha1'] === $dados['senha2']){
@@ -739,14 +755,14 @@ public static function registerUser($dados){
   $cargo = $dados['campoCargo'];
   $nivel_acesso = 3;
 
-  User::verificaRG($rg_func);
+  User::verificaCPF($cpf_func);
   User::verificaEmail($email_func);
 
   $sql = new Sql();
-  $query = $sql->query("INSERT INTO cadastros (nome_func, rg_func, email_func, senha, nivel_acesso, origem, cargo) VALUES
-      (:nome, :rg_func, :email_func, :senha, :nivel_acesso, :origem, :cargo)", array(
+  $query = $sql->query("INSERT INTO cadastros (nome_func, cpf_func, email_func, senha, nivel_acesso, origem, cargo) VALUES
+      (:nome, :cpf_func, :email_func, :senha, :nivel_acesso, :origem, :cargo)", array(
         ":nome"=>$nome_func,
-        ":rg_func"=>$rg_func,
+        ":cpf_func"=>$cpf_func,
         ":email_func"=>$email_func,
         ":senha"=>$senha,
         ":nivel_acesso"=>$nivel_acesso,
@@ -760,18 +776,18 @@ public static function registerUser($dados){
 
 
 
-public static function verificaRG($rg){
+public static function verificaCPF($cpf){
   $sql = new Sql();
-  $result = $sql->select("SELECT * FROM funcionario WHERE rg_func=:rg", array(":rg"=>$rg));
+  $result = $sql->select("SELECT * FROM funcionario WHERE cpf_func=:cpf", array(":cpf"=>$cpf));
 
   if(count($result)>0){
-    throw new \Exception('RG já cadastrado', 00365);
+    throw new \Exception('CPF já cadastrado', 00365);
   }
 
   $sql2 = new Sql();
-  $result2 = $sql2->select("SELECT * FROM cadastros WHERE rg_func=:rg", array(":rg"=>$rg));
+  $result2 = $sql2->select("SELECT * FROM cadastros WHERE cpf_func=:cpf", array(":cpf"=>$cpf));
 
-  if(count($result2)>0){ throw new \Exception('RG já cadastrado', 9856);}
+  if(count($result2)>0){ throw new \Exception('CPF já cadastrado', 9856);}
 }
 
 
@@ -828,13 +844,13 @@ public static function verifyLoginAll(){
 
    if(isset($_SESSION['nivel_acesso'])){
        if($_SESSION['nivel_acesso'] == 1){
-     header("Location: /admin");
+     header("Location: /admin/visitas");
       exit;
   }elseif($_SESSION['nivel_acesso'] == 2){
-    header("Location: /user");
+    header("Location: /user/origem/visitas");
       exit;
   }elseif($_SESSION['nivel_acesso'] == 3){
-    header("Location: /user2");
+    header("Location: /user2/origem/visitas");
       exit;
   }
     }
@@ -859,7 +875,7 @@ public static function reportError($dados){
 }
 
 
-public static function getPage($page = 1, $itemsPerPage = 10){
+public static function getPage($page = 1, $itemsPerPage = 15){
 
   $start = ($page-1)*$itemsPerPage;
 

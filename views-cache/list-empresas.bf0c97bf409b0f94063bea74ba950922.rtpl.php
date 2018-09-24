@@ -9,12 +9,12 @@
 <section class="content-header">
 
   <h1>
-     <small>EMPRESAS CADASTRADAS</small>
+     <small><b>EMPRESAS CADASTRADAS</b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/admin/empresas">Empresas</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/empresas">Empresas</a></li></button>
   </ol>
 </section>
 
@@ -26,7 +26,7 @@
       <div class="box box-primary">
             
             <div class="box-header">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS</b></center></h4> <!--</a>-->
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>EMPRESAS - GERAL</b></center></h4> <!--</a>-->
   
               <div class="box-tools">
                 <form action="/admin/empresas">
@@ -38,6 +38,7 @@
                   </div>
                 </form>
               </div>
+              <hr>
             </div>
 
             <div class="box-body no-padding">

@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Lista de Usuários
+    <small><b>USUÁRIOS CADASTRADOS NO SISTEMA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/admin/users">Usuários</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/users">Usuários</a></li></button>
   </ol>
 </section>
 
@@ -39,7 +39,6 @@
               <table class="table table-striped table-bordered text-center table-responsive table-hover">
                 <thead>
                   <tr>
-                   <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 100px">Nome</th>   
                     <th style="width: 85px" class="md2-some">Cargo</th>
                     <th style="width: 85px" class="orig">Origem</th>
@@ -52,7 +51,7 @@
                   <?php $counter1=-1;  if( isset($users) && ( is_array($users) || $users instanceof Traversable ) && sizeof($users) ) foreach( $users as $key1 => $value1 ){ $counter1++; ?>
                   
                   <a href="#" class=""><tr>
-                   <!-- <td><?php echo htmlspecialchars( $value1["rg_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>-->
+                  
                     <td><?php echo htmlspecialchars( $value1["nome_func"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["cargo"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td class="orig"><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td/>

@@ -9,12 +9,13 @@
 <section class="content-header">
 
   <h1>
-     <small>EMPRESAS CADASTRADAS</small>
+     <small><b>EMPRESAS CADASTRADAS</b></small>
   </h1>
   
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/user2/empresas">Empresas</a></li>
+    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user2/empresas">Todas empresas</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user2/empresas/origem">Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li></button>
   </ol>
 </section>
 
@@ -38,6 +39,7 @@
                   </div>
                 </form>
               </div>
+              <hr>
             </div>
 
             <div class="box-body no-padding">
