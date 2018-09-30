@@ -50,7 +50,7 @@
                     <tbody>
                       <tr><td><b>RESPONSÁVEL PELO CADASTRO DA VISITA</b></td>          <td>{$visita.nome_func}</td><td class="text-primary info-some"><b>{$visita.origem}</b></td></tr>
                       <tr><td><b>CADASTRADA EM</b></td>                     <td>{function="date('d/m/Y',strtotime($visita.data_de_agendamento))"}</td></tr>
-                      <tr><td><b>DATA PREVISTA</b></td>                     <td>27/08/2018</td></tr>
+                      <tr><td><b>DATA PREVISTA</b></td>                     <td>{function="date('d/m/Y',strtotime($visita.data_prevista))"}</td></tr>
                       <tr><td><b>SITUACÃO DA VISITA</b></td>             <td class="text-success" style="text-transform: uppercase;"><b>{$visita.status_visita}</b></td></tr>
                       <tr><td><b>FAMÍLIA DO PRODUTO OFERTADO</b></td>            <td>{$visita.familia_prod}</td></tr>
                       <tr><td><b>DEMANDA INICIAL</b></td>   <td> {$visita.demanda_inicial}</td></tr>

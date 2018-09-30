@@ -4,12 +4,12 @@
 <section class="content-header">
 
   <h1>
-     <small><b>RELATÓRIO GERAL DA CASA</b></small>
+     <small><b>RELATÓRIOS DO SINDICATO {$origem} NO CICLO</b></small>
   </h1>
   
   <ol class="breadcrumb">
-     <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
-     <button class="btn btn-xs"><li class="active"><a href="#">Relatórios</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+     <button class="btn btn-xs"><li class="active"><a href="/user/ciclos-relat/"><i class="fa fa-circle-o-notch"></i> Relatórios Sindicatos</a></li></button>
   </ol>
 </section>
 
@@ -22,9 +22,8 @@
             
             <div class="box-header">
               <div class="col-md-12">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>{$dadosCasa.nome_casa} - GERAL</b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h4> <!--</a>-->
-              <hr></div>
-              
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>{$dadosSindicato.nome_sindicato} &nbsp<span class="text-success">{function="date('d/m/Y', strtotime($ciclo.data_inicio))"} - {function="date('d/m/Y', strtotime($ciclo.data_termino))"}</span></b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h4> <!--</a>-->
+              </div>
             </div>
 
 
@@ -32,7 +31,7 @@
             <div class="box-body no-padding">
             
             
-                    
+                    <div class="box-footer">
                     
                     <div class="col-md-6">
                       <div class="col-sm-12"><br>
@@ -57,11 +56,11 @@
                             </tr>
 
                              <tr>
-                              <td><b><!--Empresas Associadas--></b></td><td>&nbsp</td>  
+                              <td><b>Empresas Associadas</b></td><td>{$dadosEmpresas.empresas_associadas}</td>  
                             </tr> 
 
                              <tr>
-                              <td><b><!----></b></td><td>&nbsp</td>  
+                              <td><b>Não Associadas</b></td><td>{$dadosEmpresas.nao_associadas}</td>  
                             </tr>  
                           
 
@@ -140,9 +139,9 @@
 
                         <div class="col-md-6">
                          <div class="col-sm-12"><br>
-                        <center><h4><b>NEGOCIAÇÕES COMERCIAIS</b></h4></center>  
+                        <center><h4><b>ASSOCIAÇÕES</b></h4></center>  
                       </div>
-                        <table class="table table-striped table-bordered   table-hover table-responsive">
+                        <table class="table table-striped table-bordered   table-hover">
                           <thead>
                             <tr>
                              <!-- <th style="width: 120px">RG</th>-->
@@ -157,11 +156,11 @@
 
 
                              <tr>
-                              <td><b>Negociadas</b></td><td>{$dadosVisitas.negociadas}</td>  
+                              <td><b>Associações Efetivadas</b></td><td>{$dadosEmpresas.associacaoEfetivada}</td>  
                             </tr>
 
                              <tr>
-                              <td><b>Não Negociadas</b></td><td>{$dadosVisitas.nao_negociadas}</td>  
+                              <td><b>Associações em Negociação</b></td><td>{$dadosEmpresas.associacao_em_negociacao}</td>  
                             </tr> 
 
                           
@@ -184,7 +183,48 @@
                        </div>
 
 
-                       
+                        <div class="col-md-6">
+                         <div class="col-sm-12"><br>
+                        <center><h4><b>NÃO ASSOCIADO PARA ASSOCIADO</b></h4></center>  
+                      </div>
+                        <table class="table table-striped table-bordered   table-hover">
+                          <thead>
+                            <tr>
+                             <!-- <th style="width: 120px">RG</th>-->
+                              <th style="">&nbsp</th>   
+                             
+                             <!-- <th>E-mail</th>
+                              <th style="width: 190px">Observação</th>
+                              <th style="width: 50px">&nbsp;</th>-->
+                            </tr>
+                          </thead>
+                          <tbody>
+
+
+                             <tr>
+                              <td><b>Total</b></td><td>0</td>  
+                            </tr>
+
+                           
+
+                          
+                          
+
+
+
+                          <!-- <td>Visita realizada e demanda gerada para várias casas e que ainda necessitam ser visualizadas</td>
+                              <td>
+                                
+                                <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b> Detalhes da Visita</b></a>
+                                <a href="#"  class="btn btn-danger btn-xs" title="Remover notificação de demanda"><i class="fa fa-close"></i> <b></b></a>
+                              </td>-->
+
+
+
+                          </tbody>
+                        </table>
+
+                       </div>
 
 
 
@@ -193,7 +233,7 @@
 
 
 
-
+</div>
 
 
 
@@ -208,10 +248,3 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
-
-
-
-
-

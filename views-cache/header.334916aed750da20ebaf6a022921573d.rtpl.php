@@ -351,7 +351,7 @@ desired effect
             <li><a href="/user/relatorio-casa/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-bar-chart"></i><span>Relatórios <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></span></a></li>
            <?php } ?>
 
-          
+          <li><a href="/user/ciclos-relat/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-circle-o-notch"></i><span>Relatórios por Ciclo</span></a></li>
         </li>
 
         <li><a href="/user/demandas"><i class="fa fa-flag"></i> <span>Demandas</span></a></li>

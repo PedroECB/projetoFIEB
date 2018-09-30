@@ -4,12 +4,12 @@
 <section class="content-header">
 
   <h1>
-     <small><b>RELATÓRIO GERAL DA CASA</b></small>
+     <small><b>RELATÓRIO DE VISITAS DA CASA NO CICLO</b></small>
   </h1>
   
   <ol class="breadcrumb">
      <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
-     <button class="btn btn-xs"><li class="active"><a href="#">Relatórios</a></li></button>
+     <button class="btn btn-xs"><li class="active"><a href="/user/ciclos-relat/"><i class="fa fa-circle-o-notch"></i> Relatórios por ciclos {$origem}</a></li></button>
   </ol>
 </section>
 
@@ -22,7 +22,7 @@
             
             <div class="box-header">
               <div class="col-md-12">
-              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>{$dadosCasa.nome_casa} - GERAL</b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h4> <!--</a>-->
+              <!--<a href="#" class="btn btn-success btn-block"> --><h4 class="text-primary"><center><b>{$dadosCasa.nome_casa} &nbsp <span class="text-success">{function="date('d/m/Y', strtotime($ciclo.data_inicio))"} - {function="date('d/m/Y', strtotime($ciclo.data_termino))"}</span></b><a href="javascript:history.back();"><button class="btn btn-link navbar-right"><b>Voltar</b></button></a></center></h4> <!--</a>-->
               <hr></div>
               
             </div>

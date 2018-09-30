@@ -24,7 +24,6 @@ $app->get('/admin', function() {
 
 
 
-
 $app->get('/admin/users', function() {  
                           
       User::verifyLoginAdmin();                     
@@ -826,7 +825,125 @@ $app->post("/admin/finalize-visita/:idvisita", function($idvisita){
 });
   
 
+$app->get('/admin/ciclos-relat/', function() {  
+                          
+      User::verifyLoginAdmin();
+
+      $ciclos = User::listCiclos();                         
+
+      $page = new PageAdmin();   
+      $page->setTpl("ciclos-relat", array("ciclos"=>$ciclos));
+});
+
+
+$app->get('/admin/ciclos-relat/:idciclo', function($idciclo) {  
+                          
+      User::verifyLoginAdmin();
+    
+      $sindicatos = User::listSindicatos();
+      $casas = User::listCasas();
+      $ciclo = User::getCiclo($idciclo);                        
+
+      $page = new PageAdmin();   
+      $page->setTpl("sindicatos-casas", array("ciclo"=>$ciclo[0],"sindicatos"=>$sindicatos, "casas"=>$casas));
+});
 
 
 
 
+
+
+
+
+
+$app->get('/admin/:idciclo/:idSindicato',function($idciclo, $idSindicato){
+
+     User::verifyLoginAdmin();
+
+     $ciclo = User::getCiclo($idciclo);
+     $nome = Sindicato::getNomeSindicato($idSindicato);
+
+     $dadosSindicato = ['nome_sindicato'=>$nome];
+
+     $dadosEmpresas = Sindicato::contEmpresas($nome);
+     $dadosVisitas = Sindicato::contVisitas($nome);
+
+      $page = new PageAdmin();
+      $page->setTpl("sindicato-ciclo", array("dadosSindicato"=>$dadosSindicato,
+                                         "dadosEmpresas"=>$dadosEmpresas[0],
+                                         "dadosVisitas"=>$dadosVisitas[0],
+                                          "ciclo"=>$ciclo[0]));
+
+
+});
+
+
+
+$app->get('/admin-relatorios-por-ciclo/:idcasa/:idciClo',function($idcasa, $idCiclo){
+
+     User::verifyLoginAdmin();
+
+      $nome = Casa::getNomeCasa($idcasa);
+      $ciclo = User::getCiclo($idCiclo);
+      
+      $dadosCasa = ['nome_casa'=>$nome];
+      $dadosCasa['idCasa'] = $idcasa;
+
+      $dadosEmpresas = Casa::contEmpresas($nome);
+      $dadosVisitas = Casa::contVisitas($nome);
+
+   
+      $page = new PageAdmin();
+      $page->setTpl("casa-relat-ciclo", array("dadosCasa"=>$dadosCasa, 
+                                        "dadosEmpresas"=>$dadosEmpresas[0],
+                                        "dadosVisitas"=>$dadosVisitas[0],
+                                        "ciclo"=>$ciclo[0]));
+
+
+});
+
+
+
+//  $app->get("/ciclos/:idSindicato/:idciclo/", function($idSindicato, $idciclo){
+
+//       User::verifyLoginAdmin();
+
+//      $ciclo = User::getCiclo($idciclo);
+//      $nome = Sindicato::getNomeSindicato($idSindicato);
+
+//      $dadosSindicato = ['nome_sindicato'=>$nome];
+
+//      $dadosEmpresas = Sindicato::contEmpresas($nome);
+//      $dadosVisitas = Sindicato::contVisitas($nome);
+
+//       $page = new PageAdmin();
+//       $page->setTpl("sindicato-ciclo", array("dadosSindicato"=>$dadosSindicato,
+//                                          "dadosEmpresas"=>$dadosEmpresas[0],
+//                                          "dadosVisitas"=>$dadosVisitas[0],
+//                                           "ciclo"=>$ciclo[0]));
+   
+
+// });
+
+
+//   $app->get("/ciclos/casa/:idcasa/:idCiclo", function($idcasa, $idCiclo){
+
+//       User::verifyLoginAdmin();
+//       $nome = Casa::getNomeCasa($idcasa);
+//       $ciclo = User::getCiclo($idCiclo);
+      
+//       $dadosCasa = ['nome_casa'=>$nome];
+//       $dadosCasa['idCasa'] = $idcasa;
+
+//       $dadosEmpresas = Casa::contEmpresas($nome);
+//       $dadosVisitas = Casa::contVisitas($nome);
+
+   
+//       $page = new PageAdmin();
+//       $page->setTpl("casa-relat-ciclo", array("dadosCasa"=>$dadosCasa, 
+//                                         "dadosEmpresas"=>$dadosEmpresas[0],
+//                                         "dadosVisitas"=>$dadosVisitas[0],
+//                                         "ciclo"=>$ciclo[0]));
+    
+
+// });
