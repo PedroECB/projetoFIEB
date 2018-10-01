@@ -628,8 +628,11 @@ $app->get('/user2/ciclo-relat-sind/:idciclo', function($idciclo) {
 
        $dadosSindicato = ['nome_sindicato'=>$nome];
 
-       $dadosEmpresas = Sindicato::contEmpresas($nome);
-       $dadosVisitas = Sindicato::contVisitas($nome);
+       // $dadosEmpresas = Sindicato::contEmpresas($nome);
+       // $dadosVisitas = Sindicato::contVisitas($nome);
+
+       $dadosEmpresas = Sindicato::contEmpresasCiclo($nome, $idciclo, $ciclo);
+       $dadosVisitas = Sindicato::contVisitasCiclo($nome, $idciclo, $ciclo);
 
 
 
@@ -652,8 +655,11 @@ $app->get('/user2/ciclo-relat-casa/:idciclo', function($idciclo) {
       $dadosCasa = ['nome_casa'=>$nome];
       
 
-      $dadosEmpresas = Casa::contEmpresas($nome);
-      $dadosVisitas = Casa::contVisitas($nome);
+      // $dadosEmpresas = Casa::contEmpresas($nome);
+      // $dadosVisitas = Casa::contVisitas($nome);
+
+      $dadosEmpresas = Casa::contEmpresasCiclo($nome, $idciclo, $ciclo);
+      $dadosVisitas = Casa::contVisitasCiclo($nome, $idciclo, $ciclo);
 
    
       $page = new PageUser2();
