@@ -376,10 +376,10 @@ desired effect
         </li>
 
 
+        <li><a href="#"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
 
 
-
-        <li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li>
+       <!--  <li><a href="#"><i class="fa fa-info"></i> <span>Informações</span></a></li> -->
 
       </ul>
       <!-- /.sidebar-menu -->

@@ -361,7 +361,7 @@ desired effect
 
      
 
-
+        <li><a href="#"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
 
 
 

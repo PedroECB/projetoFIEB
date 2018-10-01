@@ -363,9 +363,9 @@ desired effect
 
            <li><a href="/user2/ciclos-relat/" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-circle-o-notch"></i><span>Relatórios por Ciclo</span></a></li>
 
-     
+         <li><a href="/user2/origem/visitas"><i class="fa fa-calendar-o"></i> <span>Contatos</span></a></li>
 
-
+          <li><a href="#"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
 
 
 

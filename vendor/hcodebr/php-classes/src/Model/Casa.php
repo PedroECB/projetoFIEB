@@ -61,6 +61,64 @@ class Casa extends Model{
     return $dados;
  }
 
+  public static function contEmpresasCiclo($origem, $idciclo, $ciclo){
+
+    $data_inicio = $ciclo[0]['data_inicio'];
+    $data_termino = $ciclo[0]['data_termino'];
+
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+
+    $dados [0]['empresas_selecionadas'] = $result[0]['count(cnpj)'];
+
+
+
+    $sql2 = new Sql();
+    $result2 = $sql->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associada' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino", 
+       array(":origem"=>$origem,
+             ":data_inicio"=>$data_inicio,
+             ":data_termino"=>$data_termino));
+
+     $dados [0]['empresas_associadas'] = $result2[0]['count(cnpj)'];
+
+
+
+     $sql3 = new Sql();
+     $result3 = $sql3->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Não Associada' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino;",
+       array(":origem"=>$origem,
+             ":data_inicio"=>$data_inicio,
+             ":data_termino"=>$data_termino));
+
+     $dados[0]['nao_associadas'] = $result3[0]['count(cnpj)'];
+
+
+
+     $sql4 = new Sql();
+     $result4 = $sql4->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associação em Negociação' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino;",
+        array(":origem"=>$origem,
+              ":data_inicio"=>$data_inicio,
+              ":data_termino"=>$data_termino));
+
+     $dados[0]['associacao_em_negociacao'] = $result4[0]['count(cnpj)'];
+    
+
+
+     $sql5 = new Sql();
+     $result5 = $sql5->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associação Efetivada' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino;",
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+
+     $dados[0]['associacaoEfetivada'] = $result5[0]['count(cnpj)'];
+
+
+     return $dados;
+ }
+
 
 
 public static function contVisitas($origem){
@@ -94,6 +152,74 @@ public static function contVisitas($origem){
   $dados [0]['nao_negociadas'] = $result6[0]['count(idVisita)'];
 
   return $dados;
+}
+
+public static function contVisitasCiclo($origem, $idciclo, $ciclo){
+
+  $data_inicio = $ciclo[0]['data_inicio'];
+  $data_termino = $ciclo[0]['data_termino'];
+
+  $sql = new Sql();
+  $result = $sql->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Agendada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+  $dados [0]['visitas_agendadas'] = $result[0]['count(idVisita)'];
+
+  $sql2 = new Sql();
+  $result2 = $sql2->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Sem Ação' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+  $dados [0]['visitas_sem_acao'] = $result2[0]['count(idVisita)'];
+
+  $sql3 = new Sql();
+  $result3 = $sql3->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Sem Sucesso no Agendamento' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino",
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+  $dados [0]['visitas_sem_sucesso_no_agendamento'] = $result3[0]['count(idVisita)'];
+
+  $sql4 = new Sql();
+  $result4 = $sql4->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Realizada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+  $dados [0]['visitas_realizadas'] = $result4[0]['count(idVisita)'];
+
+  $sql4 = new Sql();
+  $result4 = $sql4->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Empresa Desativada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+  $dados [0]['empresa_desativada'] = $result4[0]['count(idVisita)'];
+
+
+
+   $sql5 = new Sql();
+   $result5 = $sql5->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_negociacao='Negociada' and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino;", 
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+
+   $dados [0]['negociadas'] = $result5[0]['count(idVisita)'];
+
+   
+
+   $sql6 = new Sql();
+   $result6 = $sql6->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_negociacao='Não Negociada' and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino", 
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+
+    $dados [0]['nao_negociadas'] = $result6[0]['count(idVisita)'];
+
+     return $dados;
 }
 
 

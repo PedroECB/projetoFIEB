@@ -865,8 +865,8 @@ $app->get('/admin/:idciclo/:idSindicato',function($idciclo, $idSindicato){
 
      $dadosSindicato = ['nome_sindicato'=>$nome];
 
-     $dadosEmpresas = Sindicato::contEmpresas($nome);
-     $dadosVisitas = Sindicato::contVisitas($nome);
+     $dadosEmpresas = Sindicato::contEmpresasCiclo($nome, $idciclo, $ciclo);
+     $dadosVisitas = Sindicato::contVisitasCiclo($nome, $idciclo, $ciclo);
 
       $page = new PageAdmin();
       $page->setTpl("sindicato-ciclo", array("dadosSindicato"=>$dadosSindicato,
@@ -889,8 +889,8 @@ $app->get('/admin-relatorios-por-ciclo/:idcasa/:idciClo',function($idcasa, $idCi
       $dadosCasa = ['nome_casa'=>$nome];
       $dadosCasa['idCasa'] = $idcasa;
 
-      $dadosEmpresas = Casa::contEmpresas($nome);
-      $dadosVisitas = Casa::contVisitas($nome);
+      $dadosEmpresas = Casa::contEmpresasCiclo($nome, $idCiclo, $ciclo);
+      $dadosVisitas = Casa::contVisitasCiclo($nome, $idCiclo, $ciclo);
 
    
       $page = new PageAdmin();
