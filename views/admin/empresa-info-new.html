@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>INFORMAÇÕES DE EMPRESA CADASTRADA</small>
+    <small><b>INFORMAÇÕES DE EMPRESA CADASTRADA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/admin/empresas">Empresas</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/empresas">Empresas</a></li></button>
     
   </ol>
 </section>
@@ -78,6 +78,8 @@
 
             {if="$empresa.origem_cadastro == $origem.origem"}
             <a href="/admin/empresa/{$empresa.idEmpresas}/delete"><button onclick="return confirm('Deseja realmente remover essa empresa do sistema?');" type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            
+            <a href="/admin/empresa-edit/{$empresa.idEmpresas}"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square-o"></i>&nbsp EDITAR</b></button></a>
             {/if}
             <a href="javascript:history.back();"><button type="button" class="btn btn-default btn-sm navbar-right" style="margin-top: 5px;"><b>&nbsp VOLTAR</b></button></a>
     

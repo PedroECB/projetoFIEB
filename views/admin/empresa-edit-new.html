@@ -4,7 +4,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small><b>CADASTRO DE EMPRESA PARA VISITAS</b></small>
+    <small><b>ALTERAR DADOS DA EMPRESA</b></small>
   </h1>
   <ol class="breadcrumb">
     <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
@@ -38,12 +38,12 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/empresa-create" method="post" id="formEmpresa">
+        <form role="form" action="/admin/empresa-edit/{$empresa.idEmpresas}" method="post" id="formEmpresa">
           <div class="box-body">
 
           <div class="form-group">
               <label for="campoCNPJ">CNPJ: *</label>
-              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" value="{if="isset($dados.cnpj)"}{$dados.cnpj}{/if}" onkeyup="formatCNPJ();"  maxlength="15" required>
+              <input type="tel" class="form-control" id="campoCNPJ" name="cnpj" placeholder="Digite apenas números" value="{if="isset($dados.cnpj)"}{$dados.cnpj}{/if}{$empresa.cnpj}" onkeyup="formatCNPJ();"  maxlength="15" required>
             </div>
 
 
@@ -51,18 +51,19 @@
 
             <div class="form-group">
               <label for="campoRazaoSocial">Razão Social: *</label> 
-              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  value="{if="isset($dados.razaoSocial)"}{$dados.razaoSocial}{/if}" onkeypress="formatRazaoSocial();" maxlength="50" required>
+              <input type="text" class="form-control" id="campoRazaoSocial" name="razaoSocial" placeholder=""  value="{if="isset($dados.razaoSocial)"}{$dados.razaoSocial}{/if}{$empresa.razao_social}" onkeypress="formatRazaoSocial();" maxlength="50" required>
             </div>
 
             <div class="form-group">
               <label for="campoNomeFantasia" >Nome Fantasia: *</label>
-              <input type="text" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="{if="isset($dados.nomeFantasia)"}{$dados.nomeFantasia}{/if}">
+              <input type="text" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="{if="isset($dados.nomeFantasia)"}{$dados.nomeFantasia}{/if}{$empresa.nome_fantasia}">
             </div>
 
             <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
-                {if="isset($dados.sitAssoc)"}<option value="{$dados.sitAssoc}" selected>{$dados.sitAssoc}</option>{/if}
+                <!-- {if="isset($dados.sitAssoc)"}<option value="{$dados.sitAssoc}" selected>{$dados.sitAssoc}</option>{/if} -->
+                <option value="{$empresa.situacao_associacao}">{$empresa.situacao_associacao}</option>
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
                 <option value="Associação em Negociação">Associação em Negociação</option>
@@ -71,7 +72,7 @@
             </div>
 
             <div class="form-group">
-              <label for="campoAssoc" >Sindicato: </label>
+              <label for="campoAssoc" >Empresa Associada à: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
                 {if="isset($dados.Assoc)"}<option value="{$dados.Assoc}" selected>{$dados.Assoc}</option>{/if}
                 <option value="Não Associada">Não Associada</option>
@@ -81,11 +82,6 @@
                  {loop="$sindicatos"} 
                   <option value="{$value.idSindicato}">{$value.nome_sindicato}</option>
                   {/loop} 
-
-                <!--  <option value="SINDVEST">SINDVEST</option>
-                  <option value="SINDPROCIM">SINDPROCIM</option>
-                  <option value="SINDTESTE">SINDTESTE</option>
-                -->
 
                 </optgroup>
                 
@@ -104,6 +100,7 @@
                      <select name="campoCidade" id="campoCidade" onchange="validaCidade();" class="form-control">
                             {if="isset($dados.campoCidade)"}<option value="{$dados.campoCidade}">{$dados.campoCidade}</option>{/if}
                             <option value="">Selecione a cidade</option>
+                            <option value="{$empresa.municipio}" selected>{$empresa.municipio}</option>
                             <option value="Abaíra">Abaíra</option>
                             <option value="Abaré">Abaré</option>
                             <option value="Feira de Santana">Feira de Santana</option>
@@ -120,7 +117,7 @@
 
           <div class="form-group">
               <label for="campoRegiao">Região:</label>
-              <input type="text" class="form-control" id="campoRegiao" name="CampoRegiao" placeholder="" readonly="" required value="{if="isset($dados.CampoRegiao)"}{$dados.CampoRegiao}{/if}">
+              <input type="text" class="form-control" id="campoRegiao" name="CampoRegiao" placeholder="" readonly="" required value="{if="isset($dados.CampoRegiao)"}{$dados.CampoRegiao}{/if}{$empresa.regiao_estado}">
             </div>
       </div>
 
@@ -135,14 +132,14 @@
         
           <div class="form-group">
               <label for="campoBairro">Bairro:</label>
-              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();" value="{if="isset($dados.campoBairro)"}{$dados.campoBairro}{/if}">
+              <input type="text" class="form-control" id="campoBairro" name="campoBairro" placeholder="Nome do bairro" maxlength="28" onkeypress="formatBairro();" value="{if="isset($dados.campoBairro)"}{$dados.campoBairro}{/if}{$empresa.bairro}">
             </div>
 
 
             <div class="form-group">
               <label for="campoEndereco">Endereço: </label>
               <input type="text" class="form-control" id="campoEndereco" name="campoEndereco" placeholder="Ex: Rua Américo de Oliveira, N47"
-               value="{if="isset($dados.campoEndereco)"}{$dados.campoEndereco}{/if}" maxlength="80" onkeypress="formatEndereco();">
+               value="{if="isset($dados.campoEndereco)"}{$dados.campoEndereco}{/if}{$empresa.endereco}" maxlength="80" onkeypress="formatEndereco();">
             </div>
 
 
@@ -153,7 +150,7 @@
                 <div class="input-group-addon">
                   <i class="fa fa-at"></i>
                 </div> 
-                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="{if="isset($dados.email)"}{$dados.email}{/if}">
+                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="{if="isset($dados.email)"}{$dados.email}{/if}{$empresa.email}">
             </div>  
         </div>
 
@@ -168,7 +165,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-phone"></i>
                   </div>
-                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14" value="{if="isset($dados.campoTelefone)"}{$dados.campoTelefone}{/if}">
+                  <input type="tel" id="campoTelefone" class="form-control" placeholder="(71) 3333-2222" name="campoTelefone" onkeyup="validaTelefone();" maxlength="14" value="{if="isset($dados.campoTelefone)"}{$dados.campoTelefone}{/if}{$empresa.telefone}">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -182,7 +179,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-mobile"></i>
                   </div>
-                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15" value="{if="isset($dados.campoTelefone2)"}{$dados.campoTelefone2}{/if}" >
+                  <input type="tel" id="campoTelefone2" class="form-control"  placeholder="(71) 98888-0000" name="campoTelefone2" onkeyup="validaCelular();" maxlength="15" value="{if="isset($dados.campoTelefone2)"}{$dados.campoTelefone2}{/if}{$empresa.telefone2}" >
                 </div>
                 <!-- /.input group -->
               </div>
@@ -216,7 +213,7 @@
           
 
            
-            <a><button type="submit" class="btn btn-primary"><b><i class="fa fa-check"></i>&nbsp CADASTRAR</b></button></a>  
+            <a><button type="submit" class="btn btn-primary"><b><i class="fa fa-save"></i>&nbsp SALVAR</b></button></a>  
             <a href="javascript:history.back();"><button type="button" class="btn btn-default navbar-right"><b>&nbsp VOLTAR</b></button></a>
     
 
