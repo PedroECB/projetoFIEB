@@ -57,11 +57,25 @@
                       <td class="orig">{$value.telefone}</td>
                       <td>{$value.email}</td>
                       <td>
-                        <button class="btn btn-default btn-xs" title="Visualizar"><i class="fa fa-eye"></i></button>
+                        <a href="/{$value.id_contatos}/user/contatos"><button class="btn btn-default btn-xs" title="Visualizar"><i class="fa fa-eye"></i></button></a>
                         
                         {if="$value.id_funcionario == $session.idFuncionario"}
                              <a href="/user/contatos/{$value.id_contatos}/remove"><button class="btn btn-danger btn-xs" title="Remover"><i class="fa fa-close"></i></button></a> 
                         {/if}
+                      </td>
+                    </tr>
+                  {/loop}
+
+                     <tr><td colspan="5">&nbsp</td></tr>
+
+                   {loop="$contatos2"}
+                    <tr>
+                      <td>{$value.nome_func}</td>
+                      <td class="md2-some">{$value.origem}</td>
+                      <td class="orig">{$value.telefone}</td>
+                      <td>{$value.email}</td>
+                      <td>
+
                       </td>
                     </tr>
                   {/loop}

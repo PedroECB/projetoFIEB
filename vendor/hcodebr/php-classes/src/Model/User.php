@@ -272,6 +272,18 @@ $id = (int) $idciclo;
 
 }
 
+public static function getCicloAtual(){
+
+  $sql = new Sql();
+  $result = $sql->select("SELECT * FROM ciclo WHERE now()>data_inicio and now()<data_termino;");
+
+  if(count($result) == 0 ){
+     throw new \Exception('Falha na busca do ciclo. Nenhum ciclo encontrado', 699);
+   }
+
+  return $result[0];
+}
+
 public static function updateCiclo($idciclo, $dados){
 
  $id = (int)$idciclo;
@@ -978,6 +990,62 @@ public static function getPageSearchFocais($search, $page = 1, $itemsPerPage = 1
 }
 
 
+public static function saveContato($dados){
+
+  $id_funcionario = $_SESSION['idFuncionario'];
+  $nome = $dados['nome'];
+  $entidade = $dados['entidade'];
+  $telefone = $dados['telefone'];
+  $telefone2 = $dados['telefone2'];
+  $email = $dados['email'];
+  $observacao = $dados['observacao'];
+
+  $sql = new Sql();
+  $result = $sql->query("INSERT INTO contatos (id_funcionario, nome, entidade, telefone, telefone2, email, observacao) 
+    VALUES (:idFuncionario, :nome, :entidade, :telefone, :telefone2, :email, :observacao)", 
+    array(":idFuncionario"=>$id_funcionario,
+          ":nome"=>$nome,
+          ":entidade"=>$entidade,
+          ":telefone"=>$telefone,
+          ":telefone2"=>$telefone2,
+          ":email"=>$email,
+          ":observacao"=>$observacao));
+
+  
+  if(!$result){
+    throw new Exception('Falha ao cadastrar contato', 5687);
+  }
+
+
+}
+
+public static function listContatos(){
+
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM contatos");
+
+}
+
+public static function listContatos2(){
+
+  $sql = new Sql();
+  return $sql->select("SELECT nome_func, origem, telefone, email FROM funcionario ORDER BY nome_func;");
+}
+
+public static function getContato($idcontato){
+
+  $sql = new Sql();
+
+  return $sql->select("SELECT * FROM contatos WHERE id_contatos =:id_contato", array(":id_contato"=>$idcontato));
+
+}
+
+public static function removeContato($idcontato){
+
+  $sql = new Sql();
+  $query = $sql->query("DELETE FROM contatos WHERE id_contatos=:idcontato", array(":idcontato"=>$idcontato));
+  
+}
 
 public function getIdFuncionario(){
   return $this->idFuncionario;

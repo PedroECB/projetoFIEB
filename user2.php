@@ -265,6 +265,51 @@ $app->get("/user2/empresas/:idempresa", function($idempresa){
 
 });
 
+$app->get("/user2/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginUser2();
+  $empresa = Empresa::getFuncEmpresaSind($idempresa);
+  $sindicatos = User::listSindicatos();
+  $cidades = Empresa::listCidades();
+  $page = new PageUser2();   
+  $page->setTpl("empresa-edit-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos, "cidades"=>$cidades));
+
+
+});
+
+$app->post("/user2/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginUser2();
+  $dadosEmpresa = Empresa::getEmpresa($idempresa);
+try{
+  if($dadosEmpresa[0]['origem_cadastro'] == $_SESSION['origem']){
+        Empresa::editar($_POST, $idempresa);
+
+        header("Location: /user2/empresas/$idempresa");
+        exit;
+
+      }else{
+        throw new \Exception('Não foi possível alterar os dados da empresa.',58995);
+      }
+    }catch(\Exception $e){
+
+         $error ['error'] = $e->getMessage();
+
+         $empresa = Empresa::getEmpresa($idempresa);
+         $sindicatos = User::listSindicatos();
+         $cidades = Empresa::listCidades();
+
+         $page = new PageUser2();
+         $page->setTpl("empresa-edit-new", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+         exit;
+
+    } 
+
+
+
+});
+
+
 $app->get("/user2/agendarvisita/:idempresa", function($idempresa){
 
     User::verifyLoginUser2();
@@ -667,4 +712,114 @@ $app->get('/user2/ciclo-relat-casa/:idciclo', function($idciclo) {
                                         "dadosEmpresas"=>$dadosEmpresas[0],
                                         "dadosVisitas"=>$dadosVisitas[0],
                                         "ciclo"=>$ciclo[0]));
+});
+
+
+$app->get("/user2/contatos", function(){
+
+  User::verifyLoginUser2();
+  $contatos = User::listContatos();
+  $contatos2 = User::listContatos2();
+
+  $page = new PageUser2();
+  $page->setTpl('contatos', array("contatos"=>$contatos, "contatos2"=>$contatos2, "session"=>$_SESSION));
+
+});
+
+$app->get("/:idcontato/user2/contatos", function($idcontato){
+
+  User::verifyLoginUser2();
+  $dadosContato = User::getContato((int)$idcontato);
+
+  $page = new PageUser2();
+  $page->setTpl('contato-info', array("dadosContato"=>$dadosContato[0]));
+
+});
+
+
+$app->get("/user2/contatos-create", function(){
+
+  User::verifyLoginUser2();
+
+  $page = new PageUser2();
+  $page->setTpl('contato-create');
+
+});
+
+$app->get("/user2/contatos/:idcontato/remove", function($idcontato){
+
+  User::verifyLoginUser2();
+
+  $dadosContato = User::getContato((int)$idcontato);
+
+  if($dadosContato[0]['id_funcionario'] == $_SESSION['idFuncionario']){
+
+      User::removeContato($idcontato);
+
+  }else{
+    throw new \Exception('Falha ao remover contato', 8899996);
+  }
+
+  header("Location: /user2/contatos");
+  exit;
+
+});
+
+
+$app->post("/user2/contatos-create", function(){
+
+  User::verifyLoginUser2();
+  User::saveContato($_POST);
+
+  header("Location: /user2/contatos");
+  exit;
+
+});
+
+$app->get("/user2/empresas-ciclo-atual", function(){
+
+  User::verifyLoginUser2();
+  $cicloAtual = User::getCicloAtual();
+
+  $origem = $_SESSION['origem'];
+
+    
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearchOrigemCiclo($cicloAtual, $origem ,$search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPageOrigemCiclo($cicloAtual, $origem, $page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user2/empresas-ciclo-atual?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser2();   
+    $page->setTpl("list-empresas-ciclo", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages,
+                      "origemS"=>$_SESSION['origem']));
+
+
+
 });

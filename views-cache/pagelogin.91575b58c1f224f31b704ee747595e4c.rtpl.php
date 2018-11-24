@@ -32,9 +32,15 @@
 <div class="login-box">
 
 
-  <div class="register-logo">
+ <!--  <div class="register-logo">
     <div class="lockscreen-logo">
     <img src="../res/site/dist/img/LOGO01BRANCO.png" height="" class="img-responsive"></img>
+  </div>
+  </div> -->
+
+  <div class="register-logo">
+    <div class="lockscreen-logo">
+    <img src="../res/site/dist/img/logofiebpng.png" class="img-responsive" style="width: 220px; margin-left: 20%; margin-top: -20px;"></img>
   </div>
   </div>
 
@@ -95,6 +101,12 @@
 
   </div>
   <!-- /.login-box-body -->
+
+  <div class="register-logo">
+    <div class="lockscreen-logo">
+    <img src="../res/site/dist/img/LOGO01BRANCO.png" height="" class="img-responsive" style="margin-top: 20px;"></img>
+  </div>
+  </div>
 </div>
 <!-- /.login-box -->
 

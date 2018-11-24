@@ -79,6 +79,7 @@
             <?php if( $empresa["origem_cadastro"] == $origem["origem"] ){ ?>
 
             <a href="/user/empresa/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"><button onclick="return confirm('Deseja realmente remover essa empresa do sistema?');" type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            <a href="/user/empresa-edit/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square-o"></i>&nbsp EDITAR</b></button></a>
             <?php } ?>
 
     

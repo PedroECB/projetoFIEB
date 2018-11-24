@@ -279,7 +279,7 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header" style="color:white;"><center><b>MENU</b></center></li>
+        <li class="header" style="color:white; background-color: #08375d;"><center><b>MENU</b></center></li>
         <!-- Optionally, you can add icons to the links -->
 
 
@@ -299,7 +299,7 @@ desired effect
       
         <li><a href="/user/empresa-create" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-plus"></i><span>Cadastrar</span></span></a></li>
         <li><a href="/user/empresas/origem" style="color:#9ba8b2; background-color:#043156;"><i class="fa fa-dot-circle-o"></i><span>Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></span></span></a></li>
-        <li><a href="/user/empresas" style="color:#9ba8b2; background-color:#043156;"> <i class="fa fa-sort-alpha-asc"></i><span>Listar Todas</span></span></a></li>
+        <li><a href="/user/empresas-ciclo-atual" style="color:#9ba8b2; background-color:#043156;"> <i class="fa fa-sort-alpha-asc"></i><span>Empresas ciclo atual</span></span></a></li>
 
 
 
@@ -361,7 +361,7 @@ desired effect
 
      
 
-        <li><a href="#"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
+        <li><a href="/user/contatos"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
 
 
 

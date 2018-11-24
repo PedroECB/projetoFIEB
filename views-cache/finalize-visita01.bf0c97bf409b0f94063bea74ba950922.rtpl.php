@@ -6,8 +6,8 @@
     <small>FINALIZAR VISITA</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/visitas">Visitas</a></li>
+    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
+    <li><a href="/admin/visitas">Visitas</a></li>
     
   </ol>
 </section>
@@ -25,7 +25,7 @@
     <center><h4 class=""><b>FINALIZAR VISITA</b><a href="javascript:history.back()"><button class="btn btn-link navbar-right" style="margin-left: 50px;"><b>Cancelar</b></button></a></h4></center>
 
 <br>
-<form role="form" action="/user2/finalize-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post" id="formEmpresa">
+<form role="form" action="/admin/finalize-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post" id="formEmpresa">
   <div class="form-group">
           <input hidden name="idVisita" value="<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
               <label for="campoAgenteAtend">Responsável pelo atendimento: *</label>
@@ -97,10 +97,10 @@
             </div>
       </div>
       
+<!-- Teste -->
 
 
-
-      <div class="col-md-6">   
+     <!--  <div class="col-md-6">   
           <div class="form-group">
               <label for="campoDemandas" >Demanda Identificada na Visita:</label>
               <select name="campoDemandas" class="form-control">
@@ -121,6 +121,42 @@
               </select>
             </div>
       </div>
+ -->
+
+<!-- Fim Teste -->
+
+
+<!-- <div class="col-md-6"> -->
+  
+<div class="col-md-6">
+            
+
+
+<div class="form-group">
+                <label for="campoDemandas">Demandas identificadas na visita:</label>
+                <select name="campoDemandas[]" id="campoDemandas" class="form-control" multiple="">
+                    <option value="">Nenhuma Demanda Identificada</option>
+                        <optgroup label="CASAS">
+                          <option value="SESI">SESI</option>
+                          <option value="SENAI">SENAI</option>
+                          <option value="IEL">IEL</option>
+                          <option value="CIEB">CIEB</option>
+                        </optgroup>
+
+                        <optgroup label="SINDICATOS">
+                         <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?> 
+                           <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                          <?php } ?> 
+               </optgroup> 
+                </select>
+                <small class="text-danger">Segure a tecla Ctrl e selecione as opções</small>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
     <div class="col-md-12">   
         <br>
         <label>Observação:</label><textarea name="campoObservacao" class="form-control"><?php echo htmlspecialchars( $visita["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>

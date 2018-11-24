@@ -6,8 +6,8 @@
    
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li class="active"><a href="/admin/edit-profile">Editar perfil</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/edit-profile">Editar perfil</a></li></button>
   </ol>
 </section>
 

@@ -249,8 +249,24 @@ public static function finalizeVisita($dados){
     $valor_prod = $dados['campoValorProduto'];
     $situacaoAssociacao = $dados['sitAssoc'];
     $preco_prod = $dados['campoValorProduto']!==""?$dados['campoValorProduto']:NULL;
-    $demandas  = $dados['campoDemandas']!==""?$dados['campoDemandas']:NULL;
+    $demandas  = $dados['campoDemandas'][0]!=="" ? $dados['campoDemandas']:NULL;
     $observacao = $dados['campoObservacao'];
+
+ 
+
+    if($demandas !== NULL){
+      foreach($demandas as $demanda){
+        
+        $sql2 = new Sql();
+        $query2 = $sql2->query("INSERT INTO demandas (idVisita_demandas, demanda) VALUES (:idVisita, :demanda)", 
+                        array(":idVisita"=>$idVisita,
+                              ":demanda"=>$demanda));
+        }
+    }
+
+    $demandasImplode= implode($demandas, "/");
+
+
 
 
     $sql = new Sql();
@@ -262,18 +278,12 @@ public static function finalizeVisita($dados){
                               ":idFuncionario"=>$idFuncionario,
                               ":agente_atend"=>$agente_atend,
                               ":data_realizacao"=>$data_realizacao,
-                              ":demanda_ident"=>$demandas,
+                              ":demanda_ident"=>$demandasImplode,
                               ":status_negociacao"=>$status_negociacao,
                               ":preco_prod"=>$preco_prod,
                               ":status_associacao"=>$situacaoAssociacao));
 
-    var_dump($dados);
-    if($dados['campoDemandas'] !== ""){
-        $sql2 = new Sql();
-        $query2 = $sql2->query("INSERT INTO demandas (idVisita_demandas, demanda) VALUES (:idVisita, :demanda)", 
-                            array(":idVisita"=>$idVisita,
-                                  ":demanda"=>$demandas));
-    }
+    
 
     $newStatus = "Visita Realizada";
 

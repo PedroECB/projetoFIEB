@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>CRIAÇÃO DE NOVO CICLO</small>
+    <small><b>CRIAÇÃO DE NOVO CICLO</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="#">Novo Ciclo</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="#">Novo Ciclo</a></li></button>
   </ol>
 </section>
 

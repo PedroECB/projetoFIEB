@@ -3,11 +3,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small>INFORMAÇÕES DE EMPRESA CADASTRADA</small>
+    <small><b>INFORMAÇÕES DE EMPRESA CADASTRADA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/user2"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/user2/empresas">Empresas</a></li>
+    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user2/empresas">Empresas</a></li></button>
     
   </ol>
 </section>
@@ -79,6 +79,7 @@
             <?php if( $empresa["origem_cadastro"] == $origem["origem"] ){ ?>
 
             <a href="/user2/empresa/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"><button onclick="return confirm('Deseja realmente remover essa empresa do sistema?');" type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            <a href="/user2/empresa-edit/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square-o"></i>&nbsp EDITAR</b></button></a>
             <?php } ?>
 
 

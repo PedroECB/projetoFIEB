@@ -349,6 +349,50 @@ $app->get("/user/empresas/:idempresa", function($idempresa){
 
 });
 
+$app->get("/user/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginUser();
+  $empresa = Empresa::getFuncEmpresaSind($idempresa);
+  $sindicatos = User::listSindicatos();
+  $cidades = Empresa::listCidades();
+  $page = new PageUser();   
+  $page->setTpl("empresa-edit-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos, "cidades"=>$cidades));
+
+
+});
+
+$app->post("/user/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginUser();
+  $dadosEmpresa = Empresa::getEmpresa($idempresa);
+try{
+  if($dadosEmpresa[0]['origem_cadastro'] == $_SESSION['origem']){
+        Empresa::editar($_POST, $idempresa);
+
+        header("Location: /user/empresas/$idempresa");
+        exit;
+
+      }else{
+        throw new \Exception('Não foi possível alterar os dados da empresa.',58995);
+      }
+    }catch(\Exception $e){
+
+         $error ['error'] = $e->getMessage();
+
+         $empresa = Empresa::getEmpresa($idempresa);
+         $sindicatos = User::listSindicatos();
+         $cidades = Empresa::listCidades();
+
+         $page = new PageUser();
+         $page->setTpl("empresa-edit-new", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+         exit;
+
+    } 
+
+
+
+});
+
 
 
 
@@ -716,4 +760,115 @@ $app->get('/user/ciclo-relat-casa/:idciclo', function($idciclo) {
                                         "dadosEmpresas"=>$dadosEmpresas[0],
                                         "dadosVisitas"=>$dadosVisitas[0],
                                         "ciclo"=>$ciclo[0]));
+});
+
+
+$app->get("/user/contatos", function(){
+
+  User::verifyLoginUser();
+  $contatos = User::listContatos();
+  $contatos2 = User::listContatos2();
+
+  $page = new PageUser();
+  $page->setTpl('contatos', array("contatos"=>$contatos, "contatos2"=>$contatos2, "session"=>$_SESSION));
+
+});
+
+
+$app->get("/user/contatos-create", function(){
+
+  User::verifyLoginUser();
+
+  $page = new PageUser();
+  $page->setTpl('contato-create');
+
+});
+
+$app->get("/user/contatos/:idcontato/remove", function($idcontato){
+
+   User::verifyLoginUser();
+
+  $dadosContato = User::getContato((int)$idcontato);
+
+  if($dadosContato[0]['id_funcionario'] == $_SESSION['idFuncionario']){
+
+      User::removeContato($idcontato);
+
+  }else{
+    throw new \Exception('Falha ao remover contato', 8899996);
+  }
+
+  header("Location: /user/contatos");
+  exit;
+
+});
+
+
+$app->post("/user/contatos-create", function(){
+
+  User::verifyLoginUser();
+  User::saveContato($_POST);
+
+  header("Location: /user/contatos");
+  exit;
+
+});
+
+$app->get("/:idcontato/user/contatos", function($idcontato){
+
+  User::verifyLoginUser();
+  $dadosContato = User::getContato((int)$idcontato);
+
+  $page = new PageUser();
+  $page->setTpl('contato-info', array("dadosContato"=>$dadosContato[0]));
+
+});
+
+
+$app->get("/user/empresas-ciclo-atual", function(){
+
+  User::verifyLoginUser();
+  $cicloAtual = User::getCicloAtual();
+
+  $origem = $_SESSION['origem'];
+
+    
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearchOrigemCiclo($cicloAtual, $origem ,$search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPageOrigemCiclo($cicloAtual, $origem, $page);
+
+    }
+
+   
+    $pages = [];
+
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/user/empresas-ciclo-atual?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageUser();   
+    $page->setTpl("list-empresas-ciclo", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages,
+                      "origemS"=>$_SESSION['origem']));
+
+
+
 });

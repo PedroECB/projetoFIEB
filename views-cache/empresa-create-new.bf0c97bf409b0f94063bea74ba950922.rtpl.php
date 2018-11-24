@@ -8,8 +8,8 @@
     <small><b>CADASTRO DE EMPRESA PARA VISITAS</b></small>
   </h1>
   <ol class="breadcrumb">
-    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn btn-xs"><li><a href="/user/empresa-create">Cadastrar Empresa</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/empresa-create">Cadastrar Empresa</a></li></button>
     
   </ol>
 </section>
@@ -40,7 +40,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/user/empresa-create" method="post" id="formEmpresa">
+        <form role="form" action="/admin/empresa-create" method="post" id="formEmpresa">
           <div class="box-body">
 
           <div class="form-group">
@@ -74,7 +74,7 @@
             </div>
 
             <div class="form-group">
-              <label for="campoAssoc" >Empresa Associada à: </label>
+              <label for="campoAssoc" >Sindicato: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
                 <?php if( isset($dados["Assoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 

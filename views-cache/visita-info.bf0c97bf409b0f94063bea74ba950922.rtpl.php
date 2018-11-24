@@ -5,11 +5,11 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    <small><b>CADASTRO DE EMPRESA PARA VISITAS</b></small>
+    <small><b>INFORMAÇÕES DA VISITA</b></small>
   </h1>
   <ol class="breadcrumb">
-    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn btn-xs"><li><a href="/user2/visitas">Visitas</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/visitas">Visitas</a></li></button>
     
   </ol>
 </section>
@@ -103,10 +103,10 @@
           
           <?php if( $visita["origem"] == $origem["origem"] ){ ?>
 
-            <a href="/user2/edit-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square"></i>&nbsp ALTERAR DADOS DA VISITA</b></button></a>  
+            <a href="/admin/edit-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square"></i>&nbsp ALTERAR DADOS DA VISITA</b></button></a>  
             <?php if( !isset($visita["agente_atend"]) ){ ?>
 
-            <a href="/user2/finalize-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa  fa-check-square"></i>&nbsp FINALIZAR VISITA</b></button></a>
+            <a href="/admin/finalize-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa  fa-check-square"></i>&nbsp FINALIZAR VISITA</b></button></a>
             <?php } ?>
 
           <?php } ?>

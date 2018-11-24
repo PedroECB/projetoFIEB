@@ -198,7 +198,7 @@ public static function getPageSearch($search, $page = 1, $itemsPerPage = 15){
   $sql = new Sql();
   
   $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
-                FROM empresas  WHERE razao_social LIKE :search OR nome_fantasia LIKE :search OR municipio LIKE :search OR cnpj LIKE :search OR situacao_associacao LIKE :search
+                FROM empresas  WHERE razao_social LIKE :search OR nome_fantasia LIKE :search OR municipio LIKE :search OR cnpj LIKE :search OR situacao_associacao LIKE :search OR origem_cadastro LIKE :search
                 ORDER BY idEmpresas desc
                 limit $start, $itemsPerPage;
 
@@ -271,7 +271,172 @@ public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPe
 }
 
 
+ public static function getPageCicloAtual($cicloAtual, $page = 1, $itemsPerPage = 10){
 
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $start = ($page-1)*$itemsPerPage;
+ 
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM empresas WHERE dtcadastro_empresa>=:data_inicio and dtcadastro_empresa<=:data_termino ORDER BY idEmpresas desc
+                      limit $start, $itemsPerPage;
+
+                ", array(":data_inicio"=>$data_inicio,
+                         "data_termino"=>$data_termino));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearchCicloAtual($cicloAtual, $search, $page = 1, $itemsPerPage = 15){
+
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM empresas  WHERE razao_social LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino  
+                OR nome_fantasia LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino 
+                OR municipio LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino 
+                OR cnpj LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR situacao_associacao LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                ORDER BY idEmpresas desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>$search.'%', 
+                         ":data_inicio"=>$data_inicio, 
+                         ":data_termino"=>$data_termino));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+
+ public static function getPageOrigemCiclo($cicloAtual, $origem, $page = 1, $itemsPerPage = 10){
+
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                      FROM empresas WHERE origem_cadastro=:orig  AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                      ORDER BY idEmpresas desc
+                      limit $start, $itemsPerPage;
+
+                ", array(":orig"=>$origem,
+                         ":data_inicio"=>$data_inicio,
+                         ":data_termino"=>$data_termino));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+public static function getPageSearchOrigemCiclo($cicloAtual, $origem, $search, $page = 1, $itemsPerPage = 15){
+
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $start = ($page-1)*$itemsPerPage;
+
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
+                FROM empresas WHERE origem_cadastro=:orig  AND razao_social LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino 
+                OR origem_cadastro=:orig AND nome_fantasia LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig AND cnpj LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig AND municipio LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig AND regiao_estado LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig AND situacao_associacao LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                ORDER BY idEmpresas desc
+                limit $start, $itemsPerPage;
+
+                ", array(":search"=>$search.'%', 
+                         ":orig"=>$origem,
+                         ":data_inicio"=>$data_inicio,
+                         ":data_termino"=>$data_termino));
+
+
+    $resultTotal = $sql->select("SELECT FOUND_ROWS() AS nrtotal;");
+
+    return [
+      'data'=>$results,
+      'total'=>(int)$resultTotal[0]['nrtotal'],
+      'pages'=>ceil($resultTotal[0]['nrtotal']/$itemsPerPage)
+    ];
+
+}
+
+
+public static function editar($dados, $idempresa){
+
+  $cnpj = $dados['cnpj'];
+  $razao_social = $dados['razaoSocial'];
+  $nomeFantasia = $dados['nomeFantasia'];
+  $sitAssoc = $dados['sitAssoc'];
+  $municipio = $dados['campoCidade'];
+  $regiao = $dados['CampoRegiao'];
+  $bairro = $dados['campoBairro'];
+  $endereco = $dados['campoEndereco'];
+  $email = $dados['email'];
+  $telefone = $dados['campoTelefone'];
+  $telefone2 = $dados['campoTelefone2'];
+
+  $sql = new Sql();
+  $result = $sql->query("UPDATE empresas set cnpj=:cnpj, razao_social=:razao_social, nome_fantasia=:nomeFantasia, situacao_associacao=:sitAssoc,
+                        municipio=:municipio, regiao_estado=:regiao, bairro=:bairro, endereco=:endereco, email=:email, telefone=:telefone, telefone2=:telefone2 WHERE idEmpresas=:idempresa",
+                        array(":cnpj"=>$cnpj,
+                              ":razao_social"=>$razao_social,
+                              ":nomeFantasia"=>$nomeFantasia,
+                              ":sitAssoc"=>$sitAssoc,
+                              ":municipio"=>$municipio,
+                              ":regiao"=>$regiao,
+                              ":bairro"=>$bairro,
+                              ":endereco"=>$endereco,
+                              ":email"=>$email,
+                              ":telefone"=>$telefone,
+                              ":telefone2"=>$telefone2,
+                              ":idempresa"=>$idempresa));
+
+  if(!$result){
+    throw new Exception('Falha ao editar os dados da empresa, verifique o CNPJ e os outros dados digitados e tente novamente.', 5789);
+  }
+
+}
 
 
 

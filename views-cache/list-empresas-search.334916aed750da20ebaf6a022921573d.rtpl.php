@@ -14,8 +14,9 @@
   
   <ol class="breadcrumb">
     <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn btn-xs"><li class="active"><a href="/user/empresas">Todas empresas</a></li></button>
-    <button class="btn btn-xs"><li class="active"><a href="/user/empresas/origem">Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/empresas"><i class="fa fa-industry"></i> Empresas geral</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/empresas/origem"><i class="fa fa-square"></i> Todas empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/empresas-ciclo-atual"><i class="fa fa-circle-o-notch"></i> Empresas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?> ciclo atual</a></li></button>
   </ol>
 </section>
 

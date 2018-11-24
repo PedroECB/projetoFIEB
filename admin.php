@@ -539,12 +539,59 @@ $app->get("/admin/empresas", function(){
 
 });
 
+
+
 $app->get("/admin/empresas/:idempresa", function($idempresa){
 
     User::verifyLoginAdmin();
     $empresa = Empresa::getFuncEmpresaSind($idempresa);
     $page = new PageAdmin();   
     $page->setTpl("empresa-info-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION));
+
+});
+
+
+$app->get("/admin/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginAdmin();
+  $empresa = Empresa::getFuncEmpresaSind($idempresa);
+  $sindicatos = User::listSindicatos();
+  $cidades = Empresa::listCidades();
+  $page = new PageAdmin();   
+  $page->setTpl("empresa-edit-new", array("empresa"=>$empresa[0],"origem"=>$_SESSION, "sindicatos"=>$sindicatos, "cidades"=>$cidades));
+
+
+});
+
+$app->post("/admin/empresa-edit/:idempresa", function($idempresa){
+
+  User::verifyLoginAdmin();
+  $dadosEmpresa = Empresa::getEmpresa($idempresa);
+try{
+  if($dadosEmpresa[0]['origem_cadastro'] == $_SESSION['origem']){
+        Empresa::editar($_POST, $idempresa);
+
+        header("Location: /admin/empresas/$idempresa");
+        exit;
+
+      }else{
+        throw new \Exception('Não foi possível alterar os dados da empresa.',58995);
+      }
+    }catch(\Exception $e){
+
+         $error ['error'] = $e->getMessage();
+
+         $empresa = Empresa::getEmpresa($idempresa);
+         $sindicatos = User::listSindicatos();
+         $cidades = Empresa::listCidades();
+
+         $page = new PageAdmin();
+         $page->setTpl("empresa-edit-new", array("sindicatos"=>$sindicatos, "cidades"=>$cidades,"origem"=>$_SESSION, "error"=>$error, "dados"=>$_POST));
+         exit;
+
+    } 
+
+
 
 });
 
@@ -904,46 +951,114 @@ $app->get('/admin-relatorios-por-ciclo/:idcasa/:idciClo',function($idcasa, $idCi
 
 
 
-//  $app->get("/ciclos/:idSindicato/:idciclo/", function($idSindicato, $idciclo){
 
-//       User::verifyLoginAdmin();
 
-//      $ciclo = User::getCiclo($idciclo);
-//      $nome = Sindicato::getNomeSindicato($idSindicato);
 
-//      $dadosSindicato = ['nome_sindicato'=>$nome];
 
-//      $dadosEmpresas = Sindicato::contEmpresas($nome);
-//      $dadosVisitas = Sindicato::contVisitas($nome);
+$app->get("/admin/contatos", function(){
 
-//       $page = new PageAdmin();
-//       $page->setTpl("sindicato-ciclo", array("dadosSindicato"=>$dadosSindicato,
-//                                          "dadosEmpresas"=>$dadosEmpresas[0],
-//                                          "dadosVisitas"=>$dadosVisitas[0],
-//                                           "ciclo"=>$ciclo[0]));
+  User::verifyLoginAdmin();
+  $contatos = User::listContatos();
+  $contatos2 = User::listContatos2();
+
+  $page = new PageAdmin();
+  $page->setTpl('contatos', array("contatos"=>$contatos, "contatos2"=>$contatos2,"session"=>$_SESSION));
+
+});
+
+
+$app->get("/admin/contatos-create", function(){
+
+  User::verifyLoginAdmin();
+
+  $page = new PageAdmin();
+  $page->setTpl('contato-create');
+
+});
+
+$app->get("/admin/contatos/:idcontato/remove", function($idcontato){
+  
+  User::verifyLoginAdmin();
+
+  $dadosContato = User::getContato((int)$idcontato);
+
+  if($dadosContato[0]['id_funcionario'] == $_SESSION['idFuncionario']){
+
+      User::removeContato($idcontato);
+
+  }else{
+    throw new \Exception('Falha ao remover contato', 8899996);
+  }
+
+  header("Location: /admin/contatos");
+  exit;
+
+});
+
+
+$app->post("/admin/contatos-create", function(){
+
+  User::verifyLoginAdmin();
+  User::saveContato($_POST);
+
+  header("Location: /admin/contatos");
+  exit;
+
+});
+
+
+$app->get("/:idcontato/admin/contatos", function($idcontato){
+
+  User::verifyLoginAdmin();
+  $dadosContato = User::getContato((int)$idcontato);
+
+  $page = new PageAdmin();
+  $page->setTpl('contato-info', array("dadosContato"=>$dadosContato[0]));
+
+});
+
+
+$app->get('/admin/empresas-ciclo-atual', function(){
+
+  User::verifyLoginAdmin();
+  $cicloAtual = User::getCicloAtual();
+
+
+    $search = (isset($_GET['search'])) ? $_GET['search']:"";
+    $page = (isset($_GET['page'])) ? (int) $_GET['page']: 1;
+
+    if($search != ''){
+
+      $pagination = Empresa::getPageSearchCicloAtual($cicloAtual, $search, $page);
+
+
+    }else{
+
+       $pagination = Empresa::getPageCicloAtual($cicloAtual, $page);
+
+    }
+
    
+    $pages = [];
 
-// });
+    for($x=0; $x < $pagination['pages']; $x++){
+
+      array_push($pages, [
+        'href'=>'/admin/empresas-ciclo-atual?'.http_build_query([
+          'page'=>$x+1,
+          'search'=>$search
+        ]),
+        'text'=>$x+1
+      ]);
+    }
+
+    $page = new PageAdmin();   
+    $page->setTpl("list-empresas-ciclo", 
+                array("empresas"=>$pagination['data'],
+                      "search"=>$search,
+                      "pages"=>$pages));
+
+});
 
 
-//   $app->get("/ciclos/casa/:idcasa/:idCiclo", function($idcasa, $idCiclo){
 
-//       User::verifyLoginAdmin();
-//       $nome = Casa::getNomeCasa($idcasa);
-//       $ciclo = User::getCiclo($idCiclo);
-      
-//       $dadosCasa = ['nome_casa'=>$nome];
-//       $dadosCasa['idCasa'] = $idcasa;
-
-//       $dadosEmpresas = Casa::contEmpresas($nome);
-//       $dadosVisitas = Casa::contVisitas($nome);
-
-   
-//       $page = new PageAdmin();
-//       $page->setTpl("casa-relat-ciclo", array("dadosCasa"=>$dadosCasa, 
-//                                         "dadosEmpresas"=>$dadosEmpresas[0],
-//                                         "dadosVisitas"=>$dadosVisitas[0],
-//                                         "ciclo"=>$ciclo[0]));
-    
-
-// });
