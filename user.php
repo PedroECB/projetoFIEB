@@ -940,3 +940,17 @@ $app->get('/user/export-visitas-origem', function(){
     exit;
 
 });
+
+
+$app->get('/user/export-empresas-geral', function(){
+
+    User::verifyLoginUser();
+    $empresas = Empresa::listAll();
+    
+    Empresa::exportEmpresasGeral($empresas);
+    exit;
+
+    header("Location: /user/empresas");
+    exit;
+
+});

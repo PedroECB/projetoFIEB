@@ -1072,5 +1072,18 @@ $app->get('/admin/export-visitas-geral', function(){
 
 });
 
+$app->get('/admin/export-empresas-geral', function(){
+
+    User::verifyLoginAdmin();
+    $empresas = Empresa::listAll();
+    
+    Empresa::exportEmpresasGeral($empresas);
+    exit;
+
+    header("Location: /admin/empresas");
+    exit;
+
+});
+
 
 

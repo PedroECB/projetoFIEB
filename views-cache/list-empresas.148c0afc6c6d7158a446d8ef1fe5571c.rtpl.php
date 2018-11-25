@@ -101,6 +101,9 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
+                
+                 <a href="/user2/export-empresas-geral" style="color:white;"><button class="btn btn-success btn-xs"><b><i class="fa fa-th"></i> Exportar para o Excel</b></button></a>
+
               <ul class="pagination pagination-sm no-margin pull-right">
                 <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
 

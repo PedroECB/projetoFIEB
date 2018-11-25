@@ -848,3 +848,17 @@ $app->get('/user2/export-visitas-origem', function(){
     exit;
 
 });
+
+
+$app->get('/user2/export-empresas-geral', function(){
+
+    User::verifyLoginUser2();
+    $empresas = Empresa::listAll();
+    
+    Empresa::exportEmpresasGeral($empresas);
+    exit;
+
+    header("Location: /user2/empresas");
+    exit;
+
+});

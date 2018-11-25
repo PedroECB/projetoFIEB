@@ -413,10 +413,8 @@ public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPe
 
 
 public static function exportVisitasGeral($visitas){
-  // echo "<pre>";
-  //   var_dump($visitas[0]);
-  // echo "</pre>";
-    $arquivo = 'planilha_Visitas_Geral.xls';
+
+    $arquivo = 'Planilha_Visitas_Geral.xls';
 
     $html = '';
     $html = "<meta charset='utf-8'>";
@@ -424,7 +422,6 @@ public static function exportVisitasGeral($visitas){
     $html .= '<tr>';
     $html .= '<td>RESPONSAVEL</td> <td>ORIGEM</td> <td>CNPJ EMPRESA</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>STATUS VISITA</td> <td>DATA DE CADASTRO</td> <td> DATA PREVISTA</td> <td>FAMILIA PRODUTO</td> <td>OBSERVACAO</td></tr>';
     
-    //$html .= '<tr><td>ID</td><td>NOME</td></tr>';
 
 
   foreach ($visitas as $visita) {
@@ -460,7 +457,7 @@ public static function exportVisitasOrigem($visitas){
 
   $origem = $_SESSION['origem'];
 
-    $arquivo = 'planilha_Visitas_'.$origem.'.xls';
+    $arquivo = 'Planilha_Visitas_'.$origem.'.xls';
 
     $html = '';
     $html = "<meta charset='utf-8'>";

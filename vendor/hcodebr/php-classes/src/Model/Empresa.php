@@ -447,6 +447,51 @@ public static function editar($dados, $idempresa){
 }
 
 
+public static function exportEmpresasGeral($empresas){
+
+    $arquivo = 'Planilha_Empresas_Geral.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>CNPJ</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>SITUACAO ASSOCIACAO</td> <td>MUNICIPIO</td> <td>REGIAO</td> <td>BAIRRO</td> <td> ENDERECO</td> <td>EMAIL</td> <td> NOME CONTATO</td> <td> TELEFONE</td> <td> TELEFONE ALTERNATIVO</td> <td> ENTIDADE RESPONSAVEL</td></tr>';
+    
+
+
+  foreach ($empresas as $empresa){
+
+    $html .= '<tr><td>'.$empresa['cnpj'].'</td><td>'.utf8_decode($empresa['razao_social']).'</td><td>'.
+              utf8_decode($empresa['nome_fantasia']).'</td><td>'.utf8_decode($empresa['situacao_associacao'])."</td><td>".
+              utf8_decode($empresa['municipio']).'</td><td>'.utf8_decode($empresa['regiao_estado']).'</td><td>'.
+              utf8_decode($empresa['bairro']).'</td><td>'.
+              utf8_decode($empresa['endereco']).'</td><td>'.
+              utf8_decode($empresa['email']).'</td><td>'.
+              utf8_decode($empresa['nomeContato']).'</td><td>'.$empresa['telefone'].'</td><td>'.$empresa['telefone2'].'</td><td>'.utf8_decode($empresa['origem_cadastro']).'</td></tr>';
+
+    // echo $empresa['cnpj']." ".$empresa['razao_social']." ".$empresa['nome_fantasia']." ".$empresa['situacao_associacao']." ".$empresa['municipio']." ".$empresa['regiao_estado']." ".$empresa['bairro']." ".$empresa['endereco']." ".$empresa['email']." ".$empresa['nomeContato']." ".$empresa['telefone']." ".$empresa['telefone2']." ".$empresa['origem_cadastro'];    
+  }
+
+$html .= '</table>';
+
+    // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+
+}
+
+
+
+
+
 
 
 
