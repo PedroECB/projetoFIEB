@@ -76,6 +76,7 @@
                       <tr><td><b>BAIRRO</b></td>                   <td><?php echo htmlspecialchars( $visita["bairro"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td><b>ENDEREÇO</b></td>                 <td> <?php echo htmlspecialchars( $visita["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td><b>E-MAIL DE CONTATO</b></td>        <td><?php echo htmlspecialchars( $visita["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
+                      <tr><td><b>NOME DO CONTATO</b></td>        <td><?php echo htmlspecialchars( $visita["nomeContato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td><b>TELEFONE DE CONTATO</b></td>      <td><?php echo htmlspecialchars( $visita["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td><b>TELEFONE ALTERNATIVO</b></td>                  <td> <?php echo htmlspecialchars( $visita["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
 

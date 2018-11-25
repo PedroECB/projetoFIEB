@@ -1036,7 +1036,7 @@ public static function listContatos(){
 public static function listContatos2(){
 
   $sql = new Sql();
-  return $sql->select("SELECT nome_func, origem, telefone, email FROM funcionario ORDER BY nome_func;");
+  return $sql->select("SELECT nome_func, origem, telefone, telefone2, email FROM funcionario ORDER BY nome_func;");
 }
 
 public static function getContato($idcontato){
