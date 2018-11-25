@@ -6,9 +6,9 @@
     <small><b>CADASTRO DE USUÁRIO</b></small>
   </h1>
   <ol class="breadcrumb">
-    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn btn-xs"><li><a href="/admin/users">Usuários</a></li></button>
-    <button class="btn btn-xs"><li class="active"><a href="/admin/users/create">Cadastrar</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user/users">Usuários</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user/users/create">Cadastrar</a></li></button>
   </ol>
 </section>
 
@@ -35,11 +35,18 @@
 
          {/if}
 
+           {if="isset($sucesso.sucesso)"}
+              <br>
+              <div class="alert alert-success" role="alert">
+                  <center><b>{$sucesso.sucesso}</b></center>
+              </div>
+           {/if}
+
          </div>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="/admin/users/create" method="post">
+        <form role="form" action="/user/users/create" method="post">
           <div class="box-body">
             <div class="form-group">
               <label for="campoNome">Nome: <span class="text-danger">*</span></label>
@@ -61,12 +68,12 @@
               <select id="campoTipo" class="form-control" name="nivel_acesso">
                 {if="isset($dados.origem)"}
                    <option value="{$dados.nivel_acesso}" selected>
-                    {if="$dados.nivel_acesso == 1"}Administrador{/if}
+                    <!-- {if="$dados.nivel_acesso == 1"}Administrador{/if} -->
                     {if="$dados.nivel_acesso == 2"}Ponto focal{/if}
                     {if="$dados.nivel_acesso == 3"}Agente de mercado/Executivo{/if}
                  </option>
                   {/if}
-                  <option value="1">Administrador</option>
+                  <!-- <option value="1">Administrador</option> -->
                   <option value="2">Ponto focal</option>
                   <option value="3">Agente de mercado/Executivo</option>
               </select>
@@ -78,7 +85,7 @@
                 {if="isset($dados.origem)"}
                    <option value="{$dados.origem}" selected>{$dados.origem}</option>
                   {/if}
-                <option value="FIEB">FIEB</option>
+                <!-- <option value="FIEB">FIEB</option> -->
                 <optgroup  label="CASAS">
                   <option value="IEL">IEL</option>
                   <option value="SENAI">SENAI</option>
@@ -155,14 +162,6 @@
            </div> 
 
 
-<!--
-            <div class="checkbox">
-              <label>
-                <input type="checkbox" name="inadmin" value="1"> Acesso de Administrador
-              </label>
-            </div>
-          </div>
--->
 
           <!-- /.box-body -->
           <div class="box-footer">

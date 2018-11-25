@@ -59,9 +59,28 @@
               <input type="text" class="form-control" id="campoNomeFantasia" name="nomeFantasia" placeholder="" onkeypress="formatNomeFantasia();" required value="{if="isset($dados.nomeFantasia)"}{$dados.nomeFantasia}{/if}">
             </div>
 
+              <div class="form-group">
+              <label for="identificacao" >Identificar Empresa para: *</label>
+              <select class="form-control" name="identificacao" id="identificacao">
+                <optgroup label="Casas">
+                  <option value="{$origem}">{$origem}</option>
+                  <option value="SENAI">SENAI</option>
+                  <option value="IEL">IEL</option>
+                  <option value="SESI">SESI</option>
+                  <option value="CIEB">CIEB</option>
+                </optgroup>
+                    <optgroup label="SINDICATO">
+                      {loop="$sindicatos"} 
+                          <option value="{$value.nome_sindicato}">{$value.nome_sindicato}</option>
+                      {/loop} 
+                    </optgroup>
+
+              </select>
+            </div>
+
             <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
-              <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
+              <select name="sitAssoc" class="form-control" onchange="verificaAssoc();verificaPoss();">
                 {if="isset($dados.sitAssoc)"}<option value="{$dados.sitAssoc}" selected>{$dados.sitAssoc}</option>{/if}
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
@@ -70,8 +89,11 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label for="campoAssoc" >Empresa Associada à: </label>
+
+
+         <div class="row">
+           <div class="col-md-6">
+             <label for="campoAssoc" >Sindicato: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
                 {if="isset($dados.Assoc)"}<option value="{$dados.Assoc}" selected>{$dados.Assoc}</option>{/if}
                 <option value="Não Associada">Não Associada</option>
@@ -91,6 +113,40 @@
                 
                 
               </select>
+           </div>
+
+
+           <div class="col-md-6">
+              <label for="posAssoc" >Possibilidade de associação: </label>
+              <select name="posAssoc" class="form-control" id="posAssoc" required="">
+                {if="isset($dados.possAssoc)"}<option value="{$dados.possAssoc}" selected>{$dados.possAssoc}</option>{/if}
+                <option value="Selecione uma opção">Selecione uma opção</option>
+                
+
+                <optgroup label="SINDICATO">
+                 {loop="$sindicatos"} 
+                  <option value="{$value.nome_sindicato}">{$value.nome_sindicato}</option>
+                  {/loop} 
+
+                <!--  <option value="SINDVEST">SINDVEST</option>
+                  <option value="SINDPROCIM">SINDPROCIM</option>
+                  <option value="SINDTESTE">SINDTESTE</option>
+                -->
+
+                </optgroup>
+                
+                
+              </select>
+           </div>
+         </div>  <!-- Row--> 
+
+
+
+
+            <div class="form-group">
+              
+              
+              
             </div>
 
 
@@ -156,6 +212,11 @@
                   <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="{if="isset($dados.email)"}{$dados.email}{/if}">
             </div>  
         </div>
+
+        <div class="form-group">
+                <label for="campoEmail">Nome do Contato da Empresa: </label>
+                        <input type="text" class="form-control" id="campoNomeContato" name="nomeContato" placeholder="Nome do empresário" maxlength="70" value="{if="isset($dados.nomeContato)"}{$dados.nomeContato}{/if}">
+              </div>
 
 
 <div class="row">

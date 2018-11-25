@@ -72,7 +72,7 @@
             </div>
 
             <div class="form-group">
-              <label for="campoAssoc" >Empresa Associada à: </label>
+              <label for="campoAssoc" >Sindicato: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
                 {if="isset($dados.Assoc)"}<option value="{$dados.Assoc}" selected>{$dados.Assoc}</option>{/if}
                 <option value="Não Associada">Não Associada</option>
@@ -153,6 +153,11 @@
                   <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="{if="isset($dados.email)"}{$dados.email}{/if}{$empresa.email}">
             </div>  
         </div>
+
+        <div class="form-group">
+                <label for="nomeContato">Nome do Contato da Empresa: </label>
+                        <input type="text" class="form-control" id="campoNomeContato" name="nomeContato"  maxlength="70" value="{if="isset($dados.nomeContato)"}{$dados.nomeContato}{/if}{$empresa.nomeContato}">
+              </div>
 
 
 <div class="row">

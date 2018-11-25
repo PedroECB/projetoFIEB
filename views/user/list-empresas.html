@@ -48,10 +48,10 @@
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 30px; vertical-align: middle;" class="md2-some">CNPJ</th>   
-                    <th style="width: 80px; vertical-align: middle;">Nome Fantasia</th>
-                    <th style="width: 100px; vertical-align: middle;">Situação da Associação</th>
+                    <th style="width: 100px; vertical-align: middle;">Razão Social</th>
+                    <th style="width: 60px; vertical-align: middle;">Situação da Associação</th>
                     <th  style="width:30px; vertical-align: middle;" class="md2-some">Município</th>
-                    <th style="width: 50px; vertical-align: middle;" class="md2-some">Região</th>
+                    <th style="width: 40px; vertical-align: middle;" class="md2-some">Entidade</th>
                     <th style="width: 140px; vertical-align: middle;">&nbsp;</th>
                   </tr>
                 </thead>
@@ -63,7 +63,7 @@
 
                  <tr>
                     <td class="md2-some">{$value.cnpj}</td>
-                    <td>{$value.nome_fantasia}</td>
+                    <td>{$value.razao_social}</td>
 
                     <!--<td>{$value.situacao_associacao}</td>-->
                     <td>
@@ -74,7 +74,7 @@
                   </td>
 
                     <td class="md2-some">{$value.municipio}</td>
-                    <td class="md2-some">{$value.regiao_estado}</td>
+                    <td class="md2-some">{$value.origem_cadastro}</td>
                     <td>
                       <a href="/user/agendarvisita/{$value.idEmpresas}" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> Agendar Visita</b></a>
                       <a href="/user/empresas/{$value.idEmpresas}"  class="btn btn-primary btn-xs">&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp&nbsp&nbsp Detalhes &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>

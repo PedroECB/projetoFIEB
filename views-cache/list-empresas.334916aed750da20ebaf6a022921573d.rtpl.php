@@ -49,10 +49,10 @@
                   <tr>
                    <!-- <th style="width: 120px">RG</th>-->
                     <th style="width: 30px; vertical-align: middle;" class="md2-some">CNPJ</th>   
-                    <th style="width: 80px; vertical-align: middle;">Nome Fantasia</th>
-                    <th style="width: 100px; vertical-align: middle;">Situação da Associação</th>
+                    <th style="width: 100px; vertical-align: middle;">Razão Social</th>
+                    <th style="width: 60px; vertical-align: middle;">Situação da Associação</th>
                     <th  style="width:30px; vertical-align: middle;" class="md2-some">Município</th>
-                    <th style="width: 50px; vertical-align: middle;" class="md2-some">Região</th>
+                    <th style="width: 40px; vertical-align: middle;" class="md2-some">Entidade</th>
                     <th style="width: 140px; vertical-align: middle;">&nbsp;</th>
                   </tr>
                 </thead>
@@ -65,7 +65,7 @@
 
                  <tr>
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["cnpj"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td><?php echo htmlspecialchars( $value1["nome_fantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["razao_social"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
 
                     <!--<td><?php echo htmlspecialchars( $value1["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>-->
                     <td>
@@ -80,7 +80,7 @@
                   </td>
 
                     <td class="md2-some"><?php echo htmlspecialchars( $value1["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
-                    <td class="md2-some"><?php echo htmlspecialchars( $value1["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md2-some"><?php echo htmlspecialchars( $value1["origem_cadastro"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
                     <td>
                       <a href="/user/agendarvisita/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> Agendar Visita</b></a>
                       <a href="/user/empresas/<?php echo htmlspecialchars( $value1["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs">&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-info"></i> <b>&nbsp&nbsp&nbsp Detalhes &nbsp&nbsp&nbsp&nbsp&nbsp</b></a>

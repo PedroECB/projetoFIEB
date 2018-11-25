@@ -126,13 +126,17 @@ class Empresa extends Model{
       $email = $dados['email'];
       $telefone = $dados['campoTelefone'];
       $telefone2 = $dados['campoTelefone2'];
+      $posAssoc = $dados['posAssoc'] = isset($dados['posAssoc'])?$dados['posAssoc']:"";
+      $nomeContato =  isset($dados['nomeContato'])?$dados['nomeContato']:"";
+      $identificacao = isset($dados['identificacao'])?$dados['identificacao']:"";
 
     $sql = new Sql();
     $query = $sql->query("INSERT INTO empresas 
-      (idFuncionario, Sindicato_idSindicato, cnpj, razao_social, nome_fantasia, situacao_associacao, municipio, regiao_estado, bairro, endereco, email, telefone, telefone2, origem_cadastro)
-      VALUES(:idFuncionario, :associadaA, :cnpj, :razaoSocial, :nome_fantasia, :situacaoAssociacao, :municipio, :regiao, :bairro, :endereco, :email, :telefone, :telefone2, :origem_cadastro)",
+      (idFuncionario, Sindicato_idSindicato, identificacao,cnpj, razao_social, nome_fantasia, situacao_associacao, municipio, regiao_estado, bairro, endereco, email, nomeContato, telefone, telefone2, origem_cadastro, possAssoc)
+      VALUES(:idFuncionario, :associadaA, :identificacao, :cnpj, :razaoSocial, :nome_fantasia, :situacaoAssociacao, :municipio, :regiao, :bairro, :endereco, :email, :nomeContato,:telefone, :telefone2, :origem_cadastro, :posAssoc)",
       array(":idFuncionario"=>$idFuncionario,
             ":associadaA"=>$associadaA,
+            ":identificacao"=>$identificacao,
             ":cnpj"=>$cnpj,
             ":razaoSocial"=>$razaoSocial,
             ":nome_fantasia"=>$nomeFantasia,
@@ -142,9 +146,11 @@ class Empresa extends Model{
             ":bairro"=>$bairro,
             ":endereco"=>$endereco,
             ":email"=>$email,
+            ":nomeContato"=>$nomeContato,
             ":telefone"=>$telefone,
             ":telefone2"=>$telefone2,
-            ":origem_cadastro"=>$origem_func));
+            ":origem_cadastro"=>$origem_func,
+            ":posAssoc"=>$posAssoc));
 
     if($query->rowCount() == 0){
       
@@ -223,12 +229,12 @@ public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPe
   $sql = new Sql();
   
   $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
-                FROM empresas WHERE origem_cadastro=:orig  AND razao_social LIKE :search 
-                OR origem_cadastro=:orig AND nome_fantasia LIKE :search
-                OR origem_cadastro=:orig AND cnpj LIKE :search
-                OR origem_cadastro=:orig AND municipio LIKE :search
-                OR origem_cadastro=:orig AND regiao_estado LIKE :search
-                OR origem_cadastro=:orig AND situacao_associacao LIKE :search
+                FROM empresas WHERE origem_cadastro=:orig OR identificacao=:orig AND razao_social LIKE :search 
+                OR origem_cadastro=:orig OR identificacao=:orig AND nome_fantasia LIKE :search
+                OR origem_cadastro=:orig OR identificacao=:orig AND cnpj LIKE :search
+                OR origem_cadastro=:orig OR identificacao=:orig AND municipio LIKE :search
+                OR origem_cadastro=:orig OR identificacao=:orig AND regiao_estado LIKE :search
+                OR origem_cadastro=:orig OR identificacao=:orig AND situacao_associacao LIKE :search
                 ORDER BY idEmpresas desc
                 limit $start, $itemsPerPage;
 
@@ -254,7 +260,7 @@ public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPe
   $sql = new Sql();
   
   $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
-                      FROM empresas WHERE origem_cadastro=:orig ORDER BY idEmpresas desc
+                      FROM empresas WHERE origem_cadastro=:orig OR identificacao=:orig ORDER BY idEmpresas desc
                       limit $start, $itemsPerPage;
 
                 ", array(":orig"=>$origem));
@@ -346,7 +352,7 @@ public static function getPageSearchCicloAtual($cicloAtual, $search, $page = 1, 
   $sql = new Sql();
   
   $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
-                      FROM empresas WHERE origem_cadastro=:orig  AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                      FROM empresas WHERE origem_cadastro=:orig OR identificacao=:orig AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
                       ORDER BY idEmpresas desc
                       limit $start, $itemsPerPage;
 
@@ -376,12 +382,12 @@ public static function getPageSearchOrigemCiclo($cicloAtual, $origem, $search, $
   $sql = new Sql();
   
   $results = $sql->select("SELECT SQL_CALC_FOUND_ROWS * 
-                FROM empresas WHERE origem_cadastro=:orig  AND razao_social LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino 
-                OR origem_cadastro=:orig AND nome_fantasia LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
-                OR origem_cadastro=:orig AND cnpj LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
-                OR origem_cadastro=:orig AND municipio LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
-                OR origem_cadastro=:orig AND regiao_estado LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
-                OR origem_cadastro=:orig AND situacao_associacao LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                FROM empresas WHERE origem_cadastro=:orig OR identificacao=:orig AND razao_social LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino 
+                OR origem_cadastro=:orig OR identificacao=:orig AND nome_fantasia LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig OR identificacao=:orig AND cnpj LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig OR identificacao=:orig AND municipio LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig OR identificacao=:orig AND regiao_estado LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
+                OR origem_cadastro=:orig OR identificacao=:orig AND situacao_associacao LIKE :search AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino
                 ORDER BY idEmpresas desc
                 limit $start, $itemsPerPage;
 
@@ -415,10 +421,11 @@ public static function editar($dados, $idempresa){
   $email = $dados['email'];
   $telefone = $dados['campoTelefone'];
   $telefone2 = $dados['campoTelefone2'];
+  $nomeContato = $dados['nomeContato'];
 
   $sql = new Sql();
   $result = $sql->query("UPDATE empresas set cnpj=:cnpj, razao_social=:razao_social, nome_fantasia=:nomeFantasia, situacao_associacao=:sitAssoc,
-                        municipio=:municipio, regiao_estado=:regiao, bairro=:bairro, endereco=:endereco, email=:email, telefone=:telefone, telefone2=:telefone2 WHERE idEmpresas=:idempresa",
+                        municipio=:municipio, regiao_estado=:regiao, bairro=:bairro, endereco=:endereco, email=:email, nomeContato=:nomeContato, telefone=:telefone, telefone2=:telefone2 WHERE idEmpresas=:idempresa",
                         array(":cnpj"=>$cnpj,
                               ":razao_social"=>$razao_social,
                               ":nomeFantasia"=>$nomeFantasia,
@@ -428,6 +435,7 @@ public static function editar($dados, $idempresa){
                               ":bairro"=>$bairro,
                               ":endereco"=>$endereco,
                               ":email"=>$email,
+                              ":nomeContato"=>$nomeContato,
                               ":telefone"=>$telefone,
                               ":telefone2"=>$telefone2,
                               ":idempresa"=>$idempresa));

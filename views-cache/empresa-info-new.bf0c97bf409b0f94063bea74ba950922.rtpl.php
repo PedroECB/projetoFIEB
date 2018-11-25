@@ -51,13 +51,15 @@
               <tr><td><b>NOME FANTASIA</b></td>            <td> <?php echo htmlspecialchars( $empresa["nome_fantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>SITUACÃO DA ASSOCIAÇÃO</b></td>   <td> <?php echo htmlspecialchars( $empresa["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
 
-              <tr><td><b>ASSOCIADA À</b></td>              <td> <?php if( isset($empresa["nome_sindicato"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
-
+              <tr><td><b>SINDICATO</b></td>              <td> <?php if( isset($empresa["nome_sindicato"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td>
+                <tr><td><b>POSSÍVEL ASSOCIAÇÃO</b></td>              <td> <?php if( isset($empresa["possAssoc"]) ){ ?><?php echo htmlspecialchars( $empresa["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
+              <tr><td><b>INDENTIFICADA PARA</b></td>              <td> <?php if( isset($empresa["identificacao"]) ){ ?><?php echo htmlspecialchars( $empresa["identificacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td>
               <tr><td><b>CIDADE/MUNICÍPIO</b></td>         <td> <?php echo htmlspecialchars( $empresa["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>REGIÃO DO ESTADO</b></td>         <td> <?php echo htmlspecialchars( $empresa["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>BAIRRO</b></td>                   <td><?php echo htmlspecialchars( $empresa["bairro"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>ENDEREÇO</b></td>                 <td> <?php echo htmlspecialchars( $empresa["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>E-MAIL DE CONTATO</b></td>        <td> <?php echo htmlspecialchars( $empresa["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
+              <tr><td><b>NOME DO CONTATO</b></td>        <td> <?php echo htmlspecialchars( $empresa["nomeContato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>TELEFONE DE CONTATO</b></td>      <td> <?php echo htmlspecialchars( $empresa["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>TELEFONE ALTERNATIVO</b></td>                  <td> <?php echo htmlspecialchars( $empresa["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
 

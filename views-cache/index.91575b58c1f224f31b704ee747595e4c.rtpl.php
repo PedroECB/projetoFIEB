@@ -23,7 +23,7 @@
 
     <form action="/login" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="login" required="">
+        <input type="email" class="form-control" placeholder="Email" name="login" required="" onblur="armazena(this);">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -46,7 +46,7 @@
       </div>
     </form>
 
-
+<script src="../res/site/dist/js/validacoes.js"></script>
 
 <!--
 

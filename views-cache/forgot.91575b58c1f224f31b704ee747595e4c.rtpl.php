@@ -25,7 +25,7 @@
   <script src="https://oss.maxcdn.com../../resourcespond/1.4.2../../resourcespond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition lockscreen azul">
+<body class="hold-transition lockscreen azul" onload="verificaSession();">
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
   <div class="lockscreen-logo">
@@ -38,7 +38,7 @@
     <!-- lockscreen credentials (contains the form) -->
     <form  action="/forgot" method="post">
       <div class="input-group">
-        <input type="email" class="form-control" placeholder="Digite o e-mail" name="email">
+        <input type="email" class="form-control" placeholder="Digite o e-mail" name="email" id="campoEmail">
 
         <div class="input-group-btn">
           <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
@@ -71,5 +71,6 @@
 <script src="../res/site/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="../res/site/bootstrap/js/bootstrap.min.js"></script>
+<script src="../res/site/dist/js/validacoes.js"></script>
 </body>
 </html>

@@ -872,3 +872,46 @@ $app->get("/user/empresas-ciclo-atual", function(){
 
 
 });
+
+$app->get('/user/users/create', function() {
+       
+      User::verifyLoginUser();          
+                       
+                                                    #Admin Cadastrando usuários GET
+      $sindicatos = User::listSindicatos();
+      $page = new PageUser();   
+      $page->setTpl("users-create", array("sindicatos"=>$sindicatos));
+});
+
+
+$app->post('/user/users/create', function() {
+       
+  User::verifyLoginUser();
+                                                   #Admin Cadastrando usuários POST
+  $user = new User();
+  $user->setData($_POST);
+
+  try{
+      $user->saveUser($_POST);
+  }catch(Exception $e){
+
+      $error['error'] = $e->getMessage();
+
+      $sindicatos = User::listSindicatos();
+      $page = new PageUser();   
+      $page->setTpl("users-create", array("sindicatos"=>$sindicatos, "error"=>$error, "dados"=>$_POST));
+      exit;
+
+  }
+      $sucesso['sucesso'] = 'Usuário cadastrado com sucesso!';
+      $sindicatos = User::listSindicatos();
+      $page = new PageUser();   
+      $page->setTpl("users-create", array("sindicatos"=>$sindicatos, "sucesso"=>$sucesso));
+      exit;
+  
+  // header("Location: /user/users/create");
+  // exit;
+
+
+
+});

@@ -51,13 +51,15 @@
               <tr><td><b>NOME FANTASIA</b></td>            <td> <?php echo htmlspecialchars( $empresa["nome_fantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>SITUACÃO DA ASSOCIAÇÃO</b></td>   <td> <?php echo htmlspecialchars( $empresa["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
 
-              <tr><td><b>ASSOCIADA À</b></td>              <td> <?php if( isset($empresa["nome_sindicato"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
-
+              <tr><td><b>SINDICATO</b></td>              <td> <?php if( isset($empresa["nome_sindicato"]) ){ ?><?php echo htmlspecialchars( $empresa["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td>
+                <tr><td><b>POSSÍVEL ASSOCIAÇÃO</b></td>              <td> <?php if( isset($empresa["possAssoc"]) ){ ?><?php echo htmlspecialchars( $empresa["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
+              <tr><td><b>INDENTIFICADA PARA</b></td>              <td> <?php if( isset($empresa["identificacao"]) ){ ?><?php echo htmlspecialchars( $empresa["identificacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td>
               <tr><td><b>CIDADE/MUNICÍPIO</b></td>         <td> <?php echo htmlspecialchars( $empresa["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>REGIÃO DO ESTADO</b></td>         <td> <?php echo htmlspecialchars( $empresa["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>BAIRRO</b></td>                   <td><?php echo htmlspecialchars( $empresa["bairro"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>ENDEREÇO</b></td>                 <td> <?php echo htmlspecialchars( $empresa["endereco"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>E-MAIL DE CONTATO</b></td>        <td> <?php echo htmlspecialchars( $empresa["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
+              <tr><td><b>NOME DO CONTATO</b></td>        <td> <?php echo htmlspecialchars( $empresa["nomeContato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>TELEFONE DE CONTATO</b></td>      <td> <?php echo htmlspecialchars( $empresa["telefone"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
               <tr><td><b>TELEFONE ALTERNATIVO</b></td>                  <td> <?php echo htmlspecialchars( $empresa["telefone2"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
 
@@ -79,9 +81,9 @@
             <?php if( $empresa["origem_cadastro"] == $origem["origem"] ){ ?>
 
             <a href="/user2/empresa/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>/delete"><button onclick="return confirm('Deseja realmente remover essa empresa do sistema?');" type="button" class="btn btn-danger btn-sm" style="margin-top: 5px;"><b><i class="fa fa-close"></i>&nbsp REMOVER EMPRESA</b></button></a>
+            
             <a href="/user2/empresa-edit/<?php echo htmlspecialchars( $empresa["idEmpresas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><button type="button" class="btn btn-primary btn-sm" style="margin-top: 5px;"><b><i class="fa fa-pencil-square-o"></i>&nbsp EDITAR</b></button></a>
             <?php } ?>
-
 
             <a href="javascript:history.back();"><button type="button" class="btn btn-default btn-sm navbar-right" style="margin-top: 5px;"><b>&nbsp VOLTAR</b></button></a>
     

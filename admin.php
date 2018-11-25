@@ -1061,4 +1061,15 @@ $app->get('/admin/empresas-ciclo-atual', function(){
 });
 
 
+$app->get('/admin/export-visitas-geral', function(){
+
+    User::verifyLoginAdmin();
+    $visitas = Visita::listAll();
+
+    var_dump($visitas);
+    exit;
+
+});
+
+
 

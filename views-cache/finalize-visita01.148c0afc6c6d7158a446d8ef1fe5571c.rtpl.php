@@ -1,4 +1,4 @@
-<!-- Content Wrapper. Contains page content -->
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -25,9 +25,9 @@
     <center><h4 class=""><b>FINALIZAR VISITA</b><a href="javascript:history.back()"><button class="btn btn-link navbar-right" style="margin-left: 50px;"><b>Cancelar</b></button></a></h4></center>
 
 <br>
-<form role="form" action="/user2/finalize-visita/{$visita.idVisita}" method="post" id="formEmpresa">
+<form role="form" action="/user2/finalize-visita/<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" method="post" id="formEmpresa">
   <div class="form-group">
-          <input hidden name="idVisita" value="{$visita.idVisita}">
+          <input hidden name="idVisita" value="<?php echo htmlspecialchars( $visita["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>">
               <label for="campoAgenteAtend">Responsável pelo atendimento: *</label>
               <input type="tel" class="form-control" id="campoAgenteAtend" name="campoAgenteAtend" placeholder="Nome do Agente" value="" maxlength="25" required>
             </div>
@@ -58,7 +58,7 @@
             
  <label for="campoFamilia">Família do Produto Ofertado:</label>
         <select name="campoFamilia" id="campoFamilia" class="form-control">
-          <option value="{$visita.familia_prod}">{$visita.familia_prod}</option>
+          <option value="<?php echo htmlspecialchars( $visita["familia_prod"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $visita["familia_prod"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
           <option value="Qualidade de Vida">Qualidade de Vida</option>
           <option value="Desenvolvimento de Carreiras">Desenvolvimento de Carreiras</option>
           <option value="Desenvolvimento Empresarial">Desenvolvimento Empresarial</option>
@@ -87,7 +87,7 @@
          <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
-                <option value="{$visita.situacao_associacao}">{$visita.situacao_associacao}</option>
+                <option value="<?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
                 <option value="Associação em Negociação">Associacão em Negociação</option>
@@ -113,9 +113,9 @@
                 <option value="CIEB">CIEB</option>
                </optgroup>
                <optgroup label="SINDICATOS">
-               {loop="$sindicatos"} 
-                 <option value="{$value.nome_sindicato}">{$value.nome_sindicato}</option>
-                {/loop} 
+               <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?> 
+                 <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                <?php } ?> 
                </optgroup>  
 
               </select>
@@ -123,7 +123,7 @@
       </div>
     <div class="col-md-12">   
         <br>
-        <label>Observação:</label><textarea name="campoObservacao" class="form-control">{$visita.observacao}</textarea>
+        <label>Observação:</label><textarea name="campoObservacao" class="form-control"><?php echo htmlspecialchars( $visita["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>
     </div>
   
   </div>

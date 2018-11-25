@@ -453,6 +453,12 @@ public function saveUser($dados){
   $telefone = $dados['telefone'];
   $telefone2 = $dados['telefone2'];
   $email = $dados['email'];
+
+  if($dados['senha1'] !== $dados['senha2']){
+    throw new \Exception("As senhas digitadas não coincidem", 65598);
+    
+  }
+
   $senha = password_hash($dados['senha1'], PASSWORD_DEFAULT);
   //$senha = $_POST['senha1'];
 
@@ -486,7 +492,8 @@ public function saveUser($dados){
     throw new \Exception('Erro ao cadastrar usuário. Usuário com CPF já cadastrado ou dados inválidos', 1);
   };
 
-  //header("Location: /admin/users");
+
+     
 }
 
 public static function editProfile($dados, $iduser){

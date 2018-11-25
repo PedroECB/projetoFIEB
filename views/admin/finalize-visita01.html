@@ -6,8 +6,8 @@
     <small>FINALIZAR VISITA</small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="/admin"><i class="fa fa-home"></i> Início</a></li>
-    <li><a href="/admin/visitas">Visitas</a></li>
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li><a href="/admin/visitas">Visitas</a></li></button>
     
   </ol>
 </section>

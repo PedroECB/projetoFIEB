@@ -62,19 +62,42 @@
             </div>
 
             <div class="form-group">
+              <label for="identificacao" >Identificar Empresa para: *</label>
+              <select class="form-control" name="identificacao" id="identificacao">
+                <optgroup label="Casas">
+                  <option value="<?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                  <option value="SENAI">SENAI</option>
+                  <option value="IEL">IEL</option>
+                  <option value="SESI">SESI</option>
+                  <option value="CIEB">CIEB</option>
+                </optgroup>
+                    <optgroup label="SINDICATO">
+                      <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?> 
+                          <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                      <?php } ?> 
+                    </optgroup>
+
+              </select>
+            </div>
+
+            <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
-              <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
+              <select name="sitAssoc" class="form-control" onchange="verificaAssoc();verificaPoss();" id="campoSitAssoc">
                 <?php if( isset($dados["sitAssoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["sitAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["sitAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
                 <option value="Não Associada">Não Associada</option>
                 <option value="Associada">Associada</option>
                 <option value="Associação em Negociação">Associação em Negociação</option>
 
+
               </select>
             </div>
 
-            <div class="form-group">
-              <label for="campoAssoc" >Sindicato: </label>
+
+
+         <div class="row">
+           <div class="col-md-6">
+             <label for="campoAssoc" >Sindicato: </label>
               <select name="Assoc" class="form-control" id="Assoc" disabled>
                 <?php if( isset($dados["Assoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["Assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
@@ -95,6 +118,41 @@
                 
                 
               </select>
+           </div>
+
+
+           <div class="col-md-6">
+              <label for="posAssoc" >Possibilidade de associação: </label>
+              <select name="posAssoc" class="form-control" id="posAssoc" required="">
+                <?php if( isset($dados["possAssoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
+
+                <option value="Selecione uma opção">Selecione uma opção</option>
+                
+
+                <optgroup label="SINDICATO">
+                 <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?> 
+                  <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                  <?php } ?> 
+
+                <!--  <option value="SINDVEST">SINDVEST</option>
+                  <option value="SINDPROCIM">SINDPROCIM</option>
+                  <option value="SINDTESTE">SINDTESTE</option>
+                -->
+
+                </optgroup>
+                
+                
+              </select>
+           </div>
+         </div>  <!-- Row--> 
+
+
+
+
+            <div class="form-group">
+              
+              
+              
             </div>
 
 
@@ -154,14 +212,19 @@
 
 
               <div class="form-group">
-              <label for="campoEmail">E-mail de Contato: </label>
-            <div class="input-group">
-                <div class="input-group-addon">
-                  <i class="fa fa-at"></i>
-                </div> 
-                  <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="<?php if( isset($dados["email"]) ){ ?><?php echo htmlspecialchars( $dados["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
-            </div>  
-        </div>
+                <label for="campoEmail">E-mail de Contato: </label>
+                  <div class="input-group">
+                      <div class="input-group-addon">
+                        <i class="fa fa-at"></i>
+                      </div> 
+                        <input type="email" class="form-control" id="campoEmail" name="email" placeholder="empresa@dominio.com" maxlength="50" value="<?php if( isset($dados["email"]) ){ ?><?php echo htmlspecialchars( $dados["email"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
+                  </div>  
+              </div>
+
+              <div class="form-group">
+                <label for="campoEmail">Nome do Contato da Empresa: </label>
+                        <input type="text" class="form-control" id="campoNomeContato" name="nomeContato" placeholder="Nome do empresário" maxlength="70" value="<?php if( isset($dados["nomeContato"]) ){ ?><?php echo htmlspecialchars( $dados["nomeContato"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
+              </div>
 
 
 <div class="row">

@@ -60,7 +60,7 @@
 
     <form action="" method="post">
       <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email" name="login" required value="<?php if( isset($dados["login"]) ){ ?><?php echo htmlspecialchars( $dados["login"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
+        <input type="email" class="form-control" onblur="armazena(this);" placeholder="Email" name="login" required value="<?php if( isset($dados["login"]) ){ ?><?php echo htmlspecialchars( $dados["login"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -116,6 +116,7 @@
 <script src="../res/site/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
 <script src="../res/site/plugins/iCheck/icheck.min.js"></script>
+<script src="../res/site/dist/js/validacoes.js"></script>
 <script>
   $(function () {
     $('input').iCheck({
