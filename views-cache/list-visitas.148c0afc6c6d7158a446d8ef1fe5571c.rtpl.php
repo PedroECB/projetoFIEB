@@ -1,3 +1,4 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?>
 
 
 
@@ -11,8 +12,9 @@
   </h1>
   
   <ol class="breadcrumb">
-    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
-    <button class="btn btn-xs"><li class="active"><a href="/admin/visitas">Visitas geral</a></li></button>
+    <button class="btn btn-xs"><li><a href="/user2"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn  btn-xs"><li class="active"><a href="/user2/visitas">Todas as visitas</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/user2/origem/visitas">Visitas <?php echo htmlspecialchars( $origem, ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li></button>
   </ol>
 </section>
 
@@ -26,9 +28,9 @@
             <div class="box-header">
               <h4 class="text-primary"><center><b>VISITAS - GERAL</b></center></h4>
               <div class="box-tools">
-                <form action="/admin/visitas">
+                <form action="/user2/visitas">
                   <div class="input-group input-group" style="width: 200px;top:9px;">
-                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="{$search}">
+                    <input type="text" name="search" class="form-control pull-right" placeholder="Buscar" value="<?php echo htmlspecialchars( $search, ENT_COMPAT, 'UTF-8', FALSE ); ?>">
                     <div class="input-group-btn">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
@@ -53,20 +55,22 @@
                 </thead>
                 <tbody>
 
-                {loop="$visitas"}
+                <?php $counter1=-1;  if( isset($visitas) && ( is_array($visitas) || $visitas instanceof Traversable ) && sizeof($visitas) ) foreach( $visitas as $key1 => $value1 ){ $counter1++; ?>
+
                    <tr>
-                    <td>{$value.nome_fantasia}</td>
-                    <td>{$value.status_visita}</td>
-                    <td class="xs-some">{$value.origem}</td>
-                    <td class="md-some">{$value.municipio}</td>
-                    <td class="md-some">{function="date('d/m/Y',strtotime($value.data_prevista))"}</td>
+                    <td><?php echo htmlspecialchars( $value1["nome_fantasia"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td><?php echo htmlspecialchars( $value1["status_visita"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="xs-some"><?php echo htmlspecialchars( $value1["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md-some"><?php echo htmlspecialchars( $value1["municipio"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                    <td class="md-some"><?php echo date('d/m/Y',strtotime($value1["data_prevista"])); ?></td>
                     <td>
                      <!-- <a href="#" class="btn btn-default btn-xs"><i class="fa fa-calendar-o"></i><b> &nbspAgendar Visita</b></a>-->
-                      <a href="/admin/visitas-info/{$value.idVisita}"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
+                      <a href="/user2/visitas-info/<?php echo htmlspecialchars( $value1["idVisita"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"  class="btn btn-primary btn-xs"><i class="fa fa-info"></i> <b>Detalhes</b></a>
                     </td>
                   </tr> 
 
-                {/loop}
+                <?php } ?>
+
 
 
 
@@ -78,11 +82,14 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">
-              <a href="/admin/export-visitas-geral" style="color:white;"><button class="btn btn-success btn-xs"><b><i class="fa fa-th"></i> Exportar para o Excel</b></button></a>
+              <a href="/user2/export-visitas-geral" style="color:white;"><button class="btn btn-success btn-xs"><b><i class="fa fa-th"></i> Exportar para o Excel</b></button></a>
+
               <ul class="pagination pagination-sm no-margin pull-right">
-                {loop="$pages"}
-                <li><a href="{$value.href}">{$value.text}</a></li>
-                {/loop}
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+
+                <li><a href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+
               </ul>
             </div>
           </div>

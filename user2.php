@@ -823,3 +823,28 @@ $app->get("/user2/empresas-ciclo-atual", function(){
 
 
 });
+
+$app->get('/user2/export-visitas-geral', function(){
+
+    User::verifyLoginUser2();
+    $visitas = Visita::listAll();
+    Visita::exportVisitasGeral($visitas);
+
+    header("Location: /user2/visitas");
+    exit;
+
+});
+
+
+$app->get('/user2/export-visitas-origem', function(){
+
+    $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser2();
+    $visitas = Visita::listAllOrigem($origem);
+    Visita::exportVisitasOrigem($visitas);
+
+    header("Location: /user2/origem/visitas");
+    exit;
+
+});

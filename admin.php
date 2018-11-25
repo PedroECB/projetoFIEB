@@ -1065,8 +1065,9 @@ $app->get('/admin/export-visitas-geral', function(){
 
     User::verifyLoginAdmin();
     $visitas = Visita::listAll();
+    Visita::exportVisitasGeral($visitas);
 
-    var_dump($visitas);
+    header("Location: /admin/visitas");
     exit;
 
 });

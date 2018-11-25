@@ -412,6 +412,92 @@ public static function getPageSearchOrigem($origem, $search, $page = 1, $itemsPe
 }
 
 
+public static function exportVisitasGeral($visitas){
+  // echo "<pre>";
+  //   var_dump($visitas[0]);
+  // echo "</pre>";
+    $arquivo = 'planilha_Visitas_Geral.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>RESPONSAVEL</td> <td>ORIGEM</td> <td>CNPJ EMPRESA</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>STATUS VISITA</td> <td>DATA DE CADASTRO</td> <td> DATA PREVISTA</td> <td>FAMILIA PRODUTO</td> <td>OBSERVACAO</td></tr>';
+    
+    //$html .= '<tr><td>ID</td><td>NOME</td></tr>';
+
+
+  foreach ($visitas as $visita) {
+
+    $html .= '<tr><td>'.utf8_decode($visita['nome_func']).'</td><td>'.$visita['origem'].'</td><td>'.
+              $visita['cnpj'].'</td><td>'.utf8_decode($visita['razao_social'])."</td><td>".
+              utf8_decode($visita['nome_fantasia']).'</td><td>'.utf8_decode($visita['status_visita']).'</td><td>'.
+              date('d-m-Y', strtotime($visita['data_de_agendamento'])).'</td><td>'.
+              date('d-m-Y', strtotime($visita['data_prevista'])).'</td><td>'.
+              utf8_decode($visita['familia_prod']).'</td><td>'.utf8_decode($visita['observacao']).'</td></tr>';
+
+        // echo $visita['nome_func']." ".$visita['origem']." ".$visita['cnpj']." ".$visita['razao_social']." ".$visita['nome_fantasia']." ".$visita['status_visita']." ".date('d-m-Y', strtotime($visita['data_de_agendamento']))." ".date('d-m-Y', strtotime($visita['data_prevista']))." ".$visita['familia_prod']." ".$visita['observacao'];    
+  }
+
+   $html .= '</table>';
+
+   // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+
+}
+
+
+public static function exportVisitasOrigem($visitas){
+
+  $origem = $_SESSION['origem'];
+
+    $arquivo = 'planilha_Visitas_'.$origem.'.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>RESPONSAVEL</td> <td>ORIGEM</td> <td>CNPJ EMPRESA</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>STATUS VISITA</td> <td>DATA DE CADASTRO</td> <td> DATA PREVISTA</td> <td>FAMILIA PRODUTO</td> <td>OBSERVACAO</td></tr>';
+    
+    //$html .= '<tr><td>ID</td><td>NOME</td></tr>';
+
+
+  foreach ($visitas as $visita) {
+
+    $html .= '<tr><td>'.utf8_decode($visita['nome_func']).'</td><td>'.$visita['origem'].'</td><td>'.
+              $visita['cnpj'].'</td><td>'.utf8_decode($visita['razao_social'])."</td><td>".
+              utf8_decode($visita['nome_fantasia']).'</td><td>'.utf8_decode($visita['status_visita']).'</td><td>'.
+              date('d-m-Y', strtotime($visita['data_de_agendamento'])).'</td><td>'.
+              date('d-m-Y', strtotime($visita['data_prevista'])).'</td><td>'.
+              utf8_decode($visita['familia_prod']).'</td><td>'.utf8_decode($visita['observacao']).'</td></tr>';
+
+        // echo $visita['nome_func']." ".$visita['origem']." ".$visita['cnpj']." ".$visita['razao_social']." ".$visita['nome_fantasia']." ".$visita['status_visita']." ".date('d-m-Y', strtotime($visita['data_de_agendamento']))." ".date('d-m-Y', strtotime($visita['data_prevista']))." ".$visita['familia_prod']." ".$visita['observacao'];    
+  }
+
+   $html .= '</table>';
+
+   // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+}
+
 
 
 

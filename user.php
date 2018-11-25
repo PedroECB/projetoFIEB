@@ -915,3 +915,28 @@ $app->post('/user/users/create', function() {
 
 
 });
+
+
+$app->get('/user/export-visitas-geral', function(){
+
+    User::verifyLoginUser();
+    $visitas = Visita::listAll();
+    Visita::exportVisitasGeral($visitas);
+
+    header("Location: /user/visitas");
+    exit;
+
+});
+
+$app->get('/user/export-visitas-origem', function(){
+
+    $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser();
+    $visitas = Visita::listAllOrigem($origem);
+    Visita::exportVisitasOrigem($visitas);
+
+    header("Location: /user/origem/visitas");
+    exit;
+
+});
