@@ -490,6 +490,168 @@ $html .= '</table>';
 
 
 
+public static function listAllCicloAtual($cicloAtual){
+
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $sql = new Sql();
+  
+  $results = $sql->select("SELECT * FROM empresas WHERE dtcadastro_empresa>=:data_inicio and dtcadastro_empresa<=:data_termino ORDER BY idEmpresas desc",
+                   array(":data_inicio"=>$data_inicio,
+                         "data_termino"=>$data_termino));
+
+
+  return $results;
+}
+
+
+public static function exportEmpresasCicloAtual($empresas){
+
+    $arquivo = 'Planilha_Empresas_Geral_Ciclo_Atual.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>CNPJ</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>SITUACAO ASSOCIACAO</td> <td>MUNICIPIO</td> <td>REGIAO</td> <td>BAIRRO</td> <td> ENDERECO</td> <td>EMAIL</td> <td> NOME CONTATO</td> <td> TELEFONE</td> <td> TELEFONE ALTERNATIVO</td> <td> ENTIDADE RESPONSAVEL</td></tr>';
+    
+
+
+  foreach ($empresas as $empresa){
+
+    $html .= '<tr><td>'.$empresa['cnpj'].'</td><td>'.utf8_decode($empresa['razao_social']).'</td><td>'.
+              utf8_decode($empresa['nome_fantasia']).'</td><td>'.utf8_decode($empresa['situacao_associacao'])."</td><td>".
+              utf8_decode($empresa['municipio']).'</td><td>'.utf8_decode($empresa['regiao_estado']).'</td><td>'.
+              utf8_decode($empresa['bairro']).'</td><td>'.
+              utf8_decode($empresa['endereco']).'</td><td>'.
+              utf8_decode($empresa['email']).'</td><td>'.
+              utf8_decode($empresa['nomeContato']).'</td><td>'.$empresa['telefone'].'</td><td>'.$empresa['telefone2'].'</td><td>'.utf8_decode($empresa['origem_cadastro']).'</td></tr>';
+
+    // echo $empresa['cnpj']." ".$empresa['razao_social']." ".$empresa['nome_fantasia']." ".$empresa['situacao_associacao']." ".$empresa['municipio']." ".$empresa['regiao_estado']." ".$empresa['bairro']." ".$empresa['endereco']." ".$empresa['email']." ".$empresa['nomeContato']." ".$empresa['telefone']." ".$empresa['telefone2']." ".$empresa['origem_cadastro'];    
+  }
+
+$html .= '</table>';
+
+    // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+
+}
+
+public static function exportEmpresasCicloAtualOrigem($empresas){
+
+
+    $origem = $_SESSION['origem'];
+
+    $arquivo = 'Planilha_Empresas_'.$origem.'_Ciclo_Atual.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>CNPJ</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>SITUACAO ASSOCIACAO</td> <td>MUNICIPIO</td> <td>REGIAO</td> <td>BAIRRO</td> <td> ENDERECO</td> <td>EMAIL</td> <td> NOME CONTATO</td> <td> TELEFONE</td> <td> TELEFONE ALTERNATIVO</td> <td> ENTIDADE RESPONSAVEL</td></tr>';
+    
+
+
+  foreach ($empresas as $empresa){
+
+    $html .= '<tr><td>'.$empresa['cnpj'].'</td><td>'.utf8_decode($empresa['razao_social']).'</td><td>'.
+              utf8_decode($empresa['nome_fantasia']).'</td><td>'.utf8_decode($empresa['situacao_associacao'])."</td><td>".
+              utf8_decode($empresa['municipio']).'</td><td>'.utf8_decode($empresa['regiao_estado']).'</td><td>'.
+              utf8_decode($empresa['bairro']).'</td><td>'.
+              utf8_decode($empresa['endereco']).'</td><td>'.
+              utf8_decode($empresa['email']).'</td><td>'.
+              utf8_decode($empresa['nomeContato']).'</td><td>'.$empresa['telefone'].'</td><td>'.$empresa['telefone2'].'</td><td>'.utf8_decode($empresa['origem_cadastro']).'</td></tr>';
+
+    // echo $empresa['cnpj']." ".$empresa['razao_social']." ".$empresa['nome_fantasia']." ".$empresa['situacao_associacao']." ".$empresa['municipio']." ".$empresa['regiao_estado']." ".$empresa['bairro']." ".$empresa['endereco']." ".$empresa['email']." ".$empresa['nomeContato']." ".$empresa['telefone']." ".$empresa['telefone2']." ".$empresa['origem_cadastro'];    
+  }
+
+$html .= '</table>';
+
+    // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+}
+
+
+public static function exportEmpresasOrigem($empresas){
+
+
+    $origem = $_SESSION['origem'];
+
+    $arquivo = 'Planilha_Empresas_'.$origem.'.xls';
+
+    $html = '';
+    $html = "<meta charset='utf-8'>";
+    $html .= '<table>';
+    $html .= '<tr>';
+    $html .= '<td>CNPJ</td> <td>RAZAO SOCIAL</td> <td>NOME FANTASIA</td> <td>SITUACAO ASSOCIACAO</td> <td>MUNICIPIO</td> <td>REGIAO</td> <td>BAIRRO</td> <td> ENDERECO</td> <td>EMAIL</td> <td> NOME CONTATO</td> <td> TELEFONE</td> <td> TELEFONE ALTERNATIVO</td> <td> ENTIDADE RESPONSAVEL</td></tr>';
+    
+
+
+  foreach ($empresas as $empresa){
+
+    $html .= '<tr><td>'.$empresa['cnpj'].'</td><td>'.utf8_decode($empresa['razao_social']).'</td><td>'.
+              utf8_decode($empresa['nome_fantasia']).'</td><td>'.utf8_decode($empresa['situacao_associacao'])."</td><td>".
+              utf8_decode($empresa['municipio']).'</td><td>'.utf8_decode($empresa['regiao_estado']).'</td><td>'.
+              utf8_decode($empresa['bairro']).'</td><td>'.
+              utf8_decode($empresa['endereco']).'</td><td>'.
+              utf8_decode($empresa['email']).'</td><td>'.
+              utf8_decode($empresa['nomeContato']).'</td><td>'.$empresa['telefone'].'</td><td>'.$empresa['telefone2'].'</td><td>'.utf8_decode($empresa['origem_cadastro']).'</td></tr>';
+
+    // echo $empresa['cnpj']." ".$empresa['razao_social']." ".$empresa['nome_fantasia']." ".$empresa['situacao_associacao']." ".$empresa['municipio']." ".$empresa['regiao_estado']." ".$empresa['bairro']." ".$empresa['endereco']." ".$empresa['email']." ".$empresa['nomeContato']." ".$empresa['telefone']." ".$empresa['telefone2']." ".$empresa['origem_cadastro'];    
+  }
+
+$html .= '</table>';
+
+    // Configurações header para forçar o download
+    header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+    header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+    header ("Cache-Control: no-cache, must-revalidate");
+    header ("Pragma: no-cache");
+    header ("Content-type: application/x-msexcel");
+    header ("Content-Disposition: attachment; filename=\"{$arquivo}\"" );
+    header ("Content-Description: PHP Generated Data" );
+    // Envia o conteúdo do arquivo
+    echo $html;
+    exit;
+}
+
+
+public static function listAllCicloAtualOrigem($cicloAtual, $origem){
+
+  $data_inicio = $cicloAtual['data_inicio'];
+  $data_termino = $cicloAtual['data_termino'];
+
+  $sql = new Sql();
+  return $sql->select("SELECT * FROM empresas WHERE origem_cadastro=:orig AND dtcadastro_empresa>=:data_inicio AND dtcadastro_empresa<=:data_termino ORDER BY idEmpresas DESC;", 
+        array(":orig"=>$origem,
+              ":data_inicio"=>$data_inicio,
+              ":data_termino"=>$data_termino)); 
+
+}
+
+
+
+
+
 
 
 

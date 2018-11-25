@@ -125,7 +125,7 @@
               <select name="posAssoc" class="form-control" id="posAssoc" required="">
                 <?php if( isset($dados["possAssoc"]) ){ ?><option value="<?php echo htmlspecialchars( $dados["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["possAssoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option><?php } ?>
 
-                <option value="Selecione uma opção">Selecione uma opção</option>
+                <option value="">Selecione uma opção</option>
                 
 
                 <optgroup label="SINDICATO">

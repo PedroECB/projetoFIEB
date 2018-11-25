@@ -1085,5 +1085,21 @@ $app->get('/admin/export-empresas-geral', function(){
 
 });
 
+$app->get('/admin/export-empresas-cicloAtual', function(){
+
+    User::verifyLoginAdmin();
+
+    $cicloAtual = User::getCicloAtual();
+    $empresas = Empresa::listAllCicloAtual($cicloAtual);
+
+    Empresa::exportEmpresasCicloAtual($empresas);
+    
+
+    header("Location: /admin/empresas-ciclo-atual");
+    exit;
+
+});
+
+
 
 

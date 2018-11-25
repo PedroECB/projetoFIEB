@@ -862,3 +862,38 @@ $app->get('/user2/export-empresas-geral', function(){
     exit;
 
 });
+
+
+$app->get('/user2/export-empresas-origem-cicloAtual', function(){
+
+    $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser2();
+
+    $cicloAtual = User::getCicloAtual();
+    $empresas = Empresa::listAllCicloAtualOrigem($cicloAtual, $origem);
+
+    Empresa::exportEmpresasCicloAtualOrigem($empresas);
+    
+
+    header("Location: /user2/empresas-ciclo-atual");
+    exit;
+
+});
+
+$app->get('/user2/exportempresas-origem', function(){
+
+    $origem = $_SESSION['origem'];
+
+    User::verifyLoginUser2();
+
+    $empresas = Empresa::listAllOrigem($origem);
+    Empresa::exportEmpresasOrigem($empresas);
+    exit;
+    //Empresa::exportEmpresasCicloAtualOrigem($empresas);
+    
+
+    header("Location: /user2/empresas-ciclo-atual");
+    exit;
+
+});
