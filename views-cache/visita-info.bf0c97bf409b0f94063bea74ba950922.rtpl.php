@@ -61,7 +61,7 @@
                       <tr><td><b>DEMANDA IDENTIFICADA NA VISITA</b></td>        <td><?php if( isset($visita["demanda_ident"]) ){ ?><?php echo htmlspecialchars( $visita["demanda_ident"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
                       <tr><td><b>SITUACÃO DA NEGOCIAÇÃO </b></td>         <td><?php if( isset($visita["status_negociacao"]) ){ ?><?php echo htmlspecialchars( $visita["status_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
                       <tr><td><b>PREÇO DO PRODUTO OFERTADO </b></td>         <td><?php if( isset($visita["preco_prod"]) ){ ?><?php echo number_format($visita["preco_prod"],2); ?><?php } ?></td></tr>
-                      <tr><td><b>ASSOCIACAO </b></td>         <td><?php if( isset($visita["status_associacao"]) ){ ?><?php echo htmlspecialchars( $visita["status_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
+                      <tr><td><b>ASSOCIACÃO </b></td>         <td><?php if( isset($visita["status_associacao"]) ){ ?><?php echo htmlspecialchars( $visita["status_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?><?php } ?></td></tr>
                       <tr><td><b>OBSERVAÇÃO</b></td>              <td> <?php echo htmlspecialchars( $visita["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td></tr>
                       <tr><td></td><td><td></tr>
                       <tr><td></td><td><b class="text-black">EMPRESA</b></td><td></td></tr>

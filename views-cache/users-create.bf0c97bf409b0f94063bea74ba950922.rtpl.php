@@ -63,7 +63,7 @@
               <select id="campoTipo" class="form-control" name="nivel_acesso">
                 <?php if( isset($dados["origem"]) ){ ?>
 
-                   <option value="$dados.nivel_acesso" selected>
+                   <option value="<?php echo htmlspecialchars( $dados["nivel_acesso"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected>
                     <?php if( $dados["nivel_acesso"] == 1 ){ ?>Administrador<?php } ?>
 
                     <?php if( $dados["nivel_acesso"] == 2 ){ ?>Ponto focal<?php } ?>
@@ -84,7 +84,7 @@
               <select id="campoOrigem" class="form-control" name="origem">
                 <?php if( isset($dados["origem"]) ){ ?>
 
-                   <option value="$dados.origem" selected><?php echo htmlspecialchars( $dados["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                   <option value="<?php echo htmlspecialchars( $dados["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" selected><?php echo htmlspecialchars( $dados["origem"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
                   <?php } ?>
 
                 <option value="FIEB">FIEB</option>
