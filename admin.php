@@ -1101,5 +1101,13 @@ $app->get('/admin/export-empresas-cicloAtual', function(){
 });
 
 
+$app->get('/admin/relatorio-geral', function(){
+
+  User::verifyLoginAdmin();
+
+  $page = new PageAdmin();   
+    $page->setTpl("relatorio-geral");
+});
+
 
 
