@@ -208,7 +208,113 @@ public static function contVisitasCiclo($origem, $idciclo, $ciclo){
 }
 
 
+public static function relatorioGeral($sindicatos = array()){
 
+  $cont = 0;
+  $dados = array();
+
+  // for($i=0; $i<count($sindicatos);$i++){
+
+  //   echo $sindicatos[$i]['nome_sindicato'];
+  // }
+
+  foreach ($sindicatos as $sindicato) {
+      
+    $origem = $sindicato['nome_sindicato'];
+                                                          // Retorna a quantidade de empresas selecionadas por um sindicato
+    $sql = new Sql();
+    $result = $sql->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem", array(":origem"=>$origem));
+
+    $dados [$cont]['nomeSindicato'] = $origem;
+    $dados [$cont]['empresas_selecionadas'] = $result[0]['count(cnpj)'];
+
+
+    $sql2 = new Sql();
+    $result2 = $sql2->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Realizada' and funcionario.origem=:origem", array(":origem"=>$origem));
+    
+    $dados [$cont]['visitas_realizadas'] = $result2[0]['count(idVisita)'];
+
+
+    $sql3 = new Sql();
+    $result3 = $sql3->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Agendada' and funcionario.origem=:origem", array(":origem"=>$origem));
+    $dados [$cont]['visitas_agendadas'] = $result3[0]['count(idVisita)'];
+
+
+     $sql4 = new Sql();
+     $result4 = $sql4->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Em Andamento'", array(":origem"=>$origem));
+
+    $dados [$cont]['EmAndamento'] = $result4[0]['count(cnpj)'];
+
+
+    $sql5 = new Sql();
+    $result5 = $sql5->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associação em Negociação';",array(":origem"=>$origem));
+
+    $dados[$cont]['associacao_em_negociacao'] = $result5[0]['count(cnpj)'];
+
+
+    $sql6 = new Sql();
+    $result6 = $sql6->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_associacao='Associação Efetivada';",array(":origem"=>$origem));
+
+    $dados[$cont]['associacaoEfetivada'] = $result6[0]['count(idVisita)'];
+
+  
+    $sql7 = new Sql();
+    $result7 = $sql7->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where funcionario.origem=:origem", array(":origem"=>$origem));
+    $dados[$cont]['totalVisitas'] = $result7[0]['count(idVisita)'];
+ 
+
+
+
+
+
+    $cont++;
+  }
+
+    return $dados;
+
+}
+
+
+public static function getTotaisSindicatos($dadosSindicatos){
+
+  $totais = array();
+
+  $total_empresas_selecionadas = 0;
+  $total_visitas_realizadas = 0;
+  $total_visitas_agendadas = 0;
+  $total_EmAndamento = 0;
+  $total_associacao_em_negociacao = 0;
+  $total_associacaoEfetivada = 0;
+  $total_total_visitas = 0; 
+
+
+
+  foreach ($dadosSindicatos as $dadoSindicato) {
+      
+      $total_empresas_selecionadas += $dadoSindicato['empresas_selecionadas'];
+      $total_visitas_realizadas += $dadoSindicato['visitas_realizadas'];
+      $total_visitas_agendadas += $dadoSindicato['visitas_agendadas'];
+      $total_EmAndamento += $dadoSindicato['EmAndamento'];
+      $total_associacao_em_negociacao += $dadoSindicato['associacao_em_negociacao'];
+      $total_associacaoEfetivada += $dadoSindicato['associacaoEfetivada'];
+      $total_total_visitas += $dadoSindicato['totalVisitas'];
+
+      
+  }
+
+  $totais['total_empresas_selecionadas'] = $total_empresas_selecionadas;
+  $totais['total_visitas_realizadas'] = $total_visitas_realizadas;
+  $totais['total_visitas_agendadas'] = $total_visitas_agendadas;
+  $totais['total_EmAndamento'] = $total_EmAndamento;
+  $totais['total_associacao_em_negociacao'] = $total_associacao_em_negociacao;
+  $totais['total_associacaoEfetivada'] = $total_associacaoEfetivada;
+  $totais['total_total_visitas'] = $total_total_visitas;
+
+
+  return $totais;
+
+
+}
 
 
 public function getIdFuncionario(){

@@ -56,8 +56,24 @@
             <th style="width: 15px">Total Visitas</th>
           </thead>
           <tbody>
-            
-            <tr>
+            <?php $counter1=-1;  if( isset($dadosSindicato) && ( is_array($dadosSindicato) || $dadosSindicato instanceof Traversable ) && sizeof($dadosSindicato) ) foreach( $dadosSindicato as $key1 => $value1 ){ $counter1++; ?>
+
+
+              <tr>
+                <td class="text-primary"><b><?php echo htmlspecialchars( $value1["nomeSindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+                <td><?php echo htmlspecialchars( $value1["empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["visitas_realizadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["EmAndamento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+                <td><?php echo htmlspecialchars( $value1["totalVisitas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              </tr>
+
+
+            <?php } ?>
+
+     <!--        <tr>
               <td class="text-primary"><b>SINDIREPA</b></td>
               <td>37</td>
               <td>12</td>
@@ -68,99 +84,55 @@
               <td>10</td>
             </tr>
 
-             <tr>
-              <td class="text-primary"><b>SINDRATAR</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-              <td>10</td>
-            </tr>
-
-             <tr>
-              <td class="text-primary"><b>SINDLEITE</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-              <td>10</td>
-            </tr>
+-->
              <tr style="background-color: #dddddd;">
               <td><b>TOTAL</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-              <td>10</td>
-            </tr>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_visitas_realizadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_EmAndamento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_total_visitas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+            </tr> 
+
           </tbody>
         </table>
 
        <table class="table text-center table-striped table-hover">
         <thead>
-          <th style="width: 25px">Casa</th>
-          <th style="width: 15px">Nº de Emp. Selecionadas</th>
-          <th style="width: 15px">Visitas Realizadas</th>
-          <th style="width: 15px">Agendadas</th>
+          <th style="width: 15px">Casa</th>
+          <th style="width: 25px">Nº de Emp. Selecionadas</th>
+          <th style="width: 25px">Visitas Realizadas</th>
+          <th style="width: 25px">Agendadas</th>
           <th style="width: 15px">Negociações</th>
           <th style="width: 15px">Negociações em Andamento</th>
           <th style="width: 15px">Total Visitas</th>
         </thead>
         <tbody>
+
+          <?php $counter1=-1;  if( isset($dadosCasa) && ( is_array($dadosCasa) || $dadosCasa instanceof Traversable ) && sizeof($dadosCasa) ) foreach( $dadosCasa as $key1 => $value1 ){ $counter1++; ?>
+
            <tr>
-              <td class="text-danger"><b>SESI</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
+              <td class="text-danger"><b><?php echo htmlspecialchars( $value1["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><?php echo htmlspecialchars( $value1["empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              <td><?php echo htmlspecialchars( $value1["visitas_realizadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              <td><?php echo htmlspecialchars( $value1["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              <td><?php echo htmlspecialchars( $value1["negociadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              <td><?php echo htmlspecialchars( $value1["negociacoes_em_andamento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+              <td><?php echo htmlspecialchars( $value1["totalVisitas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
             </tr>
+          <?php } ?>
 
-            <tr>
-              <td class="text-danger"><b>SENAI</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-            </tr>
-
-            <tr>
-              <td class="text-danger"><b>IEL</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-            </tr>
-
-            <tr>
-              <td class="text-danger"><b>CIEB</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-            </tr>
 
             <tr style="background-color: #dddddd;">
               <td><b>TOTAL</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_visitas_realizadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_negociadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_negociacao_em_andamento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+              <td><b><?php echo htmlspecialchars( $dadosTotaisCasas["total_total_visitas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
             </tr>
         </tbody>
       </table>
@@ -184,13 +156,13 @@
        </thead>
        <tbody>
         <tr><td class="text-primary"><b>Indústrias visitadas</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">50%</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
         
         <tr><td class="text-primary"><b>Novas Associações</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">20%</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
         
         <tr><td class="text-primary"><b>Propostas Demandadas</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">10%</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
 
          <tr><td class="text-primary"><b>Formulário de Assoc...</b></td></tr>
         <tr><td><b>-</b></td></tr>
@@ -203,29 +175,29 @@
 
           <table class="text-center">
        <thead>
-         <th> - </th>
+         <th> &nbsp </th>
        </thead>
        <tbody>
         <tr><td class="text-success"><b>Nº de Empresas</b></td></tr>
-        <tr><td><span class="badge bg-green">70</span></td></tr>
+        <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["soma_empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
         
         <tr><td class="text-success"><b>Visitas Realizadas</b></td></tr>
-        <tr><td><span class="badge bg-green">25</span></td></tr>
+        <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["soma_visitas_realizadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
         
         <tr><td class="text-success"><b>Visitas Agendadas</b></td></tr>
-        <tr><td><span class="badge bg-green">93</span></td></tr>
+        <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["soma_visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
 
          <tr><td class="text-success"><b>Negociações</b></td></tr>
-        <tr><td><b>-</b></td></tr>
+        <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["negociadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
 
          <tr><td class="text-success"><b>Negociações em Andamento</b></td></tr>
-         <tr><td><b>-</b></td></tr>
+         <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["negociacoes_em_andamento"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
 
          <tr><td class="text-success"><b>Associação em Negociação</b></td></tr>
-         <tr><td><b>-</b></td></tr>
+         <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
 
          <tr><td class="text-success"><b>Novas Associações</b></td></tr>
-        <tr><td><b>-</b></td></tr>
+        <tr><td><span class="badge bg-green"><?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span></td></tr>
 
        </tbody>
      </table>
@@ -281,10 +253,10 @@
       <tbody>
         <tr>
           <td>
-            <span class="badge bg-blue">SENAI 20</span>
-            <span class="badge bg-red">SESI 30</span>
-            <span class="badge bg-green">IEL 40</span>
-            <span class="badge bg-yellow">CIEB 10</span>
+            <span class="badge bg-blue">SENAI: 20</span>
+            <span class="badge bg-red">SESI: 30</span>
+            <span class="badge bg-green">IEL: 40</span>
+            <span class="badge bg-yellow">CIEB: 10</span>
           </td>
         </tr>
         <tr>
@@ -314,17 +286,17 @@
       <tbody>
         <tr>
           <td>
-            <span class="badge bg-blue">Não Associadas 20</span>
-            <span class="badge bg-red">Associadas 12</span>
-            <span class="badge bg-green">Assoc. em Negociação 5</span>
+            <span class="badge bg-blue">Associações: <?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <!-- <span class="badge bg-red">Não Associadas 12</span> -->
+            <span class="badge bg-green">Em Negociação: <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
           </td>
         </tr>
         <tr>
           <td colspan="3">
              <div class="progress progress">
-                      <div class="progress-bar progress-bar-blue" style="width: 20%"></div>
-                      <div class="progress-bar progress-bar-danger" style="width: 12%"></div>
-                      <div class="progress-bar progress-bar-green" style="width: 5%"></div>
+                      <div class="progress-bar progress-bar-blue" style="width: <?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%"></div>
+                      <!-- <div class="progress-bar progress-bar-danger" style="width: 12%"></div> -->
+                      <div class="progress-bar progress-bar-green" style="width: <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%"></div>
               </div>
           </td>
         </tr>

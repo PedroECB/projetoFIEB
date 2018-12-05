@@ -1104,9 +1104,26 @@ $app->get('/admin/export-empresas-cicloAtual', function(){
 $app->get('/admin/relatorio-geral', function(){
 
   User::verifyLoginAdmin();
+  
+  $sindicatos = User::listSindicatos();
+
+  $dadosSindicato = Sindicato::relatorioGeral($sindicatos);
+  $dadosTotaisSindicatos = Sindicato::getTotaisSindicatos($dadosSindicato);
+
+  $casas = User::listCasas();
+  $dadosCasas = Casa::relatorioGeral($casas);
+  $dadosTotaisCasas = Casa::getTotaisCasas($dadosCasas);
+
+
+  $somaTotal = Casa::somaTotal($dadosTotaisCasas, $dadosTotaisSindicatos);
+
 
   $page = new PageAdmin();   
-    $page->setTpl("relatorio-geral");
+    $page->setTpl("relatorio-geral", array("dadosSindicato"=>$dadosSindicato, 
+                                           "dadosTotaisSindicatos"=>$dadosTotaisSindicatos,
+                                           "dadosCasa"=>$dadosCasas,
+                                           "dadosTotaisCasas"=>$dadosTotaisCasas,
+                                           "somaTotal"=>$somaTotal));
 });
 
 
