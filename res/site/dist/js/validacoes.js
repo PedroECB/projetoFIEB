@@ -275,3 +275,19 @@ function verificaSession(){
     campoEmail.value = window.sessionStorage.getItem('emailrec');
   }
 }
+
+function verificaNegoc(element){
+
+
+  campoValorProduto = document.getElementById('campoValorProduto');
+
+  if(element.value == 'Negociada'){
+
+    campoValorProduto.removeAttribute('disabled');
+  }
+
+  if(element.value != 'Negociada'){
+
+    campoValorProduto.setAttribute('disabled','');
+  }
+};

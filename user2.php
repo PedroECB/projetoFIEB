@@ -897,3 +897,13 @@ $app->get('/user2/exportempresas-origem', function(){
     exit;
 
 });
+
+
+$app->get("/user2/help", function(){
+
+  User::verifyLoginUser2();
+
+  $page = new PageUser2();
+  $page->setTpl('help', array());
+
+});

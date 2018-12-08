@@ -274,6 +274,95 @@ public static function relatorioGeral($sindicatos = array()){
 
 }
 
+public static function relatorioGeralCiclo($sindicatos = array(), $ciclo){
+
+  $data_inicio = $ciclo[0]['data_inicio'];
+  $data_termino = $ciclo[0]['data_termino'];
+
+  $cont = 0;
+  $dados = array();
+
+
+
+  foreach ($sindicatos as $sindicato) {
+      
+    $origem = $sindicato['nome_sindicato'];
+                                                          // Retorna a quantidade de empresas selecionadas por um sindicato
+    $sql = new Sql();
+    $result = $sql->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino", 
+
+    array(":origem"=>$origem,
+          ":data_inicio"=>$data_inicio,
+          ":data_termino"=>$data_termino));
+
+    $dados [$cont]['nomeSindicato'] = $origem;
+    $dados [$cont]['empresas_selecionadas'] = $result[0]['count(cnpj)'];
+
+
+    $sql2 = new Sql();
+    $result2 = $sql2->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Realizada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+    
+    $dados [$cont]['visitas_realizadas'] = $result2[0]['count(idVisita)'];
+
+
+    $sql3 = new Sql();
+    $result3 = $sql3->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Agendada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+    
+    $dados [$cont]['visitas_agendadas'] = $result3[0]['count(idVisita)'];
+
+
+     $sql4 = new Sql();
+     $result4 = $sql4->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Em Andamento' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+
+    $dados [$cont]['EmAndamento'] = $result4[0]['count(cnpj)'];
+
+
+    $sql5 = new Sql();
+    $result5 = $sql5->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and situacao_associacao='Associação em Negociação' and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino;", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+
+    $dados[$cont]['associacao_em_negociacao'] = $result5[0]['count(cnpj)'];
+
+
+    $sql6 = new Sql();
+    $result6 = $sql6->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_associacao='Associação Efetivada' and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino;", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+
+    $dados[$cont]['associacaoEfetivada'] = $result6[0]['count(idVisita)'];
+
+  
+    $sql7 = new Sql();
+    $result7 = $sql7->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+    $dados[$cont]['totalVisitas'] = $result7[0]['count(idVisita)'];
+ 
+
+
+
+
+
+    $cont++;
+  }
+
+    return $dados;
+
+}
+
 
 public static function getTotaisSindicatos($dadosSindicatos){
 

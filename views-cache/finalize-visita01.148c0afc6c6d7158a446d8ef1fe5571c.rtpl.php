@@ -44,19 +44,39 @@
       </div>
   </div>
 
+
+<?php if( $tp == 'CASA' ){ ?> 
+
   <div class="col-md-6">
     <label for="campoNegociacao" >Negociação: </label>
-    <select name="campoNegociacao" class="form-control" id="campoNegociacao">
+    <select name="campoNegociacao" class="form-control" id="campoNegociacao" onchange="verificaNegoc(this);">
       <option value="Não Negociada">Não Negociada</option>
       <option value="Negociada">Negociada</option>
       <option value="Em Negociação">Em Negociação</option>
     </select>
   </div>
+
+
+
 </div>
   <div class="row">
     <div class="col-md-6">
-            
- <label for="campoFamilia">Família do Produto Ofertado:</label>
+               <div class="form-group">
+              <label for="campoValorProduto">Valor do Produto: </label> 
+              <input type="text" class="form-control" id="campoValorProduto" name="campoValorProduto" placeholder=""  maxlength="10">
+            </div>
+    
+
+      </div>
+<?php } ?>
+
+
+      <div class="col-md-6">
+       
+        
+         
+
+      <label for="campoFamilia">Família do Produto Ofertado:</label>
         <select name="campoFamilia" id="campoFamilia" class="form-control">
           <option value="<?php echo htmlspecialchars( $visita["familia_prod"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $visita["familia_prod"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
           <option value="Qualidade de Vida">Qualidade de Vida</option>
@@ -64,17 +84,6 @@
           <option value="Desenvolvimento Empresarial">Desenvolvimento Empresarial</option>
           <option value="Educação">Educação</option>
         </select>
-
-      </div>
-
-
-      <div class="col-md-6">
-       
-        
-        <div class="form-group">
-              <label for="campoValorProduto">Valor do Produto: </label> 
-              <input type="text" class="form-control" id="campoValorProduto" name="campoValorProduto" placeholder=""  maxlength="10">
-            </div>
       </div>
     
   </div>
@@ -82,25 +91,27 @@
 
 
   <div class="row">
-
+<?php if( $tp == 'SINDICATO' ){ ?> 
     <div class="col-md-6">   
          <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
-                <option value="<?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
-                <option value="Não Associada">Não Associada</option>
-                <option value="Associada">Associada</option>
-                <option value="Associação em Negociação">Associacão em Negociação</option>
-                <option value="Associação Efetivada">Associação Efetivada</option>
+                <!-- <option value="<?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $visita["situacao_associacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option> -->
+                <option value="Não Associada" <?php if( $visita["situacao_associacao"] == 'Não Associada' ){ ?>selected<?php } ?>>Não Associada</option>
+                <option value="Associada" <?php if( $visita["situacao_associacao"] == 'Associada' ){ ?>selected<?php } ?>>Associada</option>
+                <option value="Associação em Negociação" <?php if( $visita["situacao_associacao"] == 'Associação em Negociação' ){ ?>selected<?php } ?>>Associacão em Negociação</option>
+                <option value="Associação Efetivada" <?php if( $visita["situacao_associacao"] == 'Associação Efetivada' ){ ?>selected<?php } ?>>Associação Efetivada</option>
+                <option value="Interesse em Associar-se" <?php if( $visita["situacao_associacao"] == 'Interesse em Associar-se' ){ ?>selected<?php } ?>>Interesse em Associar-se</option>
 
               </select>
             </div>
       </div>
-      
+      <?php } ?>
+
+<!-- Teste -->
 
 
-
-      <div class="col-md-6">   
+     <!--  <div class="col-md-6">   
           <div class="form-group">
               <label for="campoDemandas" >Demanda Identificada na Visita:</label>
               <select name="campoDemandas" class="form-control">
@@ -121,6 +132,42 @@
               </select>
             </div>
       </div>
+ -->
+
+<!-- Fim Teste -->
+
+
+<!-- <div class="col-md-6"> -->
+  
+<div class="col-md-6">
+            
+
+
+<div class="form-group">
+                <label for="campoDemandas">Demandas identificadas na visita:</label>
+                <select name="campoDemandas[]" id="campoDemandas" class="form-control" multiple="">
+                    <option value="">Nenhuma Demanda Identificada</option>
+                        <optgroup label="CASAS">
+                          <option value="SESI">SESI</option>
+                          <option value="SENAI">SENAI</option>
+                          <option value="IEL">IEL</option>
+                          <option value="CIEB">CIEB</option>
+                        </optgroup>
+
+                        <optgroup label="SINDICATOS">
+                         <?php $counter1=-1;  if( isset($sindicatos) && ( is_array($sindicatos) || $sindicatos instanceof Traversable ) && sizeof($sindicatos) ) foreach( $sindicatos as $key1 => $value1 ){ $counter1++; ?> 
+                           <option value="<?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["nome_sindicato"], ENT_COMPAT, 'UTF-8', FALSE ); ?></option>
+                          <?php } ?> 
+               </optgroup> 
+                </select>
+                <small class="text-danger">Segure a tecla Ctrl e selecione as opções</small>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
     <div class="col-md-12">   
         <br>
         <label>Observação:</label><textarea name="campoObservacao" class="form-control"><?php echo htmlspecialchars( $visita["observacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></textarea>

@@ -366,6 +366,7 @@ desired effect
          <!-- <li><a href="/user2/origem/visitas"><i class="fa fa-calendar-o"></i> <span>Contatos</span></a></li> -->
 
           <li><a href="/user2/contatos"><i class="fa fa-fax"></i> <span>Contatos</span></a></li>
+          <li><a href="/user2/help"><i class="fa fa-question-circle"></i> <span>Dúvidas Frequentes</span></a></li>
 
 
 

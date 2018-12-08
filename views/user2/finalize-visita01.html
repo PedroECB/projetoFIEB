@@ -44,19 +44,38 @@
       </div>
   </div>
 
+
+{if="$tp == 'CASA'"} 
+
   <div class="col-md-6">
     <label for="campoNegociacao" >Negociação: </label>
-    <select name="campoNegociacao" class="form-control" id="campoNegociacao">
+    <select name="campoNegociacao" class="form-control" id="campoNegociacao" onchange="verificaNegoc(this);">
       <option value="Não Negociada">Não Negociada</option>
       <option value="Negociada">Negociada</option>
       <option value="Em Negociação">Em Negociação</option>
     </select>
   </div>
+
+
+
 </div>
   <div class="row">
     <div class="col-md-6">
-            
- <label for="campoFamilia">Família do Produto Ofertado:</label>
+               <div class="form-group">
+              <label for="campoValorProduto">Valor do Produto: </label> 
+              <input type="text" class="form-control" id="campoValorProduto" name="campoValorProduto" placeholder=""  maxlength="10">
+            </div>
+    
+
+      </div>
+{/if}
+
+      <div class="col-md-6">
+       
+        
+         
+
+      <label for="campoFamilia">Família do Produto Ofertado:</label>
         <select name="campoFamilia" id="campoFamilia" class="form-control">
           <option value="{$visita.familia_prod}">{$visita.familia_prod}</option>
           <option value="Qualidade de Vida">Qualidade de Vida</option>
@@ -64,17 +83,6 @@
           <option value="Desenvolvimento Empresarial">Desenvolvimento Empresarial</option>
           <option value="Educação">Educação</option>
         </select>
-
-      </div>
-
-
-      <div class="col-md-6">
-       
-        
-        <div class="form-group">
-              <label for="campoValorProduto">Valor do Produto: </label> 
-              <input type="text" class="form-control" id="campoValorProduto" name="campoValorProduto" placeholder=""  maxlength="10">
-            </div>
       </div>
     
   </div>
@@ -82,25 +90,26 @@
 
 
   <div class="row">
-
+{if="$tp == 'SINDICATO'"} 
     <div class="col-md-6">   
          <div class="form-group">
               <label for="campoSitAssoc" >Situação da Associação: *</label>
               <select name="sitAssoc" class="form-control" onchange="verificaAssoc();">
-                <option value="{$visita.situacao_associacao}">{$visita.situacao_associacao}</option>
-                <option value="Não Associada">Não Associada</option>
-                <option value="Associada">Associada</option>
-                <option value="Associação em Negociação">Associacão em Negociação</option>
-                <option value="Associação Efetivada">Associação Efetivada</option>
+                <!-- <option value="{$visita.situacao_associacao}">{$visita.situacao_associacao}</option> -->
+                <option value="Não Associada" {if="$visita.situacao_associacao == 'Não Associada'"}selected{/if}>Não Associada</option>
+                <option value="Associada" {if="$visita.situacao_associacao == 'Associada'"}selected{/if}>Associada</option>
+                <option value="Associação em Negociação" {if="$visita.situacao_associacao == 'Associação em Negociação'"}selected{/if}>Associacão em Negociação</option>
+                <option value="Associação Efetivada" {if="$visita.situacao_associacao == 'Associação Efetivada'"}selected{/if}>Associação Efetivada</option>
+                <option value="Interesse em Associar-se" {if="$visita.situacao_associacao == 'Interesse em Associar-se'"}selected{/if}>Interesse em Associar-se</option>
 
               </select>
             </div>
       </div>
-      
+      {/if}
+<!-- Teste -->
 
 
-
-      <div class="col-md-6">   
+     <!--  <div class="col-md-6">   
           <div class="form-group">
               <label for="campoDemandas" >Demanda Identificada na Visita:</label>
               <select name="campoDemandas" class="form-control">
@@ -121,6 +130,42 @@
               </select>
             </div>
       </div>
+ -->
+
+<!-- Fim Teste -->
+
+
+<!-- <div class="col-md-6"> -->
+  
+<div class="col-md-6">
+            
+
+
+<div class="form-group">
+                <label for="campoDemandas">Demandas identificadas na visita:</label>
+                <select name="campoDemandas[]" id="campoDemandas" class="form-control" multiple="">
+                    <option value="">Nenhuma Demanda Identificada</option>
+                        <optgroup label="CASAS">
+                          <option value="SESI">SESI</option>
+                          <option value="SENAI">SENAI</option>
+                          <option value="IEL">IEL</option>
+                          <option value="CIEB">CIEB</option>
+                        </optgroup>
+
+                        <optgroup label="SINDICATOS">
+                         {loop="$sindicatos"} 
+                           <option value="{$value.nome_sindicato}">{$value.nome_sindicato}</option>
+                          {/loop} 
+               </optgroup> 
+                </select>
+                <small class="text-danger">Segure a tecla Ctrl e selecione as opções</small>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
     <div class="col-md-12">   
         <br>
         <label>Observação:</label><textarea name="campoObservacao" class="form-control">{$visita.observacao}</textarea>

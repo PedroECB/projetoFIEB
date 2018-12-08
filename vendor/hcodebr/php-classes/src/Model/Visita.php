@@ -264,7 +264,12 @@ public static function finalizeVisita($dados){
         }
     }
 
-    $demandasImplode= implode($demandas, "/");
+    if($demandas != ""){
+      $demandasImplode= implode($demandas, "/");
+    }else{
+      $demandasImplode = NULL;
+    }
+    
 
 
 

@@ -290,19 +290,36 @@ public static function updateCiclo($idciclo, $dados){
  $nomeciclo = $dados['nomeCiclo'];
  $dataInicio = $dados['dataInicio'];
  $dataTermino = $dados['dataTermino'];
+ $industrias_visitadas = $dados['industriasVisitadas'];
+ $novas_associacoes = $dados['novasAssoc'];
+ $propostas_demandadas = $dados['propostasDemandadas'];
+ $interesse_em_assoc = $dados['interesseEmAssoc'];
+ $contratos_assin = $dados['contratosAssin'];
+ $receita = $dados['receita'];
 
  $sql = new Sql();
- $query = $sql->query("UPDATE ciclo SET nome_ciclo=:nomeciclo, data_inicio=:datainicio, data_termino=:datatermino WHERE idCiclo=:id",
+ $query = $sql->query("UPDATE ciclo SET nome_ciclo=:nomeciclo, data_inicio=:datainicio, data_termino=:datatermino,
+                       industrias_visitadas=:industrias_visitadas, novas_associacoes=:novas_associacoes,
+                       propostas_demandadas=:propostas_demandadas, interesse_em_assoc=:interesse_em_assoc,
+                       contratos_assin=:contratos_assin, receitas=:receita  WHERE idCiclo=:id",
  array(":nomeciclo"=>$nomeciclo,
        ":datainicio"=>$dataInicio,
        ":datatermino"=>$dataTermino,
+       ":industrias_visitadas"=>$industrias_visitadas,
+       ":novas_associacoes"=>$novas_associacoes,
+       ":propostas_demandadas"=>$propostas_demandadas,
+       ":interesse_em_assoc"=>$interesse_em_assoc,
+       ":contratos_assin"=>$contratos_assin,
+       ":receita"=>$receita,
        ":id"=>$id));
 
- if($query->rowCount() == 0){
+ // if($query->rowCount() == 0){
 
-    var_dump($query->errorInfo());
-    throw new \Exception('Falha na edição do ciclo', 598);
- }
+ //    if($query->errorInfo()){
+ //      throw new \Exception('Falha na edição do ciclo', 598);
+ //    }
+    
+ // }
 
 
 }
@@ -325,8 +342,16 @@ public static function createCiclo($datas){
  $nomeCiclo = ucfirst($datas['nomeCiclo']);
  $dataInicio = $datas['dataInicio'];
  $dataTermino = $datas['dataTermino'];
+ $industrias_visitadas = $datas['industriasVisitadas'];
+ $novas_associacoes = $datas['novasAssoc'];
+ $propostas_demandadas = $datas['propostasDemandadas'];
+ $interesse_em_assoc = $datas['interesseEmAssoc'];
+ $contratos_assin = $datas['contratosAssin'];
+ $receita = $datas['receita'];
 
 
+// var_dump($datas);
+// exit;
  $sql = new Sql();
  $result = $sql->select("SELECT * FROM ciclo WHERE data_termino>:datainicio", array(":datainicio"=>$dataInicio));
 
@@ -334,17 +359,25 @@ public static function createCiclo($datas){
 
     
       $sql2 = new Sql();
-      $query = $sql2->query("INSERT INTO ciclo (nome_ciclo, data_inicio, data_termino) VALUES (:nomeCiclo, :dataInicio, :dataTermino)",
+      $query = $sql2->query("INSERT INTO ciclo (nome_ciclo, data_inicio, data_termino, industrias_visitadas, novas_associacoes, propostas_demandadas, interesse_em_assoc, contratos_assin, receitas) 
+        VALUES (:nomeCiclo, :dataInicio, :dataTermino, :industrias_visitadas, :novas_associacoes, :propostas_demandadas, 
+                :interesse_em_assoc, :contratos_assin, :receitas)",
       array(":nomeCiclo"=>$nomeCiclo,
             ":dataInicio"=>$dataInicio,
-            ":dataTermino"=>$dataTermino));
+            ":dataTermino"=>$dataTermino,
+            ":industrias_visitadas"=>$industrias_visitadas,
+            ":novas_associacoes"=>$novas_associacoes,
+            ":propostas_demandadas"=>$propostas_demandadas,
+            ":interesse_em_assoc"=>$interesse_em_assoc,
+            ":contratos_assin"=>$contratos_assin,
+            ":receitas"=>$receita));
 
       if($query->rowCount() == 0){
             throw new \Exception('Ciclo não pode ser criado. Nome de ciclo já existente', 602);
     }
 
     }else{ 
-              throw new \Exception('Ciclo não pode ser criado. Ciclo já existente na data digitada ou datas inválidas.', 601);
+              throw new \Exception('Ciclo não pode ser criado. Ciclo já existente na data digitada ou datas inválidas, verifique as informações digitadas e tente novamente', 601);
 
               //echo "<script> alert('Ciclo não pode ser criado, ciclo já existente na data digitada ou datas inválidas'); history.back();</script>";
               exit;

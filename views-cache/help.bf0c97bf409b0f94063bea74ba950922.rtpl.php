@@ -1,0 +1,254 @@
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+
+  <ol class="breadcrumb">
+    <button class="btn btn-xs"><li><a href="/admin"><i class="fa fa-home"></i> Início</a></li></button>
+    <button class="btn btn-xs"><li class="active"><a href="/admin/contatos"><i class="fa fa-fax"></i> Contatos</a></li></button>
+  </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+  <div class="row">
+  	<div class="col-md-12">
+  		<div class="box box-primary" style="margin-top: 2%;">
+            
+            <div class="box-header bg-primary">
+             
+                <h4 class="text-center" style="color:white"><b>Dúvidas Frequentes</b></h4>
+           
+            </div>
+            <hr>
+
+            <div class="box-body no-padding">
+<!--               <table class="table table-striped table-bordered text-center table-responsive table-hover">
+                <thead>
+                  <tr>
+                    <th style="width: 40px"></th>   
+                    <th style="width: 30px" class="md2-some"></th>
+                    <th style="width: 40px" class="orig"></th>
+                    <th style="width: 40px" class="orig"></th>
+                    <th style="width: 60px" class="nv"></th>
+                    <th style="width: 30px">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+    
+
+      
+
+ 
+                </tbody>
+              </table> -->
+<div class="col-md-12">
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">VISITAS</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="collapsed">
+                        Como agendar uma visita?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      Para agendar uma visita a uma empresa no ciclo é necessário que a empresa esteja previamente cadastrada no sistema <a href="/admin/empresa-create" target="_blank">(clique aqui para cadastrar uma empresa)</a>. Após a realização do cadastro da empresa procure a empresa desejada para visita na lista de empresas cadastradas e clique no botão de agendar visita e preencha as informações solicitadas.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed" aria-expanded="false">
+                        Como finalizar uma visita? 
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      Apenas os usuários da entidade responsável pelo cadastro da visita poderá finalizar uma visita em andamento. Na lista de visitas > Clique em exibir detalhes da visita > Os botões para alterar as informações e finalizar a visita aparecerão na parte inferior da tela de informações da visita desejada.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                        Como alterar as informações de uma visita em andamento?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      As informações de uma visita em andamento só poderá ser alterada por usuários da entidade responsável pelo cadastro da visita. Na lista de visitas > Clique em exibir detalhes da visita > Os botões para alterar as informações e finalizar a visita aparecerão na parte inferior da tela de informações da visita desejada. Após finalizada, as informações sobre a visita não poderá ser alterada por nenhum usuário.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+
+
+
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">EMPRESAS</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" class="collapsed">
+                        Há informações erradas sobre uma empresa, como alterar?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      As informações de uma empresa cadastrada no sistema só poderão ser alteradas por usuários da entidade responsável pelo cadastro da empresa. Se forem constatados erros nas informações relacionadas à empresa que possa alterar ou prejudicar o andamento das visitas, você pode visualizar nos detalhes da empresa o nome do usuário responsável pelo cadastro e procurar as informações desse usuário na aba de <a href="/admin/contatos" target="_blank">contatos</a> e solicitar diretamente ao usuário que modifique as informações.
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive" class="collapsed" aria-expanded="false">
+                        Como remover uma empresa? 
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      As empresas só poderão ser removidas do sistema por usuários da entidade responsável pelo seu cadastro. Clique em exibir detalhes da empresa > Os botões para alterar as informações e remover a empresa aparecerão na parte inferior da tela de informações da empresa. <span class="text-danger"><b>Ao remover a empresa, informações sobre visitas e relatórios gerados por essa empresa poderão ser afetados.</b></span>
+                    </div>
+                  </div>
+                </div>
+
+<!--                 <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix" class="collapsed" aria-expanded="false">
+                        Como alterar as informações de uma visita em andamento?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSix" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                      wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
+                      eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                      assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
+                      nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer
+                      farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+                      labore sustainable VHS.
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <!-- /.box-body -->
+
+
+
+
+
+                      <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">USUÁRIO</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" class="collapsed">
+                        Como alterar as informações do meu perfil?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseSeven" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      <a href="/admin/edit-profile" target="_blank">Clique aqui para alterar suas informações de cadastro</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight" class="collapsed" aria-expanded="false">
+                        Como alterar a minha senha? 
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseEight" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      <a href="/admin/alter-password" target="_blank">Clique aqui para alterar sua senha</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel box box-primary">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine" class="collapsed" aria-expanded="false">
+                        Como alterar o meu nível de acesso?
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseNine" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+                    <div class="box-body">
+                      Para alterar o nível de acesso é necessário entrar em contato com qualquer um os administradores que estão indentificados com a entidade "FIEB" na aba de <a href="/admin/contatos">contatos</a>. 
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          </div>
+        </div>
+
+
+
+            </div>
+            <!-- /.box-body -->
+
+             <!-- <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                <?php $counter1=-1;  if( isset($pages) && ( is_array($pages) || $pages instanceof Traversable ) && sizeof($pages) ) foreach( $pages as $key1 => $value1 ){ $counter1++; ?>
+                <li><a href="<?php echo htmlspecialchars( $value1["href"], ENT_COMPAT, 'UTF-8', FALSE ); ?>"><?php echo htmlspecialchars( $value1["text"], ENT_COMPAT, 'UTF-8', FALSE ); ?></a></li>
+                <?php } ?>
+              </ul>
+            </div> -->
+
+
+
+          </div>
+  	</div>
+  </div>
+
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

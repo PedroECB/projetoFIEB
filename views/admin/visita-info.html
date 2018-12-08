@@ -59,8 +59,9 @@
                       <tr><td><b>DATA DE REALIZAÇÃO</b></td>                    <td>{if="isset($visita.data_realizacao)"}{function="date('d/m/Y',strtotime($visita.data_realizacao))"}{/if}</td></tr>
                       <tr><td><b>DEMANDA IDENTIFICADA NA VISITA</b></td>        <td>{if="isset($visita.demanda_ident)"}{$visita.demanda_ident}{/if}</td></tr>
                       <tr><td><b>SITUACÃO DA NEGOCIAÇÃO </b></td>         <td>{if="isset($visita.status_negociacao)"}{$visita.status_negociacao}{/if}</td></tr>
-                      <tr><td><b>PREÇO DO PRODUTO OFERTADO </b></td>         <td>{if="isset($visita.preco_prod)"}{function="number_format($visita.preco_prod,2)"}{/if}</td></tr>
-                      <tr><td><b>ASSOCIACÃO </b></td>         <td>{if="isset($visita.status_associacao)"}{$visita.status_associacao}{/if}</td></tr>
+                      <tr><td><b>PREÇO DO PRODUTO OFERTADO </b></td>         <td>{if="isset($visita.preco_prod)"}{function="number_format($visita.preco_prod,2,',','&#46;')"}{/if}</td></tr>
+                      <tr><td><b>ASSOCIACÃO </b></td>         <td>
+                      {if="isset($visita.status_associacao)"}{$visita.status_associacao}{/if}</td></tr>
                       <tr><td><b>OBSERVAÇÃO</b></td>              <td> {$visita.observacao}</td></tr>
                       <tr><td></td><td><td></tr>
                       <tr><td></td><td><b class="text-black">EMPRESA</b></td><td></td></tr>

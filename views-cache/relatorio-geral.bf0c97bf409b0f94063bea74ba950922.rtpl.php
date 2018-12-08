@@ -73,18 +73,7 @@
 
             <?php } ?>
 
-     <!--        <tr>
-              <td class="text-primary"><b>SINDIREPA</b></td>
-              <td>37</td>
-              <td>12</td>
-              <td>3</td>
-              <td>32</td>
-              <td>5</td>
-              <td>3</td>
-              <td>10</td>
-            </tr>
 
--->
              <tr style="background-color: #dddddd;">
               <td><b>TOTAL</b></td>
               <td><b><?php echo htmlspecialchars( $dadosTotaisSindicatos["total_empresas_selecionadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
@@ -147,7 +136,7 @@
         <tr>
           <td>
                 <div class="progress progress">
-                  <div class="progress-bar progress-bar-blue" style="width: 100%">-</div>
+                  <div class="progress-bar progress-bar-blue" style="width: 100%"> 0%</div>
                  <!--  <div class="progress-bar progress-bar-green" style="width: 40%">120</div> -->
               </div>
           </td>
@@ -156,19 +145,19 @@
        </thead>
        <tbody>
         <tr><td class="text-primary"><b>Indústrias visitadas</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">-</span></td></tr>
         
         <tr><td class="text-primary"><b>Novas Associações</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">-</span></td></tr>
         
         <tr><td class="text-primary"><b>Propostas Demandadas</b></td></tr>
-        <tr><td><span class="badge bg-light-blue">0</span></td></tr>
+        <tr><td><span class="badge bg-light-blue">-</span></td></tr>
 
-         <tr><td class="text-primary"><b>Formulário de Assoc...</b></td></tr>
-        <tr><td><b>-</b></td></tr>
+         <tr><td class="text-primary"><b>Interesse em Associar-se</b></td></tr>
+        <tr><td><span class="badge bg-light-blue">-</span></td></tr>
 
-         <tr><td class="text-primary"><b>Contratos Assinados</b></td></tr>
-        <tr><td><b>-</b></td></tr>
+        <!--  <tr><td class="text-primary"><b>Receita</b></td></tr>
+        <tr><td><span class="badge bg-light-blue">-</span></td></tr> -->
 
        </tbody>
      </table>
@@ -210,39 +199,9 @@
 </div> <!-- FIM ROW -->
  
 <div class="row">
-  <div class="col-md-4">
-    <table class="table text-center">
-      <thead>
-        <tr class="bg-primary"><th colspan="3">Empresas por Região</th></tr>
-        <th>Região</th>
-        <th>Visitadas</th>
-        <th>Empresas</th>
-      </thead>
-      
-      <tbody>
-        <tr>
-          <td style="color:#001F3F"><b>Central</b></td>
-          <td>12</td>
-          <td>30</td>
-        </tr>
+  
 
-       <tr>
-          <td style="color:#001F3F"><b>Sudeste</b></td>
-          <td>12</td>
-          <td>30</td>
-        </tr>
-
-       <tr>
-          <td style="color:#001F3F"><b>Sul</b></td>
-          <td>12</td>
-          <td>30</td>
-        </tr>
-      </tbody>
-    
-    </table>
-  </div>
-
-  <div class="col-md-4">
+  <div class="col-md-6">
     <table class="table">
       <thead>
         <th colspan="3" class="text-center">Agendamentos</th>
@@ -253,19 +212,39 @@
       <tbody>
         <tr>
           <td>
-            <span class="badge bg-blue">SENAI: 20</span>
-            <span class="badge bg-red">SESI: 30</span>
-            <span class="badge bg-green">IEL: 40</span>
-            <span class="badge bg-yellow">CIEB: 10</span>
+            <span class="badge bg-green"><?php echo htmlspecialchars( $dadosCasa["0"]["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>: <?php echo htmlspecialchars( $dadosCasa["0"]["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <span class="badge bg-blue"><?php echo htmlspecialchars( $dadosCasa["1"]["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>: <?php echo htmlspecialchars( $dadosCasa["1"]["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <span class="badge bg-red"><?php echo htmlspecialchars( $dadosCasa["2"]["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>: <?php echo htmlspecialchars( $dadosCasa["2"]["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <span class="badge bg-yellow"><?php echo htmlspecialchars( $dadosCasa["3"]["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?>: <?php echo htmlspecialchars( $dadosCasa["3"]["visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <span class="badge bg-light">Total: <?php echo htmlspecialchars( $dadosTotaisCasas["total_visitas_agendadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
           </td>
         </tr>
         <tr>
-          <td colspan="3">
-             <div class="progress progress">
-                      <div class="progress-bar progress-bar-blue" style="width: 20%"></div>
-                      <div class="progress-bar progress-bar-danger" style="width: 30%"></div>
-                      <div class="progress-bar progress-bar-green" style="width: 40%"></div>
-                      <div class="progress-bar progress-bar-yellow" style="width: 10%"></div>
+        <td colspan="3">
+          <div class="progress progress">
+          <?php if( $dadosTotaisCasas["total_visitas_agendadas"]>0 ){ ?>
+
+              <div class="progress-bar progress-bar-green" style="width:<?php echo htmlspecialchars( $dadosCasa["0"]["visitas_agendadas"]*100/($dadosTotaisCasas["total_visitas_agendadas"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>
+
+              <div class="progress-bar progress-bar-blue" style="width:<?php echo htmlspecialchars( $dadosCasa["1"]["visitas_agendadas"]*100/($dadosTotaisCasas["total_visitas_agendadas"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>
+
+              <div class="progress-bar progress-bar-red" style="width:<?php echo htmlspecialchars( $dadosCasa["2"]["visitas_agendadas"]*100/($dadosTotaisCasas["total_visitas_agendadas"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>
+
+              <div class="progress-bar progress-bar-yellow" style="width:<?php echo htmlspecialchars( $dadosCasa["3"]["visitas_agendadas"]*100/($dadosTotaisCasas["total_visitas_agendadas"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>
+              <?php }else{ ?>
+
+              <div class="progress-bar progress-bar-green" style="width:1%">
+              </div>
+              <?php } ?>
+
+
+
+                    
+
               </div>
           </td>
         </tr>
@@ -275,7 +254,7 @@
     </table>
   </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
     <table class="table">
       <thead>
         <th colspan="3" class="text-center">Associações</th>
@@ -289,14 +268,30 @@
             <span class="badge bg-blue">Associações: <?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
             <!-- <span class="badge bg-red">Não Associadas 12</span> -->
             <span class="badge bg-green">Em Negociação: <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
+            <span class="badge bg-dark">Total: <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"]+$somaTotal["associacaoEfetivada"], ENT_COMPAT, 'UTF-8', FALSE ); ?></span>
           </td>
         </tr>
         <tr>
           <td colspan="3">
              <div class="progress progress">
-                      <div class="progress-bar progress-bar-blue" style="width: <?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%"></div>
-                      <!-- <div class="progress-bar progress-bar-danger" style="width: 12%"></div> -->
-                      <div class="progress-bar progress-bar-green" style="width: <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%"></div>
+              <?php if( $somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]>0 ){ ?>
+
+              <div class="progress-bar progress-bar-blue" style="width:
+              <?php echo htmlspecialchars( $somaTotal["associacaoEfetivada"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>
+              <div class="progress-bar progress-bar-green" style="width:
+              <?php echo htmlspecialchars( $somaTotal["associacao_em_negociacao"]*100/($somaTotal["associacaoEfetivada"]+$somaTotal["associacao_em_negociacao"]), ENT_COMPAT, 'UTF-8', FALSE ); ?>%">
+              </div>  
+                      
+                      
+                      <?php }else{ ?>
+
+                        <div class="progress-bar progress-bar-blue" style="width:0%">
+                        </div> 
+
+                      <?php } ?>
+
+
               </div>
           </td>
         </tr>
@@ -313,17 +308,54 @@
 
 <div class="row">
   
-  <div class="col-md-4">
+  <div class="col-md-6">
     <table class="table text-center">
       <thead>
-        <tr class="bg-primary"><th colspan="3">RECEITA</th></tr>
-        <th>Entidades</th>
-        <th>Receita</th>
-        <th>Produto</th>
+        <tr class="bg-primary"><th colspan="3">Empresas por Região</th></tr>
+        <th style="background-color: #dddddd;">Região</th>
+        <th style="background-color: #dddddd;">Visitadas</th>
+        <th style="background-color: #dddddd;">Empresas</th>
       </thead>
       
       <tbody>
+        <?php $counter1=-1;  if( isset($dadosRegioes) && ( is_array($dadosRegioes) || $dadosRegioes instanceof Traversable ) && sizeof($dadosRegioes) ) foreach( $dadosRegioes as $key1 => $value1 ){ $counter1++; ?>
+
         <tr>
+          <td class="text-success"><b><?php echo htmlspecialchars( $value1["regiao_estado"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+          <td><?php echo htmlspecialchars( $value1["empresas_visitadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+          <td><?php echo htmlspecialchars( $value1["empresas_totais"], ENT_COMPAT, 'UTF-8', FALSE ); ?></td>
+        </tr>
+        <?php } ?>
+
+
+      </tbody>
+    
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <table class="table text-center">
+      <thead>
+        <tr class="bg-primary"><th colspan="3">RECEITA</th></tr>
+        <th style="background-color: #dddddd;">Entidades</th>
+        <th style="background-color: #dddddd;">Receita</th>
+        <th style="background-color: #dddddd;">Produto</th>
+      </thead>
+      
+      <tbody>
+
+        <?php $counter1=-1;  if( isset($dadosReceita) && ( is_array($dadosReceita) || $dadosReceita instanceof Traversable ) && sizeof($dadosReceita) ) foreach( $dadosReceita as $key1 => $value1 ){ $counter1++; ?>
+
+
+        <tr>
+          <td style="color:#001F3F"><b><?php echo htmlspecialchars( $value1["nome_casa"], ENT_COMPAT, 'UTF-8', FALSE ); ?></b></td>
+          <td>R$ <?php echo number_format($value1["total"],2,',','&#46;'); ?></td>
+          <td> </td>
+        </tr>
+
+        <?php } ?>
+
+<!--         <tr>
           <td style="color:#001F3F"><b>SESI</b></td>
           <td>R$ 0</td>
           <td> </td>
@@ -339,7 +371,7 @@
           <td style="color:#001F3F"><b>IEL</b></td>
           <td>R$ 0</td>
           <td></td>
-        </tr>
+        </tr> -->
       </tbody>
     
     </table>

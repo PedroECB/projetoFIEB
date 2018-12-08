@@ -887,12 +887,42 @@ $app->get('/admin/ciclos-relat/:idciclo', function($idciclo) {
                           
       User::verifyLoginAdmin();
     
-      $sindicatos = User::listSindicatos();
-      $casas = User::listCasas();
-      $ciclo = User::getCiclo($idciclo);                        
+      // $sindicatos = User::listSindicatos();
+      // $casas = User::listCasas();
+      $ciclo = User::getCiclo($idciclo);
+
+
+
+  $sindicatos = User::listSindicatos();
+
+  $dadosSindicato = Sindicato::relatorioGeralCiclo($sindicatos, $ciclo);
+  $dadosTotaisSindicatos = Sindicato::getTotaisSindicatos($dadosSindicato);
+
+  $casas = User::listCasas();
+  $dadosCasas = Casa::relatorioGeralCiclo($casas, $ciclo);
+  $dadosTotaisCasas = Casa::getTotaisCasas($dadosCasas);
+
+
+  $somaTotal = Casa::somaTotal($dadosTotaisCasas, $dadosTotaisSindicatos);
+  $dadosRegioes = Empresa::getDadosRegiaoCiclo($ciclo);
+  $dadosReceita = Casa::getDadosReceitaCiclo($casas, $ciclo);
+
+
+  $metas = Empresa::getDadosMetas($ciclo, $dadosTotaisCasas, $dadosTotaisSindicatos, $dadosReceita, $somaTotal);
+
+
+
 
       $page = new PageAdmin();   
-      $page->setTpl("sindicatos-casas", array("ciclo"=>$ciclo[0],"sindicatos"=>$sindicatos, "casas"=>$casas));
+      $page->setTpl("sindicatos-casas", array("ciclo"=>$ciclo[0],"sindicatos"=>$sindicatos, "casas"=>$casas,
+      "dadosSindicato"=>$dadosSindicato, 
+      "dadosTotaisSindicatos"=>$dadosTotaisSindicatos,
+      "dadosCasa"=>$dadosCasas,
+      "dadosTotaisCasas"=>$dadosTotaisCasas,
+      "somaTotal"=>$somaTotal,
+      "dadosRegioes"=>$dadosRegioes,
+      "dadosReceita"=>$dadosReceita,
+      "metas"=>$metas));
 });
 
 
@@ -1112,10 +1142,17 @@ $app->get('/admin/relatorio-geral', function(){
 
   $casas = User::listCasas();
   $dadosCasas = Casa::relatorioGeral($casas);
+
+
   $dadosTotaisCasas = Casa::getTotaisCasas($dadosCasas);
 
 
   $somaTotal = Casa::somaTotal($dadosTotaisCasas, $dadosTotaisSindicatos);
+  $dadosRegioes = Empresa::getDadosRegiao();
+  $dadosReceita = Casa::getDadosReceita($casas);
+
+
+  
 
 
   $page = new PageAdmin();   
@@ -1123,8 +1160,18 @@ $app->get('/admin/relatorio-geral', function(){
                                            "dadosTotaisSindicatos"=>$dadosTotaisSindicatos,
                                            "dadosCasa"=>$dadosCasas,
                                            "dadosTotaisCasas"=>$dadosTotaisCasas,
-                                           "somaTotal"=>$somaTotal));
+                                           "somaTotal"=>$somaTotal,
+                                           "dadosRegioes"=>$dadosRegioes,
+                                           "dadosReceita"=>$dadosReceita));
 });
 
 
 
+$app->get("/admin/help", function(){
+
+  User::verifyLoginAdmin();
+
+  $page = new PageAdmin();
+  $page->setTpl('help', array());
+
+});

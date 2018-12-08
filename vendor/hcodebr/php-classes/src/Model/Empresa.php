@@ -649,9 +649,152 @@ public static function listAllCicloAtualOrigem($cicloAtual, $origem){
 }
 
 
+public static function getDadosRegiao(){
+
+  //SELECT regiao_estado, count(idEmpresas) FROM empresas GROUP BY regiao_estado
+
+  // select empresas.regiao_estado, empresas.razao_social, count(idVisita) from visita join empresas WHERE visita.Empresas_idEmpresas=empresas.idEmpresas GROUP BY empresas.regiao_estado;
+
+  //select empresas.regiao_estado, Count(DISTINCT(empresas.cnpj)) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and visita.status_visita='Visita Realizada' GROUP by empresas.regiao_estado
+
+
+  //select empresas.regiao_estado, COUNT(visita.idVisita) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas GROUP by empresas.regiao_estado
+
+  //select empresas.regiao_estado, COUNT(visita.idVisita) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and visita.status_visita='Visita Realizada' GROUP by empresas.regiao_estado
+
+  $dadosRegioes = array();
+  $cont = 0;
+
+  $sql = new Sql();
+  $regioes = $sql->select("SELECT regiao_estado, count(idEmpresas) FROM empresas GROUP BY regiao_estado");
+
+  foreach ($regioes as $regiao) {
+
+        // $regiao['regiao_estado'] = 'Norte';
+      
+     // echo $regiao['regiao_estado']." - ".$regiao['count(idEmpresas)']."<br>";
+
+
+      $sql2 = new Sql();
+      $regioes2 = $sql2->select("SELECT empresas.regiao_estado, Count(DISTINCT(empresas.cnpj)) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and empresas.regiao_estado=:regiao and visita.status_visita='Visita Realizada' GROUP by empresas.regiao_estado
+", array(":regiao"=>$regiao['regiao_estado']));
+
+      
+      $dadosRegioes[$cont]['regiao_estado'] = $regiao['regiao_estado'];
+      $dadosRegioes[$cont]['empresas_totais'] = $regiao['count(idEmpresas)'];
+      $dadosRegioes[$cont]['empresas_visitadas'] = isset($regioes2[0]['Count(DISTINCT(empresas.cnpj))']) ? $regioes2[0]['Count(DISTINCT(empresas.cnpj))']:0;
+
+      $cont++;
+  }
+
+  return $dadosRegioes;
+
+
+}
 
 
 
+public static function getDadosRegiaoCiclo($ciclo){
+
+  $data_inicio = $ciclo[0]['data_inicio'];
+  $data_termino = $ciclo[0]['data_termino'];
+
+  //SELECT regiao_estado, count(idEmpresas) FROM empresas GROUP BY regiao_estado
+
+  // select empresas.regiao_estado, empresas.razao_social, count(idVisita) from visita join empresas WHERE visita.Empresas_idEmpresas=empresas.idEmpresas GROUP BY empresas.regiao_estado;
+
+  //select empresas.regiao_estado, Count(DISTINCT(empresas.cnpj)) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and visita.status_visita='Visita Realizada' GROUP by empresas.regiao_estado
+
+
+  //select empresas.regiao_estado, COUNT(visita.idVisita) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas GROUP by empresas.regiao_estado
+
+  //select empresas.regiao_estado, COUNT(visita.idVisita) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and visita.status_visita='Visita Realizada' GROUP by empresas.regiao_estado
+
+  $dadosRegioes = array();
+  $cont = 0;
+
+  $sql = new Sql();
+  $regioes = $sql->select("SELECT regiao_estado, count(idEmpresas) FROM empresas WHERE dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino GROUP BY regiao_estado", array(":data_inicio"=>$data_inicio, ":data_termino"=>$data_termino));
+
+  foreach ($regioes as $regiao) {
+
+        // $regiao['regiao_estado'] = 'Norte';
+      
+     // echo $regiao['regiao_estado']." - ".$regiao['count(idEmpresas)']."<br>";
+
+
+      $sql2 = new Sql();
+      $regioes2 = $sql2->select("SELECT empresas.regiao_estado, Count(DISTINCT(empresas.cnpj)) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and empresas.regiao_estado=:regiao and visita.status_visita='Visita Realizada' and data_prevista>=:data_inicio and data_prevista<=:data_termino GROUP by empresas.regiao_estado
+", array(":regiao"=>$regiao['regiao_estado'],
+         ":data_inicio"=>$data_inicio,
+         ":data_termino"=>$data_termino));
+
+      
+      $dadosRegioes[$cont]['regiao_estado'] = $regiao['regiao_estado'];
+      $dadosRegioes[$cont]['empresas_totais'] = $regiao['count(idEmpresas)'];
+      $dadosRegioes[$cont]['empresas_visitadas'] = isset($regioes2[0]['Count(DISTINCT(empresas.cnpj))']) ? $regioes2[0]['Count(DISTINCT(empresas.cnpj))']:0;
+
+      $cont++;
+  }
+
+  return $dadosRegioes;
+
+
+}
+
+//SELECT count(*) from visita join visita_has_funcionario join demandas where visita.idVisita=visita_has_funcionario.Visita_idVisita and visita_has_funcionario.Visita_idVisita=demandas.idVisita_demandas and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino; 
+
+
+public static function getDadosMetas($ciclo, $dadosTotaisCasas, $dadosTotaisSindicatos, $dadosReceita, $somaTotal){
+
+$data_inicio = $ciclo[0]['data_inicio'];
+$data_termino = $ciclo[0]['data_termino'];
+
+
+
+$dadosMetas = array();
+
+ $sql1 = new Sql();
+ $result1 = $sql1->select("SELECT Count(DISTINCT(empresas.cnpj)) FROM empresas JOIN visita WHERE empresas.idEmpresas=visita.Empresas_idEmpresas and visita.status_visita='Visita Realizada' and data_prevista>=:data_inicio and data_prevista<=:data_termino
+", array(":data_inicio"=>$data_inicio,
+         ":data_termino"=>$data_termino));
+
+
+   $dadosMetas['percentual_visitadas'] = $somaTotal['soma_empresas_selecionadas']>0?$result1[0]["Count(DISTINCT(empresas.cnpj))"]*100/$somaTotal['soma_empresas_selecionadas']: 0;
+   $dadosMetas['distinct_visitadas'] = $result1[0]["Count(DISTINCT(empresas.cnpj))"];
+   $dadosMetas['percentual_associacoes'] = $ciclo[0]['novas_associacoes']>0 ? $dadosTotaisSindicatos['total_associacaoEfetivada']*100/$ciclo[0]['novas_associacoes']:0;
+
+
+
+   $sql2 = new Sql();
+   $result2 = $sql2->select("SELECT count(*) from visita join visita_has_funcionario join demandas where visita.idVisita=visita_has_funcionario.Visita_idVisita and visita_has_funcionario.Visita_idVisita=demandas.idVisita_demandas and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino
+", array(":data_inicio"=>$data_inicio,
+         ":data_termino"=>$data_termino));
+
+   $dadosMetas['percentual_propostas_demandadas'] = $result2[0]["count(*)"];
+
+
+  $sql3 = new Sql();
+  $result3 = $sql3->select("SELECT count(*) from visita join visita_has_funcionario WHERE visita.idVisita=visita_has_funcionario.Visita_idVisita and visita_has_funcionario.status_associacao='Interesse em Associar-se'
+ and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino
+", array(":data_inicio"=>$data_inicio,
+         ":data_termino"=>$data_termino));
+
+  $dadosMetas['percentual_interesse_em_assoc'] = $ciclo[0]['interesse_em_assoc']> 0 ? $result3[0]['count(*)']*100/$ciclo[0]['interesse_em_assoc']: 0;
+
+
+
+
+
+
+
+
+return $dadosMetas;
+
+
+
+
+}
 
 
 

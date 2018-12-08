@@ -279,8 +279,87 @@ public static function relatorioGeral($casas = array()){
 
 }
 
+public static function relatorioGeralCiclo($casas = array(), $ciclo){
+
+  $data_inicio = $ciclo[0]['data_inicio'];
+  $data_termino = $ciclo[0]['data_termino'];
+
+  $cont = 0;
+  $dados = array();
+
+
+
+  foreach ($casas as $casa) {
+      
+    $origem = $casa['nome_casa'];
+                                        // Retorna a quantidade de empresas selecionadas por uma casa
+    $sql = new Sql();
+    $result = $sql->select("SELECT count(cnpj) from empresas where origem_cadastro=:origem and dtcadastro_empresa >=:data_inicio and dtcadastro_empresa<=:data_termino",
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+
+    $dados [$cont]['nome_casa'] = $origem;
+    $dados [$cont]['empresas_selecionadas'] = $result[0]['count(cnpj)'];
+
+    
+    $sql2 = new Sql();
+    $result2 = $sql2->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Realizada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino",
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+    $dados [$cont]['visitas_realizadas'] = $result2[0]['count(idVisita)'];
+
+
+    $sql3 = new Sql();
+    $result3 = $sql3->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where visita.status_visita='Visita Agendada' and funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+    
+    $dados[$cont]['visitas_agendadas'] = $result3[0]['count(idVisita)'];
+
+
+    $sql4 = new Sql();
+    $result4 = $sql4->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_negociacao='Negociada' and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino;",
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+    
+    $dados[$cont]['negociadas'] = $result4[0]['count(idVisita)'];
+
+
+    $sql5 = new Sql();
+    $result5 = $sql5->select("SELECT count(idVisita) from funcionario join visita  join visita_has_funcionario on funcionario.idFuncionario = visita.idFuncionario and visita.idVisita=visita_has_funcionario.Visita_idVisita where funcionario.origem =:origem and visita_has_funcionario.status_negociacao='Negociação em Andamento' and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino;", 
+      array(":origem"=>$origem,
+            ":data_inicio"=>$data_inicio,
+            ":data_termino"=>$data_termino));
+    
+    $dados[$cont]['negociacoes_em_andamento'] = $result5[0]['count(idVisita)'];
+
+
+    $sql6 = new Sql();
+    $result6 = $sql6->select("SELECT count(idVisita) from funcionario join visita on funcionario.idFuncionario=visita.idFuncionario where funcionario.origem=:origem and data_prevista>=:data_inicio and data_prevista<=:data_termino",
+     array(":origem"=>$origem,
+           ":data_inicio"=>$data_inicio,
+           ":data_termino"=>$data_termino));
+
+    $dados[$cont]['totalVisitas'] = $result6[0]['count(idVisita)'];
+
+
+
+
+    $cont++;
+  }
+
+
+    return $dados;
+
+}
+
 
 public function getTotaisCasas($dadosCasas){
+
 
   $totais = array();
 
@@ -295,6 +374,7 @@ public function getTotaisCasas($dadosCasas){
 
 
   foreach ($dadosCasas as $dadosCasa) {
+
       
       $total_empresas_selecionadas += $dadosCasa['empresas_selecionadas'];
       $total_visitas_realizadas += $dadosCasa['visitas_realizadas'];
@@ -322,6 +402,8 @@ public function getTotaisCasas($dadosCasas){
 
 public static function somaTotal($dadosTotaisCasas, $dadosTotaisSindicatos){
 
+
+
   $somaTotal = array();
 
 $somaTotal['soma_empresas_selecionadas'] = $dadosTotaisCasas['total_empresas_selecionadas'] + $dadosTotaisSindicatos['total_empresas_selecionadas'];
@@ -330,7 +412,7 @@ $somaTotal['soma_visitas_realizadas'] = $dadosTotaisCasas['total_visitas_realiza
 
 $somaTotal['soma_visitas_agendadas'] = $dadosTotaisCasas['total_visitas_agendadas'] + $dadosTotaisSindicatos['total_visitas_agendadas'];
 
-$somaTotal['negociadas'] = $dadosTotaisCasas['total_negociadas'];
+$somaTotal['negociadas'] =  $dadosTotaisCasas['total_negociadas'];
 
 $somaTotal['negociacoes_em_andamento'] = $dadosTotaisCasas['total_negociacao_em_andamento'];
 
@@ -338,14 +420,86 @@ $somaTotal['associacao_em_negociacao'] = $dadosTotaisSindicatos['total_associaca
 
 $somaTotal['associacaoEfetivada'] = $dadosTotaisSindicatos['total_associacaoEfetivada'];
  
-  var_dump($dadosTotaisCasas);
-  echo "<hr>";
-  var_dump($dadosTotaisSindicatos);
-  echo "<hr>";
-  var_dump($somaTotal);
+
 
 
 return $somaTotal;
+
+}
+
+public static function getDadosReceita($casas = array()){
+
+  //select visita.demanda_inicial, SUM(visita_has_funcionario.preco_prod) FROM visita join visita_has_funcionario WHERE visita.idVisita=visita_has_funcionario.Visita_idVisita GROUP BY visita_has_funcionario.preco_prod;
+
+
+ $dadosReceitas = array();
+ $cont = 0;
+ $soma = 0; 
+
+  foreach ($casas as $casa) {
+    
+   // echo $casa['nome_casa'];
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT visita.demanda_inicial, SUM(visita_has_funcionario.preco_prod) FROM visita join visita_has_funcionario WHERE visita.idVisita=visita_has_funcionario.Visita_idVisita AND visita.demanda_inicial=:casa
+
+", array(":casa"=>$casa['nome_casa']));
+
+
+
+     if(isset($result[0]['demanda_inicial'])){
+
+      $dadosReceitas[$cont]['nome_casa'] = $result[0]['demanda_inicial'];
+      $dadosReceitas[$cont]['total'] = $result[0]["SUM(visita_has_funcionario.preco_prod)"]!= NULL?$result[0]["SUM(visita_has_funcionario.preco_prod)"]:0;
+    }
+
+    
+
+    $cont++;
+  }
+
+  return $dadosReceitas;
+
+}
+
+public static function getDadosReceitaCiclo($casas = array(), $ciclo){
+
+  $data_inicio = $ciclo[0]['data_inicio'];
+  $data_termino = $ciclo[0]['data_termino'];
+
+
+  //select visita.demanda_inicial, SUM(visita_has_funcionario.preco_prod) FROM visita join visita_has_funcionario WHERE visita.idVisita=visita_has_funcionario.Visita_idVisita GROUP BY visita_has_funcionario.preco_prod;
+
+
+ $dadosReceitas = array();
+ $cont = 0;
+ $soma = 0; 
+
+  foreach ($casas as $casa) {
+    
+   // echo $casa['nome_casa'];
+
+    $sql = new Sql();
+    $result = $sql->select("SELECT visita.demanda_inicial, SUM(visita_has_funcionario.preco_prod) FROM visita join visita_has_funcionario WHERE visita.idVisita=visita_has_funcionario.Visita_idVisita AND visita.demanda_inicial=:casa and visita_has_funcionario.data_realizacao >=:data_inicio and visita_has_funcionario.data_realizacao<=:data_termino GROUP BY visita_has_funcionario.preco_prod
+
+", array(":casa"=>$casa['nome_casa'],
+         ":data_inicio"=>$data_inicio,
+         ":data_termino"=>$data_termino));
+
+
+
+     if(isset($result[0]['demanda_inicial'])){
+
+      $dadosReceitas[$cont]['nome_casa'] = $result[0]['demanda_inicial'];
+      $dadosReceitas[$cont]['total'] = $result[0]["SUM(visita_has_funcionario.preco_prod)"]!= NULL?$result[0]["SUM(visita_has_funcionario.preco_prod)"]:0;
+    }
+
+    
+
+    $cont++;
+  }
+
+  return $dadosReceitas;
 
 }
 

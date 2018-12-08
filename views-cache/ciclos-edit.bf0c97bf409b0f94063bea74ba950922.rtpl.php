@@ -67,7 +67,80 @@
      </div>
 
         
+          <div class="box-header">
+        <h4 class="text-center text-primary" style="margin-left: -10%;"><b>METAS</b></h4>
+        <hr>
 
+<div class="row">
+    <div class="col-md-6">
+
+      <div class="form-group">
+        <label for="cIndustriasVisitadas">Indústrias Visitadas: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cIndustriasVisitadas" name="industriasVisitadas" placeholder="Digite apenas números" max="10000" min="0" value="<?php echo htmlspecialchars( $ciclo["industrias_visitadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+      </div>
+
+    </div>
+
+
+    <div class="col-md-6">
+       <div class="form-group">
+        <label for="cNovasAssoc">Novas Associações: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cNovasAssoc" name="novasAssoc" placeholder="Digite apenas números" max="100000" min="0" value="<?php echo htmlspecialchars( $ciclo["novas_associacoes"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+       </div>
+
+    </div>
+</div>
+  
+
+  <div class="row">
+
+    <div class="col-md-6">
+        
+       <div class="form-group">
+        <label for="cPropostasDemandadas">Propostas Demandadas: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cPropostasDemandadas" name="propostasDemandadas" placeholder="Digite apenas números" max="100000" min="0" value="<?php echo htmlspecialchars( $ciclo["propostas_demandadas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+       </div>
+
+    </div>
+
+    <div class="col-md-6">
+    
+       <div class="form-group">
+        <label for="cInteresseEmAssoc">Interesse em Associar-se: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cInteresseEmAssoc" name="interesseEmAssoc" placeholder="Digite apenas números" max="100000" min="0" value="<?php echo htmlspecialchars( $ciclo["interesse_em_assoc"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+       </div>
+       
+    </div>
+  </div>
+
+    <div class="row">
+
+    <div class="col-md-6">
+        
+       <div class="form-group">
+        <label for="cContratosAssin">Contratos Assinados: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cContratosAssin" name="contratosAssin" placeholder="Digite apenas números" max="100000" min="0" value="<?php echo htmlspecialchars( $ciclo["contratos_assin"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+       </div>
+
+    </div>
+
+    <div class="col-md-6">
+    
+       <div class="form-group">
+        <label for="cReceita">Receita: <span class="text-danger">*</span></label>  
+         <input type="number" class="form-control" id="cReceita" name="receita" placeholder="R$" max="100000000000" min="0" value="<?php echo htmlspecialchars( $ciclo["receitas"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" required>
+       </div>
+       
+    </div>
+  </div>
+
+
+     
+
+
+
+
+     </div>
             
 
 

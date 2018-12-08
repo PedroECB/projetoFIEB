@@ -991,3 +991,13 @@ $app->get('/user/exportempresas-origem', function(){
     exit;
 
 });
+
+
+$app->get("/user/help", function(){
+
+  User::verifyLoginUser();
+
+  $page = new PageUser();
+  $page->setTpl('help', array());
+
+});
