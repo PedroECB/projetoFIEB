@@ -907,3 +907,13 @@ $app->get("/user2/help", function(){
   $page->setTpl('help', array());
 
 });
+
+
+$app->get("/user2/equipe", function(){
+
+  User::verifyLoginUser2();
+
+  $page = new PageUser2();
+  $page->setTpl('equipe', array());
+
+});

@@ -1175,3 +1175,12 @@ $app->get("/admin/help", function(){
   $page->setTpl('help', array());
 
 });
+
+$app->get("/admin/equipe", function(){
+
+  User::verifyLoginAdmin();
+
+  $page = new PageAdmin();
+  $page->setTpl('equipe', array());
+
+});

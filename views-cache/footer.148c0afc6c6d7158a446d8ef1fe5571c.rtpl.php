@@ -5,7 +5,7 @@
       Versão 1.0.1
     </div>
     <!-- Default to the left -->
-    <strong> SISTEMA DE GESTÃO ARTICULADA 2018 <a href="#">Desenvolvido por: Equipe Genesys | </a></strong><b>Copyright &copy;</b> Todos os direitos reservados.
+    <strong> SISTEMA DE GESTÃO ARTICULADA 2018 <a href="/user2/equipe">Desenvolvido por: Equipe Genesys | </a></strong><b>Copyright &copy;</b> Todos os direitos reservados.
   </footer>
 
   <!-- Control Sidebar -->

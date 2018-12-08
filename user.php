@@ -1001,3 +1001,13 @@ $app->get("/user/help", function(){
   $page->setTpl('help', array());
 
 });
+
+
+$app->get("/user/equipe", function(){
+
+  User::verifyLoginUser();
+
+  $page = new PageUser();
+  $page->setTpl('equipe', array());
+
+});
